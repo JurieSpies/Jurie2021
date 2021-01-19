@@ -3,16 +3,16 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div style={{display:'grid'}}>
-      <div style={styles.title}>
-        Jurie Spies
-      </div>
-      <div style={styles.subTitle}>
-        Software Developer
-      </div>
-      <div>
-        <ParticlesBg num={50} type="cobweb" bg={false}/>
-      </div>
+    <div>
+      <ParticlesBg num={50} type="cobweb" bg={true}/> 
+        <div style={styles.headerContainer}>
+          <div style={styles.title}>
+            Jurie Spies
+          </div>
+          <div style={styles.subTitle}>
+            Software Developer
+          </div>
+        </div>
     </div>
   )
 }
@@ -33,5 +33,11 @@ const styles={
     fontSize:24,
     fontWeight:'bold',
     color:'#000'
-  }
+  },
+  headerContainer:{
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)'
+}
 }
