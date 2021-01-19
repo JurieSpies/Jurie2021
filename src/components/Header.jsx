@@ -3,11 +3,16 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>
+    <div style={{display:'grid'}}>
       <div style={styles.title}>
         Jurie Spies
       </div>
-      <ParticlesBg num={100} type="cobweb" bg={false}/>
+      <div style={styles.subTitle}>
+        Software Developer
+      </div>
+      <div>
+        <ParticlesBg num={50} type="cobweb" bg={false}/>
+      </div>
     </div>
   )
 }
@@ -16,8 +21,17 @@ export default Header
 
 const styles={
   title:{
-    backgroundColor: 'pink', 
     display:'flex',
-    alignSelf: 'center',
+    justifyContent: 'center',
+    fontSize:68,
+    fontWeight:'bold',
+    color:'#000',
+  },
+  subTitle:{
+    display:'flex',
+     justifyContent: 'center',
+    fontSize:24,
+    fontWeight:'bold',
+    color:'#000'
   }
 }
