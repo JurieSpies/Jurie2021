@@ -3,15 +3,15 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>
-      <ParticlesBg num={50} type="cobweb" bg={true}/> 
-        <div style={styles.headerContainer}>
-          <div style={styles.title}>
+    <div style={styles.headerContainer}>
+        <div>
+          <ParticlesBg color="#242a40;" num={50} type="cobweb" bg={true} /> 
+          <span style={styles.title}>
             Jurie Spies
-          </div>
-          <div style={styles.subTitle}>
+          </span>
+          <span style={styles.subTitle}>
             Software Developer
-          </div>
+          </span>
         </div>
     </div>
   )
@@ -29,15 +29,15 @@ const styles={
   },
   subTitle:{
     display:'flex',
-     justifyContent: 'center',
+    justifyContent: 'center',
     fontSize:24,
     fontWeight:'bold',
     color:'#000'
   },
-  headerContainer:{
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)'
+  headerContainer:{ 
+    display:'flex',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
 }
 }
