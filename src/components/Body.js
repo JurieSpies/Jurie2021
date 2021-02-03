@@ -1,12 +1,25 @@
 import React from 'react'
 import profilePic from '../assets/images/JuriePP.png'
+import { AboutMe } from '../assets/info'
 
 const Body = () => {
   return (
     <div  style={styles.mainBodyContainer}>
       <img src={profilePic} style={styles.profilePic}/>
+      <>
+        <div style={styles.title}>
+          About me
+        </div>
+        <div style={styles.title}>
+          {AboutMe.aboutMe}
+        </div>
+      </>
+      
       <div style={styles.title}>
-        About me
+       Contact Details
+      </div>
+      <div style={styles.title}>
+        {AboutMe.contactDetails}
       </div>
     </div>
   )
