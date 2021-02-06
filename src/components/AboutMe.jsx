@@ -8,7 +8,6 @@ const styles = {
   mainBodyContainer: {
     display: 'flex',
     backgroundColor: '#000524',
-    borderRadius: 10,
     alignItems: 'center',
   },
   profilePic: {
@@ -41,7 +40,7 @@ const styles = {
   },
 };
 
-const Body = () => (
+const AboutMe = () => (
   <div style={styles.mainBodyContainer}>
     <img alt="not found" src={profilePic} style={styles.profilePic} />
     <div style={styles.mainSectionsContainer}>
@@ -75,4 +74,4 @@ const Body = () => (
   </div>
 );
 
-export default Body;
+export default AboutMe;

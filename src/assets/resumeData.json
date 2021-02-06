@@ -3,5 +3,19 @@
   "phoneNumber": "+27768862529",
   "email":"juriespies@gmail.com",
   "github": "https://github.com/JurieSpies",
-  "linkedIn": "https://www.linkedin.com/in/juriespies/"
+  "linkedIn": "https://www.linkedin.com/in/juriespies/",
+  "work":[
+    {
+      "title":"Open Vantage",
+      "role":"software developer",
+      "description":"React Native,Graphql,restfull api's,figma",
+      "timeline":"* September 2019 to Currently"
+    },
+    {
+      "title":"Verge Technologies",
+      "role":"software developer",
+      "description":"React Native,Graphql",
+      "timeline":"* March 2019 to August"
+    }
+  ]
 }

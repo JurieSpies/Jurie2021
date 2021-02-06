@@ -1,10 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './pages/Home';
+import './index.css';
+import Header from './components/Header';
+import AboutMe from './components/AboutMe';
+import Work from './components/Work';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <div style={{ height: '100vh' }}>
+      <Header />
+      <AboutMe />
+      <Work />
+    </div>
   </React.StrictMode>,
   document.getElementById('root'),
 );
