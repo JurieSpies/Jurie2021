@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from 'react-icons/fa';
+import { ImMail } from 'react-icons/im';
 import profilePic from '../assets/images/JuriePP.png';
 import resumeData from '../assets/resumeData.json';
 
@@ -56,7 +57,11 @@ const Body = () => (
       </div>
       <div style={styles.subTitle}>
         <FaPhoneSquare style={styles.icon} />
-        <a style={styles.subTitle} href={resumeData.phoneNumber} target="_blank" rel="noreferrer">+27768862529</a>
+        <a style={styles.subTitle} href={`tel:${resumeData.phoneNumber}`} target="_blank" rel="noreferrer">+27768862529</a>
+      </div>
+      <div style={styles.subTitle}>
+        <ImMail style={styles.icon} />
+        <a style={styles.subTitle} href={`mailto:${resumeData.phoneNumber}`} target="_blank" rel="noreferrer">jurie.spies@gmail.com</a>
       </div>
       <div style={styles.subTitle}>
         <FaGithubSquare style={styles.icon} />
