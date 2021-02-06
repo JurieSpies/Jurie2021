@@ -5,7 +5,7 @@ const styles = {
 
   workContainer: {
     display: 'grid',
-    flexGrow: 4,
+    flexGrow: 8,
   },
   card: {
     display: 'grid',
@@ -43,13 +43,13 @@ const styles = {
 };
 
 const Work = () => (
-  <div style={{ display: 'flex' }}>
+  <div style={{ display: 'flex', marginTop: 10 }}>
     <div style={styles.workSection}>
       work
     </div>
     <div style={styles.workContainer}>
-      <div style={styles.card}>
-        {resumeData.work.map((val) => (
+      {resumeData.work.map((val) => (
+        <div style={styles.card}>
           <>
             <div style={styles.title}>
               {val.title}
@@ -61,8 +61,8 @@ const Work = () => (
               {val.description}
             </div>
           </>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   </div>
 );
