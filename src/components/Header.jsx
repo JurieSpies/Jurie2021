@@ -7,14 +7,14 @@ const styles = {
     justifyContent: 'center',
     fontSize: 68,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#fff ',
   },
   subTitle: {
     display: 'flex',
     justifyContent: 'center',
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#B8B8B8 ',
   },
   headerContainer: {
     display: 'flex',
@@ -27,7 +27,7 @@ const styles = {
 const Header = () => (
   <div style={styles.headerContainer}>
     <div>
-      <ParticlesBg color="#242a40;" num={50} type="cobweb" bg />
+      <ParticlesBg color="#242a40;" num={100} type="lines" bg />
       <span style={styles.title}>
         Jurie Spies
       </span>

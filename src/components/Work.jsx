@@ -2,34 +2,34 @@ import React from 'react';
 import resumeData from '../assets/resumeData.json';
 
 const styles = {
-
+  card: {
+    display: 'grid',
+    margin: '10px',
+    padding: '15px',
+    boxShadow: '5px 1px 10px #ccc',
+  },
   workContainer: {
     display: 'grid',
     flexGrow: 8,
-  },
-  card: {
-    display: 'grid',
-    margin: 10,
-    padding: 10,
-    boxShadow: '5px 1px 10px #ccc',
-  },
-  title: {
-    fontSize: '22px',
-    fontWeight: 'bold',
-    color: '#000',
+    margin: '10px',
   },
   workSection: {
     flexGrow: 1,
     margin: 15,
     fontSize: '22px',
     fontWeight: 'bold',
-    color: '#000',
+    color: '#fff',
     textDecorationLine: 'underline',
     textDecorationColor: 'blue',
   },
+  title: {
+    fontSize: '22px',
+    fontWeight: 'bold',
+    color: '#fff',
+  },
   subTitle: {
     display: 'flex',
-    fontSize: '18px',
+    fontSize: '16px',
     color: 'grey',
     marginTop: 5,
   },
@@ -43,9 +43,9 @@ const styles = {
 };
 
 const Work = () => (
-  <div style={{ display: 'flex', marginTop: 10 }}>
+  <div style={{ display: 'flex', backgroundColor: '#101010' }}>
     <div style={styles.workSection}>
-      work
+      Work
     </div>
     <div style={styles.workContainer}>
       {resumeData.work.map((val) => (
