@@ -10,7 +10,7 @@ ReactDOM.render(
     <div style={{
       height: '100vh',
       flexWrap: 1,
-      // backgroundColor: 'black',
+      overflow: 'auto',
     }}
     >
       <Header />
