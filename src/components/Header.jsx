@@ -10,6 +10,7 @@ const styles = {
     color: '#fff ',
   },
   subTitle: {
+    textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
     fontSize: 24,
@@ -17,6 +18,7 @@ const styles = {
     color: '#B8B8B8 ',
   },
   headerContainer: {
+    textAlign: 'center',
     display: 'flex',
     height: '100%',
     alignItems: 'center',

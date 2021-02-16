@@ -7,7 +7,12 @@ import Work from './components/Work';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div style={{ height: '100vh' }}>
+    <div style={{
+      height: '100vh',
+      flexWrap: 1,
+      // backgroundColor: 'black',
+    }}
+    >
       <Header />
       <AboutMe />
       <Work />

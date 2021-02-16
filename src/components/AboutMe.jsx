@@ -13,11 +13,10 @@ const styles = {
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     padding: '50px',
-    margin: 0,
   },
   profilePic: {
-    minHeight: 0,
-    minWidth: 0,
+    // minHeight: 0,
+    // minWidth: 0,
     maxHeight: '300px',
     maxWidth: '300px',
     borderRadius: 200,
