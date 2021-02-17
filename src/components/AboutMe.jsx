@@ -7,7 +7,6 @@ import resumeData from '../assets/resumeData.json';
 const styles = {
   mainBodyContainer: {
     display: 'flex',
-    // height: '100%',
     backgroundColor: '#101010',
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -15,8 +14,8 @@ const styles = {
     padding: '50px',
   },
   profilePic: {
-    // minHeight: 0,
-    // minWidth: 0,
+    minHeight: '200px',
+    minWidth: '200px',
     maxHeight: '300px',
     maxWidth: '300px',
     borderRadius: 200,
@@ -26,13 +25,11 @@ const styles = {
     width: '1200px',
   },
   title: {
-    // width: '20%',
     fontSize: '24px',
     fontWeight: 'bold',
     color: '#fff',
   },
   subTitle: {
-    // width: '20%',
     display: 'flex',
     fontSize: '18px',
     color: '#fff',
@@ -41,7 +38,16 @@ const styles = {
   icon: {
     width: '24px',
     height: '24px',
-    paddingRight: 5,
+    paddingRight: '5px',
+  },
+  resumeButton: {
+    borderRadius: '5px',
+    marginTop: '15px',
+    padding: '15px',
+    fontSize: 'inherit',
+    boxShadow: '1px 3px 10px #ccc',
+    fontWeight: 'bold',
+
   },
 };
 
@@ -75,6 +81,9 @@ const AboutMe = () => (
         <FaLinkedin style={styles.icon} />
         <a style={styles.subTitle} href={resumeData.linkedIn} target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
+      <a href={resumeData.resume} download target="_blank" rel="noreferrer">
+        <button style={styles.resumeButton} type="button">Download</button>
+      </a>
     </div>
   </div>
 );

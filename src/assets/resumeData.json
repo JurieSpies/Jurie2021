@@ -4,6 +4,7 @@
   "email":"juriespies@gmail.com",
   "github": "https://github.com/JurieSpies",
   "linkedIn": "https://www.linkedin.com/in/juriespies/",
+  "resume":"https://drive.google.com/file/d/12M1nPAPPPeLcZDuZvXHoCrF6L9Pg6RUf/view?usp=sharing",
   "work":[
     {
       "title":"Open Vantage",
@@ -16,6 +17,16 @@
       "role":"software developer",
       "description":"React Native,Graphql",
       "timeline":"* March 2019 to August"
+    }
+  ],
+  "skills":[
+    {
+      "language":"Open Vantage",
+      "rating":"100%"
+    },
+    {
+      "language":"Verge Technologies",
+      "rating":"100%"
     }
   ]
 }

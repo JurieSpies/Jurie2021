@@ -16,6 +16,7 @@ ReactDOM.render(
       <Header />
       <AboutMe />
       <Work />
+      {/* <Skills /> */}
     </div>
   </React.StrictMode>,
   document.getElementById('root'),

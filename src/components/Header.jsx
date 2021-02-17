@@ -29,12 +29,12 @@ const styles = {
 const Header = () => (
   <div style={styles.headerContainer}>
     <div>
-      <ParticlesBg color="#242a40;" num={100} type="lines" bg />
+      <ParticlesBg color="#fff" num={100} type="lines" bg />
       <span style={styles.title}>
         Jurie Spies
       </span>
       <span style={styles.subTitle}>
-        Software Developer
+        Software Wizard
       </span>
     </div>
   </div>
