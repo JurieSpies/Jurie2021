@@ -25,13 +25,13 @@ const styles = {
     width: '1200px',
   },
   title: {
-    fontSize: '24px',
+    fontSize: 'min(max(24px,3vw),26px)',
     fontWeight: 'bold',
     color: '#fff',
   },
   subTitle: {
     display: 'flex',
-    fontSize: '18px',
+    fontSize: 'min(max(14px,2vw),18px)',
     color: '#fff',
     marginTop: 5,
   },
@@ -44,7 +44,7 @@ const styles = {
     borderRadius: '5px',
     marginTop: '15px',
     padding: '15px',
-    fontSize: 'inherit',
+    fontSize: 'min(max(14px,2vw),18px)',
     boxShadow: '1px 3px 10px #ccc',
     fontWeight: 'bold',
 

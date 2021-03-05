@@ -2,6 +2,10 @@ import React from 'react';
 import resumeData from '../assets/resumeData.json';
 
 const styles = {
+  mainComponent: {
+    display: 'flex',
+    backgroundColor: '#101010',
+  },
   card: {
     display: 'grid',
     margin: '10px',
@@ -16,26 +20,27 @@ const styles = {
   workSection: {
     flexGrow: 1,
     margin: 15,
-    fontSize: '22px',
+    fontSize: 'min(max(14px,2vw),22px)',
     fontWeight: 'bold',
     color: '#fff',
     textDecorationLine: 'underline',
+    textAlign: 'center',
     textDecorationColor: 'blue',
   },
   title: {
-    fontSize: '22px',
+    fontSize: 'min(max(14px,2vw),22px)',
     fontWeight: 'bold',
     color: '#fff',
   },
   subTitle: {
     display: 'flex',
-    fontSize: '16px',
+    fontSize: 'min(max(14px,2vw),16px)',
     color: 'grey',
     marginTop: 5,
   },
   description: {
     display: 'flex',
-    fontSize: '16px',
+    fontSize: 'min(max(14px,2vw),16px)',
     color: '#ccc',
     marginTop: 5,
   },
@@ -43,7 +48,7 @@ const styles = {
 };
 
 const Work = () => (
-  <div style={{ display: 'flex', backgroundColor: '#101010' }}>
+  <div style={styles.mainComponent}>
     <div style={styles.workSection}>
       Work
     </div>

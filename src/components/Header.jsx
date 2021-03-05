@@ -5,7 +5,7 @@ const styles = {
   title: {
     display: 'flex',
     justifyContent: 'center',
-    fontSize: 68,
+    fontSize: 'min(max(32px,4vw),78px)',
     fontWeight: 'bold',
     color: '#fff ',
   },
@@ -13,7 +13,7 @@ const styles = {
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
-    fontSize: 24,
+    fontSize: 'min(max(20px,2vw),38px)',
     fontWeight: 'bold',
     color: '#B8B8B8 ',
   },
