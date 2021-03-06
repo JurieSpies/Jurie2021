@@ -4,6 +4,7 @@ import './index.css';
 import Header from './components/Header';
 import AboutMe from './components/AboutMe';
 import Work from './components/Work';
+import Skills from './components/Skills';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +17,7 @@ ReactDOM.render(
       <Header />
       <AboutMe />
       <Work />
-      {/* <Skills /> */}
+      <Skills />
     </div>
   </React.StrictMode>,
   document.getElementById('root'),

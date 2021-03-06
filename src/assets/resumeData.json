@@ -21,12 +21,16 @@
   ],
   "skills":[
     {
-      "language":"Open Vantage",
-      "rating":"100%"
+      "language":"Javascript",
+      "rating":"80"
     },
     {
-      "language":"Verge Technologies",
-      "rating":"100%"
+      "language":"Typescript",
+      "rating":"60"
+    },
+    {
+      "language":"CSS",
+      "rating":"30"
     }
   ]
 }
