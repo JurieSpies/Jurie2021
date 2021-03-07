@@ -5,7 +5,7 @@ import resumeData from '../assets/resumeData.json';
 const styles = {
   mainComponent: {
     display: 'flex',
-    backgroundColor: '#101010',
+    // backgroundColor: '#101010',
   },
   title: {
     flexGrow: 1,
@@ -36,7 +36,10 @@ const Skills = () => (
     </div>
     <div style={styles.skillSection}>
       {resumeData.skills.map((skill) => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', position: 'relative', alignSelf: 'center', justifyContent: 'center', width: '10%',
+        }}
+        >
           <div style={styles.skillContainer}>
             <Circle
               percent={`${skill.rating}`}
@@ -46,7 +49,7 @@ const Skills = () => (
               trailWidth="2px"
             />
           </div>
-          <div style={{ color: '#D3D3D3' }}>{skill.language}</div>
+          <div style={{ color: '#D3D3D3', position: 'absolute', top: '55px' }}>{skill.language}</div>
         </div>
       ))}
     </div>

@@ -4,7 +4,7 @@ import resumeData from '../assets/resumeData.json';
 const styles = {
   mainComponent: {
     display: 'flex',
-    backgroundColor: '#101010',
+    // backgroundColor: '#101010',
   },
   card: {
     display: 'grid',

@@ -7,7 +7,7 @@ import resumeData from '../assets/resumeData.json';
 const styles = {
   mainBodyContainer: {
     display: 'flex',
-    backgroundColor: '#101010',
+    // backgroundColor: '#101010',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',

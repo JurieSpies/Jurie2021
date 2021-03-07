@@ -33,7 +33,7 @@ const Header = () => (
       <span style={styles.title}>
         Jurie Spies
       </span>
-      <span style={styles.subTitle}>
+      <span className="fadeIn wait-2s" style={styles.subTitle}>
         Software Wizard
       </span>
     </div>
