@@ -1,31 +1,40 @@
-import { Circle } from 'rc-progress';
 import React from 'react';
 import resumeData from '../assets/resumeData.json';
+import ProgressBar from './ProgressBar/ProgressBar';
 
 const styles = {
   mainComponent: {
     display: 'flex',
-    // backgroundColor: '#101010',
+    flexWrap: 'wrap',
   },
   title: {
-    flexGrow: 1,
-    margin: 15,
-    fontSize: 'min(max(14px,2vw),22px)',
+    display: 'grid',
+    width: '500px',
+    margin: '15px',
+    fontSize: 'min(max(18px,2vw),22px)',
     fontWeight: 'bold',
     color: '#fff',
     textDecorationLine: 'underline',
     textAlign: 'center',
     textDecorationColor: 'blue',
-    minWidth: '50px',
   },
   skillSection: {
-    flexGrow: 8,
-    margin: '10px',
+    margin: '15px',
+    width: '1000px',
   },
-  skillContainer: {
-    margin: '10px',
-    height: '200px',
-    width: '200px',
+  skillMainContainer: {
+    minHeight: '100px',
+    maxHeight: '150px',
+  },
+  skillTextContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '5px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+  },
+  skillText: {
+    color: '#fff',
   },
 };
 
@@ -36,23 +45,20 @@ const Skills = () => (
     </div>
     <div style={styles.skillSection}>
       {resumeData.skills.map((skill) => (
-        <div style={{
-          display: 'flex', alignItems: 'center', position: 'relative', alignSelf: 'center', justifyContent: 'center', width: '10%',
-        }}
-        >
-          <div style={styles.skillContainer}>
-            <Circle
-              percent={`${skill.rating}`}
-              strokeWidth="4"
-              strokeColor="blue"
-              trailColor="#D3D3D3"
-              trailWidth="2px"
-            />
+        <div style={styles.skillMainContainer}>
+          <div style={styles.skillTextContainer}>
+            <span style={styles.skillText}>
+              {skill.language}
+            </span>
+            <span style={styles.skillText}>
+              {`${skill.rating}%`}
+            </span>
           </div>
-          <div style={{ color: '#D3D3D3', position: 'absolute', top: '55px' }}>{skill.language}</div>
+          <ProgressBar stripe animate width={skill.rating} color="blue" />
         </div>
       ))}
     </div>
+
   </div>
 );
 

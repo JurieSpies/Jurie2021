@@ -4,28 +4,30 @@ import resumeData from '../assets/resumeData.json';
 const styles = {
   mainComponent: {
     display: 'flex',
-    // backgroundColor: '#101010',
-  },
-  card: {
-    display: 'grid',
-    margin: '10px',
-    padding: '15px',
-    boxShadow: '5px 1px 10px #ccc',
+    flexWrap: 'wrap',
   },
   workContainer: {
     display: 'grid',
-    flexGrow: 8,
-    margin: '10px',
+    width: '1000px',
+    margin: '15px',
   },
   workSection: {
-    flexGrow: 1,
-    margin: 15,
-    fontSize: 'min(max(14px,2vw),22px)',
+    display: 'grid',
+    width: '500px',
+    margin: '15px',
+    fontSize: 'min(max(18px,2vw),22px)',
     fontWeight: 'bold',
     color: '#fff',
     textDecorationLine: 'underline',
     textAlign: 'center',
     textDecorationColor: 'blue',
+  },
+  card: {
+    display: 'grid',
+    margin: '10px',
+    marginBottom: '30px',
+    padding: '15px',
+    boxShadow: '1px 1px 10px #ccc',
   },
   title: {
     fontSize: 'min(max(14px,2vw),22px)',

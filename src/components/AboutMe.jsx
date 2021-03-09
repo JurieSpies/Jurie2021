@@ -7,22 +7,21 @@ import resumeData from '../assets/resumeData.json';
 const styles = {
   mainBodyContainer: {
     display: 'flex',
-    // backgroundColor: '#101010',
+    flexWrap: 'wrap',
+    margin: '50px',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    flexWrap: 'wrap',
-    padding: '50px',
   },
   profilePic: {
     minHeight: '200px',
     minWidth: '200px',
     maxHeight: '300px',
     maxWidth: '300px',
-    borderRadius: 200,
-    padding: '20px',
+    borderRadius: '200px',
+    marginBottom: '20px',
   },
   mainSectionsContainer: {
-    width: '1200px',
+    width: '1185px',
   },
   title: {
     fontSize: 'min(max(24px,3vw),26px)',
