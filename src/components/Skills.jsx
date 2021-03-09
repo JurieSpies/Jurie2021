@@ -6,10 +6,11 @@ const styles = {
   mainComponent: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   title: {
     display: 'grid',
-    width: '500px',
+    width: '300px',
     margin: '15px',
     fontSize: 'min(max(18px,2vw),22px)',
     fontWeight: 'bold',
@@ -20,7 +21,7 @@ const styles = {
   },
   skillSection: {
     margin: '15px',
-    width: '1000px',
+    width: '1300px',
   },
   skillMainContainer: {
     minHeight: '100px',

@@ -8,7 +8,7 @@ const ProgressBar = (props) => {
   } = props;
   const divStyles = {
     height,
-    width: '1000px',
+    // width: 'min(max(300px,10vw),1200px)',
   };
   const span1Styles = {
     width: width <= 100 ? `${width}%` : '100%',
@@ -32,7 +32,7 @@ const ProgressBar = (props) => {
 };
 
 ProgressBar.propTypes = {
-  width: propTypes.string,
+  width: propTypes.string.isRequired,
   height: propTypes.string,
   color: propTypes.string,
   stripe: propTypes.bool,
@@ -40,7 +40,6 @@ ProgressBar.propTypes = {
 };
 
 ProgressBar.defaultProps = {
-  width: '50%',
   height: '15px',
   color: 'green',
   stripe: true,

@@ -5,15 +5,16 @@ const styles = {
   mainComponent: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   workContainer: {
     display: 'grid',
-    width: '1000px',
+    width: '1300px',
     margin: '15px',
   },
   workSection: {
     display: 'grid',
-    width: '500px',
+    width: '300px',
     margin: '15px',
     fontSize: 'min(max(18px,2vw),22px)',
     fontWeight: 'bold',
