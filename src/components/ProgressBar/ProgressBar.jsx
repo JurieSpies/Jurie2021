@@ -8,7 +8,6 @@ const ProgressBar = (props) => {
   } = props;
   const divStyles = {
     height,
-    // width: 'min(max(300px,10vw),1200px)',
   };
   const span1Styles = {
     width: width <= 100 ? `${width}%` : '100%',
