@@ -1,5 +1,7 @@
 import React from 'react';
 import ParticlesBg from 'particles-bg';
+import ReactTyped from 'react-typed';
+import resumeData from '../assets/resumeData.json';
 
 const styles = {
   title: {
@@ -34,7 +36,14 @@ const Header = () => (
         Jurie Spies
       </span>
       <span className="fadeIn wait-2s" style={styles.subTitle}>
-        Software Wizard
+        {'{software'}
+        <ReactTyped
+          strings={resumeData.coolSoftwareTiles}
+          typeSpeed={60}
+          backSpeed={60}
+          loop
+        />
+        {'}'}
       </span>
     </div>
   </div>
