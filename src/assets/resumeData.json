@@ -33,5 +33,15 @@
       "language":"CSS",
       "rating":"30"
     }
+  ],
+  "frameworkSkills":[
+    {
+      "frameworkTitle":"React",
+      "rating":"80"
+    },
+    {
+      "frameworkTitle":"React Native",
+      "rating":"90"
+    }
   ]
 }

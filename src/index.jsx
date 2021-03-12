@@ -5,6 +5,7 @@ import Header from './components/Header';
 import AboutMe from './components/AboutMe';
 import Work from './components/Work';
 import Skills from './components/Skills';
+import Frameworks from './components/Frameworks';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
       <AboutMe />
       <Work />
       <Skills />
+      <Frameworks />
     </div>
   </React.StrictMode>,
   document.getElementById('root'),
