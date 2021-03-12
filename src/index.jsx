@@ -1,20 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Header from './components/Header';
-import AboutMe from './components/AboutMe';
-import Work from './components/Work';
-import Skills from './components/Skills';
-import Frameworks from './components/Frameworks';
+import Header from './pages/Header';
+import AboutMe from './pages/AboutMe';
+import Work from './pages/Work';
+import Skills from './pages/Skills';
+import Frameworks from './pages/Frameworks';
+
+const styles = {
+  mainContainer: {
+    height: '100vh',
+    flexWrap: 1,
+    overflow: 'auto',
+  },
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <div style={{
-      height: '100vh',
-      flexWrap: 1,
-      overflow: 'auto',
-    }}
-    >
+    <div style={styles.mainContainer}>
       <Header />
       <AboutMe />
       <Work />

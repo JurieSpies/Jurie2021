@@ -1,5 +1,5 @@
 import React from 'react';
-import resumeData from '../assets/resumeData.json';
+import resumeData from '../RESUME_DATA.json';
 
 const styles = {
   mainComponent: {

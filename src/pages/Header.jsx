@@ -1,7 +1,7 @@
 import React from 'react';
 import ParticlesBg from 'particles-bg';
 import ReactTyped from 'react-typed';
-import resumeData from '../assets/resumeData.json';
+import resumeData from '../RESUME_DATA.json';
 
 const styles = {
   title: {

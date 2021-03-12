@@ -1,6 +1,6 @@
 import React from 'react';
-import resumeData from '../assets/resumeData.json';
-import ProgressBar from './ProgressBar/ProgressBar';
+import resumeData from '../RESUME_DATA.json';
+import ProgressBar from '../components/ProgressBar/ProgressBar';
 
 const styles = {
   mainComponent: {
@@ -19,43 +19,43 @@ const styles = {
     textAlign: 'center',
     textDecorationColor: 'blue',
   },
-  FrameworkSection: {
+  skillSection: {
     margin: '15px',
     width: '1300px',
   },
-  FrameworkMainContainer: {
+  skillMainContainer: {
     minHeight: '100px',
     maxHeight: '150px',
   },
-  FrameworkTextContainer: {
+  skillTextContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: '5px',
     paddingLeft: '10px',
     paddingRight: '10px',
   },
-  FrameworkText: {
+  skillText: {
     color: '#fff',
   },
 };
 
-const Frameworks = () => (
+const Skills = () => (
   <div style={styles.mainComponent}>
     <div style={styles.title}>
-      Frameworks
+      Skills
     </div>
-    <div style={styles.FrameworkSection}>
-      {resumeData.frameworkSkills.map((skill) => (
-        <div style={styles.FrameworkMainContainer}>
-          <div style={styles.FrameworkTextContainer}>
-            <span style={styles.FrameworkText}>
-              {skill.frameworkTitle}
+    <div style={styles.skillSection}>
+      {resumeData.skills.map((skill) => (
+        <div style={styles.skillMainContainer}>
+          <div style={styles.skillTextContainer}>
+            <span style={styles.skillText}>
+              {skill.language}
             </span>
-            <span style={styles.FrameworkText}>
+            <span style={styles.skillText}>
               {`${skill.rating}%`}
             </span>
           </div>
-          <ProgressBar stripe animate width={skill.rating} color="darkblue" />
+          <ProgressBar stripe animate width={skill.rating} color="blue" />
         </div>
       ))}
     </div>
@@ -63,4 +63,4 @@ const Frameworks = () => (
   </div>
 );
 
-export default Frameworks;
+export default Skills;

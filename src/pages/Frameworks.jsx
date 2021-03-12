@@ -1,6 +1,6 @@
 import React from 'react';
-import resumeData from '../assets/resumeData.json';
-import ProgressBar from './ProgressBar/ProgressBar';
+import resumeData from '../RESUME_DATA.json';
+import ProgressBar from '../components/ProgressBar/ProgressBar';
 
 const styles = {
   mainComponent: {
@@ -19,43 +19,43 @@ const styles = {
     textAlign: 'center',
     textDecorationColor: 'blue',
   },
-  skillSection: {
+  FrameworkSection: {
     margin: '15px',
     width: '1300px',
   },
-  skillMainContainer: {
+  FrameworkMainContainer: {
     minHeight: '100px',
     maxHeight: '150px',
   },
-  skillTextContainer: {
+  FrameworkTextContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: '5px',
     paddingLeft: '10px',
     paddingRight: '10px',
   },
-  skillText: {
+  FrameworkText: {
     color: '#fff',
   },
 };
 
-const Skills = () => (
+const Frameworks = () => (
   <div style={styles.mainComponent}>
     <div style={styles.title}>
-      Skills
+      Frameworks
     </div>
-    <div style={styles.skillSection}>
-      {resumeData.skills.map((skill) => (
-        <div style={styles.skillMainContainer}>
-          <div style={styles.skillTextContainer}>
-            <span style={styles.skillText}>
-              {skill.language}
+    <div style={styles.FrameworkSection}>
+      {resumeData.frameworkSkills.map((skill) => (
+        <div style={styles.FrameworkMainContainer}>
+          <div style={styles.FrameworkTextContainer}>
+            <span style={styles.FrameworkText}>
+              {skill.frameworkTitle}
             </span>
-            <span style={styles.skillText}>
+            <span style={styles.FrameworkText}>
               {`${skill.rating}%`}
             </span>
           </div>
-          <ProgressBar stripe animate width={skill.rating} color="blue" />
+          <ProgressBar stripe animate width={skill.rating} color="darkblue" />
         </div>
       ))}
     </div>
@@ -63,4 +63,4 @@ const Skills = () => (
   </div>
 );
 
-export default Skills;
+export default Frameworks;

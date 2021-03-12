@@ -31,17 +31,21 @@
     },
     {
       "language":"CSS",
-      "rating":"30"
+      "rating":"50"
+    },
+    {
+      "language":"HTML",
+      "rating":"50"
     }
   ],
   "frameworkSkills":[
     {
-      "frameworkTitle":"React",
-      "rating":"80"
-    },
-    {
       "frameworkTitle":"React Native",
       "rating":"90"
+    },
+    {
+      "frameworkTitle":"React",
+      "rating":"80"
     }
   ]
 }

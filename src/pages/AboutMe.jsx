@@ -2,7 +2,7 @@ import React from 'react';
 import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from 'react-icons/fa';
 import { ImMail } from 'react-icons/im';
 import profilePic from '../assets/images/JuriePPbw.png';
-import resumeData from '../assets/resumeData.json';
+import resumeData from '../RESUME_DATA.json';
 
 const styles = {
   mainBodyContainer: {
