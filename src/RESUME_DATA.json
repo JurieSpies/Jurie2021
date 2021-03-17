@@ -47,5 +47,13 @@
       "frameworkTitle":"React",
       "rating":"80"
     }
+  ],
+  "myProjects":[
+    {"repoName":"Corona-Virus-Tracker",
+      "gitUrl":"https://github.com/JurieSpies/Corona-Virus-Tracker"
+    },
+    {"repoName":"Rock Paper Scissors game",
+      "gitUrl":"https://github.com/JurieSpies/RPSgame"
+    }
   ]
 }

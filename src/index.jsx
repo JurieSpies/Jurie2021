@@ -6,6 +6,7 @@ import AboutMe from './pages/AboutMe';
 import Work from './pages/Work';
 import Skills from './pages/Skills';
 import Frameworks from './pages/Frameworks';
+import MyProjects from './pages/MyProjects';
 
 const styles = {
   mainContainer: {
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Work />
       <Skills />
       <Frameworks />
+      <MyProjects />
     </div>
   </React.StrictMode>,
   document.getElementById('root'),
