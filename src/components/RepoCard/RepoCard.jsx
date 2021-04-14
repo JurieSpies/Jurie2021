@@ -64,7 +64,10 @@ const RepoCard = (props) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div style={{ color: 'white', fontWeight: 'bold', textDecorationLine: 'underline' }}>
+                <div style={{
+                  color: 'white', fontWeight: 'bold', textDecorationLine: 'underline', fontSize: '22px',
+                }}
+                >
                   {git.name}
                 </div>
               </a>
