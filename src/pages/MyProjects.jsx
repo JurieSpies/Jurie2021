@@ -1,5 +1,5 @@
 import React from 'react';
-import resumeData from '../RESUME_DATA.json';
+import RepoCard from '../components/RepoCard/RepoCard';
 
 const styles = {
   mainComponent: {
@@ -37,7 +37,10 @@ const MyProjects = () => (
     </div>
     <div style={styles.projectsSection}>
       <div style={styles.repoSection}>
-        {resumeData.myProjects.map((repo) => <a style={styles.repoSection} href={repo.gitUrl} target="_blank" rel="noreferrer">{repo.repoName}</a>)}
+        <RepoCard
+          githubName="JurieSpies"
+          token="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"
+        />
       </div>
     </div>
   </div>
