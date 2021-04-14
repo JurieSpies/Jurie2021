@@ -8,6 +8,8 @@ import Skills from './pages/Skills';
 import Frameworks from './pages/Frameworks';
 import MyProjects from './pages/MyProjects';
 
+require('dotenv').config();
+
 const styles = {
   mainContainer: {
     height: '100vh',

@@ -1,6 +1,8 @@
 import React from 'react';
 import RepoCard from '../components/RepoCard/RepoCard';
 
+const { REACT_APP_GITHUB_REPO_TOKEN } = process.env;
+
 const styles = {
   mainComponent: {
     display: 'flex',
@@ -39,7 +41,7 @@ const MyProjects = () => (
       <div style={styles.repoSection}>
         <RepoCard
           githubName="JurieSpies"
-          token="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"
+          token={REACT_APP_GITHUB_REPO_TOKEN}
         />
       </div>
     </div>
