@@ -5,18 +5,51 @@ import axios from 'axios';
 const styles = {
   card: {
     display: 'flex',
+    backgroundColor: 'orange',
     margin: '10px',
     marginBottom: '30px',
     padding: '15px',
     boxShadow: '1px 1px 10px #ccc',
+    flexWrap: 'wrap',
+
   },
-  repoSection: {
+  githubProfilePic: {
+    // flex: 0.5,
+    flex: 1,
+    // width: '20%',
+    // height: 'auto',
+    paddingRight: '3%',
+    minHeight: '100px',
+    minWidth: '100px',
+    maxHeight: '300px',
+    maxWidth: '300px',
+    backgroundColor: 'pink',
+  },
+  cardRightHandSide: {
+    flex: 3,
+    // width: '80%',
+    backgroundColor: 'blue',
+    display: 'grid',
+  },
+  repoLink: {
+    // backgroundColor: 'pink',
     fontWeight: 'bold',
     display: 'grid',
     fontSize: 'min(max(14px,2vw),18px)',
     color: '#000',
     marginTop: 5,
     textTransform: 'uppercase',
+  },
+  cardTitle: {
+    color: 'white',
+    display: 'block',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    fontSize: 'min(max(22px,2vw),18px)',
+  },
+  cardSubTitle: {
+    display: 'flex',
+    // width: '100%',
   },
   moreOrLessButton: {
     borderRadius: '5px',
@@ -62,35 +95,37 @@ const RepoCard = (props) => {
       {repoInfo > '0'
         && repoInfo.slice(0, showMore ? repoInfo.length : 3).map((git) => (
           <div style={styles.card}>
+
             <img
+              style={styles.githubProfilePic}
               src={git.owner.avatar_url}
               alt="Logo"
-              style={{ width: '20%', height: 'auto', paddingRight: '3%' }}
             />
-            <div>
+
+            <div style={styles.cardRightHandSide}>
               <a
-                style={styles.repoSection}
+                style={styles.repoLink}
                 href={git.html_url}
                 target="_blank"
                 rel="noreferrer"
               >
-                <div style={{
-                  color: 'white', fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 'min(max(22px,2vw),18px)',
-                }}
-                >
+                <span style={styles.cardTitle}>
                   {git.name}
-                </div>
+                </span>
               </a>
-              <div>{git.description}</div>
-              <div>
+              <span style={styles.cardSubTitle}>
+                {git.description}
+              </span>
+              <span style={styles.cardSubTitle}>
                 language :
                 {git.language ? git.language : 'N/A'}
-              </div>
-              <div>
+              </span>
+              <span style={styles.cardSubTitle}>
                 watchers :
                 {git.watchers}
-              </div>
+              </span>
             </div>
+
           </div>
         ))}
       <button style={styles.moreOrLessButton} type="button" onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</button>
