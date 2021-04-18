@@ -46,7 +46,6 @@ const styles = {
     fontSize: 'min(max(14px,2vw),18px)',
     boxShadow: '1px 3px 10px #ccc',
     fontWeight: 'bold',
-
   },
 };
 

@@ -18,10 +18,20 @@ const styles = {
     marginTop: 5,
     textTransform: 'uppercase',
   },
+  moreOrLessButton: {
+    borderRadius: '5px',
+    marginTop: '15px',
+    padding: '15px',
+    fontSize: 'min(max(14px,2vw),18px)',
+    boxShadow: '1px 3px 10px #ccc',
+    fontWeight: 'bold',
+    width: '50%',
+  },
 };
 
 const RepoCard = (props) => {
   const { githubName, token } = props;
+  const [showMore, setShowMore] = useState(false);
   const [repoInfo, setRepoInfo] = useState();
 
   const getRepos = async () => {
@@ -50,7 +60,7 @@ const RepoCard = (props) => {
   return (
     <>
       {repoInfo > '0'
-        && repoInfo.map((git) => (
+        && repoInfo.slice(0, showMore ? repoInfo.length : 3).map((git) => (
           <div style={styles.card}>
             <img
               src={git.owner.avatar_url}
@@ -65,7 +75,7 @@ const RepoCard = (props) => {
                 rel="noreferrer"
               >
                 <div style={{
-                  color: 'white', fontWeight: 'bold', textDecorationLine: 'underline', fontSize: '22px',
+                  color: 'white', fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 'min(max(22px,2vw),18px)',
                 }}
                 >
                   {git.name}
@@ -83,6 +93,7 @@ const RepoCard = (props) => {
             </div>
           </div>
         ))}
+      <button style={styles.moreOrLessButton} type="button" onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</button>
     </>
   );
 };
