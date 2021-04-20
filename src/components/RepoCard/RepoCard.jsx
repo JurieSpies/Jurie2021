@@ -1,40 +1,38 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import propTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const styles = {
+  projectsSection: {
+    display: 'grid',
+    width: '1300px',
+    margin: '15px',
+    justifyContent: 'center',
+  },
   card: {
     display: 'flex',
-    backgroundColor: 'orange',
+    flexWrap: 'wrap',
     margin: '10px',
     marginBottom: '30px',
     padding: '15px',
     boxShadow: '1px 1px 10px #ccc',
-    flexWrap: 'wrap',
-
   },
+
   githubProfilePic: {
-    // flex: 0.5,
-    flex: 1,
-    // width: '20%',
-    // height: 'auto',
-    paddingRight: '3%',
     minHeight: '100px',
     minWidth: '100px',
     maxHeight: '300px',
     maxWidth: '300px',
-    backgroundColor: 'pink',
+    borderRadius: '200px',
+    marginBottom: '20px',
   },
   cardRightHandSide: {
-    flex: 3,
-    // width: '80%',
-    backgroundColor: 'blue',
-    display: 'grid',
+    flex: 1,
   },
   repoLink: {
-    // backgroundColor: 'pink',
     fontWeight: 'bold',
-    display: 'grid',
     fontSize: 'min(max(14px,2vw),18px)',
     color: '#000',
     marginTop: 5,
@@ -42,23 +40,27 @@ const styles = {
   },
   cardTitle: {
     color: 'white',
-    display: 'block',
     fontWeight: 'bold',
+    wordBreak: 'break-all',
     textDecorationLine: 'underline',
     fontSize: 'min(max(22px,2vw),18px)',
   },
   cardSubTitle: {
     display: 'flex',
-    // width: '100%',
+    color: 'white',
   },
   moreOrLessButton: {
     borderRadius: '5px',
     marginTop: '15px',
     padding: '15px',
+    color: 'white',
     fontSize: 'min(max(14px,2vw),18px)',
-    boxShadow: '1px 3px 10px #ccc',
+    textAlign: 'center',
     fontWeight: 'bold',
-    width: '50%',
+    width: '200px',
+    height: 'auto',
+    placeSelf: 'center',
+    cursor: 'pointer',
   },
 };
 
@@ -91,17 +93,15 @@ const RepoCard = (props) => {
   }, []);
 
   return (
-    <>
+    <div style={styles.projectsSection}>
       {repoInfo > '0'
         && repoInfo.slice(0, showMore ? repoInfo.length : 3).map((git) => (
           <div style={styles.card}>
-
             <img
               style={styles.githubProfilePic}
               src={git.owner.avatar_url}
               alt="Logo"
             />
-
             <div style={styles.cardRightHandSide}>
               <a
                 style={styles.repoLink}
@@ -128,8 +128,8 @@ const RepoCard = (props) => {
 
           </div>
         ))}
-      <button style={styles.moreOrLessButton} type="button" onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</button>
-    </>
+      <span style={styles.moreOrLessButton} curs onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</span>
+    </div>
   );
 };
 

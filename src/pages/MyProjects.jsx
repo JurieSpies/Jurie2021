@@ -20,16 +20,6 @@ const styles = {
     textAlign: 'center',
     textDecorationColor: 'blue',
   },
-  projectsSection: {
-    margin: '15px',
-    width: '1300px',
-  },
-  repoSection: {
-    display: 'grid',
-    fontSize: 'min(max(14px,2vw),18px)',
-    color: '#fff',
-    marginTop: 5,
-  },
 };
 
 const MyProjects = () => (
@@ -37,14 +27,10 @@ const MyProjects = () => (
     <div style={styles.title}>
       My Projects
     </div>
-    <div style={styles.projectsSection}>
-      <div style={styles.repoSection}>
-        <RepoCard
-          githubName="JurieSpies"
-          token={REACT_APP_GITHUB_REPO_TOKEN}
-        />
-      </div>
-    </div>
+    <RepoCard
+      githubName="JurieSpies"
+      token={REACT_APP_GITHUB_REPO_TOKEN}
+    />
   </div>
 );
 
