@@ -1,5 +1,4 @@
 import React from 'react';
-import ParticlesBg from 'particles-bg';
 import ReactTyped from 'react-typed';
 import resumeData from '../RESUME_DATA.json';
 
@@ -21,31 +20,27 @@ const styles = {
   },
   headerContainer: {
     textAlign: 'center',
-    display: 'flex',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: 'grid',
+    height: '100vh',
+    alignContent: 'center',
   },
 };
 
 const Header = () => (
   <div style={styles.headerContainer}>
-    <div>
-      <ParticlesBg color="#fff" num={100} type="lines" bg />
-      <span style={styles.title}>
-        Jurie Spies
-      </span>
-      <span className="fadeIn wait-2s" style={styles.subTitle}>
-        {'{software'}
-        <ReactTyped
-          strings={resumeData.coolSoftwareTiles}
-          typeSpeed={60}
-          backSpeed={60}
-          loop
-        />
-        {'}'}
-      </span>
-    </div>
+    <span style={styles.title}>
+      Jurie Spies
+    </span>
+    <span className="fadeIn wait-2s" style={styles.subTitle}>
+      {'{software'}
+      <ReactTyped
+        strings={resumeData.coolSoftwareTiles}
+        typeSpeed={60}
+        backSpeed={60}
+        loop
+      />
+      {'}'}
+    </span>
   </div>
 );
 
