@@ -1,9 +1,8 @@
-import ParticlesBg from 'particles-bg';
 import React from 'react';
+import Particles from 'react-particles-js';
 
-const AnimatedBackground = () => (
-
-  <div style={{
+const styles = {
+  mainContainer: {
     position: 'fixed',
     display: 'grid',
     height: '100%',
@@ -12,9 +11,12 @@ const AnimatedBackground = () => (
     bottom: 0,
     zIndex: -1,
     backgroundColor: '#000',
-  }}
-  >
-    <ParticlesBg color="#fff" num={100} type="lines" />
+  },
+};
+
+const AnimatedBackground = () => (
+  <div style={styles.mainContainer}>
+    <Particles params={{ particles: { number: { value: 20 }, move: { speed: 1 } } }} />
   </div>
 );
 

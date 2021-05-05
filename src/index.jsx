@@ -7,14 +7,14 @@ import Work from './pages/Work';
 import Skills from './pages/Skills';
 import Frameworks from './pages/Frameworks';
 import MyProjects from './pages/MyProjects';
-// import AnimatedBackground from './pages/AnimatedBackground';
+import AnimatedBackground from './pages/AnimatedBackground';
 
 require('dotenv').config();
 
 ReactDOM.render(
   <React.StrictMode>
     <>
-      {/* <AnimatedBackground /> */}
+      <AnimatedBackground />
       <Header />
       <AboutMe />
       <Work />
