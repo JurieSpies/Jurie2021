@@ -26,8 +26,7 @@ const styles = {
   },
 };
 
-const randomTitle = resumeData.coolSoftwareTiles[Math.floor(Math.random()
-* resumeData.coolSoftwareTiles.length)];
+const randomTitle = (array) => array.sort(() => 0.5 - Math.random());
 
 const Header = () => (
   <div style={styles.headerContainer}>
@@ -37,7 +36,7 @@ const Header = () => (
     <span className="fadeIn wait-2s" style={styles.subTitle}>
       {'{software'}
       <ReactTyped
-        strings={[randomTitle]}
+        strings={randomTitle(resumeData.coolSoftwareTiles)}
         typeSpeed={60}
         backSpeed={60}
         loop
