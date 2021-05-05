@@ -1,4 +1,3 @@
-// import ParticlesBg from 'particles-bg';
 import React from 'react';
 import ReactTyped from 'react-typed';
 import resumeData from '../RESUME_DATA.json';
@@ -27,16 +26,18 @@ const styles = {
   },
 };
 
+const randomTitle = resumeData.coolSoftwareTiles[Math.floor(Math.random()
+* resumeData.coolSoftwareTiles.length)];
+
 const Header = () => (
   <div style={styles.headerContainer}>
-    {/* <ParticlesBg color="#fff" num={100} type="lines" bg /> */}
     <span style={styles.title}>
       Jurie Spies
     </span>
     <span className="fadeIn wait-2s" style={styles.subTitle}>
       {'{software'}
       <ReactTyped
-        strings={resumeData.coolSoftwareTiles}
+        strings={[randomTitle]}
         typeSpeed={60}
         backSpeed={60}
         loop
