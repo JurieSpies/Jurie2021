@@ -1,3 +1,4 @@
+// import ParticlesBg from 'particles-bg';
 import React from 'react';
 import ReactTyped from 'react-typed';
 import resumeData from '../RESUME_DATA.json';
@@ -28,6 +29,7 @@ const styles = {
 
 const Header = () => (
   <div style={styles.headerContainer}>
+    {/* <ParticlesBg color="#fff" num={100} type="lines" bg /> */}
     <span style={styles.title}>
       Jurie Spies
     </span>

@@ -7,27 +7,21 @@ import Work from './pages/Work';
 import Skills from './pages/Skills';
 import Frameworks from './pages/Frameworks';
 import MyProjects from './pages/MyProjects';
-import AnimatedBackground from './pages/AnimatedBackground';
+// import AnimatedBackground from './pages/AnimatedBackground';
 
 require('dotenv').config();
 
-const styles = {
-  mainContainer: {
-    height: '100%',
-  },
-};
-
 ReactDOM.render(
   <React.StrictMode>
-    <div style={styles.mainContainer}>
-      <AnimatedBackground />
+    <>
+      {/* <AnimatedBackground /> */}
       <Header />
       <AboutMe />
       <Work />
       <Skills />
       <Frameworks />
       <MyProjects />
-    </div>
+    </>
   </React.StrictMode>,
   document.getElementById('root'),
 );

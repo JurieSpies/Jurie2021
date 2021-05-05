@@ -4,10 +4,17 @@ import React from 'react';
 const AnimatedBackground = () => (
 
   <div style={{
-    position: 'fixed', display: 'grid', height: '100%', width: '100%', top: 0, bottom: 0, zIndex: -1,
+    position: 'fixed',
+    display: 'grid',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    bottom: 0,
+    zIndex: -1,
+    backgroundColor: '#000',
   }}
   >
-    <ParticlesBg color="#fff" num={100} type="lines" bg />
+    <ParticlesBg color="#fff" num={100} type="lines" />
   </div>
 );
 
