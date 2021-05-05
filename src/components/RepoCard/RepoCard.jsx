@@ -97,11 +97,11 @@ const RepoCard = (props) => {
       {repoInfo > '0'
         && repoInfo.slice(0, showMore ? repoInfo.length : 3).map((git) => (
           <div style={styles.card}>
-            <img
+            {/* <img
               style={styles.githubProfilePic}
               src={git.owner.avatar_url}
               alt="Logo"
-            />
+            /> */}
             <div style={styles.cardRightHandSide}>
               <a
                 style={styles.repoLink}

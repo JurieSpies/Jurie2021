@@ -12,7 +12,7 @@ require('dotenv').config();
 
 const styles = {
   mainContainer: {
-    height: '100vh',
+    height: '96vh',
     flexWrap: 1,
     overflow: 'auto',
   },
