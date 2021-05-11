@@ -29,6 +29,7 @@ const styles = {
     marginBottom: '30px',
     padding: '15px',
     boxShadow: '1px 1px 10px #ccc',
+    zIndex: 1,
   },
   title: {
     fontSize: 'min(max(14px,2vw),22px)',

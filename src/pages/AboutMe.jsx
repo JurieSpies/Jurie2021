@@ -34,6 +34,12 @@ const styles = {
     color: '#fff',
     marginTop: 5,
   },
+  quote: {
+    display: 'flex',
+    fontSize: 'min(max(14px,2vw),18px)',
+    color: '#ccc',
+    marginTop: 5,
+  },
   icon: {
     width: '24px',
     height: '24px',
@@ -60,6 +66,10 @@ const AboutMe = () => (
         {resumeData.aboutMe}
       </div>
       <br />
+      <div style={styles.quote}>
+        {`"${resumeData.quote}"`}
+      </div>
+      <br />
       <div style={styles.title}>
         Contact Details
       </div>
@@ -80,7 +90,7 @@ const AboutMe = () => (
         <a style={styles.subTitle} href={resumeData.linkedIn} target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
       <a href={resumeData.resume} download target="_blank" rel="noreferrer">
-        <button style={styles.resumeButton} type="button">Download</button>
+        <button style={styles.resumeButton} type="button">Curriculum Vitae</button>
       </a>
     </div>
   </div>
