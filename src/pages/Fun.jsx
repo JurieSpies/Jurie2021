@@ -67,7 +67,7 @@ const Fun = () => {
             style={styles.counterText}
             end={cupsOfCoffee}
             delay={1}
-            duration={3}
+            duration={5}
           />
         </div>
         )}
@@ -81,7 +81,7 @@ const Fun = () => {
             style={styles.counterText}
             end={linesOfCode}
             delay={1}
-            duration={3}
+            duration={5}
             redraw
           />
         </div>
