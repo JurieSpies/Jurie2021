@@ -6,6 +6,7 @@ import { BottomScrollListener } from 'react-bottom-scroll-listener';
 const styles = {
   mainComponent: {
     display: 'flex',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'center',
     marginBottom: '100px',
@@ -20,6 +21,7 @@ const styles = {
     textDecorationLine: 'underline',
     textAlign: 'center',
     textDecorationColor: 'blue',
+    alignSelf: 'center',
   },
   counter: {
     backgroundColor: 'white',
@@ -27,6 +29,7 @@ const styles = {
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   counterText: {
     fontWeight: 'bold',
