@@ -1,13 +1,14 @@
-/* eslint-disable no-unused-vars */
-import moment from 'moment';
-import React, { useState } from 'react';
+import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
+import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
 const styles = {
   mainComponent: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    marginBottom: '100px',
   },
   title: {
     display: 'grid',
@@ -20,46 +21,70 @@ const styles = {
     textAlign: 'center',
     textDecorationColor: 'blue',
   },
+  counter: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  counterText: {
+    fontWeight: 'bold',
+  },
 };
 
 const Fun = () => {
-  const [cupsOfCoffee, setCupsOfCoffee] = useState(200);
-  const refDate = new Date('03/12/2021');
-  const today = new Date('05/12/2021');
+  const refDate = '2019-01-01';
+  const today = dayjs();
+  const diff = today.diff(refDate, 'day').toString();
+  const [cupsOfCoffee, setCupsOfCoffee] = useState(0);
+  const [linesOfCode, setLinesOfCode] = useState(0);
+  const [isLazyLoading, setIsLazyLoading] = useState(false);
 
-  // const refDate2 = moment('03/12/2021');
-  // const today2 = moment(new Date());
-  // const refDate2 = moment('03/12/2021').format('YYYY-MM-DD');
-  // const today2 = moment(new Date()).format('YYYY-MM-DD');
+  const bottomListener = () => {
+    setIsLazyLoading(true);
+  };
 
-  const difference = Math.abs(today - refDate) / (1000 * 3600 * 24);
-
-  console.log('🚀 ~ refDate', refDate);
-  console.log('🚀 ~ today', today);
-
-  // console.log('🚀 ~ refDate2', refDate2);
-  // console.log('🚀 ~ today2', today2);
-
-  console.log('🚀 ~ difference', difference);
+  useEffect(() => {
+    setCupsOfCoffee(diff * 4);
+    setLinesOfCode(diff * 123);
+  }, [diff]);
 
   return (
-    <div style={styles.mainComponent}>
-      <div style={styles.title}>
-        Cups of Coffee
+    <>
+      <div style={styles.mainComponent}>
+        <BottomScrollListener onBottom={bottomListener} />
+        <div style={styles.title}>
+          Cups of Coffee
+        </div>
+        {isLazyLoading
+        && (
+        <div style={styles.counter}>
+          <CountUp
+            style={styles.counterText}
+            end={cupsOfCoffee}
+            delay={1}
+            duration={3}
+          />
+        </div>
+        )}
+        <div style={styles.title}>
+          Lines of Code
+        </div>
+        {isLazyLoading
+        && (
+        <div style={styles.counter}>
+          <CountUp
+            style={styles.counterText}
+            end={linesOfCode}
+            delay={1}
+            duration={3}
+            redraw
+          />
+        </div>
+        )}
       </div>
-      <div style={{
-        backgroundColor: 'white', padding: 20, borderRadius: 10, alignItems: 'center', justifyContent: 'center',
-      }}
-      >
-        <CountUp end={cupsOfCoffee} />
-      </div>
-      {/* <div style={styles.title}>
-        Lines of Code
-      </div>
-      <div style={{ backgroundColor: 'white' }}>
-        <CountUp end={100} />
-      </div> */}
-    </div>
+    </>
   );
 };
 

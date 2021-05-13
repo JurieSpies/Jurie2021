@@ -80,7 +80,7 @@ const RepoCard = (props) => {
     await axios(config)
       .then((res) => {
         const result = res.data;
-        console.log('✅: ', result);
+        // console.log('✅: ', result);
         setRepoInfo(result);
       })
       .catch((res) => {
