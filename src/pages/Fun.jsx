@@ -2,16 +2,17 @@ import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
+import { GiCoffeeCup } from 'react-icons/gi';
+import { BsCodeSlash } from 'react-icons/bs';
 
 const styles = {
   mainComponent: {
     display: 'flex',
-    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginBottom: '100px',
+    marginBottom: '10%',
   },
-  title: {
+  spacer: {
     display: 'grid',
     width: '300px',
     margin: '15px',
@@ -21,15 +22,41 @@ const styles = {
     textDecorationLine: 'underline',
     textAlign: 'center',
     textDecorationColor: 'blue',
+  },
+  subTitle: {
+    display: 'grid',
+    width: '300px',
+    margin: '15px',
+    fontSize: 'min(max(18px,2vw),22px)',
+    fontWeight: 'bold',
+    color: '#fff',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    textDecorationColor: 'blue',
+  },
+  counterContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     alignSelf: 'center',
+    paddingRight: '40px',
+    // backgroundColor: 'orange',
+  },
+  iconStyle: {
+    color: 'white',
+    paddingRight: '10px',
+    fontSize: 'xx-large',
+    // backgroundColor: 'red',
   },
   counter: {
-    backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
+    border: 'solid',
+    color: 'white',
+    // backgroundColor: 'white',
   },
   counterText: {
     fontWeight: 'bold',
@@ -49,43 +76,58 @@ const Fun = () => {
   };
 
   useEffect(() => {
-    setCupsOfCoffee(diff * 4);
+    setCupsOfCoffee(diff * 6);
     setLinesOfCode(diff * 123);
   }, [diff]);
 
   return (
     <>
       <div style={styles.mainComponent}>
-        <BottomScrollListener onBottom={bottomListener} />
-        <div style={styles.title}>
-          Cups of Coffee
+        <BottomScrollListener onBottom={bottomListener} offset={100} />
+        <div style={styles.spacer} />
+        <div style={{
+          margin: '15px', width: '1300px', height: '100%', textAlign: 'center',
+        }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={styles.subTitle}>
+              Cups of Coffee
+            </div>
+            <div style={styles.counterContainer}>
+              <GiCoffeeCup style={styles.iconStyle} />
+              {isLazyLoading
+            && (
+            <div style={styles.counter}>
+              <CountUp
+                style={styles.counterText}
+                end={cupsOfCoffee}
+                duration={5}
+              />
+            </div>
+            )}
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={styles.subTitle}>
+              Lines of Code
+            </div>
+            <div style={styles.counterContainer}>
+              <BsCodeSlash style={styles.iconStyle} />
+              {isLazyLoading
+            && (
+            <div style={styles.counter}>
+              <CountUp
+                style={styles.counterText}
+                end={linesOfCode}
+                duration={5}
+              />
+            </div>
+            )}
+            </div>
+          </div>
         </div>
-        {isLazyLoading
-        && (
-        <div style={styles.counter}>
-          <CountUp
-            style={styles.counterText}
-            end={cupsOfCoffee}
-            delay={1}
-            duration={5}
-          />
-        </div>
-        )}
-        <div style={styles.title}>
-          Lines of Code
-        </div>
-        {isLazyLoading
-        && (
-        <div style={styles.counter}>
-          <CountUp
-            style={styles.counterText}
-            end={linesOfCode}
-            delay={1}
-            duration={5}
-            redraw
-          />
-        </div>
-        )}
+
       </div>
     </>
   );
