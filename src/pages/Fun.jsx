@@ -101,7 +101,7 @@ const Fun = () => {
               <CountUp
                 style={styles.counterText}
                 end={cupsOfCoffee}
-                duration={5}
+                duration={3}
               />
             </div>
             )}
