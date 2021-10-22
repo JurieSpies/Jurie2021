@@ -1,0 +1,52 @@
+{
+  "coolSoftwareTiles":["Ninjaneer", "Wizard", "Engineer", "RockStar", "Master", "Codeling", "Magician", "Guru", "Engineer", "Developer"],
+  "aboutMe": "I am a hardworking, honest individual with a strong sense of responsibility. I am outgoing and tactful, and able to listen effectively when solving problems. I’m eager to Learn new skills and produce high standards of work.",
+  "quote": "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
+  "phoneNumber": "+27768862529",
+  "email":"juriespies@gmail.com",
+  "github": "https://github.com/JurieSpies",
+  "linkedIn": "https://www.linkedin.com/in/juriespies/",
+  "resume":"https://drive.google.com/file/d/1K5SbXp7NUftkfao5-nq_nibZd8UGFbmu/view?usp=sharing",
+  "work":[
+    {
+      "title":"Open Vantage",
+      "role":"Software Developer (Front-End)",
+      "description":"Currently Responsible for Building React Native Apps/React Web Apps,AWS,Graphql,Restfull API's,Figma Designs,Sketch,GraphQL,Managed Services",
+      "timeline":"* September 2019 to Currently"
+    },
+    {
+      "title":"Verge Technologies (Front-End)",
+      "role":"Software Developer",
+      "description":"React Native,Graphql,Restfull API's,Adobe XD, Xcode ,GraphQL",
+      "timeline":"* March 2019 to August"
+    }
+  ],
+  "skills":[
+    {
+      "language":"Javascript",
+      "rating":"80"
+    },
+    {
+      "language":"Typescript",
+      "rating":"60"
+    },
+    {
+      "language":"CSS",
+      "rating":"50"
+    },
+    {
+      "language":"HTML",
+      "rating":"50"
+    }
+  ],
+  "frameworkSkills":[
+    {
+      "frameworkTitle":"React Native",
+      "rating":"90"
+    },
+    {
+      "frameworkTitle":"React",
+      "rating":"80"
+    }
+  ]
+}
