@@ -76,8 +76,8 @@ const Fun = () => {
   };
 
   useEffect(() => {
-    setCupsOfCoffee(diff * 6);
-    setLinesOfCode(diff * 123);
+    setCupsOfCoffee(diff * 5);
+    setLinesOfCode(diff * 120);
   }, [diff]);
 
   return (
