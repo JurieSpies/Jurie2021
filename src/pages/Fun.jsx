@@ -120,7 +120,7 @@ const Fun = () => {
               <CountUp
                 style={styles.counterText}
                 end={linesOfCode}
-                duration={5}
+                duration={3}
               />
             </div>
             )}
