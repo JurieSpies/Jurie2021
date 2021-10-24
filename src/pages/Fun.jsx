@@ -64,7 +64,7 @@ const styles = {
 };
 
 const Fun = () => {
-  const refDate = '2019-01-01';
+  const refDate = '2019-01-06';
   const today = dayjs();
   const diff = today.diff(refDate, 'day').toString();
   const [cupsOfCoffee, setCupsOfCoffee] = useState(0);
