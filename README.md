@@ -1,5 +1,5 @@
 # Jurie2021
-Jurie Online Resume
+This is the Online Resume of Jurie Spies
 ![resume](https://user-images.githubusercontent.com/28508616/111862626-20caeb80-895f-11eb-87ea-c3fc4bedc840.png)
 # Getting Started with Create React App
 
