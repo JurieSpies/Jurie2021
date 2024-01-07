@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from 'react-icons/fa';
 import { ImMail } from 'react-icons/im';
+import { PiBracketsAngleBold } from 'react-icons/pi';
+import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import profilePic from '../assets/images/JuriePPbw.png';
 import resumeData from '../RESUME_DATA.json';
 
@@ -89,6 +91,14 @@ const AboutMe = () => (
       <div style={styles.subTitle}>
         <FaLinkedin style={styles.icon} />
         <a style={styles.subTitle} href={resumeData.linkedIn} target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+      <div style={styles.subTitle}>
+        <PiBracketsAngleBold style={styles.icon} />
+        <a style={styles.subTitle} href={resumeData.dreamCode} target="_blank" rel="noreferrer">DreamCode</a>
+      </div>
+      <div style={styles.subTitle}>
+        <IoLogoGooglePlaystore style={styles.icon} />
+        <a style={styles.subTitle} href={resumeData.dreamCodePlayStore} target="_blank" rel="noreferrer">PlayStore</a>
       </div>
       <a href={resumeData.resume} download target="_blank" rel="noreferrer">
         <button style={styles.resumeButton} type="button">Curriculum Vitae</button>

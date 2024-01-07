@@ -128,7 +128,7 @@ const RepoCard = (props) => {
 
           </div>
         ))}
-      <span style={styles.moreOrLessButton} curs onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</span>
+      <span style={styles.moreOrLessButton} onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</span>
     </div>
   );
 };
