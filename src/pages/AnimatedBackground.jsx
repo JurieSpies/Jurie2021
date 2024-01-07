@@ -1,6 +1,6 @@
 import React from 'react';
 // import MouseParticles from 'react-mouse-particles';
-import Particles from 'react-particles-js';
+// import Particles from 'react-particles-js';
 
 const styles = {
   mainContainer: {
@@ -18,7 +18,7 @@ const styles = {
 const AnimatedBackground = () => (
   <div style={styles.mainContainer}>
     {/* <MouseParticles g={3} color="white" cull="col,image-wrapper" /> */}
-    <Particles params={{ particles: { number: { value: 20 }, move: { speed: 1 } } }} />
+    {/* <Particles params={{ particles: { number: { value: 20 }, move: { speed: 1 } } }} /> */}
   </div>
 );
 

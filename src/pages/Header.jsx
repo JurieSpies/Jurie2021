@@ -8,7 +8,17 @@ const styles = {
     justifyContent: 'center',
     fontSize: 'min(max(32px,4vw),78px)',
     fontWeight: 'bold',
+    background: '-webkit-linear-gradient(#eee, blue)',
+    WebkitBackgroundClip: 'text',
+    color: 'transparent',
+  },
+  occupation: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: 'min(max(20px,2vw),38px)',
+    fontWeight: 'bold',
     color: '#fff ',
+    marginBottom: '20px',
   },
   subTitle: {
     textAlign: 'center',
@@ -33,8 +43,11 @@ const Header = () => (
     <span style={styles.title}>
       Jurie Spies
     </span>
+    <span style={styles.occupation}>
+      Software Engineer
+    </span>
     <span className="fadeIn wait-2s" style={styles.subTitle}>
-      {'{software'}
+      {'{'}
       <ReactTyped
         strings={randomTitle(resumeData.coolSoftwareTiles)}
         typeSpeed={60}
