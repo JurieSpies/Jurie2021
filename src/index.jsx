@@ -10,8 +10,6 @@ import Frameworks from './pages/Frameworks';
 import MyProjects from './pages/MyProjects';
 import Fun from './pages/Fun';
 
-require('dotenv').config();
-
 ReactDOM.render(
   <React.StrictMode>
     <>
