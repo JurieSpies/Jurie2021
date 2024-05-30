@@ -3,7 +3,7 @@ import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from 'react-icons/fa';
 import { ImMail } from 'react-icons/im';
 import { PiBracketsAngleBold } from 'react-icons/pi';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
-import profilePic from '../assets/images/JuriePPbw.png';
+import profilePic from '../assets/images/JuriePPbw2.png';
 import resumeData from '../RESUME_DATA.json';
 
 const styles = {

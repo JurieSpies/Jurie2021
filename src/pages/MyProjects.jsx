@@ -1,7 +1,7 @@
 import React from 'react';
 import RepoCard from '../components/RepoCard/RepoCard';
 
-const { REACT_APP_GITHUB_REPO_TOKEN } = process.env;
+const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
 
 const styles = {
   mainComponent: {
