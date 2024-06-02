@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 import Header from './pages/Header';
 import Home from './pages/Home';
 
@@ -34,6 +34,7 @@ const App = () => {
       <PageContainer>
         <Header active={select} />
         {activeSelection === 'Home' && <Home />}
+        {activeSelection === 'Resume' && <Home />}
       </PageContainer>
       <Spacer />
     </Main>
