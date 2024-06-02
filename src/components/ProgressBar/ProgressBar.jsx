@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 
 const ProgressBar = (props) => {
   const {
-    height, width, color, stripe, animate,
+    height, width, color, stripe, animate, animationSpeed,
   } = props;
   const divStyles = {
     height,
@@ -16,7 +16,7 @@ const ProgressBar = (props) => {
     borderBottomRightRadius: width < 100 ? '8px' : '20px',
   };
   const span2Styles = {
-    animation: 'move 2s linear infinite',
+    animation: `move ${animationSpeed} linear infinite`,
   };
   return (
     <div className="meter" style={divStyles}>
@@ -36,6 +36,7 @@ ProgressBar.propTypes = {
   color: propTypes.string,
   stripe: propTypes.bool,
   animate: propTypes.bool,
+  animationSpeed: propTypes.string,
 };
 
 ProgressBar.defaultProps = {
@@ -43,6 +44,7 @@ ProgressBar.defaultProps = {
   color: 'green',
   stripe: true,
   animate: true,
+  animationSpeed: '2s',
 };
 
 export default ProgressBar;

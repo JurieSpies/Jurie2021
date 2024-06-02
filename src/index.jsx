@@ -1,27 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import App from './App';
 import './index.css';
-import AnimatedBackground from './pages/AnimatedBackground';
-import Header from './pages/Header';
-import AboutMe from './pages/AboutMe';
-import Work from './pages/Work';
-import Skills from './pages/Skills';
-import Frameworks from './pages/Frameworks';
-import MyProjects from './pages/MyProjects';
-import Fun from './pages/Fun';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <>
-      <AnimatedBackground />
-      <Header />
-      <AboutMe />
-      <Work />
-      <Skills />
-      <Frameworks />
-      <MyProjects />
-      <Fun />
-    </>
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+// https://www.youtube.com/watch?v=dImgZ_AH7uA
+
+createRoot(document.getElementById('root')).render(<App />);
