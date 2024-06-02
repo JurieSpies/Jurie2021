@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import AboutMe from './pages/AboutMe';
 import Header from './pages/Header';
 
 const Main = styled.div`
   display: flex;
+  height: 100%;
+  width: 100%;
 `;
 
 const PageContainer = styled.div`
@@ -19,20 +20,15 @@ const Spacer = styled.div`
   flex: 0.1;
 `;
 
-const App = () => {
-  // const [activeMenu, setActiveMenu] = useState(0);
-  console.log('🚀 example');
-
-  return (
-    <Main>
-      <Spacer />
-      <PageContainer>
-        <Header />
-        <AboutMe />
-      </PageContainer>
-      <Spacer />
-    </Main>
-  );
-};
+const App = () => (
+  <Main>
+    <Spacer />
+    <PageContainer>
+      <Header active={(e) => console.log(e)} />
+      <AboutMe />
+    </PageContainer>
+    <Spacer />
+  </Main>
+);
 
 export default App;

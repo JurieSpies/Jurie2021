@@ -1,7 +1,9 @@
 import Button from '@/components/Button/Button';
 import { COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
 import { Heading } from '@/utils/globalFonts';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const MainContent = styled.div`
   display: flex;
@@ -10,7 +12,6 @@ const MainContent = styled.div`
   font-size: 16px;
   font-weight: 700;
   width: 100%;
-  flex:1;
   margin: 20px 0;
 `;
 
@@ -20,16 +21,17 @@ const Green = styled.span`
 `;
 
 const HeaderTab = styled.div`
-    display: flex;
-    color: ${COLOR_WHITE};
-    text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
-    margin: 0 20px;
-    cursor: pointer;
-    transform: scale(1);
-    transition: transform 0.3s;
+  display: flex;
+  text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
+  text-decoration-color: ${COLOR_PRIMARY};
+  text-decoration-thickness: 2px;
+  margin: 0 20px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s;
   &:hover {
-    color: ${COLOR_PRIMARY};
-    transform: scale(1.2);
+  color: ${COLOR_PRIMARY};
+  transform: scale(1.2);
   }
 `;
 
@@ -40,7 +42,8 @@ const Right = styled.div`
   align-items: center;
 `;
 
-const Header = () => {
+const Header = ({ active = 'Home' }) => {
+  const [activeTab, setActiveTab] = useState('Home');
   const menus = [
     'Home',
     'Services',
@@ -49,6 +52,15 @@ const Header = () => {
     'Contact',
   ];
 
+  const activeTabFunction = (e) => {
+    setActiveTab(e);
+    active(e);
+  };
+
+  useEffect(() => {
+    active('Home');
+  }, []);
+
   return (
     <MainContent>
       <Heading>
@@ -56,8 +68,8 @@ const Header = () => {
         <Green>.</Green>
       </Heading>
       <Right>
-        {menus?.map((menu, index) => (
-          <HeaderTab key={menu}>
+        {menus?.map((menu) => (
+          <HeaderTab key={menu} $active={activeTab === menu} onClick={() => activeTabFunction(menu)}>
             {menu}
           </HeaderTab>
         ))}
@@ -72,7 +84,7 @@ const Header = () => {
 };
 
 Header.propTypes = {
-  // menus: propTypes.object.isRequired,
+  active: PropTypes.string,
 };
 
 export default Header;
