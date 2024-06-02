@@ -27,6 +27,7 @@ module.exports = {
     },
   },
   rules: {
+    'react/require-default-props': 'off',
     'linebreak-style': 0,
     'no-console': 'error',
     'max-len': 'off',

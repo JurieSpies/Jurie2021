@@ -13,6 +13,7 @@ export const SubHeading = styled.span`
   font-size: 18px;
   font-weight: 700;
   color: ${COLOR_WHITE};
+  max-width: 30%;
 `;
 
 export default {

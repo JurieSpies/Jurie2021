@@ -1,5 +1,5 @@
 import Button from '@/components/Button/Button';
-import { COLOR_BLACK, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
+import { COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
 import { Heading } from '@/utils/globalFonts';
 import styled from 'styled-components';
 
@@ -22,6 +22,7 @@ const Green = styled.span`
 const HeaderTab = styled.div`
     display: flex;
     color: ${COLOR_WHITE};
+    text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
     margin: 0 20px;
     cursor: pointer;
     transform: scale(1);
@@ -39,33 +40,39 @@ const Right = styled.div`
   align-items: center;
 `;
 
-const Header = () => (
-  <MainContent>
-    <Heading>
-      Jurie
-      <Green>.</Green>
-    </Heading>
-    <Right>
-      <HeaderTab>
-        Home
-      </HeaderTab>
-      <HeaderTab>
-        Services
-      </HeaderTab>
-      <HeaderTab>
-        Resume
-      </HeaderTab>
-      <HeaderTab>
-        Work
-      </HeaderTab>
-      <HeaderTab>
-        Contact
-      </HeaderTab>
-      <Button>
-        Hire Me
-      </Button>
-    </Right>
-  </MainContent>
-);
+const Header = () => {
+  const menus = [
+    'Home',
+    'Services',
+    'Resume',
+    'Work',
+    'Contact',
+  ];
+
+  return (
+    <MainContent>
+      <Heading>
+        Jurie
+        <Green>.</Green>
+      </Heading>
+      <Right>
+        {menus?.map((menu, index) => (
+          <HeaderTab key={menu}>
+            {menu}
+          </HeaderTab>
+        ))}
+        <Button>
+          <>
+            Hire Me
+          </>
+        </Button>
+      </Right>
+    </MainContent>
+  );
+};
+
+Header.propTypes = {
+  // menus: propTypes.object.isRequired,
+};
 
 export default Header;
