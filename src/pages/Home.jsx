@@ -323,7 +323,7 @@ const Home = () => {
                 end={getLinesOfCode()}
                 delay={0.5}
                 preserveValue
-                useEasing
+                useEasing={false}
               />
             </StatisticsNumber>
             <SubHeading>
@@ -337,8 +337,7 @@ const Home = () => {
                 end={getCupsOfCoffee()}
                 delay={0.5}
                 preserveValue
-                useEasing
-                duration={10}
+                useEasing={false}
               />
             </StatisticsNumber>
             <SubHeading>
