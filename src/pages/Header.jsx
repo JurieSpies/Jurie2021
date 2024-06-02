@@ -46,7 +46,6 @@ const Header = ({ active = 'Home' }) => {
   const [activeTab, setActiveTab] = useState('Home');
   const menus = [
     'Home',
-    'Services',
     'Resume',
     'Work',
     'Contact',

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import AboutMe from './pages/AboutMe';
+import { useState } from 'react';
 import Header from './pages/Header';
+import Home from './pages/Home';
 
 const Main = styled.div`
   display: flex;
@@ -20,15 +21,23 @@ const Spacer = styled.div`
   flex: 0.1;
 `;
 
-const App = () => (
-  <Main>
-    <Spacer />
-    <PageContainer>
-      <Header active={(e) => console.log(e)} />
-      <AboutMe />
-    </PageContainer>
-    <Spacer />
-  </Main>
-);
+const App = () => {
+  const [activeSelection, setActiveSelection] = useState('');
+
+  const select = (e) => {
+    setActiveSelection(e);
+  };
+
+  return (
+    <Main>
+      <Spacer />
+      <PageContainer>
+        <Header active={select} />
+        {activeSelection === 'Home' && <Home />}
+      </PageContainer>
+      <Spacer />
+    </Main>
+  );
+};
 
 export default App;
