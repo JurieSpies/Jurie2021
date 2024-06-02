@@ -55,7 +55,7 @@ const Skills = () => (
               {`${skill.rating}%`}
             </span>
           </div>
-          <ProgressBar stripe animate width={skill.rating} color="blue" />
+          <ProgressBar stripe animate animationSpeed="1s" width={skill.rating} color="#68D8FF" />
         </div>
       ))}
     </div>

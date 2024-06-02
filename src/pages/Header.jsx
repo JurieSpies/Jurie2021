@@ -1,69 +1,71 @@
-import React from 'react';
-import ReactTyped from 'react-typed';
-import resumeData from '../RESUME_DATA.json';
+import Button from '@/components/Button/Button';
+import { COLOR_BLACK, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
+import { Heading } from '@/utils/globalFonts';
+import styled from 'styled-components';
 
-const styles = {
-  title: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontSize: 'min(max(32px,4vw),78px)',
-    fontWeight: 'bold',
-    background: '-webkit-linear-gradient(#eee, blue)',
-    WebkitBackgroundClip: 'text',
-    color: 'transparent',
-  },
-  occupation: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontSize: 'min(max(20px,2vw),38px)',
-    fontWeight: 'bold',
-    color: '#fff ',
-    marginBottom: '20px',
-  },
-  subTitle: {
-    textAlign: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    fontSize: 'min(max(20px,2vw),38px)',
-    fontWeight: 'bold',
-    color: '#B8B8B8 ',
-  },
-  headerContainer: {
-    textAlign: 'center',
-    display: 'grid',
-    height: '100vh',
-    alignContent: 'center',
-  },
-};
+const MainContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: ${COLOR_WHITE};
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  flex:1;
+  margin: 20px 0;
+`;
 
-const randomTitle = (array) => {
-  const shuffledArray = [...array];
-  for (let i = shuffledArray.length - 1; i >= 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+const Green = styled.span`
+  color: ${COLOR_PRIMARY};
+  margin-left: 5px;
+`;
+
+const HeaderTab = styled.div`
+    display: flex;
+    color: ${COLOR_WHITE};
+    margin: 0 20px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.3s;
+  &:hover {
+    color: ${COLOR_PRIMARY};
+    transform: scale(1.2);
   }
-  return shuffledArray;
-};
+`;
+
+const Right = styled.div`
+  margin-left: auto;
+  color: ${COLOR_WHITE};
+  display: flex;
+  align-items: center;
+`;
 
 const Header = () => (
-  <div style={styles.headerContainer}>
-    <span style={styles.title}>
-      Jurie Spies
-    </span>
-    <span style={styles.occupation}>
-      Software Engineer
-    </span>
-    <span className="fadeIn wait-2s" style={styles.subTitle}>
-      {'{'}
-      <ReactTyped
-        strings={randomTitle(resumeData.coolSoftwareTiles)}
-        typeSpeed={60}
-        backSpeed={60}
-        loop
-      />
-      {'}'}
-    </span>
-  </div>
+  <MainContent>
+    <Heading>
+      Jurie
+      <Green>.</Green>
+    </Heading>
+    <Right>
+      <HeaderTab>
+        Home
+      </HeaderTab>
+      <HeaderTab>
+        Services
+      </HeaderTab>
+      <HeaderTab>
+        Resume
+      </HeaderTab>
+      <HeaderTab>
+        Work
+      </HeaderTab>
+      <HeaderTab>
+        Contact
+      </HeaderTab>
+      <Button>
+        Hire Me
+      </Button>
+    </Right>
+  </MainContent>
 );
 
 export default Header;
