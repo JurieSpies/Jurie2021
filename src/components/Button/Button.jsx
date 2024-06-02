@@ -1,6 +1,6 @@
 import { COLOR_BLACK, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
-import styled from 'styled-components';
 import propTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledButton = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const StyledButton = styled.div`
   }
 `;
 
-const Button = ({ children, invert, onClick, style }) => (
+const Button = ({ children, invert = false, onClick = () => {}, style = {} }) => (
   <StyledButton $invert={invert} onClick={onClick} style={style}>
     {children}
   </StyledButton>
@@ -31,13 +31,6 @@ Button.propTypes = {
   invert: propTypes.bool,
   onClick: propTypes.func,
   style: propTypes.object,
-};
-
-Button.defaultProps = {
-  children: null,
-  invert: false,
-  onClick: () => {},
-  style: {},
 };
 
 export default Button;

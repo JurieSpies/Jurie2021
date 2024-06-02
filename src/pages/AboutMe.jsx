@@ -1,14 +1,19 @@
 import Button from '@/components/Button/Button';
 import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
 import { Heading, SubHeading } from '@/utils/globalFonts';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import CountUp from 'react-countup';
 import { AiOutlineDownload, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { IoLogoGooglePlaystore } from 'react-icons/io5';
+import { PiBracketsAngleBold } from 'react-icons/pi';
 import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
-import { PiBracketsAngleBold } from 'react-icons/pi';
-import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import resumeData from '../RESUME_DATA.json';
 import profilePic from '../assets/images/JuriePPbw3.png';
+
+const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
 
 const Statistics = styled.div`
   display: flex;
@@ -131,12 +136,6 @@ const InfoContainer = styled.div`
   flex-direction: column;
   align-self: center;
 `;
-
-const Jurie = styled(Heading)`
-  color: ${COLOR_PRIMARY};
-  font-size: 72px;
-`;
-
 const rotate = keyframes`
   0% {
     transform: rotate(0deg);
@@ -144,13 +143,6 @@ const rotate = keyframes`
   100% {
     transform: rotate(360deg);
   }
-`;
-
-const ProfilePicContainer = styled.div`
-  flex:1;
-  position: relative;
-  justify-content: center;
-  display: flex;
 `;
 
 const Border = styled.div`
@@ -161,6 +153,18 @@ const Border = styled.div`
   position: absolute;
   width: 354px;
   height: 354px;
+`;
+
+const Jurie = styled(Heading)`
+  color: ${COLOR_PRIMARY};
+  font-size: 72px;
+`;
+
+const ProfilePicContainer = styled.div`
+  flex:1;
+  position: relative;
+  justify-content: center;
+  display: flex;
 `;
 
 const ProfilePic = styled.img`
@@ -188,85 +192,145 @@ const getYearsOfExperience = () => {
   return yearsExperience;
 };
 
-const AboutMe = () => (
-  <>
-    <Main>
-      <InfoContainer>
-        <Occupation>
-          Software Engineer
-        </Occupation>
-        <Heading style={{ fontSize: 52 }}>
-          Hello, I&apos;m
-        </Heading>
-        <Jurie>
-          Jurie Spies
-        </Jurie>
-        <Description>
-          Front-end engineer specializing in building dynamic and high-performance web and mobile applications using React,React Native
-        </Description>
-        <TypedContainer>
-          {'{'}
-          <ReactTyped
-            strings={randomTitle(resumeData.coolSoftwareTitles)}
-            typeSpeed={60}
-            backSpeed={60}
-            loop
-          />
-          {'}'}
-        </TypedContainer>
-      </InfoContainer>
-      <ProfilePicContainer>
-        <Border />
-        <ProfilePic alt="jurie" src={profilePic} />
-      </ProfilePicContainer>
-    </Main>
-    <SocialsContainer>
-      <Button invert onClick={() => window.open(resumeData.resume, '_blank')} style={{ marginRight: 10 }}>
-        Download CV
-        <DownloadIcon />
-      </Button>
-      <SocialIconContainer href={resumeData.github} target="_blank" rel="noreferrer">
-        <GithubIcon />
-      </SocialIconContainer>
-      <SocialIconContainer href={resumeData.linkedIn} target="_blank" rel="noreferrer">
-        <LinkedInIcon />
-      </SocialIconContainer>
-      <SocialIconContainer href={`tel:${resumeData.phoneNumber}`}>
-        <PhoneIcon />
-      </SocialIconContainer>
-      <SocialIconContainer href={`mailto:${resumeData.email}`}>
-        <MailIcon />
-      </SocialIconContainer>
-      <SocialIconContainer href={resumeData.dreamCode} target="_blank" rel="noreferrer">
-        <DreamCodeIcon />
-      </SocialIconContainer>
-      <SocialIconContainer href={resumeData.dreamCodePlayStore} target="_blank" rel="noreferrer">
-        <PlayStoreIcon />
-      </SocialIconContainer>
-    </SocialsContainer>
-    <br />
-    <div style={{ display: 'flex' }}>
-      <Statistics>
-        <StatisticsNumber>
-          {getYearsOfExperience()}
-        </StatisticsNumber>
-        <SubHeading>
-          Years of Experience
-        </SubHeading>
-      </Statistics>
-      <Statistics>
-        <StatisticsNumber>
-          {getYearsOfExperience()}
-        </StatisticsNumber>
-        <SubHeading>
-          Years of Experience
-        </SubHeading>
-      </Statistics>
-      {/* <RepoCard
-        githubName="JurieSpies"
-        token={REACT_APP_GITHUB_REPO_TOKEN}
-      /> */}
-    </div>
-  </>
-);
+const getLinesOfCode = () => {
+  const refDate = '2019-03-01';
+  const today = new Date();
+  const linesOfCodePerDay = 20;
+  const diff = today - new Date(refDate);
+  const days = diff / (1000 * 60 * 60 * 24);
+  return days * linesOfCodePerDay;
+};
+
+const getCupsOfCoffee = () => {
+  const refDate = '2019-03-01';
+  const today = new Date();
+  const cupsPerDay = 1;
+  const diff = today - new Date(refDate);
+  const days = diff / (1000 * 60 * 60 * 24);
+  return days * cupsPerDay;
+};
+
+const AboutMe = () => {
+  const { data: totalRepositories } = useQuery({
+    queryKey: ['githubRepos'],
+    queryFn: () => axios({
+      method: 'get',
+      url: 'https://api.github.com/search/repositories?q=user:JurieSpies',
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: `Bearer ${REACT_APP_GITHUB_REPO_TOKEN}`,
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    }).then((response) => response.data),
+  });
+
+  return (
+    <>
+      <Main>
+        <InfoContainer>
+          <Occupation>
+            Software Engineer
+          </Occupation>
+          <Heading style={{ fontSize: 52 }}>
+            Hello, I&apos;m
+          </Heading>
+          <Jurie>
+            Jurie Spies
+          </Jurie>
+          <Description>
+            Front-end engineer specializing in building dynamic and high-performance web and mobile applications using React,React Native
+          </Description>
+          <TypedContainer>
+            {'{'}
+            <ReactTyped
+              strings={randomTitle(resumeData.coolSoftwareTitles)}
+              typeSpeed={60}
+              backSpeed={60}
+              loop
+            />
+            {'}'}
+          </TypedContainer>
+        </InfoContainer>
+        <ProfilePicContainer>
+          <Border />
+          <ProfilePic alt="jurie" src={profilePic} />
+        </ProfilePicContainer>
+      </Main>
+      <SocialsContainer>
+        <Button invert onClick={() => window.open(resumeData.resume, '_blank')} style={{ marginRight: 10 }}>
+          <>
+            Download CV
+            <DownloadIcon />
+          </>
+        </Button>
+        <SocialIconContainer href={resumeData.github} target="_blank" rel="noreferrer">
+          <GithubIcon />
+        </SocialIconContainer>
+        <SocialIconContainer href={resumeData.linkedIn} target="_blank" rel="noreferrer">
+          <LinkedInIcon />
+        </SocialIconContainer>
+        <SocialIconContainer href={`tel:${resumeData.phoneNumber}`}>
+          <PhoneIcon />
+        </SocialIconContainer>
+        <SocialIconContainer href={`mailto:${resumeData.email}`}>
+          <MailIcon />
+        </SocialIconContainer>
+        <SocialIconContainer href={resumeData.dreamCode} target="_blank" rel="noreferrer">
+          <DreamCodeIcon />
+        </SocialIconContainer>
+        <SocialIconContainer href={resumeData.dreamCodePlayStore} target="_blank" rel="noreferrer">
+          <PlayStoreIcon />
+        </SocialIconContainer>
+      </SocialsContainer>
+      <br />
+      <div style={{ display: 'flex' }}>
+        <Statistics>
+          <StatisticsNumber>
+            {getYearsOfExperience()}
+          </StatisticsNumber>
+          <SubHeading>
+            Years of Experience
+          </SubHeading>
+        </Statistics>
+        <Statistics>
+          <StatisticsNumber>
+            {totalRepositories?.total_count}
+          </StatisticsNumber>
+          <SubHeading>
+            Projects
+          </SubHeading>
+        </Statistics>
+        <Statistics>
+          <StatisticsNumber>
+            <CountUp
+              start={0}
+              end={getLinesOfCode()}
+              delay={0.5}
+              preserveValue
+              useEasing
+            />
+          </StatisticsNumber>
+          <SubHeading>
+            Lines of Code
+          </SubHeading>
+        </Statistics>
+        <Statistics>
+          <StatisticsNumber>
+            <CountUp
+              start={0}
+              end={getCupsOfCoffee()}
+              delay={0.5}
+              preserveValue
+              useEasing
+              duration={10}
+            />
+          </StatisticsNumber>
+          <SubHeading>
+            Cups of Coffee
+          </SubHeading>
+        </Statistics>
+      </div>
+    </>
+  );
+};
 export default AboutMe;
