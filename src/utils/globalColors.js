@@ -6,6 +6,7 @@ export const COLOR_BLACK = '#000000';
 export const COLOR_GREY = '#707172';
 export const COLOR_DISABLED = '#B2B2B2';
 export const COLOR_HEADER = '#393B3C';
+export const COLOR_BACKGROUND = '#27262F';
 
 export default {
   COLOR_PRIMARY,
@@ -15,4 +16,5 @@ export default {
   COLOR_GREY,
   COLOR_DISABLED,
   COLOR_HEADER,
+  COLOR_BACKGROUND,
 };

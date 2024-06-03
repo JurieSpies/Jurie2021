@@ -10,8 +10,8 @@ import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import { PiBracketsAngleBold } from 'react-icons/pi';
 import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
-import resumeData from '../RESUME_DATA.json';
-import profilePic from '../assets/images/JuriePPbw3.png';
+import profilePic from '@/assets/images/JuriePPbw3.png';
+import RESUME_DATA from '@/utils/RESUME_DATA';
 
 const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
 
@@ -52,6 +52,7 @@ height: 32px;
     box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
     -webkit-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
     -moz-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
+    transition: all 0.5s ease-in-out;
   }
 `;
 
@@ -188,6 +189,11 @@ const ProfilePicContainer = styled.div`
   position: relative;
   justify-content: center;
   display: flex;
+
+  &:hover {
+    transform: scale(1.03) rotate(5deg);
+    transition: all 1s ease-in-out;
+  }
 `;
 
 const ProfilePic = styled.img`
@@ -246,7 +252,7 @@ const Home = () => {
             <Occupation>
               Software Engineer
             </Occupation>
-            <Heading style={{ fontSize: 52 }}>
+            <Heading size="52px">
               Hello, I&apos;m
             </Heading>
             <Jurie>
@@ -259,7 +265,7 @@ const Home = () => {
             <TypedContainer>
               {'{'}
               <ReactTyped
-                strings={resumeData.coolSoftwareTitles}
+                strings={RESUME_DATA.coolSoftwareTitles}
                 typeSpeed={60}
                 backSpeed={60}
                 shuffle
@@ -274,28 +280,28 @@ const Home = () => {
           </ProfilePicContainer>
         </Main>
         <SocialsContainer>
-          <Button invert onClick={() => window.open(resumeData.resume, '_blank')} style={{ marginRight: 10 }}>
+          <Button invert onClick={() => window.open(RESUME_DATA.resume, '_blank')} style={{ marginRight: 10 }}>
             <>
               Download CV
               <DownloadIcon />
             </>
           </Button>
-          <SocialIconContainer href={resumeData.github} target="_blank" rel="noreferrer">
+          <SocialIconContainer href={RESUME_DATA.github} target="_blank" rel="noreferrer">
             <GithubIcon />
           </SocialIconContainer>
-          <SocialIconContainer href={resumeData.linkedIn} target="_blank" rel="noreferrer">
+          <SocialIconContainer href={RESUME_DATA.linkedIn} target="_blank" rel="noreferrer">
             <LinkedInIcon />
           </SocialIconContainer>
-          <SocialIconContainer href={`tel:${resumeData.phoneNumber}`}>
+          <SocialIconContainer href={`tel:${RESUME_DATA.phoneNumber}`}>
             <PhoneIcon />
           </SocialIconContainer>
-          <SocialIconContainer href={`mailto:${resumeData.email}`}>
+          <SocialIconContainer href={`mailto:${RESUME_DATA.email}`}>
             <MailIcon />
           </SocialIconContainer>
-          <SocialIconContainer href={resumeData.dreamCode} target="_blank" rel="noreferrer">
+          <SocialIconContainer href={RESUME_DATA.dreamCode} target="_blank" rel="noreferrer">
             <DreamCodeIcon />
           </SocialIconContainer>
-          <SocialIconContainer href={resumeData.dreamCodePlayStore} target="_blank" rel="noreferrer">
+          <SocialIconContainer href={RESUME_DATA.dreamCodePlayStore} target="_blank" rel="noreferrer">
             <PlayStoreIcon />
           </SocialIconContainer>
         </SocialsContainer>
@@ -304,7 +310,7 @@ const Home = () => {
             <StatisticsNumber>
               {getYearsOfExperience()}
             </StatisticsNumber>
-            <SubHeading>
+            <SubHeading style={{ maxWidth: '30%' }}>
               Years of Experience
             </SubHeading>
           </Statistics>
@@ -312,7 +318,7 @@ const Home = () => {
             <StatisticsNumber>
               {totalRepositories?.total_count ?? '00'}
             </StatisticsNumber>
-            <SubHeading>
+            <SubHeading style={{ maxWidth: '30%' }}>
               Projects
             </SubHeading>
           </Statistics>
@@ -326,7 +332,7 @@ const Home = () => {
                 useEasing={false}
               />
             </StatisticsNumber>
-            <SubHeading>
+            <SubHeading style={{ maxWidth: '30%' }}>
               Lines of Code
             </SubHeading>
           </Statistics>
@@ -340,7 +346,7 @@ const Home = () => {
                 useEasing={false}
               />
             </StatisticsNumber>
-            <SubHeading>
+            <SubHeading style={{ maxWidth: '30%' }}>
               Cups of Coffee
             </SubHeading>
           </Statistics>

@@ -39,7 +39,8 @@
     "serve": "vite preview",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "build && firebase deploy"
+    "deploy": "build && firebase deploy",
+    "lint:css": "stylelint '**/*.{js,jsx}'"
   },
   "browserslist": {
     "production": [
