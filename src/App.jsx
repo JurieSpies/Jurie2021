@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Header from './pages/Header';
 import Home from './pages/Home';
+import Resume from './pages/Resume';
 
 const Main = styled.div`
   display: flex;
@@ -21,6 +22,21 @@ const Spacer = styled.div`
   flex: 0.1;
 `;
 
+const Animation = styled.div`
+  display: flex;
+  flex: 1;
+  animation: fadeIn 1.5s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
 const App = () => {
   const [activeSelection, setActiveSelection] = useState('');
 
@@ -33,8 +49,18 @@ const App = () => {
       <Spacer />
       <PageContainer>
         <Header active={select} />
-        {activeSelection === 'Home' && <Home />}
-        {activeSelection === 'Resume' && <Home />}
+        {activeSelection === 'Home'
+        && (
+        <Animation>
+          <Home />
+        </Animation>
+        )}
+        {activeSelection === 'Resume'
+        && (
+        <Animation>
+          <Resume />
+        </Animation>
+        )}
       </PageContainer>
       <Spacer />
     </Main>

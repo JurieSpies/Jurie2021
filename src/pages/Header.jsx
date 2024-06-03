@@ -83,7 +83,7 @@ const Header = ({ active = 'Home' }) => {
 };
 
 Header.propTypes = {
-  active: PropTypes.string,
+  active: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 export default Header;
