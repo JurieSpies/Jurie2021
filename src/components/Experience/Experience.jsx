@@ -1,6 +1,6 @@
 import resumeData from '@/utils/RESUME_DATA.json';
 import { COLOR_BACKGROUND, COLOR_GREY, COLOR_PRIMARY } from '@/utils/globalColors';
-import { Heading, SubHeading } from '@/utils/globalFonts';
+import { SubHeading } from '@/utils/globalFonts';
 import styled from 'styled-components';
 
 const CardsContainer = styled.div`
@@ -41,27 +41,22 @@ const ExperienceCard = styled.div`
 
 const Experience = () => {
   const { work } = resumeData;
-  console.log('🚀 ~~ work:', work);
 
   return (
-    <>
-      <Heading size="52px">Work Experience</Heading>
-      <SubHeading>lorem ipsum dolor sit amet lorem ipsum dolor sit amet</SubHeading>
-      <CardsContainer>
-        {work.map((workItem) => (
-          <ExperienceCard key={workItem.title}>
-            <SubHeading style={{ color: COLOR_PRIMARY }}>{workItem.timeline}</SubHeading>
-            <SubHeading>{workItem.title}</SubHeading>
-            <br />
-            <SubHeading fontWeight="thin" color={COLOR_GREY}>
-              <li>
-                {workItem.occupation}
-              </li>
-            </SubHeading>
-          </ExperienceCard>
-        ))}
-      </CardsContainer>
-    </>
+    <CardsContainer>
+      {work.map((workItem) => (
+        <ExperienceCard key={workItem.title}>
+          <SubHeading style={{ color: COLOR_PRIMARY }}>{workItem.timeline}</SubHeading>
+          <SubHeading>{workItem.title}</SubHeading>
+          <br />
+          <SubHeading fontWeight="thin" color={COLOR_GREY}>
+            <li>
+              {workItem.occupation}
+            </li>
+          </SubHeading>
+        </ExperienceCard>
+      ))}
+    </CardsContainer>
   );
 };
 export default Experience;
