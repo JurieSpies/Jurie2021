@@ -4,13 +4,15 @@ import Skills from '@/components/Skills/Skills';
 import { Heading, SubHeading } from '@/utils/globalFonts';
 import { useState } from 'react';
 import styled from 'styled-components';
+import AboutMe from '../components/AboutMe/AboutMe';
 
 const Main = styled.div`
   display: flex;
-  height: 100%;
   width: 100%;
-  margin-top: 50px;
-  `;
+  padding-top: 50px;
+  /* height: 85vh; */
+  /* height: 100%; */
+`;
 
 const Left = styled.div`
   display: flex;
@@ -22,14 +24,25 @@ const Left = styled.div`
 const Spacer = styled.div`
   display: flex;
   flex: 0.1;
-  `;
+`;
 
 const Right = styled.div`
   display: flex;
   flex: 1;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   flex-direction: column;
+`;
+
+const Selections = styled.div`
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  overflow: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to top, black calc(100% - 100px), transparent 100%);
 `;
 
 const buttonStyle = {
@@ -52,6 +65,27 @@ const Resume = () => {
     setActiveSelection(e.target.innerText);
   };
 
+  const renderHeading = (selection) => {
+    const title = {
+      Experience: 'Work Experience',
+      Skills: 'Work Skills',
+      'About me': 'About Me',
+    };
+
+    const subTitle = {
+      Experience: 'Work Experience',
+      Skills: 'Work Skills',
+      'About me': 'About Me',
+    };
+
+    return (
+      <>
+        <Heading size="52px">{title[selection] || ''}</Heading>
+        <SubHeading>{subTitle[selection]}</SubHeading>
+      </>
+    );
+  };
+
   return (
     <Main>
       <Left>
@@ -65,9 +99,12 @@ const Resume = () => {
       </Left>
       <Spacer />
       <Right>
-        {activeSelection === 'Experience' && <Experience /> }
-        {activeSelection === 'Skills' && <Skills /> }
-        {activeSelection === 'About me' && <Heading>About me</Heading> }
+        {renderHeading(activeSelection)}
+        <Selections>
+          {activeSelection === 'Experience' && <Experience /> }
+          {activeSelection === 'Skills' && <Skills /> }
+          {activeSelection === 'About me' && <AboutMe /> }
+        </Selections>
       </Right>
     </Main>
   );

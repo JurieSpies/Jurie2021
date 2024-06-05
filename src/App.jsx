@@ -5,9 +5,19 @@ import Home from './pages/Home';
 import Resume from './pages/Resume';
 
 const Main = styled.div`
+  overflow: auto;
   display: flex;
-  height: 100%;
   width: 100%;
+  /* flex-grow: 1; */
+  /* flex: 1; */
+  /* height: 100vh; */
+  /* overflow: hidden; */
+  /* overflow: hidden; */
+  position: fixed;
+
+  @media (max-width: 768px) {
+  position: relative;
+  }
 `;
 
 const PageContainer = styled.div`

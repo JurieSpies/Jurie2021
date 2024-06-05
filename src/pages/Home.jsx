@@ -198,7 +198,6 @@ const ProfilePicContainer = styled.div`
 
 const ProfilePic = styled.img`
   border-radius: 200px;
-  /* position: relative; */
   max-height: 350px;
   max-width: 350px;
   min-height: 250px;
