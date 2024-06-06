@@ -180,6 +180,8 @@ const PageContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  /* background-color: green; */
+  justify-content: center;
 `;
 
 const Center = styled.div`

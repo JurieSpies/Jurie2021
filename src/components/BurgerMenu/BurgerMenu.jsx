@@ -15,7 +15,7 @@ const BurgerBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-const slideIn = keyframes`
+const openMenu = keyframes`
   from {
     transform: translateX(100%);
   }
@@ -24,7 +24,7 @@ const slideIn = keyframes`
   }
 `;
 
-const slideOut = keyframes`
+const closeMenu = keyframes`
   from {
     transform: translateX(0%);
   }
@@ -43,7 +43,9 @@ const BurgerMenuContainer = styled.div`
   top: 0px;
   width: 70dvw;
   z-index: 100;
-  animation: ${({ open }) => (open ? slideIn : slideOut)} 0.5s ease-in-out forwards;
+  animation: ${(props) => (props.open ? openMenu : closeMenu)} 0.8s ease-in-out forwards;
+  transform: translateX(100%); // Start off-screen
+  ${(props) => !props.open && 'visibility: hidden;'} // Hide when not open
 `;
 
 const BurgerMenuIcon = styled(AiOutlineMenu)`
@@ -127,22 +129,19 @@ const BurgerMenu = ({ active = 'Home' }) => {
   return (
     <Header>
       <BurgerMenuIcon size="2rem" onClick={() => toggleBurgerMenu()} color={COLOR_PRIMARY} />
-      <>
-        {openBurgerMenu && <BurgerBackdrop onClick={toggleBurgerMenu} />}
-        <BurgerMenuContainer open={openBurgerMenu}>
-          <BurgerMenuCloseIcon onClick={toggleBurgerMenu} />
-          {menus?.map((menu) => (
-            <HeaderTab
-              key={menu}
-              $active={activeTab === menu}
-              onClick={() => onSectionClick(menu)}
-            >
-              {menu}
-            </HeaderTab>
-          ))}
-        </BurgerMenuContainer>
-      </>
-      {/* )} */}
+      {openBurgerMenu && <BurgerBackdrop onClick={toggleBurgerMenu} />}
+      <BurgerMenuContainer open={openBurgerMenu}>
+        <BurgerMenuCloseIcon onClick={toggleBurgerMenu} />
+        {menus?.map((menu) => (
+          <HeaderTab
+            key={menu}
+            $active={activeTab === menu}
+            onClick={() => onSectionClick(menu)}
+          >
+            {menu}
+          </HeaderTab>
+        ))}
+      </BurgerMenuContainer>
     </Header>
   );
 };

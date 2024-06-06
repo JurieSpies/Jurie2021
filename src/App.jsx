@@ -27,6 +27,7 @@ const PageContainer = styled.div`
   width: 100%;
   flex:1;
   flex-direction: column;
+  /* background-color: blue; */
 `;
 
 const Spacer = styled.div`
