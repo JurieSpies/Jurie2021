@@ -16,7 +16,7 @@ const Main = styled.div`
 
 const Left = styled.div`
   display: flex;
-  flex: 0.5;
+  flex: 0.6;
   height: 50%;
   flex-direction: column;
   `;
