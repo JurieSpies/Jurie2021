@@ -13,6 +13,7 @@ body,
   user-select: none;
   flex-wrap: wrap;
   display: flex;
+  -webkit-tap-highlight-color: transparent;
 }
 
 input:-webkit-autofill {

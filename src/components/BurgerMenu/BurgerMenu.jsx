@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineDoubleRight, AiOutlineMenu } from 'react-icons/ai'; // Changed AiOutlineDoubleLeft to AiOutlineDoubleRight for semantic correctness
 import styled, { keyframes } from 'styled-components';
@@ -77,31 +77,78 @@ const Header = styled.header`
   flex-wrap: wrap;
 `;
 
-const BurgerMenu = ({ children = null }) => {
+const HeaderTab = styled.div`
+  display: flex;
+  text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
+  text-decoration-color: ${COLOR_PRIMARY};
+  text-decoration-thickness: 2px;
+  margin: 30px 30px;
+  cursor: pointer;
+  transform: scale(1);
+  font-size: 18x;
+  transition: transform 0.3s;
+  width: fit-content;
+  margin-left: auto;
+  &:hover {
+  color: ${COLOR_PRIMARY};
+  transform: scale(1.2);
+  }
+`;
+
+const BurgerMenu = ({ active = 'Home' }) => {
   const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
+  const [activeTab, setActiveTab] = useState('Home');
+
+  const menus = [
+    'Home',
+    'Resume',
+    'Work',
+    'Contact',
+  ];
 
   const toggleBurgerMenu = () => {
     setOpenBurgerMenu((prevState) => !prevState);
   };
 
+  const activeTabFunction = (e) => {
+    setActiveTab(e);
+    active(e);
+  };
+
+  const onSectionClick = (menu) => {
+    activeTabFunction(menu);
+    toggleBurgerMenu();
+  };
+
+  useEffect(() => {
+    active('Home');
+  }, []);
+
   return (
     <Header>
-      <BurgerMenuIcon size="2rem" onClick={toggleBurgerMenu} color={COLOR_PRIMARY} />
-      {openBurgerMenu && (
-        <>
-          <BurgerBackdrop onClick={toggleBurgerMenu} />
-          <BurgerMenuContainer open={openBurgerMenu}>
-            <BurgerMenuCloseIcon onClick={toggleBurgerMenu} />
-            {children}
-          </BurgerMenuContainer>
-        </>
-      )}
+      <BurgerMenuIcon size="2rem" onClick={() => toggleBurgerMenu()} color={COLOR_PRIMARY} />
+      <>
+        {openBurgerMenu && <BurgerBackdrop onClick={toggleBurgerMenu} />}
+        <BurgerMenuContainer open={openBurgerMenu}>
+          <BurgerMenuCloseIcon onClick={toggleBurgerMenu} />
+          {menus?.map((menu) => (
+            <HeaderTab
+              key={menu}
+              $active={activeTab === menu}
+              onClick={() => onSectionClick(menu)}
+            >
+              {menu}
+            </HeaderTab>
+          ))}
+        </BurgerMenuContainer>
+      </>
+      {/* )} */}
     </Header>
   );
 };
 
 BurgerMenu.propTypes = {
-  children: PropTypes.node,
+  active: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 export default BurgerMenu;
