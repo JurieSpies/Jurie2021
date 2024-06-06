@@ -12,6 +12,7 @@ import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
+import { getYearsOfExperience } from '../utils/helpers';
 
 const AllIcons = styled.div`
   align-items: center;
@@ -180,7 +181,6 @@ const PageContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  /* background-color: green; */
   justify-content: center;
 `;
 
@@ -279,13 +279,6 @@ const ProfilePic = styled.img`
   }
 `;
 const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
-
-const getYearsOfExperience = () => {
-  const startDate = new Date('2019-03-01');
-  const endDate = new Date();
-  const yearsExperience = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24 * 365));
-  return yearsExperience;
-};
 
 const getLinesOfCode = () => {
   const refDate = '2019-03-01';

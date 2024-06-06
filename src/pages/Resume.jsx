@@ -10,8 +10,7 @@ const Main = styled.div`
   display: flex;
   width: 100%;
   padding-top: 50px;
-  /* height: 85vh; */
-  /* height: 100%; */
+  height: 85vh;
 `;
 
 const Left = styled.div`
@@ -29,7 +28,7 @@ const Spacer = styled.div`
 const Right = styled.div`
   display: flex;
   flex: 1;
-  height: 100vh;
+  height: 85vh;
   width: 100%;
   flex-direction: column;
 `;

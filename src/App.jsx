@@ -5,9 +5,10 @@ import Home from './pages/Home';
 import Resume from './pages/Resume';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu';
 import useIsMobile from './hooks/useIsMobile';
+import AboutMe from './components/AboutMe/AboutMe';
 
 const Main = styled.div`
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   width: 100%;
   position: fixed;
