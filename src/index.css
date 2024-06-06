@@ -11,6 +11,8 @@ body,
   margin: 0;
   background-color: #17161D;
   user-select: none;
+  flex-wrap: wrap;
+  display: flex;
 }
 
 input:-webkit-autofill {

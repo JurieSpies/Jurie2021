@@ -11,15 +11,37 @@ import { PiBracketsAngleBold } from 'react-icons/pi';
 import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
-import RESUME_DATA from '@/utils/RESUME_DATA';
+import RESUME_DATA from '../utils/RESUME_DATA.json';
 
-const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
+const AllIcons = styled.div`
+  align-items: center;
+  display: flex;
+  margin: 0px 10px 10px 0px;
+`;
+
+const StyledHeading = styled(Heading)`
+  font-size: 52px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+  font-size: 32px;
+  }
+`;
 
 const StatisticsMainContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex: 1;
   margin-top: 100px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    margin: 10px 0px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+  }
 `;
 
 const Statistics = styled.div`
@@ -38,8 +60,14 @@ const SocialsContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: fit-content;
-  /* margin-top: 15px; */
   margin-bottom: 15px;
+  flex-wrap: wrap;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  justify-content: center;
+  }
 `;
 
 const SocialIconContainer = styled.a`
@@ -125,7 +153,12 @@ const TypedContainer = styled(SubHeading)`
   width: 100%;
   min-width: 400px;
   flex: 1;
-  display: flex;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    justify-content: center;
+    min-width: 100px ;
+  }
 `;
 
 const Description = styled.div`
@@ -133,13 +166,20 @@ const Description = styled.div`
   font-size: 16px;
   margin-top: 30px;
   display: flex;
+  flex: 1;
+  width: 60%;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 const PageContainer = styled.div`
   display: flex;
-  flex-direction: column;
   flex: 1;
-  justify-content: center;
+  flex-direction: column;
 `;
 
 const Center = styled.div`
@@ -150,14 +190,25 @@ const Center = styled.div`
 const Main = styled.div`
   display: flex;
   flex-wrap: wrap;
-  /* margin-top: 100px; */
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-self: center;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    align-items: center;
+  }
 `;
 
 const rotate = keyframes`
@@ -177,11 +228,24 @@ const Border = styled.div`
   position: absolute;
   width: 354px;
   height: 354px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+  max-height: 250px;
+  max-width: 250px;
+  min-height: 150px;
+  min-width: 150px;
+  }
 `;
 
 const Jurie = styled(Heading)`
   color: ${COLOR_PRIMARY};
-  font-size: 72px;
+  font-size:72px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+  font-size: 52px;
+  }
 `;
 
 const ProfilePicContainer = styled.div`
@@ -202,7 +266,17 @@ const ProfilePic = styled.img`
   max-width: 350px;
   min-height: 250px;
   min-width: 250px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+  border-radius: 150px;
+  max-height: 250px;
+  max-width: 250px;
+  min-height: 150px;
+  min-width: 150px;
+  }
 `;
+const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
 
 const getYearsOfExperience = () => {
   const startDate = new Date('2019-03-01');
@@ -251,9 +325,9 @@ const Home = () => {
             <Occupation>
               Software Engineer
             </Occupation>
-            <Heading size="52px">
+            <StyledHeading>
               Hello, I&apos;m
-            </Heading>
+            </StyledHeading>
             <Jurie>
               Jurie Spies
             </Jurie>
@@ -279,30 +353,32 @@ const Home = () => {
           </ProfilePicContainer>
         </Main>
         <SocialsContainer>
-          <Button invert onClick={() => window.open(RESUME_DATA.resume, '_blank')} style={{ marginRight: 10 }}>
+          <Button invert onClick={() => window.open(RESUME_DATA.resume, '_blank')} style={{ margin: '0px 10px 10px 0px' }}>
             <>
               Download CV
               <DownloadIcon />
             </>
           </Button>
-          <SocialIconContainer href={RESUME_DATA.github} target="_blank" rel="noreferrer">
-            <GithubIcon />
-          </SocialIconContainer>
-          <SocialIconContainer href={RESUME_DATA.linkedIn} target="_blank" rel="noreferrer">
-            <LinkedInIcon />
-          </SocialIconContainer>
-          <SocialIconContainer href={`tel:${RESUME_DATA.phoneNumber}`}>
-            <PhoneIcon />
-          </SocialIconContainer>
-          <SocialIconContainer href={`mailto:${RESUME_DATA.email}`}>
-            <MailIcon />
-          </SocialIconContainer>
-          <SocialIconContainer href={RESUME_DATA.dreamCode} target="_blank" rel="noreferrer">
-            <DreamCodeIcon />
-          </SocialIconContainer>
-          <SocialIconContainer href={RESUME_DATA.dreamCodePlayStore} target="_blank" rel="noreferrer">
-            <PlayStoreIcon />
-          </SocialIconContainer>
+          <AllIcons>
+            <SocialIconContainer href={RESUME_DATA.github} target="_blank" rel="noreferrer">
+              <GithubIcon />
+            </SocialIconContainer>
+            <SocialIconContainer href={RESUME_DATA.linkedIn} target="_blank" rel="noreferrer">
+              <LinkedInIcon />
+            </SocialIconContainer>
+            <SocialIconContainer href={`tel:${RESUME_DATA.phoneNumber}`}>
+              <PhoneIcon />
+            </SocialIconContainer>
+            <SocialIconContainer href={`mailto:${RESUME_DATA.email}`}>
+              <MailIcon />
+            </SocialIconContainer>
+            <SocialIconContainer href={RESUME_DATA.dreamCode} target="_blank" rel="noreferrer">
+              <DreamCodeIcon />
+            </SocialIconContainer>
+            <SocialIconContainer href={RESUME_DATA.dreamCodePlayStore} target="_blank" rel="noreferrer">
+              <PlayStoreIcon />
+            </SocialIconContainer>
+          </AllIcons>
         </SocialsContainer>
         <StatisticsMainContainer>
           <Statistics>
