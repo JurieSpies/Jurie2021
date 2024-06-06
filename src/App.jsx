@@ -3,17 +3,19 @@ import styled from 'styled-components';
 import Header from './pages/Header';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
+import BurgerMenu from './components/BurgerMenu/BurgerMenu';
+import useIsMobile from './hooks/useIsMobile';
 
 const Main = styled.div`
   overflow: auto;
   display: flex;
   width: 100%;
-  /* flex-grow: 1; */
-  /* flex: 1; */
-  /* height: 100vh; */
-  /* overflow: hidden; */
-  /* overflow: hidden; */
   position: fixed;
+
+  @media (min-width: 768px) {
+  position: relative;
+  }
+
 
   @media (max-width: 768px) {
   position: relative;
@@ -53,12 +55,13 @@ const App = () => {
   const select = (e) => {
     setActiveSelection(e);
   };
+  const isMobile = useIsMobile();
 
   return (
     <Main>
       <Spacer />
       <PageContainer>
-        <Header active={select} />
+        {isMobile ? <BurgerMenu active={select} /> : <Header active={select} />}
         {activeSelection === 'Home'
         && (
         <Animation>
