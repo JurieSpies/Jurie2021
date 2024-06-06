@@ -1,5 +1,6 @@
 // Global colors
 export const COLOR_PRIMARY = '#03FDA7';
+export const COLOR_DARK = '#17161D';
 export const COLOR_SECONDARY = '#5BCDFB';
 export const COLOR_WHITE = '#FEFEFF';
 export const COLOR_BLACK = '#000000';
@@ -17,4 +18,5 @@ export default {
   COLOR_DISABLED,
   COLOR_HEADER,
   COLOR_BACKGROUND,
+  COLOR_DARK,
 };
