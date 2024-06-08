@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Header from './pages/Header';
+import BurgerMenu from './components/BurgerMenu/BurgerMenu';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
-import BurgerMenu from './components/BurgerMenu/BurgerMenu';
-import useIsMobile from './hooks/useIsMobile';
-import AboutMe from './components/AboutMe/AboutMe';
+import Header from './pages/Header';
 
 const Main = styled.div`
   overflow: hidden;
@@ -23,12 +21,27 @@ const Main = styled.div`
   }
 `;
 
+const RenderDesktop = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const RenderMobile = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
 const PageContainer = styled.div`
   display: flex;
   width: 100%;
   flex:1;
   flex-direction: column;
-  /* background-color: blue; */
+  background-color: purple;
+
+  @media (max-width: 768px) {
+  }
 `;
 
 const Spacer = styled.div`
@@ -57,13 +70,19 @@ const App = () => {
   const select = (e) => {
     setActiveSelection(e);
   };
-  const isMobile = useIsMobile();
 
   return (
     <Main>
       <Spacer />
       <PageContainer>
-        {isMobile ? <BurgerMenu active={select} /> : <Header active={select} />}
+        <RenderDesktop>
+          {/* Desktop */}
+          <Header active={select} />
+        </RenderDesktop>
+        <RenderMobile>
+          {/* Mobile  */}
+          <BurgerMenu active={select} />
+        </RenderMobile>
         {activeSelection === 'Home'
         && (
         <Animation>

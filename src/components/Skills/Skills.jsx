@@ -8,6 +8,15 @@ const CardsContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin-top: 35px;
+  background-color: brown;
+
+  @media (max-width: 768px) {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0px;
+  }
 `;
 
 const Image = styled.img`
@@ -16,13 +25,17 @@ const Image = styled.img`
   padding: 20px;
   border-radius: 10px;
   border: 1px solid ${COLOR_PRIMARY};
-  width: 15%;
   min-width: 100px;
   animation: fadeIn 1s ease-in-out;
+  width: 15%;
   filter: grayscale(100%);
   &:hover {
     filter: none;
     transform: scale(1.15)
+    }
+
+    @media (max-width: 768px) {
+      align-self: center;
   }
 `;
 
