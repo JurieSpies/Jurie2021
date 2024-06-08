@@ -38,7 +38,6 @@ const PageContainer = styled.div`
   width: 100%;
   flex:1;
   flex-direction: column;
-  background-color: purple;
 
   @media (max-width: 768px) {
   }

@@ -8,7 +8,6 @@ const CardsContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin-top: 35px;
-  background-color: brown;
 
   @media (max-width: 768px) {
   align-items: center;

@@ -21,7 +21,6 @@ const CardsContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     margin-top: 0px;
-    background-color: green;
   }
 `;
 
@@ -53,7 +52,6 @@ const ExperienceCard = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     width: auto;
-    background-color: orange;
   }
 `;
 
