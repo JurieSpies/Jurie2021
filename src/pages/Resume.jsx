@@ -39,8 +39,9 @@ const Main = styled.div`
 const ButtonsContainer = styled.div`
 
 @media (max-width: 768px) {
-    width: 90%;
-    align-self: center;
+    width: 100%;
+    justify-content: center;
+    display: grid;
   }
 `;
 
@@ -54,7 +55,6 @@ const Left = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     height: 100%;
-    background-color: blue;
     margin-bottom: 25px;
   }
   `;
@@ -74,7 +74,6 @@ const Right = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    background-color: #f0f;
     height: 100%;
   }
 `;
@@ -97,10 +96,12 @@ const Selections = styled.div`
 `;
 
 const buttonStyle = {
+  display: 'flex',
   width: '100%',
   borderRadius: 5,
   marginTop: 40,
   justifyContent: 'center',
+  minWidth: 200,
 };
 
 const Resume = () => {

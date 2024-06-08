@@ -4,13 +4,22 @@ import { Heading, SubHeading } from '../../utils/globalFonts';
 import { getAge, getYearsOfExperience } from '../../utils/helpers';
 
 const StyledHeading = styled(Heading)`
-`;
+  font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    }
+    `;
 
 const StyledSubHeading = styled(SubHeading)`
   font-size: 18px;
   margin-right: 20px;
   color: ${COLOR_GREY};
   font-weight: 100;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Info = styled.div`
@@ -27,6 +36,10 @@ const Column = styled.div`
 const Spacer = styled.div`
   display: flex;
   flex: 0.1;
+
+  @media (max-width: 1260px) {
+    display: none;
+  }
 `;
 
 const CardsContainer = styled.div`
@@ -38,6 +51,10 @@ const CardsContainer = styled.div`
   margin-top: 60px;
   color: ${COLOR_WHITE};
   display: flex;
+
+@media (max-width: 768px) {
+  flex-direction: column;
+  }
 `;
 
 const AboutMe = () => (
