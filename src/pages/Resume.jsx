@@ -6,11 +6,42 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import AboutMe from '../components/AboutMe/AboutMe';
 
+const StyledSubHeading = styled(SubHeading)`
+@media (max-width: 768px) {
+  font-size: 16px;
+}
+`;
+
+const StyledHeading = styled(Heading)`
+font-size: 52px;
+
+@media (max-width: 768px) {
+  font-size: 32px;
+}
+`;
+
 const Main = styled.div`
   display: flex;
   width: 100%;
   padding-top: 50px;
   height: 85vh;
+
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    display: flex;
+    padding-top: 0px;
+    overflow: auto;
+    height: 100%;
+  }
+`;
+
+const ButtonsContainer = styled.div`
+
+@media (max-width: 768px) {
+    width: 90%;
+    align-self: center;
+  }
 `;
 
 const Left = styled.div`
@@ -18,6 +49,14 @@ const Left = styled.div`
   flex: 0.6;
   height: 50%;
   flex-direction: column;
+
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 100%;
+    background-color: blue;
+    margin-bottom: 25px;
+  }
   `;
 
 const Spacer = styled.div`
@@ -31,6 +70,13 @@ const Right = styled.div`
   height: 85vh;
   width: 100%;
   flex-direction: column;
+
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    background-color: #f0f;
+    height: 100%;
+  }
 `;
 
 const Selections = styled.div`
@@ -42,6 +88,12 @@ const Selections = styled.div`
   overflow: auto;
   scrollbar-width: none;
   mask-image: linear-gradient(to top, black calc(100% - 100px), transparent 100%);
+
+
+  @media (max-width: 768px) {
+    mask-image: none;
+    overflow: hidden;
+  }
 `;
 
 const buttonStyle = {
@@ -79,8 +131,8 @@ const Resume = () => {
 
     return (
       <>
-        <Heading size="52px">{title[selection] || ''}</Heading>
-        <SubHeading>{subTitle[selection]}</SubHeading>
+        <StyledHeading>{title[selection] || ''}</StyledHeading>
+        <StyledSubHeading>{subTitle[selection]}</StyledSubHeading>
       </>
     );
   };
@@ -88,13 +140,15 @@ const Resume = () => {
   return (
     <Main>
       <Left>
-        <Heading size="52px">Why hire me ?</Heading>
-        <SubHeading>lorem ipsum dolor sit amet lorem ipsum dolor sit amet</SubHeading>
-        {buttonsTitles.map((buttonTitle) => (
-          <Button style={buttonStyle} onClick={selectionHandler} invert={activeSelection !== buttonTitle} key={buttonTitle}>
-            {buttonTitle}
-          </Button>
-        ))}
+        <StyledHeading>Why hire me ?</StyledHeading>
+        <StyledSubHeading>lorem ipsum dolor sit amet lorem ipsum dolor sit amet</StyledSubHeading>
+        <ButtonsContainer>
+          {buttonsTitles.map((buttonTitle) => (
+            <Button style={buttonStyle} onClick={selectionHandler} invert={activeSelection !== buttonTitle} key={buttonTitle}>
+              {buttonTitle}
+            </Button>
+          ))}
+        </ButtonsContainer>
       </Left>
       <Spacer />
       <Right>
