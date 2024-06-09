@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { AiOutlineDoubleRight, AiOutlineMenu } from 'react-icons/ai'; // Changed AiOutlineDoubleLeft to AiOutlineDoubleRight for semantic correctness
 import styled, { keyframes } from 'styled-components';
 import { COLOR_PRIMARY, COLOR_WHITE } from '../../utils/globalColors';
+import { openWhatsapp } from '../../utils/helpers';
 
 const BurgerBackdrop = styled.div`
   display: flex;
@@ -119,13 +120,6 @@ const BurgerMenu = ({ active = 'Home' }) => {
   const onSectionClick = (menu) => {
     activeTabFunction(menu);
     toggleBurgerMenu();
-  };
-
-  const openWhatsapp = () => {
-    const phoneNumber = '27768862529';
-    const message = 'Hey Jurie, ';
-    const url = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${message}`;
-    window.open(url, '_blank');
   };
 
   useEffect(() => {

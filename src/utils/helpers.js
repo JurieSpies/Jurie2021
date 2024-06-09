@@ -12,7 +12,15 @@ export const getAge = () => {
   return age;
 };
 
+export const openWhatsapp = () => {
+  const phoneNumber = '27768862529';
+  const message = 'Hey Jurie, ';
+  const url = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${message}`;
+  window.open(url, '_blank');
+};
+
 export default {
   getYearsOfExperience,
   getAge,
+  openWhatsapp,
 };

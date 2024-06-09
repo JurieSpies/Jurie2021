@@ -12,9 +12,9 @@ import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
 import CV from '@/assets/JurieSpiesCV.pdf';
-import { FloatingWhatsApp } from 'react-floating-whatsapp';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
+// import { FloatingWhatsApp } from 'react-floating-whatsapp';
 
 const StyledSubHeading = styled(SubHeading)`
   max-width: 30%;
@@ -337,7 +337,7 @@ const Home = () => {
 
   return (
     <PageContainer>
-      <FloatingWhatsApp
+      {/* <FloatingWhatsApp
         accountName="Jurie"
         phoneNumber="27768862529"
         allowClickAway
@@ -347,7 +347,7 @@ const Home = () => {
         darkMode
         messageDelay={0}
         allowEsc
-      />
+      /> */}
       <Center>
         <Main>
           <InfoContainer>
