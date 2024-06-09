@@ -14,6 +14,15 @@ import profilePic from '@/assets/images/JuriePPbw3.png';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
 
+const StyledSubHeading = styled(SubHeading)`
+  max-width: 30%;
+
+  /* mobile */
+  @media (max-width: 768px) {
+  max-width: 100%;
+  }
+`;
+
 const AllIcons = styled.div`
   align-items: center;
   display: flex;
@@ -55,6 +64,11 @@ const Statistics = styled.div`
 const StatisticsNumber = styled(Heading)`
   font-size: 52px;
   margin-right: 10px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+  font-size: 32px;
+  }
 `;
 
 const SocialsContainer = styled.div`
@@ -380,17 +394,17 @@ const Home = () => {
             <StatisticsNumber>
               {getYearsOfExperience()}
             </StatisticsNumber>
-            <SubHeading style={{ maxWidth: '30%' }}>
+            <StyledSubHeading>
               Years of Experience
-            </SubHeading>
+            </StyledSubHeading>
           </Statistics>
           <Statistics>
             <StatisticsNumber>
               {totalRepositories?.total_count ?? '00'}
             </StatisticsNumber>
-            <SubHeading style={{ maxWidth: '30%' }}>
+            <StyledSubHeading>
               Projects
-            </SubHeading>
+            </StyledSubHeading>
           </Statistics>
           <Statistics>
             <StatisticsNumber>
@@ -402,9 +416,9 @@ const Home = () => {
                 useEasing={false}
               />
             </StatisticsNumber>
-            <SubHeading style={{ maxWidth: '30%' }}>
+            <StyledSubHeading>
               Lines of Code
-            </SubHeading>
+            </StyledSubHeading>
           </Statistics>
           <Statistics>
             <StatisticsNumber>
@@ -416,9 +430,9 @@ const Home = () => {
                 useEasing={false}
               />
             </StatisticsNumber>
-            <SubHeading style={{ maxWidth: '30%' }}>
+            <StyledSubHeading>
               Cups of Coffee
-            </SubHeading>
+            </StyledSubHeading>
           </Statistics>
         </StatisticsMainContainer>
       </Center>
