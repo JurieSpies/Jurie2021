@@ -29,6 +29,12 @@ const AllIcons = styled.div`
   align-items: center;
   display: flex;
   margin: 0px 10px 10px 0px;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    justify-content: center;
+  }
 `;
 
 const StyledHeading = styled(Heading)`
