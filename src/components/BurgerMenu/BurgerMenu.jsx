@@ -123,21 +123,8 @@ const BurgerMenu = ({ active = 'Home' }) => {
 
   const openWhatsapp = () => {
     const phoneNumber = '27768862529';
-    const initialMessage = 'Hey Jurie, ';
-    const fullMessage = 'Hey Jurie, this is the full message...';
-
-    const encodedInitialMessage = encodeURIComponent(initialMessage);
-    const encodedFullMessage = encodeURIComponent(fullMessage);
-
-    const isWhatsAppSupported = navigator.userAgent.match(/Android|iPhone/i);
-
-    let url;
-    if (isWhatsAppSupported) {
-      url = `whatsapp://send?phone=${phoneNumber}&text=${encodedInitialMessage}`;
-    } else {
-      url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedFullMessage}`;
-    }
-
+    const message = 'Hey Jurie, ';
+    const url = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${message}`;
     window.open(url, '_blank');
   };
 
