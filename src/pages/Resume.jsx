@@ -5,8 +5,10 @@ import { Heading, SubHeading } from '@/utils/globalFonts';
 import { useState } from 'react';
 import styled from 'styled-components';
 import AboutMe from '../components/AboutMe/AboutMe';
+import { COLOR_GREY } from '../utils/globalColors';
 
 const StyledSubHeading = styled(SubHeading)`
+color:${COLOR_GREY};
 @media (max-width: 768px) {
   font-size: 16px;
 }
@@ -131,18 +133,19 @@ const Resume = () => {
     };
 
     return (
-      <>
-        <StyledHeading>{title[selection] || ''}</StyledHeading>
-        <StyledSubHeading>{subTitle[selection]}</StyledSubHeading>
-      </>
+      <StyledHeading>{title[selection] || ''}</StyledHeading>
     );
   };
 
   return (
     <Main>
       <Left>
-        <StyledHeading>Why hire me ?</StyledHeading>
-        <StyledSubHeading>lorem ipsum dolor sit amet lorem ipsum dolor sit amet</StyledSubHeading>
+        <StyledHeading>Why Hire Me ?</StyledHeading>
+        <StyledSubHeading>
+          Front-end engineer specializing in building dynamic and high
+          performance web and mobile applications using React, React
+          Native
+        </StyledSubHeading>
         <ButtonsContainer>
           {buttonsTitles.map((buttonTitle) => (
             <Button style={buttonStyle} onClick={selectionHandler} invert={activeSelection !== buttonTitle} key={buttonTitle}>
