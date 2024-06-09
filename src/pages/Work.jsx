@@ -9,19 +9,36 @@ import WodbudImage from '../assets/projects/wodbud.png';
 import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
 
-const Project = styled.div`
+const Main = styled(Heading)`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  flex: 1;
+  `;
+
+const ProjectContainer = styled.div`
+  display: flex;
+  flex: 2;
+  width: 100%;
+  `;
+
+const Project = styled.div`
+  display: flex;
+  flex-direction: row;
+  `;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex:0.5;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 const AnimatedSlide = styled.div`
   animation: fadeIn 1.5s ease-in-out;
   display: flex;
-  flex:1;
-`;
-
-const Main = styled(Heading)`
-  display: flex;
+  flex: 1;
   align-items: center;
 `;
 
@@ -46,9 +63,8 @@ const Stack = styled(SubHeading)`
 
 const Left = styled.div`
   display: flex;
-  flex: 0.6;
-  /* height: 50%; */
   flex-direction: column;
+  flex: 1;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -59,14 +75,15 @@ const Left = styled.div`
 
 const Spacer = styled.div`
   display: flex;
-  flex: 0.1;
+  flex: 0.2;
+  height: 100%;
 `;
 
 const Right = styled.div`
   display: flex;
-  flex: 1;
   width: 100%;
   flex-direction: column;
+  flex: 1;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -74,35 +91,9 @@ const Right = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 50px;
-`;
-
-// const BackButton = styled.button`
-//   background-color: ${COLOR_GREY};
-//   color: white;
-//   border: none;
-//   padding: 10px 20px;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   margin-top: 20px;
-// `;
-
-// const NextButton = styled.button`
-//   background-color: ${COLOR_PRIMARY};
-//   border: none;
-//   padding: 10px 20px;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   margin-top: 20px;
-// `;
-
 const Image = styled.img`
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -140,35 +131,35 @@ const Work = () => {
 
   return (
     <Main>
-      {projects.map((project, index) => (
-        activeProject === index
+      <ProjectContainer>
+        {projects.map((project, index) => (
+          activeProject === index
         && (
           <Project>
             <AnimatedSlide>
-              <Main>
-                <Left>
-                  <StyledHeading>{project.number}</StyledHeading>
-                  <StyledSubHeading>Frontend Project</StyledSubHeading>
-                  <Paragraph>{project.description}</Paragraph>
-                  <Stack>{project.stack}</Stack>
-                </Left>
-                <Spacer />
-                <Right>
-                  <Image src={project.image} alt={project.title} />
-                </Right>
-              </Main>
+              <Left>
+                <StyledHeading>{project.number}</StyledHeading>
+                <StyledSubHeading>Frontend Project</StyledSubHeading>
+                <Paragraph>{project.description}</Paragraph>
+                <Stack>{project.stack}</Stack>
+              </Left>
+              <Spacer />
+              <Right>
+                <Image src={project.image} alt={project.title} />
+              </Right>
             </AnimatedSlide>
-            <ButtonContainer>
-              <BackButton onClick={() => setActiveProject((activeProject - 1 + projects.length) % projects.length)} invert style={{ borderRadius: '5px' }}>
-                Back
-              </BackButton>
-              <NextButton onClick={() => setActiveProject((activeProject + 1) % projects.length)} style={{ borderRadius: '5px' }}>
-                Next Project
-              </NextButton>
-            </ButtonContainer>
           </Project>
         )
-      ))}
+        ))}
+      </ProjectContainer>
+      <ButtonContainer>
+        <BackButton onClick={() => setActiveProject((activeProject - 1 + projects.length) % projects.length)} invert style={{ borderRadius: '5px' }}>
+          Back
+        </BackButton>
+        <NextButton onClick={() => setActiveProject((activeProject + 1) % projects.length)} style={{ borderRadius: '5px' }}>
+          Next Project
+        </NextButton>
+      </ButtonContainer>
     </Main>
   );
 };
