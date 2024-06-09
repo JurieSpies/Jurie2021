@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import ReactWhatsapp from 'react-whatsapp';
 import styled from 'styled-components';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu';
+import Header from './pages/Header';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
-import Header from './pages/Header';
 import Work from './pages/Work';
 
 const Main = styled.div`
@@ -101,19 +102,6 @@ const App = () => {
           <Work />
         </Animation>
         )}
-        {activeSelection === 'Whatsapp' // send me a whatsapp message
-          && (
-          <iframe
-            title="Whatsapp"
-            src="https://wa.me/0768862529?text=Hey Jurie,"
-            width="100%"
-            height="100%"
-            style={{ border: 'none' }}
-          />
-          // <a href="https://wa.me/0768862529?text=Hey Jurie," target="_blank" rel="noreferrer">
-          //   .
-          // </a>
-          )}
       </PageContainer>
       <Spacer />
     </Main>

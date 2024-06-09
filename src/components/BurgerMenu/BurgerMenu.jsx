@@ -105,8 +105,6 @@ const BurgerMenu = ({ active = 'Home' }) => {
     'Home',
     'Resume',
     'Work',
-    'Contact',
-    'Whatsapp',
   ];
 
   const toggleBurgerMenu = () => {
@@ -121,6 +119,13 @@ const BurgerMenu = ({ active = 'Home' }) => {
   const onSectionClick = (menu) => {
     activeTabFunction(menu);
     toggleBurgerMenu();
+  };
+
+  const openWhatsapp = () => {
+    const phoneNumber = '768862529';
+    const message = 'Hey Jurie, ';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url);
   };
 
   useEffect(() => {
@@ -142,6 +147,9 @@ const BurgerMenu = ({ active = 'Home' }) => {
             {menu}
           </HeaderTab>
         ))}
+        <HeaderTab onClick={openWhatsapp}>
+          Whatsapp
+        </HeaderTab>
       </BurgerMenuContainer>
     </Header>
   );

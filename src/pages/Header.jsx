@@ -62,6 +62,15 @@ const Header = ({ active = 'Home' }) => {
     active(e);
   };
 
+  const openWhatsapp = () => {
+    const phoneNumber = '768862529';
+    const message = 'Hey Jurie, ';
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const baseURL = isMobile ? 'whatsapp://' : 'https://web.whatsapp.com/';
+    const url = `${baseURL}send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   useEffect(() => {
     active('Home');
   }, []);
@@ -78,11 +87,9 @@ const Header = ({ active = 'Home' }) => {
             {menu}
           </HeaderTab>
         ))}
-        <Button>
-          <>
-            <WhatsappIcon size={18} />
-            Whatsapp
-          </>
+        <Button onClick={openWhatsapp}>
+          <WhatsappIcon size={18} />
+          Whatsapp
         </Button>
       </Right>
     </MainContent>

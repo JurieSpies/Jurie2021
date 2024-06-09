@@ -220,7 +220,7 @@ const Work = () => {
         {projects.map((project, index) => (
           activeProject === index
         && (
-          <Project>
+          <Project key={project.number}>
             <AnimatedSlide>
               <Left>
                 <StyledHeading>{project.number}</StyledHeading>
