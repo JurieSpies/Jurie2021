@@ -11,6 +11,7 @@ import { PiBracketsAngleBold } from 'react-icons/pi';
 import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
+import CV from '@/assets/JurieSpiesCV.pdf';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
 
@@ -363,7 +364,7 @@ const Home = () => {
           </ProfilePicContainer>
         </Main>
         <SocialsContainer>
-          <Button invert onClick={() => window.open(RESUME_DATA.resume, '_blank')} style={{ margin: '0px 10px 10px 0px' }}>
+          <Button invert onClick={() => window.open(CV, '_blank')} rel="noreferrer">
             <>
               Download CV
               <DownloadIcon />
