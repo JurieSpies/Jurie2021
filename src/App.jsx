@@ -83,7 +83,7 @@ const App = () => {
           {/* Mobile  */}
           <BurgerMenu active={select} />
         </RenderMobile>
-        {/* {activeSelection === 'Home'
+        {activeSelection === 'Home'
         && (
         <Animation>
           <Home />
@@ -94,9 +94,8 @@ const App = () => {
         <Animation>
           <Resume />
         </Animation>
-        )} */}
-        {/* {activeSelection === 'Work' */}
-        {activeSelection === 'Home'
+        )}
+        {activeSelection === 'Work'
         && (
         <Animation>
           <Work />

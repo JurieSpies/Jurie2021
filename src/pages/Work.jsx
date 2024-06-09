@@ -3,11 +3,13 @@ import BackButton from '@/components/Button/Button';
 import NextButton from '@/components/Button/Button';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { FaGithub } from 'react-icons/fa';
 import ApexFit from '../assets/projects/apexfit.png';
 import PiggyVault from '../assets/projects/piggyvault.png';
 import WodbudImage from '../assets/projects/wodbud.png';
 import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
+import RESUME_DATA from '../utils/RESUME_DATA.json';
 
 const Main = styled(Heading)`
   display: flex;
@@ -126,6 +128,29 @@ const Image = styled.img`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
+const SocialIconContainer = styled.a`
+display: flex;
+width: 32px;
+border-radius: 100%;
+margin-top: 50px;
+height: 32px;
+  &:hover {
+    box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
+    -webkit-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
+    -moz-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
+    transition: all 0.5s ease-in-out;
+  }
+`;
+
+const GithubIcon = styled(FaGithub)`
+  display: flex;
+  color: ${COLOR_PRIMARY};
+  font-size: 32px;
+  padding: 5px;
+  border-radius: 100%;
+  border: 1px solid ${COLOR_PRIMARY};
+`;
+
 const Work = () => {
   const [activeProject, setActiveProject] = useState(0);
 
@@ -134,9 +159,12 @@ const Work = () => {
       number: '01',
       title: 'WODbud',
       description:
-        'WODbud is a functional fitness app that allows users to generate custom workouts, access various timers, view Hero WODs, and use conversion tools. It provides a comprehensive and user-friendly platform to enhance training experiences.',
+        'WODbud is a functional fitness mobile app that allows users to generate custom workouts, access various timers, view Hero WODs, and use conversion tools. It provides a comprehensive and user-friendly platform to enhance training experiences. PWA also a Work in Progress.',
       stack: 'JavaScript , React Native, Jotai',
       image: WodbudImage,
+      githubUrl: 'https://github.com/JurieSpies/WODbud',
+      liveUrl: 'https://play.google.com/store/apps/details?id=com.wodbud',
+      pwa: true,
     },
     {
       number: '02',
@@ -145,6 +173,8 @@ const Work = () => {
         'Piggyvault is a budget app that allows users to track expenses and income, tag items, and monitor when they are going over budget. Additionally, it serves as a document vault for secure storage of financial documents.',
       stack: 'Typescript, React, Firebase',
       image: PiggyVault,
+      githubUrl: '',
+      liveUrl: '',
     },
     {
       number: '03',
@@ -152,6 +182,8 @@ const Work = () => {
       description: 'I developed a gym management app that enables users to register for memberships, make payments, and book classes. This app streamlines the gym experience, making it easy for users to manage their memberships and schedules.',
       stack: 'Typescript, React, Firebase',
       image: ApexFit,
+      githubUrl: '',
+      liveUrl: '',
     },
   ];
 
@@ -168,6 +200,17 @@ const Work = () => {
                 <StyledSubHeading>Frontend Project</StyledSubHeading>
                 <Paragraph>{project.description}</Paragraph>
                 <Stack>{project.stack}</Stack>
+                <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
+                  <GithubIcon />
+                </SocialIconContainer>
+                <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
+                  Live
+                </SocialIconContainer>
+                {project.pwa && (
+                <SocialIconContainer href="https://wodbud.netlify.app/" target="_blank" rel="noreferrer">
+                  PWA
+                </SocialIconContainer>
+                )}
               </Left>
               <Spacer />
               <Right>
