@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { PiWhatsappLogoBold } from 'react-icons/pi';
 import styled from 'styled-components';
+import { openWhatsapp } from '../utils/helpers';
 
 const WhatsappIcon = styled(PiWhatsappLogoBold)`
   font-weight: bold;
@@ -60,13 +61,6 @@ const Header = ({ active = 'Home' }) => {
   const activeTabFunction = (e) => {
     setActiveTab(e);
     active(e);
-  };
-
-  const openWhatsapp = () => {
-    const phoneNumber = '27768862529';
-    const message = 'Hey Jurie, ';
-    const url = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${message}`;
-    window.open(url, '_blank');
   };
 
   useEffect(() => {
