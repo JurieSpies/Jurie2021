@@ -83,6 +83,9 @@ dependencies:
   react-typed:
     specifier: ^1.2.0
     version: 1.2.0(react-dom@18.3.1)(react@18.3.1)
+  react-whatsapp:
+    specifier: ^0.3.0
+    version: 0.3.0
   styled-components:
     specifier: ^6.1.11
     version: 6.1.11(react-dom@18.3.1)(react@18.3.1)
@@ -3952,6 +3955,10 @@ packages:
       throttle-debounce: 3.0.1
       ts-easing: 0.2.0
       tslib: 2.6.2
+    dev: false
+
+  /react-whatsapp@0.3.0:
+    resolution: {integrity: sha512-ZuCKhd30crVVNdLf/3BfDffqEOZLFW6mYRITA4fB6Vk5p3TU1Gl3YfTEfLE/7W+kTuwYPzF6aDnzbNt6GcatiQ==}
     dev: false
 
   /react-youtube@7.14.0(react@18.3.1):
