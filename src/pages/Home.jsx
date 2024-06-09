@@ -406,14 +406,16 @@ const Home = () => {
               Years of Experience
             </StyledSubHeading>
           </Statistics>
+          {totalRepositories && (
           <Statistics>
             <StatisticsNumber>
-              {totalRepositories?.total_count ?? '00'}
+              {totalRepositories.total_count ?? '00'}
             </StatisticsNumber>
             <StyledSubHeading>
               Projects
             </StyledSubHeading>
           </Statistics>
+          )}
           <Statistics>
             <StatisticsNumber>
               <CountUp

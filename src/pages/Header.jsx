@@ -63,11 +63,25 @@ const Header = ({ active = 'Home' }) => {
   };
 
   const openWhatsapp = () => {
-    const phoneNumber = '768862529';
+    const phoneNumber = '27768862529'; // Remember to add the country code
     const message = 'Hey Jurie, ';
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const baseURL = isMobile ? 'whatsapp://' : 'https://web.whatsapp.com/';
-    const url = `${baseURL}send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+
+    // Encode the message to handle special characters
+    const encodedMessage = encodeURIComponent(message);
+
+    // Check if the device supports the WhatsApp URL scheme
+    const isWhatsAppSupported = navigator.userAgent.match(/Android|iPhone/i);
+
+    let url;
+    if (isWhatsAppSupported) {
+      // Use the WhatsApp URL scheme for mobile devices
+      url = `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`;
+    } else {
+      // Use the WhatsApp Web URL for desktop browsers
+      url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+    }
+
+    // Open the URL in a new window or tab
     window.open(url, '_blank');
   };
 
