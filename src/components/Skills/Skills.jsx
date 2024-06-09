@@ -105,7 +105,7 @@ const Skills = () => {
   return (
     <CardsContainer>
       {skillSvgs.map((skill) => (
-        <Image src={skill.svg} alt="Skill Logo" />
+        <Image loading="lazy" src={skill.svg} alt="Skill Logo" />
       ))}
     </CardsContainer>
   );

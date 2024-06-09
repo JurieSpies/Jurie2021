@@ -1,9 +1,16 @@
 import Button from '@/components/Button/Button';
 import { COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
 import { Heading } from '@/utils/globalFonts';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { PiWhatsappLogoBold } from 'react-icons/pi';
+import styled from 'styled-components';
+
+const WhatsappIcon = styled(PiWhatsappLogoBold)`
+  font-weight: bold;
+  margin-right: 3px;
+  font-size: 18px;
+`;
 
 const MainContent = styled.div`
   display: flex;
@@ -48,7 +55,6 @@ const Header = ({ active = 'Home' }) => {
     'Home',
     'Resume',
     'Work',
-    'Contact',
   ];
 
   const activeTabFunction = (e) => {
@@ -74,7 +80,8 @@ const Header = ({ active = 'Home' }) => {
         ))}
         <Button>
           <>
-            Hire Me
+            <WhatsappIcon size={18} />
+            Whatsapp
           </>
         </Button>
       </Right>

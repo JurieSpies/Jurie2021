@@ -101,6 +101,19 @@ const App = () => {
           <Work />
         </Animation>
         )}
+        {activeSelection === 'Whatsapp' // send me a whatsapp message
+          && (
+          <iframe
+            title="Whatsapp"
+            src="https://wa.me/0768862529?text=Hey Jurie,"
+            width="100%"
+            height="100%"
+            style={{ border: 'none' }}
+          />
+          // <a href="https://wa.me/0768862529?text=Hey Jurie," target="_blank" rel="noreferrer">
+          //   .
+          // </a>
+          )}
       </PageContainer>
       <Spacer />
     </Main>

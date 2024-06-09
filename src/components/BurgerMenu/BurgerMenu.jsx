@@ -106,6 +106,7 @@ const BurgerMenu = ({ active = 'Home' }) => {
     'Resume',
     'Work',
     'Contact',
+    'Whatsapp',
   ];
 
   const toggleBurgerMenu = () => {
