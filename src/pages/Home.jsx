@@ -16,6 +16,7 @@ import { getYearsOfExperience } from '../utils/helpers';
 
 const StyledSubHeading = styled(SubHeading)`
   max-width: 30%;
+  color:${COLOR_GREY};
 
   /* mobile */
   @media (max-width: 768px) {
