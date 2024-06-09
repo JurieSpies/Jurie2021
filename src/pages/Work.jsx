@@ -33,6 +33,22 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  @media (max-width: 768px) {
+  margin: 20px 0px;
+  }
+`;
+
+const AnimateBackButton = styled.div`
+&:hover{
+  transform: scale(1.01) rotate(-5deg);
+}
+`;
+
+const AnimateNextButton = styled.div`
+&:hover {
+  transform: scale(1.01) rotate(5deg);
+}
 `;
 
 const AnimatedSlide = styled.div`
@@ -40,6 +56,13 @@ const AnimatedSlide = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const StyledHeading = styled(Heading)`
@@ -67,9 +90,7 @@ const Left = styled.div`
   flex: 1;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    height: 100%;
-    margin-bottom: 25px;
+    margin: 0px 50px;
   }
   `;
 
@@ -77,6 +98,11 @@ const Spacer = styled.div`
   display: flex;
   flex: 0.2;
   height: 100%;
+
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Right = styled.div`
@@ -86,13 +112,14 @@ const Right = styled.div`
   flex: 1;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    height: 100%;
+    @media (max-width: 768px) {
+      width: 100%;
+  }
   }
 `;
 
 const Image = styled.img`
-  width: auto;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
@@ -100,7 +127,6 @@ const Image = styled.img`
 `;
 
 const Work = () => {
-  console.log('🚀 example');
   const [activeProject, setActiveProject] = useState(0);
 
   const projects = [
@@ -153,12 +179,16 @@ const Work = () => {
         ))}
       </ProjectContainer>
       <ButtonContainer>
-        <BackButton onClick={() => setActiveProject((activeProject - 1 + projects.length) % projects.length)} invert style={{ borderRadius: '5px' }}>
-          Back
-        </BackButton>
-        <NextButton onClick={() => setActiveProject((activeProject + 1) % projects.length)} style={{ borderRadius: '5px' }}>
-          Next Project
-        </NextButton>
+        <AnimateBackButton>
+          <BackButton onClick={() => setActiveProject((activeProject - 1 + projects.length) % projects.length)} invert style={{ borderRadius: '5px' }}>
+            Back
+          </BackButton>
+        </AnimateBackButton>
+        <AnimateNextButton>
+          <NextButton onClick={() => setActiveProject((activeProject + 1) % projects.length)} style={{ borderRadius: '5px' }}>
+            Next Project
+          </NextButton>
+        </AnimateNextButton>
       </ButtonContainer>
     </Main>
   );
