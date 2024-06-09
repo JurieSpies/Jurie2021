@@ -122,25 +122,22 @@ const BurgerMenu = ({ active = 'Home' }) => {
   };
 
   const openWhatsapp = () => {
-    const phoneNumber = '27768862529'; // Remember to add the country code
-    const message = 'Hey Jurie, ';
+    const phoneNumber = '27768862529';
+    const initialMessage = 'Hey Jurie, ';
+    const fullMessage = 'Hey Jurie, this is the full message...';
 
-    // Encode the message to handle special characters
-    const encodedMessage = encodeURIComponent(message);
+    const encodedInitialMessage = encodeURIComponent(initialMessage);
+    const encodedFullMessage = encodeURIComponent(fullMessage);
 
-    // Check if the device supports the WhatsApp URL scheme
     const isWhatsAppSupported = navigator.userAgent.match(/Android|iPhone/i);
 
     let url;
     if (isWhatsAppSupported) {
-      // Use the WhatsApp URL scheme for mobile devices
-      url = `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`;
+      url = `whatsapp://send?phone=${phoneNumber}&text=${encodedInitialMessage}`;
     } else {
-      // Use the WhatsApp Web URL for desktop browsers
-      url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+      url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedFullMessage}`;
     }
 
-    // Open the URL in a new window or tab
     window.open(url, '_blank');
   };
 
