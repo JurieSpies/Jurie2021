@@ -4,6 +4,7 @@ import BurgerMenu from './components/BurgerMenu/BurgerMenu';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
 import Header from './pages/Header';
+import Work from './pages/Work';
 
 const Main = styled.div`
   overflow: hidden;
@@ -82,7 +83,7 @@ const App = () => {
           {/* Mobile  */}
           <BurgerMenu active={select} />
         </RenderMobile>
-        {activeSelection === 'Home'
+        {/* {activeSelection === 'Home'
         && (
         <Animation>
           <Home />
@@ -92,6 +93,13 @@ const App = () => {
         && (
         <Animation>
           <Resume />
+        </Animation>
+        )} */}
+        {/* {activeSelection === 'Work' */}
+        {activeSelection === 'Home'
+        && (
+        <Animation>
+          <Work />
         </Animation>
         )}
       </PageContainer>
