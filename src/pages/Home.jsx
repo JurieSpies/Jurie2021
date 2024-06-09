@@ -12,6 +12,7 @@ import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
 import CV from '@/assets/JurieSpiesCV.pdf';
+import { FloatingWhatsApp } from 'react-floating-whatsapp';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
 
@@ -336,6 +337,17 @@ const Home = () => {
 
   return (
     <PageContainer>
+      <FloatingWhatsApp
+        accountName="Jurie"
+        phoneNumber="27768862529"
+        allowClickAway
+        avatar={profilePic}
+        chatMessage="Hi there! How can I help you?"
+        notification
+        darkMode
+        messageDelay={0}
+        allowEsc
+      />
       <Center>
         <Main>
           <InfoContainer>
@@ -406,16 +418,14 @@ const Home = () => {
               Years of Experience
             </StyledSubHeading>
           </Statistics>
-          {totalRepositories && (
           <Statistics>
             <StatisticsNumber>
-              {totalRepositories.total_count ?? '00'}
+              {totalRepositories?.total_count ?? '66'}
             </StatisticsNumber>
             <StyledSubHeading>
               Projects
             </StyledSubHeading>
           </Statistics>
-          )}
           <Statistics>
             <StatisticsNumber>
               <CountUp

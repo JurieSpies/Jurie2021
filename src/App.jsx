@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import ReactWhatsapp from 'react-whatsapp';
 import styled from 'styled-components';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu';
 import Header from './pages/Header';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
 import Work from './pages/Work';
+
+// https://www.youtube.com/watch?v=dImgZ_AH7uA
 
 const Main = styled.div`
   overflow: hidden;
