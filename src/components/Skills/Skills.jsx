@@ -1,5 +1,35 @@
 import { COLOR_BACKGROUND, COLOR_PRIMARY } from '@/utils/globalColors';
 import styled from 'styled-components';
+import css from '../../assets/skillIcons/css.svg';
+import html from '../../assets/skillIcons/html.svg';
+import js from '../../assets/skillIcons/js.svg';
+import react from '../../assets/skillIcons/react.svg';
+import typescript from '../../assets/skillIcons/typescript.svg';
+import azure from '../../assets/skillIcons/azure.svg';
+import cypress from '../../assets/skillIcons/cypress.svg';
+import docker from '../../assets/skillIcons/docker.svg';
+import eslint from '../../assets/skillIcons/eslint.svg';
+import discord from '../../assets/skillIcons/discord.svg';
+import figma from '../../assets/skillIcons/figma.svg';
+import git from '../../assets/skillIcons/git.svg';
+import github from '../../assets/skillIcons/github.svg';
+import githubactions from '../../assets/skillIcons/githubactions.svg';
+import gitlab from '../../assets/skillIcons/gitlab.svg';
+import firebase from '../../assets/skillIcons/firebase.svg';
+import graphql from '../../assets/skillIcons/graphql.svg';
+import insomnia from '../../assets/skillIcons/insomnia.svg';
+import jest from '../../assets/skillIcons/jest.svg';
+import knex from '../../assets/skillIcons/knex.svg';
+import nodejs from '../../assets/skillIcons/nodejs.svg';
+import postgressql from '../../assets/skillIcons/postgressql.svg';
+import postman from '../../assets/skillIcons/postman.svg';
+import sketch from '../../assets/skillIcons/sketch.svg';
+import storybook from '../../assets/skillIcons/storybook.svg';
+import vite from '../../assets/skillIcons/vite.svg';
+import vscode from '../../assets/skillIcons/vscode.svg';
+import swagger from '../../assets/skillIcons/swagger.svg';
+import xcode from '../../assets/skillIcons/xcode.svg';
+import openai from '../../assets/skillIcons/openai.svg';
 
 const CardsContainer = styled.div`
   justify-content: center;
@@ -40,36 +70,36 @@ const Image = styled.img`
 
 const Skills = () => {
   const skillSvgs = [
-    { svg: 'src/assets/skillIcons/css.svg' },
-    { svg: 'src/assets/skillIcons/html.svg' },
-    { svg: 'src/assets/skillIcons/js.svg' },
-    { svg: 'src/assets/skillIcons/react.svg' },
-    { svg: 'src/assets/skillIcons/typescript.svg' },
-    { svg: 'src/assets/skillIcons/azure.svg' },
-    { svg: 'src/assets/skillIcons/cypress.svg' },
-    { svg: 'src/assets/skillIcons/docker.svg' },
-    { svg: 'src/assets/skillIcons/eslint.svg' },
-    { svg: 'src/assets/skillIcons/discord.svg' },
-    { svg: 'src/assets/skillIcons/figma.svg' },
-    { svg: 'src/assets/skillIcons/git.svg' },
-    { svg: 'src/assets/skillIcons/github.svg' },
-    { svg: 'src/assets/skillIcons/githubactions.svg' },
-    { svg: 'src/assets/skillIcons/gitlab.svg' },
-    { svg: 'src/assets/skillIcons/firebase.svg' },
-    { svg: 'src/assets/skillIcons/graphql.svg' },
-    { svg: 'src/assets/skillIcons/insomnia.svg' },
-    { svg: 'src/assets/skillIcons/jest.svg' },
-    { svg: 'src/assets/skillIcons/knex.svg' },
-    { svg: 'src/assets/skillIcons/nodejs.svg' },
-    { svg: 'src/assets/skillIcons/postgressql.svg' },
-    { svg: 'src/assets/skillIcons/postman.svg' },
-    { svg: 'src/assets/skillIcons/sketch.svg' },
-    { svg: 'src/assets/skillIcons/storybook.svg' },
-    { svg: 'src/assets/skillIcons/vite.svg' },
-    { svg: 'src/assets/skillIcons/vscode.svg' },
-    { svg: 'src/assets/skillIcons/swagger.svg' },
-    { svg: 'src/assets/skillIcons/xcode.svg' },
-    { svg: 'src/assets/skillIcons/openai.svg' },
+    { svg: css },
+    { svg: html },
+    { svg: js },
+    { svg: react },
+    { svg: typescript },
+    { svg: azure },
+    { svg: cypress },
+    { svg: docker },
+    { svg: eslint },
+    { svg: discord },
+    { svg: figma },
+    { svg: git },
+    { svg: github },
+    { svg: githubactions },
+    { svg: gitlab },
+    { svg: firebase },
+    { svg: graphql },
+    { svg: insomnia },
+    { svg: jest },
+    { svg: knex },
+    { svg: nodejs },
+    { svg: postgressql },
+    { svg: postman },
+    { svg: sketch },
+    { svg: storybook },
+    { svg: vite },
+    { svg: vscode },
+    { svg: swagger },
+    { svg: xcode },
+    { svg: openai },
   ];
 
   return (
