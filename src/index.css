@@ -21,6 +21,8 @@ body,
   -webkit-overflow-scrolling: touch;
   @media (max-width: 768px) {
     overflow-x:auto;
+    position: fixed;
+    overflow-y: scroll;
   }
 }
 
