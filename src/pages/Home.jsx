@@ -205,6 +205,11 @@ const PageContainer = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: center;
+
+  /* mobile */
+  @media (max-width: 768px) {
+    margin-bottom: 100px;
+  }
 `;
 
 const Center = styled.div`

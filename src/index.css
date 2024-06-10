@@ -2,8 +2,8 @@
 html,
 body,
 #root {
-  height: 100dvh;
-  width: 100dvw;
+  /* height: 100dvh; */
+  /* width: 100dvw; */
   height: 100vh; /* Fallback if browsers does not support dvh */
   width: 100vw; /* Fallback if browsers does not support dvw */
   overflow-x: hidden;
