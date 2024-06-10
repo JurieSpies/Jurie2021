@@ -11,7 +11,7 @@ import WodbudImage from '../assets/projects/wodbud.png';
 import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
 
-const LiveIcon = styled(IoLogoGooglePlaystore)`
+const PlayStoreIcon = styled(IoLogoGooglePlaystore)`
   display: flex;
   color: ${COLOR_PRIMARY};
   font-size: 32px;
@@ -188,8 +188,8 @@ const Work = () => {
       stack: 'JavaScript , React Native, Jotai',
       image: WodbudImage,
       githubUrl: 'https://github.com/JurieSpies/WODbud',
-      liveUrl: 'https://play.google.com/store/apps/details?id=com.wodbud',
-      pwa: 'https://wodbud.netlify.app/',
+      playStore: 'https://play.google.com/store/apps/details?id=com.wodbud',
+      liveUrl: 'https://wodbud.netlify.app/',
     },
     {
       number: '02',
@@ -228,14 +228,20 @@ const Work = () => {
                 <Paragraph>{project.description}</Paragraph>
                 <Stack>{project.stack}</Stack>
                 <Icons>
+                  {project.githubUrl && (
                   <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
                     <GithubIcon />
                   </SocialIconContainer>
-                  <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
-                    <LiveIcon />
+                  )}
+                  {/* //playstore */}
+                  {project.playStore && (
+                  <SocialIconContainer href={project.playStore} target="_blank" rel="noreferrer">
+                    <PlayStoreIcon />
                   </SocialIconContainer>
-                  {project?.pwa && (
-                  <SocialIconContainer href="https://wodbud.netlify.app/" target="_blank" rel="noreferrer">
+                  )}
+                  {/* //chrome */}
+                  {project.liveUrl && (
+                  <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
                     <PwaIcon />
                   </SocialIconContainer>
                   )}
