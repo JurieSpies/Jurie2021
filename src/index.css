@@ -20,9 +20,9 @@ body,
   /* For mobile devices */
   -webkit-overflow-scrolling: touch;
   @media (max-width: 768px) {
-    overflow-x:auto;
+    /* overflow-x:auto; */
     position: fixed;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 }
 
