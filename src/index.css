@@ -14,6 +14,12 @@ body,
   flex-wrap: wrap;
   display: flex;
   -webkit-tap-highlight-color: transparent;
+
+  /* For mobile devices */
+  -webkit-overflow-scrolling: touch;
+  @media (max-width: 768px) {
+    overflow-x:auto;
+  }
 }
 
 input:-webkit-autofill {
