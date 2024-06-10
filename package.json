@@ -37,12 +37,11 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "run build",
-    "build2": "vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy",
+    "deploy": "vite build && firebase deploy",
     "lint:css": "stylelint './src/**/*.js'"
   },
   "browserslist": {
