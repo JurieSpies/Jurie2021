@@ -275,7 +275,7 @@ const Work = () => {
             onClick={next}
             style={{ borderRadius: '5px' }}
           >
-            Next Project
+            Next
           </NextButton>
         </AnimateNextButton>
       </ButtonContainer>
