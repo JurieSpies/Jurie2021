@@ -77,7 +77,7 @@ const AboutMe = () => (
       <Info>
         <StyledSubHeading>Nationality</StyledSubHeading>
         <StyledHeading>
-          Jurie Spies
+          South African
         </StyledHeading>
       </Info>
       <Info>
