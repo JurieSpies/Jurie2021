@@ -80,17 +80,15 @@
   "work": [
     {
       "title": "Open Vantage",
-      "role": "Software Engineer (Front-End)",
-      "description": "At Open Vantage, I am instrumental in building cutting-edge Web and Mobile Applications using React Native and React. My role extends beyond development to encompass integrating JavaScript solutions and creating SDKs to enhance our software ecosystem. Additionally, I actively manage services for clients, ensuring seamless integration and providing valuable technical expertise. I also play a vital role in optimizing payment gateways for secure and efficient processing, collaborating with merchants and ensuring industry standard compliance.",
+      "description": "At Open Vantage, I am instrumental in building cutting-edge Web and Mobile Applications using React Native and React. My role extends beyond development to encompass integrating JavaScript solutions. Additionally, I actively manage services for clients, ensuring seamless integration and providing valuable technical expertise. I also handle deployments of React Native apps to the Play Store and App Store.",
       "timeline": "September 2019 - Currently",
-      "occupation": "Software Engineer"
+      "occupation": "Software Engineer (Front-End)"
     },
     {
-      "title": "Verge Technologies (Front-End)",
-      "role": "Software Developer",
+      "title": "Verge Technologies",
       "description": "Developed mobile applications with React Native, contributing to the entire development lifecycle. Collaborated with cross-functional teams, optimized performance, and ensured seamless platform integration. Gained valuable insights into mobile app architecture and solidified skills in React Native.",
       "timeline": "March 2019 - August",
-      "occupation": "Jnr Software developer"
+      "occupation": "Jnr Software developer (Front-End)"
     }
   ],
   "skills": [

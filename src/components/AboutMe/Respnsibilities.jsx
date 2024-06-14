@@ -54,7 +54,7 @@ const CardsContainer = styled.div`
   justify-content: space-around;
   margin-top: 60px;
   align: left;
-  grid-template-columns: 10fr 1fr; 
+  grid-template-columns: 10fr 1fr;
   gap: 50px
   color: ${COLOR_WHITE};
   display: flex;
@@ -88,21 +88,13 @@ const Responsibilities = () => (
         <StyledSubHeading>Front-End Development</StyledSubHeading>
         <Description>
           Designing and developing dynamic and high-performance user interfaces for web and mobile applications using React and React Native.
-          Employing front-end frameworks and libraries like Redux for state management, and integrating with RESTful APIs for seamless data flow.
+          Employing front-end frameworks and libraries like Redux for state management, and integrating with RESTful APIs and GraphQL for seamless data flow.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Back-End Development</StyledSubHeading>
         <Description>
-          Developing server-side logic, RESTful APIs, and databases using technologies such as Node.js, Express, and MongoDB to support front-end functionality.
-          Implementing authentication and authorization mechanisms for secure data access and user management.
-        </Description>
-      </Info>
-      <Info>
-        <StyledSubHeading>Full-Stack Development</StyledSubHeading>
-        <Description>
-          Bridging front-end and back-end development to ensure smooth integration and cohesive application architecture.
-          Leading technical discussions and architectural decisions, mentoring team members, and advocating for best practices in software engineering.
+          To develop and maintain server-side logic, RESTful APIs, and databases using technologies such as Node.js, Express.js, Knex.js, Docker, and PostgreSQL, you can follow the detailed steps below. This guide includes setting up a Node.js environment with Express.js for the server, Knex.js for database migrations and queries, Docker for containerization, and PostgreSQL as the database.
         </Description>
       </Info>
       <Info>
@@ -120,13 +112,6 @@ const Responsibilities = () => (
         </Description>
       </Info>
       <Info>
-        <StyledSubHeading>DevOps and Deployment</StyledSubHeading>
-        <Description>
-          Implementing CI/CD pipelines using tools like Jenkins or GitLab CI to automate testing, build, and deployment processes for continuous integration and delivery.
-          Monitoring application performance, conducting root cause analysis, and implementing improvements to enhance scalability, reliability, and efficiency.
-        </Description>
-      </Info>
-      <Info>
         <StyledSubHeading>Collaboration and Communication</StyledSubHeading>
         <Description>
           Collaborating effectively with cross-functional teams including designers, QA engineers, and product managers to deliver high-quality software solutions.
@@ -137,7 +122,7 @@ const Responsibilities = () => (
         <StyledSubHeading>Documentation and Knowledge Sharing</StyledSubHeading>
         <Description>
           Documenting technical specifications, architectural designs, and operational procedures to ensure clarity and maintainable codebase.
-          Sharing knowledge through internal wiki, code repositories, and mentorship programs to empower team members and foster continuous learning.
+          Sharing knowledge through internal wiki, code repositories, and mentorship to foster continuous learning.
         </Description>
       </Info>
       <Info>
@@ -157,14 +142,14 @@ const Responsibilities = () => (
       <Info>
         <StyledSubHeading>Tool Proficiency</StyledSubHeading>
         <Description>
-          Utilizing a wide range of software tools and technologies such as Git for version control, IDEs like Visual Studio Code, and collaboration platforms like Slack and Jira.
-          Proficient in using cloud services such as AWS or Azure for hosting applications, database management, and infrastructure scaling.
+          Utilizing a wide range of software tools and technologies such as Git for version control, IDEs like Visual Studio Code, and collaboration platforms like Clickup,Discord,Jira andSlack, .
+          Proficient in using cloud services such as AWS, Azure and Firestore for database management, and infrastructure scaling.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Project Domain Expertise</StyledSubHeading>
         <Description>
-          Managing projects within diverse domains including PropTech, CCTV solutions, video monitoring, profuct solutions, loyalty systems, budgeting, fitness, payment solutions, and more.
+          Managing projects within diverse domains including PropTech, CCTV solutions, video monitoring, product solutions, loyalty systems, budgeting, fitness, payment solutions, and more.
           Leveraging domain knowledge to develop tailored solutions that meet specific business requirements and industry standards.
         </Description>
       </Info>

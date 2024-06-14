@@ -31,7 +31,7 @@ const ImageWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
@@ -43,8 +43,8 @@ const IconTitle = styled.div`
 
 const Education = () => {
   const skillSvgs = [
-    { svg: udemy, title: 'Self-taught through Udemy and Pluralsight, Ive honed skills in React, React Native, Node.js, and CI/CD tools like Git and Jenkins. These courses empower me to deliver high-quality software solutions aligned with industry best practices.' },
-    { svg: redseal, title: 'Majuba FET College - Newcastle Training Centre: Red Seal - Jan 2008 - Dec 2011' },
+    { svg: udemy, title: 'Self-taught through Udemy and Pluralsight, Ive honed skills in React, React Native, Node.js, and CI/CD tools like Git. These courses empower me to deliver high-quality software solutions aligned with industry best practices.' },
+    { svg: redseal, title: 'Majuba FET College - Newcastle Training Centre: Instumentation Red Seal - Jan 2008 - Dec 2011' },
     { svg: school, title: 'HTS Witbank: Matriculated - 2013' },
 
   ];
