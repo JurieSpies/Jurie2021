@@ -11,7 +11,6 @@ import { PiBracketsAngleBold } from 'react-icons/pi';
 import ReactTyped from 'react-typed';
 import styled, { keyframes } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
-import CV from '@/assets/JurieSpiesCV1.pdf';
 import resume from '@/assets/JurieSpiesResume.pdf';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
