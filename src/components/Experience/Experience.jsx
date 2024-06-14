@@ -45,22 +45,8 @@ const ExperienceCard = styled.div`
   }
 
   &:hover {
-    animation: hoverEffect 0.5s forwards;
-  }
-
-  @keyframes hoverEffect {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1.01);
-      opacity: 1;
-    }
+    transform: scale(1.01) rotate(1deg);
+    transition: all 0.5s ease-in-out;
   }
 
   @media (max-width: 768px) {
@@ -68,37 +54,6 @@ const ExperienceCard = styled.div`
     width: auto;
   }
 `;
-
-// const ExperienceCard = styled.div`
-//   margin: 20px;
-//   background-color: ${COLOR_BACKGROUND};
-//   padding: 20px;
-//   border-radius: 10px;
-//   border: 1px solid ${COLOR_PRIMARY};
-//   display: block;
-//   align-self: center;
-//   width: 80%;
-//   animation: fadeIn 1s ease-in-out;
-
-//   @keyframes fadeIn {
-//     from {
-//       opacity: 0;
-//     }
-//     to {
-//       opacity: 1;
-//     }
-//   }
-
-//   &:hover {
-//     transform: scale(1.01) rotate(1deg);
-//     transition: all 0.5s ease-in-out;
-//   }
-
-//   @media (max-width: 768px) {
-//     flex-direction: column;
-//     width: auto;
-//   }
-// `;
 
 const Experience = () => {
   const { work } = resumeData;
