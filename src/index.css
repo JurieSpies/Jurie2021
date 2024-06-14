@@ -1,0 +1,39 @@
+
+html,
+body,
+#root {
+  /* height: 100dvh; */
+  /* width: 100dvw; */
+  height: 100vh; /* Fallback if browsers does not support dvh */
+  width: 100vw; /* Fallback if browsers does not support dvw */
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: #17161D;
+  user-select: none;
+  flex-wrap: wrap;
+  display: flex;
+  -webkit-tap-highlight-color: transparent;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+
+  /* For mobile devices */
+  @media (max-width: 768px) {
+    height: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text; /* To remove the highlight color from autocompleted inputs */
+}
+
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+
+

@@ -1,0 +1,14 @@
+/**
+ * This file is to configure the path aliases for the project
+ */
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/stories"]
+}
