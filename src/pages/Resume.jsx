@@ -1,25 +1,25 @@
-import Button from '@/components/Button/Button';
-import Experience from '@/components/Experience/Experience';
-import Skills from '@/components/Skills/Skills';
-import { Heading, SubHeading } from '@/utils/globalFonts';
-import { useState } from 'react';
-import styled from 'styled-components';
-import AboutMe from '../components/AboutMe/AboutMe';
-import { COLOR_GREY } from '../utils/globalColors';
+import Button from "@/components/Button/Button";
+import Experience from "@/components/Experience/Experience";
+import Skills from "@/components/Skills/Skills";
+import { Heading, SubHeading } from "@/utils/globalFonts";
+import { useState } from "react";
+import styled from "styled-components";
+import AboutMe from "../components/AboutMe/AboutMe";
+import { COLOR_GREY } from "../utils/globalColors";
 
 const StyledSubHeading = styled(SubHeading)`
-color:${COLOR_GREY};
-@media (max-width: 768px) {
-  font-size: 16px;
-}
+  color: ${COLOR_GREY};
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const StyledHeading = styled(Heading)`
-font-size: 52px;
+  font-size: 52px;
 
-@media (max-width: 768px) {
-  font-size: 32px;
-}
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
 `;
 
 const Main = styled.div`
@@ -27,7 +27,6 @@ const Main = styled.div`
   width: 100%;
   padding-top: 50px;
   height: 85vh;
-
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -39,8 +38,7 @@ const Main = styled.div`
 `;
 
 const ButtonsContainer = styled.div`
-
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 100%;
     justify-content: center;
     display: grid;
@@ -53,13 +51,12 @@ const Left = styled.div`
   height: 50%;
   flex-direction: column;
 
-
   @media (max-width: 768px) {
     flex-direction: column;
     height: 100%;
     margin-bottom: 25px;
   }
-  `;
+`;
 
 const Spacer = styled.div`
   display: flex;
@@ -72,7 +69,6 @@ const Right = styled.div`
   height: 85vh;
   width: 100%;
   flex-direction: column;
-
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -88,8 +84,11 @@ const Selections = styled.div`
   flex-direction: column;
   overflow: auto;
   scrollbar-width: none;
-  mask-image: linear-gradient(to top, black calc(100% - 100px), transparent 100%);
-
+  mask-image: linear-gradient(
+    to top,
+    black calc(100% - 100px),
+    transparent 100%
+  );
 
   @media (max-width: 768px) {
     mask-image: none;
@@ -98,22 +97,18 @@ const Selections = styled.div`
 `;
 
 const buttonStyle = {
-  display: 'flex',
-  width: '100%',
+  display: "flex",
+  width: "100%",
   borderRadius: 5,
   marginTop: 40,
-  justifyContent: 'center',
+  justifyContent: "center",
   minWidth: 200,
 };
 
 const Resume = () => {
-  const [activeSelection, setActiveSelection] = useState('Experience');
+  const [activeSelection, setActiveSelection] = useState("Experience");
 
-  const buttonsTitles = [
-    'Experience',
-    'Skills',
-    'About me',
-  ];
+  const buttonsTitles = ["Experience", "Skills", "About me"];
 
   const selectionHandler = (e) => {
     setActiveSelection(e.target.innerText);
@@ -121,20 +116,18 @@ const Resume = () => {
 
   const renderHeading = (selection) => {
     const title = {
-      Experience: 'Work Experience',
-      Skills: 'Work Skills',
-      'About me': 'About Me',
+      Experience: "Work Experience",
+      Skills: "Work Skills",
+      "About me": "About Me",
     };
 
     const subTitle = {
-      Experience: 'Work Experience',
-      Skills: 'Work Skills',
-      'About me': 'About Me',
+      Experience: "Work Experience",
+      Skills: "Work Skills",
+      "About me": "About Me",
     };
 
-    return (
-      <StyledHeading>{title[selection] || ''}</StyledHeading>
-    );
+    return <StyledHeading>{title[selection] || ""}</StyledHeading>;
   };
 
   return (
@@ -143,12 +136,16 @@ const Resume = () => {
         <StyledHeading>Why Hire Me ?</StyledHeading>
         <StyledSubHeading>
           Front-end engineer specializing in building dynamic and high
-          performance web and mobile applications using React, React
-          Native
+          performance web and mobile applications using React, React Native
         </StyledSubHeading>
         <ButtonsContainer>
           {buttonsTitles.map((buttonTitle) => (
-            <Button style={buttonStyle} onClick={selectionHandler} invert={activeSelection !== buttonTitle} key={buttonTitle}>
+            <Button
+              style={buttonStyle}
+              onClick={selectionHandler}
+              invert={activeSelection !== buttonTitle}
+              key={buttonTitle}
+            >
               {buttonTitle}
             </Button>
           ))}
@@ -158,9 +155,9 @@ const Resume = () => {
       <Right>
         {renderHeading(activeSelection)}
         <Selections>
-          {activeSelection === 'Experience' && <Experience /> }
-          {activeSelection === 'Skills' && <Skills /> }
-          {activeSelection === 'About me' && <AboutMe /> }
+          {activeSelection === "Experience" && <Experience />}
+          {activeSelection === "Skills" && <Skills />}
+          {activeSelection === "About me" && <AboutMe />}
         </Selections>
       </Right>
     </Main>
