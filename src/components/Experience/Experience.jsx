@@ -1,19 +1,22 @@
-import resumeData from '@/utils/RESUME_DATA.json';
-import { COLOR_BACKGROUND, COLOR_GREY, COLOR_PRIMARY } from '@/utils/globalColors';
-import { SubHeading } from '@/utils/globalFonts';
-import styled from 'styled-components';
+import resumeData from "@/utils/RESUME_DATA.json";
+import {
+  COLOR_BACKGROUND,
+  COLOR_GREY,
+  COLOR_PRIMARY,
+} from "@/utils/globalColors";
+import { SubHeading } from "@/utils/globalFonts";
+import styled from "styled-components";
 
 const StyledSubHeading = styled(SubHeading)`
-
-@media (max-width: 768px) {
-  font-size: 16px;
+  @media (max-width: 768px) {
+    font-size: 16px;
   }
 `;
 
 const CardsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
-  flex:1;
+  flex: 1;
   flex-direction: row;
   justify-content: space-around;
   margin-top: 35px;
@@ -68,6 +71,7 @@ const Experience = () => {
           <StyledSubHeading fontWeight="thin" color={COLOR_GREY}>
             <li>
               {workItem.occupation}
+              {` - ${workItem.description}`}
             </li>
           </StyledSubHeading>
         </ExperienceCard>
