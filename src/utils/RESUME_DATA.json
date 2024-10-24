@@ -79,15 +79,21 @@
   "resume": "https://drive.google.com/file/d/1EbNpgHpoXuZCyBq5UkU8BhJGE9Xu7Mf4/view?usp=sharing",
   "work": [
     {
+      "title": "Capitec",
+      "description": "I work as a software engineer for Capitec Bank, where I'm responsible for developing and maintaining a wide range of applications and tools. This includes web applications built with HTML, CSS, and JavaScript, as well as mobile applications built with Kendo UI and Vue.js. I also work with React, Nuxt, and Capacitor to deliver high-quality applications. In addition, I'm involved in the development of internal software development tools and contribute to the improvement of our development processes.",
+      "timeline": "August 2024 - Currently",
+      "occupation": "Software Engineer (Front-End)"
+    },
+    {
       "title": "Open Vantage",
       "description": "At Open Vantage, I am instrumental in building cutting-edge Web and Mobile Applications using React Native and React. My role extends beyond development to encompass integrating JavaScript solutions. Additionally, I actively manage services for clients, ensuring seamless integration and providing valuable technical expertise. I also handle deployments of React Native apps to the Play Store and App Store.",
-      "timeline": "September 2019 - Currently",
+      "timeline": "September 2019 - July 2024",
       "occupation": "Software Engineer (Front-End)"
     },
     {
       "title": "Verge Technologies",
       "description": "Developed mobile applications with React Native, contributing to the entire development lifecycle. Collaborated with cross-functional teams, optimized performance, and ensured seamless platform integration. Gained valuable insights into mobile app architecture and solidified skills in React Native.",
-      "timeline": "March 2019 - August",
+      "timeline": "March 2019 - August 2019",
       "occupation": "Jnr Software developer (Front-End)"
     }
   ],
@@ -117,6 +123,10 @@
     {
       "frameworkTitle": "React",
       "rating": "95"
+    },
+    {
+      "frameworkTitle": "Vue",
+      "rating": "65"
     },
     {
       "frameworkTitle": "Express Servers",

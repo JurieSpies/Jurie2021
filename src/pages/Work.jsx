@@ -9,6 +9,7 @@ import ApexFit from '../assets/projects/apexfit.png';
 import PiggyVault from '../assets/projects/piggyvault.png';
 import WodbudImage from '../assets/projects/wodbud.png';
 import GoWaterfall from '../assets/projects/GoWaterfall.png';
+import PasswordGenerator from '../assets/projects/PasswordGenerator.png';
 import Proof from '../assets/projects/Proof.png';
 import ETTX from '../assets/projects/ETTX.png';
 import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
@@ -184,6 +185,7 @@ const Work = () => {
 
   const projects = [
     {
+      type: 'Frontend Project',
       number: '01',
       title: 'WODbud',
       description:
@@ -195,6 +197,7 @@ const Work = () => {
       liveUrl: 'https://wodbud.netlify.app/',
     },
     {
+      type: 'Frontend Project',
       number: '02',
       title: 'PiggyVault',
       description:
@@ -204,6 +207,7 @@ const Work = () => {
       githubUrl: 'https://github.com/AdamErwee/piggyvault-react-native',
     },
     {
+      type: 'Frontend Project',
       number: '03',
       title: 'ApexFit',
       description: 'I developed a gym management app that enables users to register for memberships, make payments, and book classes. This app streamlines the gym experience, making it easy for users to manage their memberships and schedules.',
@@ -213,6 +217,7 @@ const Work = () => {
       liveUrl: 'https://apexfit-crossfit.netlify.app/',
     },
     {
+      type: 'Frontend Project',
       number: '04',
       title: 'ETTX',
       description: 'ETT designs and manufactures a diverse line of open pit mine support equipment and specialised mobile industrial equipment aimed at improving productivity and safety.',
@@ -221,6 +226,7 @@ const Work = () => {
       liveUrl: 'https://www.ett.com/za/home',
     },
     {
+      type: 'Frontend Project',
       number: '05',
       title: 'Proof',
       description: 'Proof is a robust security platform designed for the security industry, law enforcement, insurance, and private businesses. It leverages Vumacam’s advanced video analytics and a centralized video management system hosted in a Tier-3 data center. The platform integrates with a public space smart camera network and private sites, sending alerts to the E2 Fusion Centre, which collaborates with the SAPS command center for necessary support.',
@@ -229,6 +235,7 @@ const Work = () => {
       liveUrl: 'https://vumacam.co.za/proof',
     },
     {
+      type: 'Frontend Project',
       number: '06',
       title: 'GoWaterfall / GoCity / Balwin ',
       description: 'GoWaterfall, GoCity, and Balwin are mobile platform, enhancing user engagement with their city. Designed for residents, employees, and visitors, the app simplifies navigation and offers a range of convenient services. By integrating digital and real-world experiences, these apps aim to elevate lifestyle and streamline daily activities in the urban environment.',
@@ -236,7 +243,15 @@ const Work = () => {
       image: GoWaterfall,
       liveUrl: 'https://www.gowaterfall.co.za/',
       playStore: 'https://play.google.com/store/apps/details?id=za.co.thinkdigital.balwin&hl=en_ZA',
-
+    },
+    {
+      type: 'Frontend Project',
+      number: '07',
+      title: 'Password Generator',
+      description: 'Sometimes I work, sometimes I play. This password generator was created for the fun of it and helps users generate strong, unique passwords. Users can customize the length, complexity, and character types of their passwords.',
+      stack: 'Javascript , React',
+      image: PasswordGenerator,
+      liveUrl: 'https://juriepasswordgen.netlify.app/',
     },
   ];
 
@@ -253,7 +268,7 @@ const Work = () => {
             <AnimatedSlide>
               <Left>
                 <StyledHeading>{project.number}</StyledHeading>
-                <StyledSubHeading>Frontend Project</StyledSubHeading>
+                <StyledSubHeading>{project.type}</StyledSubHeading>
                 <Paragraph>{project.description}</Paragraph>
                 <Stack>{project.stack}</Stack>
                 <Icons>

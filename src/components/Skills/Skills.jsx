@@ -8,6 +8,8 @@ import typescript from '../../assets/skillIcons/typescript.svg';
 import azure from '../../assets/skillIcons/azure.svg';
 import cypress from '../../assets/skillIcons/cypress.svg';
 import docker from '../../assets/skillIcons/docker.svg';
+import vue from '../../assets/skillIcons/vue.svg';
+import nuxtjs from '../../assets/skillIcons/nuxtjs.svg';
 import eslint from '../../assets/skillIcons/eslint.svg';
 import discord from '../../assets/skillIcons/discord.svg';
 import figma from '../../assets/skillIcons/figma.svg';
@@ -50,7 +52,6 @@ const ImageWrapper = styled.div`
   width: 15%;
   filter: grayscale(100%);
   transition: transform 0.3s ease-in-out;
-
 
   &:hover {
     filter: none;
@@ -96,15 +97,19 @@ const Skills = () => {
     { svg: sketch, title: 'sketch' },
     { svg: storybook, title: 'storybook' },
     { svg: vite, title: 'vite' },
+    { svg: vue, title: 'vue' },
+    { svg: nuxtjs, title: 'nuxtjs' },
     { svg: vscode, title: 'vscode' },
     { svg: swagger, title: 'swagger' },
     { svg: xcode, title: 'xcode' },
     { svg: openai, title: 'openai' },
   ];
 
+  const randomizedSkills = [...skillSvgs].sort(() => Math.random() - 0.5);
+
   return (
     <CardsContainer>
-      {skillSvgs.map((skill, index) => (
+      {randomizedSkills.map((skill, index) => (
         <ImageWrapper key={index}>
           <img src={skill.svg} alt={`${skill.title} Logo`} />
           <IconTitle>{skill.title}</IconTitle>
