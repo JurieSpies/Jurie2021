@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { FiChrome } from 'react-icons/fi';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import ApexFit from '../assets/projects/apexfit.png';
 import PiggyVault from '../assets/projects/piggyvault.png';
 import WodbudImage from '../assets/projects/wodbud.png';
@@ -14,6 +14,17 @@ import Proof from '../assets/projects/Proof.png';
 import ETTX from '../assets/projects/ETTX.png';
 import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
+
+const GlobalStyle = createGlobalStyle`
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+`;
 
 const PlayStoreIcon = styled(IoLogoGooglePlaystore)`
   display: flex;
@@ -38,6 +49,9 @@ const Main = styled(Heading)`
   flex-direction: column;
   align-items: center;
   flex: 1;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const ProjectContainer = styled.div`
@@ -49,8 +63,9 @@ const ProjectContainer = styled.div`
   overflow: hidden;
 
   @media (max-width: 768px) {
-    min-height: 90vh;
-    margin-top: 20px;
+    min-height: unset;
+    flex: 1;
+    margin-top: 10px;
   }
 `;
 
@@ -69,10 +84,11 @@ const Project = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex: 0.5;
+  /* flex: 0.5; */
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 95%;
+  height: 80px;
 
   @media (max-width: 768px) {
     margin: 15px 0px;
@@ -354,66 +370,69 @@ const Work = () => {
   const next = () => handleTransition((activeProject + 1) % projects.length);
 
   return (
-    <Main>
-      <ProjectContainer>
-        {projects.map((project, index) => (
-          activeProject === index && (
-            <Project key={project.number}>
-              <AnimatedSlide>
-                <LeftAndBottom>
-                  <StyledHeading>{project.number}</StyledHeading>
-                  <StyledSubHeading>{project.type}</StyledSubHeading>
-                  <Paragraph>{project.description}</Paragraph>
-                  <Stack>{project.stack}</Stack>
-                  <Icons>
-                    {project.githubUrl && (
-                      <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
-                        <GithubIcon />
-                      </SocialIconContainer>
-                    )}
-                    {project.playStore && (
-                      <SocialIconContainer href={project.playStore} target="_blank" rel="noreferrer">
-                        <PlayStoreIcon />
-                      </SocialIconContainer>
-                    )}
-                    {project.liveUrl && (
-                      <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
-                        <PwaIcon />
-                      </SocialIconContainer>
-                    )}
-                  </Icons>
-                </LeftAndBottom>
-                <Spacer />
-                <RightAndTop>
-                  <Image loading="lazy" src={project.image} alt={project.title} />
-                </RightAndTop>
-              </AnimatedSlide>
-            </Project>
-          )
-        ))}
-      </ProjectContainer>
-      <ButtonContainer>
-        <AnimateBackButton>
-          <BackButton
-            onClick={goBack}
-            disabled={isAnimating}
-            invert
-            style={{ borderRadius: '5px' }}
-          >
-            Back
-          </BackButton>
-        </AnimateBackButton>
-        <AnimateNextButton>
-          <NextButton
-            onClick={next}
-            disabled={isAnimating}
-            style={{ borderRadius: '5px' }}
-          >
-            Next
-          </NextButton>
-        </AnimateNextButton>
-      </ButtonContainer>
-    </Main>
+    <>
+      <GlobalStyle />
+      <Main>
+        <ProjectContainer>
+          {projects.map((project, index) => (
+            activeProject === index && (
+              <Project key={project.number}>
+                <AnimatedSlide>
+                  <LeftAndBottom>
+                    <StyledHeading>{project.number}</StyledHeading>
+                    <StyledSubHeading>{project.type}</StyledSubHeading>
+                    <Paragraph>{project.description}</Paragraph>
+                    <Stack>{project.stack}</Stack>
+                    <Icons>
+                      {project.githubUrl && (
+                        <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
+                          <GithubIcon />
+                        </SocialIconContainer>
+                      )}
+                      {project.playStore && (
+                        <SocialIconContainer href={project.playStore} target="_blank" rel="noreferrer">
+                          <PlayStoreIcon />
+                        </SocialIconContainer>
+                      )}
+                      {project.liveUrl && (
+                        <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
+                          <PwaIcon />
+                        </SocialIconContainer>
+                      )}
+                    </Icons>
+                  </LeftAndBottom>
+                  <Spacer />
+                  <RightAndTop>
+                    <Image loading="lazy" src={project.image} alt={project.title} />
+                  </RightAndTop>
+                </AnimatedSlide>
+              </Project>
+            )
+          ))}
+        </ProjectContainer>
+        <ButtonContainer>
+          <AnimateBackButton>
+            <BackButton
+              onClick={goBack}
+              disabled={isAnimating}
+              invert
+              style={{ borderRadius: '5px' }}
+            >
+              Back
+            </BackButton>
+          </AnimateBackButton>
+          <AnimateNextButton>
+            <NextButton
+              onClick={next}
+              disabled={isAnimating}
+              style={{ borderRadius: '5px' }}
+            >
+              Next
+            </NextButton>
+          </AnimateNextButton>
+        </ButtonContainer>
+      </Main>
+    </>
   );
 };
 
