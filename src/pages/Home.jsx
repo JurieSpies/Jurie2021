@@ -15,12 +15,6 @@ import resume from '@/assets/JurieSpiesResume.pdf';
 import { GITHUB_CONFIG } from '@/config/github';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
-<<<<<<< HEAD
-=======
-import { GITHUB_CONFIG } from '@/config/github';
->>>>>>> 9bcfcad493a7cbc68c711758c0d2f2fcbd8e53d5
-
-// import { FloatingWhatsApp } from 'react-floating-whatsapp';
 
 const rotate = keyframes`
   0% {
