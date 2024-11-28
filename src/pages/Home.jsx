@@ -26,15 +26,60 @@ const rotate = keyframes`
 `;
 
 const GlobalStyle = createGlobalStyle`
-  html, body, #root {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     width: 100%;
-
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: relative; /* Needed for overflow-x hidden to work properly */
+    
+    @media (min-height: 800px) {
+      overflow-y: hidden;
+    }
+    
     @media (max-width: 768px) {
-      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  #root {
+    min-height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: relative; /* Needed for overflow-x hidden to work properly */
+    
+    @media (min-height: 800px) {
+      overflow-y: hidden;
+    }
+    
+    @media (max-width: 768px) {
       position: relative;
+    }
+  }
+
+  /* Hide browser interface on mobile */
+  @media (display-mode: standalone) {
+    body {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  /* For Chrome, Safari, and Edge */
+  @media screen and (max-width: 768px) {
+    body {
+      overscroll-behavior: none;
+      overscroll-behavior-y: none;
+      -webkit-overflow-scrolling: touch;
     }
   }
 `;
@@ -125,13 +170,22 @@ const PageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  position: relative; /* Needed for overflow-x hidden to work properly */
+
+  @media (min-height: 800px) {
+    overflow-y: hidden;
+    height: 100vh;
+  }
 
   /* mobile */
   @media (max-width: 768px) {
     padding: 20px;
     justify-content: flex-start;
     padding-top: 40px;
-    overflow-y: auto;
+    overscroll-behavior-y: none;
   }
 `;
 
@@ -141,6 +195,8 @@ const Main = styled.div`
   align-items: center;
   justify-content: center;
   align-content: center;
+  width: 100%;
+  max-width: 100%; /* Ensure content doesn't overflow */
 
   /* mobile */
   @media (max-width: 768px) {
