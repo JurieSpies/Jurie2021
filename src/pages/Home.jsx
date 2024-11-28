@@ -29,16 +29,29 @@ const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
   body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: -moz-available;
+    min-height: fill-available;
+    min-height: stretch;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    
+    @supports (-webkit-touch-callout: none) {
+      min-height: -webkit-fill-available;
+    }
     
     @media (min-height: 800px) {
       overflow-y: hidden;
@@ -46,23 +59,27 @@ const GlobalStyle = createGlobalStyle`
     
     @media (max-width: 768px) {
       -webkit-overflow-scrolling: touch;
-      padding-bottom: env(safe-area-inset-bottom); /* Add safe area padding for mobile */
+      -ms-overflow-style: -ms-autohiding-scrollbar;
     }
   }
 
   #root {
     min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: -moz-available;
+    min-height: fill-available;
+    min-height: stretch;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
     
-    @media (min-height: 800px) {
-      overflow-y: hidden;
+    @supports (-webkit-touch-callout: none) {
+      min-height: -webkit-fill-available;
     }
     
-    @media (max-width: 768px) {
-      position: relative;
+    @media (min-height: 800px) {
+      overflow-y: hidden;
     }
   }
 `;
@@ -107,13 +124,15 @@ const StatisticsMainContainer = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   width: 100%;
-  margin-bottom: env(safe-area-inset-bottom, 0px);
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 
   @media (max-width: 768px) {
     margin-top: 20px;
     gap: 20px;
     justify-content: center;
-    padding-bottom: 20px;
+    margin-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px);
+    margin-bottom: calc(constant(safe-area-inset-bottom, 20px) + 20px); /* For older iOS */
   }
 `;
 
@@ -155,23 +174,39 @@ const PageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  min-height: fill-available;
+  min-height: stretch;
   width: 100%;
   overflow-y: auto;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  position: relative; /* Needed for overflow-x hidden to work properly */
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  @supports (-webkit-touch-callout: none) {
+    min-height: -webkit-fill-available;
+  }
 
   @media (min-height: 800px) {
     overflow-y: hidden;
     height: 100vh;
+    height: -webkit-fill-available;
+    height: -moz-available;
+    height: fill-available;
+    height: stretch;
   }
 
   /* mobile */
   @media (max-width: 768px) {
     padding: 20px;
-    padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 60px);
+    padding-bottom: calc(constant(safe-area-inset-bottom, 20px) + 60px); /* For older iOS */
     justify-content: flex-start;
-    padding-top: 40px;
+    padding-top: max(40px, env(safe-area-inset-top, 40px));
     overscroll-behavior-y: none;
+    -ms-scroll-chaining: none;
   }
 `;
 
@@ -281,6 +316,10 @@ const Description = styled.div`
 const Center = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: constant(safe-area-inset-bottom, 0px); /* For older iOS */
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 `;
 
 const InfoContainer = styled.div`
