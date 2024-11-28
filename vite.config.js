@@ -7,8 +7,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': '/src',
+      '@': resolve(__dirname, './src'),
     },
+  },
+  server: {
+    host: true,
+    port: 3000,
   },
   build: {
     rollupOptions: {

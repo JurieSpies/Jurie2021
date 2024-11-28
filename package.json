@@ -2,6 +2,7 @@
   "name": "jurie_resume",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@tanstack/react-query": "^5.40.0",
@@ -18,7 +19,6 @@
     "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-react-app": "^6.2.2",
     "lodash": "^4.17.21",
-    "npm": "^10.8.1",
     "prettier": "^3.2.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -34,14 +34,15 @@
     "vite-tsconfig-paths": "^4.3.2",
     "web-vitals": "^0.2.4"
   },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.3.9"
+  },
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "build2": "vite build",
     "serve": "vite preview",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "firebase deploy",
     "lint:css": "stylelint './src/**/*.js'"
   },
   "browserslist": {
@@ -55,21 +56,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.1.0",
-    "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.34.2",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "postcss-styled-syntax": "^0.6.4",
-    "stylelint": "^16.6.1",
-    "stylelint-config-standard": "^36.0.0",
-    "vite": "^3.1.0"
   }
 }
