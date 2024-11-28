@@ -29,10 +29,13 @@ const GlobalStyle = createGlobalStyle`
   html, body, #root {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    position: fixed;
+    min-height: 100vh;
     width: 100%;
+
+    @media (max-width: 768px) {
+      overflow-y: auto;
+      position: relative;
+    }
   }
 `;
 
@@ -121,14 +124,14 @@ const PageContainer = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 
   /* mobile */
   @media (max-width: 768px) {
     padding: 20px;
     justify-content: flex-start;
     padding-top: 40px;
+    overflow-y: auto;
   }
 `;
 
