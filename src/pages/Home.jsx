@@ -12,7 +12,6 @@ import ReactTyped from 'react-typed';
 import styled, { keyframes, createGlobalStyle } from 'styled-components';
 import profilePic from '@/assets/images/JuriePPbw3.png';
 import resume from '@/assets/JurieSpiesResume.pdf';
-import { GITHUB_CONFIG } from '@/config/github';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
 
@@ -351,10 +350,10 @@ const Home = () => {
       try {
         const response = await axios({
           method: 'get',
-          url: `https://api.github.com/users/${GITHUB_CONFIG.USERNAME}/repos`,
+          url: 'https://api.github.com/users/juriespies/repos',
           headers: {
             Accept: 'application/vnd.github+json',
-            'X-GitHub-Api-Version': GITHUB_CONFIG.API_VERSION,
+            'X-GitHub-Api-Version': '',
           },
         });
         return { total_count: response.data.length + 25 }; // Adding 25 to account for private repos
