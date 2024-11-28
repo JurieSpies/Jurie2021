@@ -27,7 +27,12 @@ const Button = ({ children, invert = false, onClick = () => {}, style = {} }) =>
 );
 
 Button.propTypes = {
-  children: propTypes.oneOfType([propTypes.element, propTypes.string]),
+  children: propTypes.oneOfType([
+    propTypes.element,
+    propTypes.string,
+    propTypes.arrayOf(propTypes.element),
+    propTypes.node
+  ]),
   invert: propTypes.bool,
   onClick: propTypes.func,
   style: propTypes.object,
