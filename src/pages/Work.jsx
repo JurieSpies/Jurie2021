@@ -49,7 +49,8 @@ const ProjectContainer = styled.div`
   overflow: hidden;
 
   @media (max-width: 768px) {
-    min-height: 800px;
+    min-height: 90vh;
+    margin-top: 20px;
   }
 `;
 
@@ -60,6 +61,10 @@ const Project = styled.div`
   position: absolute;
   left: 0;
   right: 0;
+
+  @media (max-width: 768px) {
+    height: 100%;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -70,7 +75,8 @@ const ButtonContainer = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    margin: 20px 0px;
+    margin: 15px 0px;
+    padding: 0 20px;
   }
 `;
 
@@ -105,10 +111,11 @@ const AnimatedSlide = styled.div`
   }
 
   @media (max-width: 768px) {
-    margin-top: 20px;
+    margin-top: 10px;
     flex-direction: column-reverse;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 100%;
     
     @keyframes slideIn {
       from {
@@ -125,10 +132,18 @@ const AnimatedSlide = styled.div`
 
 const StyledHeading = styled(Heading)`
   font-size: 52px;
+  
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
 `;
 
 const StyledSubHeading = styled(SubHeading)`
   font-size: 22px;
+  
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const Paragraph = styled(SubHeading)`
@@ -136,6 +151,11 @@ const Paragraph = styled(SubHeading)`
   font-weight: 100;
   margin: 20px 0px;
   color: ${COLOR_GREY};
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin: 15px 0px;
+  }
 `;
 
 const Stack = styled(SubHeading)`
@@ -143,19 +163,37 @@ const Stack = styled(SubHeading)`
   color: ${COLOR_PRIMARY};
 `;
 
-const Icons = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-`;
-
-const Left = styled.div`
+const LeftAndBottom = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 10px;
+  padding-bottom: 50px;
+
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: ${COLOR_PRIMARY} transparent;
+
+  /* For Chrome, Safari, and Opera */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLOR_PRIMARY};
+    border-radius: 3px;
+  }
 
   @media (max-width: 768px) {
-    margin: 0px 50px;
+    margin: 0px 20px;
+    max-height: 50vh;
+    padding-right: 5px;
   }
 `;
 
@@ -169,7 +207,7 @@ const Spacer = styled.div`
   }
 `;
 
-const Right = styled.div`
+const RightAndTop = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -177,6 +215,8 @@ const Right = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    margin-bottom: 20px;
+    height: 300px;
   }
 `;
 
@@ -186,6 +226,11 @@ const Image = styled.img`
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    height: 300px;
+    object-fit: cover;
+  }
 `;
 
 const SocialIconContainer = styled.a`
@@ -209,6 +254,17 @@ const GithubIcon = styled(FaGithub)`
   padding: 5px;
   border-radius: 100%;
   border: 1px solid ${COLOR_PRIMARY};
+`;
+
+const Icons = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+    margin-top: 10px;
+  }
 `;
 
 const Work = () => {
@@ -304,7 +360,7 @@ const Work = () => {
           activeProject === index && (
             <Project key={project.number}>
               <AnimatedSlide>
-                <Left>
+                <LeftAndBottom>
                   <StyledHeading>{project.number}</StyledHeading>
                   <StyledSubHeading>{project.type}</StyledSubHeading>
                   <Paragraph>{project.description}</Paragraph>
@@ -326,11 +382,11 @@ const Work = () => {
                       </SocialIconContainer>
                     )}
                   </Icons>
-                </Left>
+                </LeftAndBottom>
                 <Spacer />
-                <Right>
+                <RightAndTop>
                   <Image loading="lazy" src={project.image} alt={project.title} />
-                </Right>
+                </RightAndTop>
               </AnimatedSlide>
             </Project>
           )
