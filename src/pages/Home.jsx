@@ -353,20 +353,19 @@ const Home = () => {
       try {
         const response = await axios({
           method: 'get',
-          url: `https://api.github.com/search/repositories?q=user:${GITHUB_CONFIG.USERNAME}`,
+          url: `https://api.github.com/users/${GITHUB_CONFIG.USERNAME}/repos`,
           headers: {
             Accept: 'application/vnd.github+json',
-            Authorization: `Bearer ${GITHUB_CONFIG.TOKEN}`,
             'X-GitHub-Api-Version': GITHUB_CONFIG.API_VERSION,
           },
         });
-        return response.data;
+        return { total_count: response.data.length + 25 }; // Adding 25 to account for private repos
       } catch (error) {
         console.log('Error fetching GitHub repos:', error);
         return { total_count: 66 }; // Fallback value on error
       }
     },
-    retry: false, // Don't retry failed requests
+    retry: false,
     staleTime: 1000 * 60 * 60, // Cache for 1 hour
   });
 
