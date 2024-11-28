@@ -87,63 +87,55 @@ const Responsibilities = () => (
       <Info>
         <StyledSubHeading>Front-End Development</StyledSubHeading>
         <Description>
-          Designing and developing dynamic and high-performance user interfaces for web and mobile applications using React and React Native.
-          Employing front-end frameworks and libraries like Redux for state management, and integrating with RESTful APIs and GraphQL for seamless data flow.
+          I build user-friendly websites and mobile apps using React and React Native. I work with tools like Redux to manage data and connect to various APIs to make everything work smoothly.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Back-End Development</StyledSubHeading>
         <Description>
-          To develop and maintain server-side logic, RESTful APIs, and databases using technologies such as Node.js, Express.js, Knex.js, Docker, and PostgreSQL, you can follow the detailed steps below. This guide includes setting up a Node.js environment with Express.js for the server, Knex.js for database migrations and queries, Docker for containerization, and PostgreSQL as the database.
+          I work on the server side of applications using Node.js and Express.js. This includes creating APIs, managing databases with PostgreSQL, and using Docker to package everything together nicely.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Technical Leadership</StyledSubHeading>
         <Description>
-          Providing technical guidance and leadership, conducting code reviews, and ensuring adherence to coding standards and quality guidelines.
-          Collaborating with stakeholders to define technical requirements, project milestones, and aligning development efforts with business objectives.
+          I help guide the technical direction of projects and review code to maintain high quality. I work closely with team members to plan features and make sure we're meeting business goals.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Agile Methodologies Implementation</StyledSubHeading>
         <Description>
-          Driving Agile methodologies such as Scrum or Kanban to optimize project workflows, increase productivity, and ensure timely delivery of features.
-          Facilitating sprint planning, daily stand-ups, retrospectives, and backlog grooming sessions to foster team collaboration and transparency.
+          I use Agile methods like Scrum to keep projects organized and on track. This includes running daily meetings, planning sprints, and making sure everyone knows what they need to do.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Collaboration and Communication</StyledSubHeading>
         <Description>
-          Collaborating effectively with cross-functional teams including designers, QA engineers, and product managers to deliver high-quality software solutions.
-          Facilitating clear and concise communication with stakeholders to gather requirements, provide progress updates, and address project concerns.
+          I work well with designers, testers, and product managers to build great software. I make sure to keep everyone updated on progress and discuss any concerns openly.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Documentation and Knowledge Sharing</StyledSubHeading>
         <Description>
-          Documenting technical specifications, architectural designs, and operational procedures to ensure clarity and maintainable codebase.
-          Sharing knowledge through internal wiki, code repositories, and mentorship to foster continuous learning.
+          I write clear documentation for code and processes to help the team understand how things work. I also enjoy teaching others and sharing what I know through wikis and mentoring.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Problem Solving and Troubleshooting</StyledSubHeading>
         <Description>
-          Identifying and resolving technical challenges, bugs, and performance issues to ensure smooth application functionality and user satisfaction.
-          Conducting root cause analysis and implementing solutions to optimize code efficiency, application performance, and user experience.
+          I'm good at finding and fixing technical problems and bugs. I look for ways to make applications run faster and work better for users.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>User Experience (UX) Design</StyledSubHeading>
         <Description>
-          Applying UX design principles and conducting user research to create intuitive, user-friendly interfaces that enhance overall application usability.
-          Prototyping and iterating designs based on user feedback and usability testing to validate design decisions and improve user satisfaction.
+          I create easy-to-use interfaces that make sense for users. I test designs with real users and make improvements based on their feedback.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Tool Proficiency</StyledSubHeading>
         <Description>
-          Utilizing a wide range of software tools and technologies such as Git for version control, IDEs like Visual Studio Code, and collaboration platforms like Clickup,Discord,Jira andSlack, .
-          Proficient in using cloud services such as AWS, Azure and Firestore for database management, and infrastructure scaling.
+          I'm experienced with common development tools like Git for code management, VS Code for writing code, and team collaboration tools like Clickup and Discord.
         </Description>
       </Info>
       <Info>

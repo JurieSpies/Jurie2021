@@ -147,31 +147,37 @@ const Main = styled.div`
 `;
 
 const ProfilePicContainer = styled.div`
-  flex:1;
+  flex: 1;
   position: relative;
   justify-content: center;
   display: flex;
+  width: 350px;
+  height: 350px;
 
   &:hover {
     transform: scale(1.03) rotate(5deg);
     transition: all 1s ease-in-out;
   }
+
+  /* mobile */
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 
 const ProfilePic = styled.img`
   border-radius: 200px;
-  max-height: 350px;
-  max-width: 350px;
-  min-height: 250px;
-  min-width: 250px;
+  height: 350px;
+  width: 350px;
+  object-fit: cover;
+  aspect-ratio: 1;
 
   /* mobile */
   @media (max-width: 768px) {
-  border-radius: 150px;
-  max-height: 200px;
-  max-width: 200px;
-  min-height: 120px;
-  min-width: 120px;
+    border-radius: 150px;
+    height: 200px;
+    width: 200px;
   }
 `;
 
@@ -395,7 +401,7 @@ const Home = () => {
                 Jurie Spies
               </Jurie>
               <Description>
-                I’m a Software Engineer who loves building web and mobile apps. I work with React, React Native, and Vue.js to create fast and user-friendly applications that people enjoy using.
+                I’m a Software Engineer who loves building web and mobile apps. I work with React, React Native, and Vue.js to create fast and user-friendly applications.
                 {' '}
               </Description>
               <br />
