@@ -52,6 +52,10 @@ const Main = styled(Heading)`
   height: 100%;
   overflow: hidden;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    height: calc(100% - 56px); /* Subtract navigation bar height */
+  }
 `;
 
 const ProjectContainer = styled.div`
@@ -88,13 +92,10 @@ const ButtonContainer = styled.div`
   align-items: center;
   width: 95%;
   height: 80px;
-  position: relative;
-  z-index: 1;
 
   @media (max-width: 768px) {
-    margin: 15px 0px;
-    padding: 0 20px 20px 20px;
-    margin-bottom: env(safe-area-inset-bottom, 20px);
+    padding: 0 20px;
+    margin-bottom: 20px;
   }
 `;
 
