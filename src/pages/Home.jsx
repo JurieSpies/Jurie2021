@@ -14,6 +14,8 @@ import profilePic from '@/assets/images/JuriePPbw3.png';
 import resume from '@/assets/JurieSpiesResume.pdf';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
+import { GITHUB_CONFIG } from '@/config/github';
+
 // import { FloatingWhatsApp } from 'react-floating-whatsapp';
 
 const rotate = keyframes`
@@ -326,8 +328,6 @@ const LinkedInIcon = styled(FaLinkedinIn)`
   border: 1px solid ${COLOR_PRIMARY};
 `;
 
-const REACT_APP_GITHUB_REPO_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_REPO_TOKEN;
-
 const getLinesOfCode = () => {
   const refDate = '2019-03-01';
   const today = new Date();
@@ -349,15 +349,24 @@ const getCupsOfCoffee = () => {
 const Home = () => {
   const { data: totalRepositories } = useQuery({
     queryKey: ['githubRepos'],
-    queryFn: () => axios({
-      method: 'get',
-      url: 'https://api.github.com/search/repositories?q=user:JurieSpies',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${REACT_APP_GITHUB_REPO_TOKEN}`,
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
-    }).then((response) => response.data),
+    queryFn: async () => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: `https://api.github.com/users/${GITHUB_CONFIG.USERNAME}/repos`,
+          headers: {
+            Accept: 'application/vnd.github+json',
+            'X-GitHub-Api-Version': GITHUB_CONFIG.API_VERSION,
+          },
+        });
+        return { total_count: response.data.length + 25 }; // Adding 25 to account for private repos
+      } catch (error) {
+        console.log('Error fetching GitHub repos:', error);
+        return { total_count: 66 }; // Fallback value on error
+      }
+    },
+    retry: false,
+    staleTime: 1000 * 60 * 60, // Cache for 1 hour
   });
 
   return (
