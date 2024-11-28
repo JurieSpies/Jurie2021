@@ -367,20 +367,8 @@ const Home = () => {
               Jurie Spies
             </Jurie>
             <Description>
-              As a dedicated and skilled Software Engineer/Developer specializing in front-end technologies, I excel in building dynamic and high-performance web and mobile applications using React and React Native.
+              I'm a Software Engineer who loves building web and mobile apps. I work with React, React Native, and Vue.js to create fast and user-friendly applications that people enjoy using.
               {' '}
-              <br />
-              <br />
-              {' '}
-              I am a hardworking, honest individual with a strong sense of responsibility, and I pride myself on my ability to deliver high standards of work consistently. I possess excellent problem-solving skills, effectively listening and communicating to understand and address challenges.
-              <br />
-              <br />
-              {' '}
-              My outgoing and tactful nature enables me to work collaboratively within teams and engage with clients to meet their needs and exceed expectations. I am always eager to learn new skills and stay updated with the latest industry trends, continuously striving to enhance my technical proficiency and professional growth.
-              <br />
-              <br />
-              {' '}
-              With expertise in React and React Native, strong analytical skills, excellent interpersonal abilities, and a commitment to producing high-quality work, I am well-equipped to contribute to innovative and impactful software solutions.
             </Description>
             <br />
             <TypedContainer>

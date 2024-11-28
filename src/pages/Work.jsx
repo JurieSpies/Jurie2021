@@ -38,54 +38,88 @@ const Main = styled(Heading)`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  `;
+`;
 
 const ProjectContainer = styled.div`
   display: flex;
   flex: 2;
   width: 100%;
-  `;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    min-height: 800px;
+  }
+`;
 
 const Project = styled.div`
   display: flex;
   flex-direction: row;
-  `;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex:0.5;
+  flex: 0.5;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 
   @media (max-width: 768px) {
-  margin: 20px 0px;
+    margin: 20px 0px;
   }
 `;
 
 const AnimateBackButton = styled.div`
-&:hover{
-  transform: scale(1.01) rotate(-5deg);
-}
+  &:hover {
+    transform: scale(1.01) rotate(-5deg);
+  }
 `;
 
 const AnimateNextButton = styled.div`
-&:hover {
-  transform: scale(1.01) rotate(5deg);
-}
+  &:hover {
+    transform: scale(1.01) rotate(5deg);
+  }
 `;
 
 const AnimatedSlide = styled.div`
-  animation: fadeIn 1.5s ease-in-out;
+  animation: slideIn 0.5s ease-out;
   display: flex;
   flex: 1;
   align-items: center;
+  width: 100%;
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 
   @media (max-width: 768px) {
     margin-top: 20px;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
 `;
 
@@ -123,13 +157,12 @@ const Left = styled.div`
   @media (max-width: 768px) {
     margin: 0px 50px;
   }
-  `;
+`;
 
 const Spacer = styled.div`
   display: flex;
   flex: 0.2;
   height: 100%;
-
 
   @media (max-width: 768px) {
     display: none;
@@ -143,9 +176,7 @@ const Right = styled.div`
   flex: 1;
 
   @media (max-width: 768px) {
-    @media (max-width: 768px) {
-      width: 100%;
-  }
+    width: 100%;
   }
 `;
 
@@ -158,11 +189,11 @@ const Image = styled.img`
 `;
 
 const SocialIconContainer = styled.a`
-display: flex;
-width: 32px;
-border-radius: 100%;
-margin: 50px 30px 0px 0px;
-height: 32px;
+  display: flex;
+  width: 32px;
+  border-radius: 100%;
+  margin: 50px 30px 0px 0px;
+  height: 32px;
   &:hover {
     box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
     -webkit-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
@@ -182,6 +213,7 @@ const GithubIcon = styled(FaGithub)`
 
 const Work = () => {
   const [activeProject, setActiveProject] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const projects = [
     {
@@ -255,59 +287,60 @@ const Work = () => {
     },
   ];
 
-  const goBack = () => setActiveProject((activeProject - 1 + projects.length) % projects.length);
-  const next = () => setActiveProject((activeProject + 1) % projects.length);
+  const handleTransition = (newIndex) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setActiveProject(newIndex);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const goBack = () => handleTransition((activeProject - 1 + projects.length) % projects.length);
+  const next = () => handleTransition((activeProject + 1) % projects.length);
 
   return (
     <Main>
       <ProjectContainer>
         {projects.map((project, index) => (
-          activeProject === index
-        && (
-          <Project key={project.number}>
-            <AnimatedSlide>
-              <Left>
-                <StyledHeading>{project.number}</StyledHeading>
-                <StyledSubHeading>{project.type}</StyledSubHeading>
-                <Paragraph>{project.description}</Paragraph>
-                <Stack>{project.stack}</Stack>
-                <Icons>
-                  {project.githubUrl && (
-                  <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
-                    <GithubIcon />
-                  </SocialIconContainer>
-                  )}
-                  {/* //playstore */}
-                  {project.playStore && (
-                  <SocialIconContainer href={project.playStore} target="_blank" rel="noreferrer">
-                    <PlayStoreIcon />
-                  </SocialIconContainer>
-                  )}
-                  {/* //chrome */}
-                  {project.liveUrl && (
-                  <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
-                    <PwaIcon />
-                  </SocialIconContainer>
-                  )}
-                </Icons>
-              </Left>
-              <Spacer />
-              <Right>
-                <Image
-                  loading="lazy"
-                  src={project.image}
-                  alt={project.title}
-                />
-              </Right>
-            </AnimatedSlide>
-          </Project>
-        )
+          activeProject === index && (
+            <Project key={project.number}>
+              <AnimatedSlide>
+                <Left>
+                  <StyledHeading>{project.number}</StyledHeading>
+                  <StyledSubHeading>{project.type}</StyledSubHeading>
+                  <Paragraph>{project.description}</Paragraph>
+                  <Stack>{project.stack}</Stack>
+                  <Icons>
+                    {project.githubUrl && (
+                      <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
+                        <GithubIcon />
+                      </SocialIconContainer>
+                    )}
+                    {project.playStore && (
+                      <SocialIconContainer href={project.playStore} target="_blank" rel="noreferrer">
+                        <PlayStoreIcon />
+                      </SocialIconContainer>
+                    )}
+                    {project.liveUrl && (
+                      <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
+                        <PwaIcon />
+                      </SocialIconContainer>
+                    )}
+                  </Icons>
+                </Left>
+                <Spacer />
+                <Right>
+                  <Image loading="lazy" src={project.image} alt={project.title} />
+                </Right>
+              </AnimatedSlide>
+            </Project>
+          )
         ))}
       </ProjectContainer>
       <ButtonContainer>
         <AnimateBackButton>
           <BackButton
             onClick={goBack}
+            disabled={isAnimating}
             invert
             style={{ borderRadius: '5px' }}
           >
@@ -317,6 +350,7 @@ const Work = () => {
         <AnimateNextButton>
           <NextButton
             onClick={next}
+            disabled={isAnimating}
             style={{ borderRadius: '5px' }}
           >
             Next

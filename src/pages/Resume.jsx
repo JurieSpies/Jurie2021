@@ -148,9 +148,7 @@ const Resume = () => {
       <Left>
         <StyledHeading>Why Hire Me ?</StyledHeading>
         <StyledSubHeading>
-          Front-end engineer specializing in building dynamic and high
-          performance web and mobile applications using React, React
-          Native
+          Front-end developer making fast and easy-to-use apps with React, Vue.js and React Native
         </StyledSubHeading>
         <ButtonsContainer>
           {buttonsTitles.map((buttonTitle) => (
