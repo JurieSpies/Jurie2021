@@ -84,15 +84,17 @@ const Project = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  /* flex: 0.5; */
   justify-content: space-between;
   align-items: center;
   width: 95%;
   height: 80px;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: 768px) {
     margin: 15px 0px;
-    padding: 0 20px;
+    padding: 0 20px 20px 20px;
+    margin-bottom: env(safe-area-inset-bottom, 20px);
   }
 `;
 
