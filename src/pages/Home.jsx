@@ -28,7 +28,7 @@ const rotate = keyframes`
 const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
   }
   
   body {
@@ -37,8 +37,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     width: 100%;
     overflow-y: auto;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    position: relative; /* Needed for overflow-x hidden to work properly */
+    overflow-x: hidden;
+    position: relative;
     
     @media (min-height: 800px) {
       overflow-y: hidden;
@@ -46,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
     
     @media (max-width: 768px) {
       -webkit-overflow-scrolling: touch;
+      padding-bottom: env(safe-area-inset-bottom); /* Add safe area padding for mobile */
     }
   }
 
@@ -53,8 +54,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     width: 100%;
     overflow-y: auto;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    position: relative; /* Needed for overflow-x hidden to work properly */
+    overflow-x: hidden;
+    position: relative;
     
     @media (min-height: 800px) {
       overflow-y: hidden;
@@ -62,24 +63,6 @@ const GlobalStyle = createGlobalStyle`
     
     @media (max-width: 768px) {
       position: relative;
-    }
-  }
-
-  /* Hide browser interface on mobile */
-  @media (display-mode: standalone) {
-    body {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-  }
-
-  /* For Chrome, Safari, and Edge */
-  @media screen and (max-width: 768px) {
-    body {
-      overscroll-behavior: none;
-      overscroll-behavior-y: none;
-      -webkit-overflow-scrolling: touch;
     }
   }
 `;
@@ -124,11 +107,13 @@ const StatisticsMainContainer = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   width: 100%;
+  margin-bottom: env(safe-area-inset-bottom, 0px);
 
   @media (max-width: 768px) {
     margin-top: 20px;
     gap: 20px;
     justify-content: center;
+    padding-bottom: 20px;
   }
 `;
 
@@ -183,6 +168,7 @@ const PageContainer = styled.div`
   /* mobile */
   @media (max-width: 768px) {
     padding: 20px;
+    padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
     justify-content: flex-start;
     padding-top: 40px;
     overscroll-behavior-y: none;
