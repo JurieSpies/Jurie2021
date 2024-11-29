@@ -1,4 +1,4 @@
-import { COLOR_BACKGROUND, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
+import { COLOR_BACKGROUND, COLOR_WHITE } from '@/utils/globalColors';
 import styled from 'styled-components';
 import udemy from '../../assets/skillIcons/Udemy.svg';
 import school from '../../assets/skillIcons/school.svg';
@@ -18,7 +18,7 @@ const ImageWrapper = styled.div`
   background-color: ${COLOR_BACKGROUND};
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
   min-width: 100px;
   width: 90%;
   filter: grayscale(100%);
@@ -38,7 +38,7 @@ const ImageWrapper = styled.div`
 const IconTitle = styled.div`
   margin-top: 10px;
   font-size: 14px;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
 `;
 
 const Education = () => {

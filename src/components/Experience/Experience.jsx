@@ -1,5 +1,5 @@
 import resumeData from '@/utils/RESUME_DATA.json';
-import { COLOR_BACKGROUND, COLOR_GREY, COLOR_PRIMARY } from '@/utils/globalColors';
+import { COLOR_BACKGROUND, COLOR_GREY } from '@/utils/globalColors';
 import { SubHeading } from '@/utils/globalFonts';
 import styled from 'styled-components';
 
@@ -29,7 +29,7 @@ const ExperienceCard = styled.div`
   background-color: ${COLOR_BACKGROUND};
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
   display: block;
   align-self: center;
   width: 80%;
@@ -65,7 +65,7 @@ const Experience = () => {
           <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
           <StyledSubHeading>{workItem.title}</StyledSubHeading>
           <br />
-          <StyledSubHeading fontWeight="thin" color={COLOR_PRIMARY}>
+          <StyledSubHeading fontWeight="thin" style={{ color: 'var(--color-primary)' }}>
             <li>
               {workItem.occupation}
             </li>

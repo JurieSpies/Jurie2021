@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { AiOutlineDoubleRight, AiOutlineMenu } from 'react-icons/ai'; // Changed AiOutlineDoubleLeft to AiOutlineDoubleRight for semantic correctness
+import { AiOutlineDoubleRight, AiOutlineMenu } from 'react-icons/ai';
+import { IoColorPaletteOutline } from 'react-icons/io5';
 import styled, { keyframes } from 'styled-components';
-import { COLOR_PRIMARY, COLOR_WHITE } from '../../utils/globalColors';
+import { COLOR_WHITE, COLOR_DARK } from '../../utils/globalColors';
 import { openWhatsapp } from '../../utils/helpers';
+import { useColorPicker } from '../ColorPicker/ColorPicker';
 
 const BurgerBackdrop = styled.div`
   display: flex;
@@ -71,6 +73,7 @@ const BurgerMenuCloseIcon = styled(AiOutlineDoubleRight)`
 
 const Header = styled.header`
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
   background-color: transparent;
@@ -83,7 +86,7 @@ const Header = styled.header`
 const HeaderTab = styled.div`
   display: flex;
   text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
-  text-decoration-color: ${COLOR_PRIMARY};
+  text-decoration-color: var(--color-primary);
   text-decoration-thickness: 2px;
   margin: 30px 30px;
   cursor: pointer;
@@ -93,14 +96,58 @@ const HeaderTab = styled.div`
   width: fit-content;
   margin-left: auto;
   &:hover {
-  color: ${COLOR_PRIMARY};
-  transform: scale(1.2);
+    color: var(--color-primary);
+    transform: scale(1.2);
   }
+`;
+
+const ColorPickerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 30px 30px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s;
+  width: fit-content;
+  margin-left: auto;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+const ColorPickerIcon = styled(IoColorPaletteOutline)`
+  color: var(--color-primary);
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+const ResetButton = styled.button`
+  color: ${COLOR_DARK};
+  border: none;
+  padding: 6px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: opacity 0.2s;
+  background: var(--color-primary);
+  display: ${props => props.$showReset ? 'block' : 'none'};
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const ColorInput = styled.input`
+  display: none;
 `;
 
 const BurgerMenu = ({ active = 'Home' }) => {
   const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
+  const { color, handleColorChange, handleReset, DEFAULT_COLOR } = useColorPicker();
+  const colorInputRef = useRef(null);
 
   const menus = [
     'Home',
@@ -122,29 +169,62 @@ const BurgerMenu = ({ active = 'Home' }) => {
     toggleBurgerMenu();
   };
 
+  const handleIconClick = () => {
+    colorInputRef.current?.click();
+  };
+
+  useEffect(() => {
+    if (openBurgerMenu) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [openBurgerMenu]);
+
   useEffect(() => {
     active('Home');
   }, []);
 
   return (
     <Header>
-      <BurgerMenuIcon size="2rem" onClick={() => toggleBurgerMenu()} color={COLOR_PRIMARY} />
-      {openBurgerMenu && <BurgerBackdrop onClick={toggleBurgerMenu} />}
-      <BurgerMenuContainer open={openBurgerMenu}>
-        <BurgerMenuCloseIcon onClick={toggleBurgerMenu} />
-        {menus?.map((menu) => (
-          <HeaderTab
-            key={menu}
-            $active={activeTab === menu}
-            onClick={() => onSectionClick(menu)}
-          >
-            {menu}
-          </HeaderTab>
-        ))}
-        <HeaderTab onClick={openWhatsapp}>
-          Whatsapp
-        </HeaderTab>
-      </BurgerMenuContainer>
+      <BurgerMenuIcon size="2rem" onClick={() => toggleBurgerMenu()} color="var(--color-primary)" />
+      {openBurgerMenu && (
+        <BurgerBackdrop onClick={() => toggleBurgerMenu()}>
+          <BurgerMenuContainer open={openBurgerMenu} onClick={(e) => e.stopPropagation()}>
+            <BurgerMenuCloseIcon onClick={() => toggleBurgerMenu()} />
+            <Header>
+              {menus?.map((menu) => (
+                <HeaderTab
+                  key={menu}
+                  $active={activeTab === menu}
+                  onClick={() => onSectionClick(menu)}
+                >
+                  {menu}
+                </HeaderTab>
+              ))}
+              <HeaderTab onClick={openWhatsapp}>Whatsapp</HeaderTab>
+              <ColorPickerContainer>
+                <ColorPickerIcon 
+                  title="Customize Theme Color"
+                  onClick={handleIconClick}
+                />
+                <ResetButton 
+                  onClick={handleReset}
+                  $showReset={color !== DEFAULT_COLOR}
+                >
+                  Reset
+                </ResetButton>
+              </ColorPickerContainer>
+              <ColorInput
+                ref={colorInputRef}
+                type="color"
+                value={color}
+                onChange={handleColorChange}
+              />
+            </Header>
+          </BurgerMenuContainer>
+        </BurgerBackdrop>
+      )}
     </Header>
   );
 };

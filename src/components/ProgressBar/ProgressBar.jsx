@@ -1,6 +1,23 @@
 import React from 'react';
 import './ProgressBar.css';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ProgressBarContainer = styled.div`
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+`;
+
+const Progress = styled.div`
+  width: ${(props) => props.$progress}%;
+  height: 100%;
+  background-color: var(--color-primary);
+  transition: width 0.5s ease-in-out;
+`;
 
 const ProgressBar = (props) => {
   const {
@@ -19,24 +36,27 @@ const ProgressBar = (props) => {
     animation: `move ${animationSpeed} linear infinite`,
   };
   return (
-    <div className="meter" style={divStyles}>
-      <span style={span1Styles}>
-        <span
-          className={stripe ? 'stripe' : null}
-          style={animate ? span2Styles : null}
-        />
-      </span>
-    </div>
+    <ProgressBarContainer>
+      <Progress $progress={width} />
+      <div className="meter" style={divStyles}>
+        <span style={span1Styles}>
+          <span
+            className={stripe ? 'stripe' : null}
+            style={animate ? span2Styles : null}
+          />
+        </span>
+      </div>
+    </ProgressBarContainer>
   );
 };
 
 ProgressBar.propTypes = {
-  width: propTypes.string.isRequired,
-  height: propTypes.string,
-  color: propTypes.string,
-  stripe: propTypes.bool,
-  animate: propTypes.bool,
-  animationSpeed: propTypes.string,
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string,
+  color: PropTypes.string,
+  stripe: PropTypes.bool,
+  animate: PropTypes.bool,
+  animationSpeed: PropTypes.string,
 };
 
 ProgressBar.defaultProps = {

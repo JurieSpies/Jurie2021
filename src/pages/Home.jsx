@@ -1,5 +1,6 @@
 import Button from '@/components/Button/Button';
-import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
+import { COLOR_GREY, COLOR_WHITE } from '@/utils/globalColors';
+import { GlobalColors } from '@/utils/globalColors';
 import { Heading, SubHeading } from '@/utils/globalFonts';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -86,13 +87,12 @@ const GlobalStyle = createGlobalStyle`
 
 const StyledSubHeading = styled(SubHeading)`
   max-width: 30%;
-  color:${COLOR_GREY};
+  color: ${COLOR_GREY};
   font-size: 16px;
 
   /* mobile */
   @media (max-width: 768px) {
-  max-width: 100%;
-  font-size: 14px;
+    max-width: 100%;
   }
 `;
 
@@ -113,7 +113,7 @@ const StyledHeading = styled(Heading)`
 
   /* mobile */
   @media (max-width: 768px) {
-  font-size: 32px;
+    font-size: 32px;
   }
 `;
 
@@ -272,20 +272,20 @@ const Border = styled.div`
 
   /* mobile */
   @media (max-width: 768px) {
-  max-height: 204px;
-  max-width: 204px;
-  min-height: 124px;
-  min-width: 124px;
+    max-height: 204px;
+    max-width: 204px;
+    min-height: 124px;
+    min-width: 124px;
   }
 `;
 
 const Occupation = styled(Heading)`
   font-weight: normal;
-  color:${COLOR_GREY};
+  color: ${COLOR_GREY};
 `;
 
 const TypedContainer = styled(SubHeading)`
-  color:${COLOR_GREY};
+  color: ${COLOR_GREY};
   width: 100%;
   margin-bottom: 15px;
   min-width: 400px;
@@ -294,7 +294,7 @@ const TypedContainer = styled(SubHeading)`
   /* mobile */
   @media (max-width: 768px) {
     justify-content: center;
-    min-width: 100px ;
+    min-width: 100px;
   }
 `;
 
@@ -334,12 +334,12 @@ const InfoContainer = styled.div`
 `;
 
 const Jurie = styled(Heading)`
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size:72px;
 
   /* mobile */
   @media (max-width: 768px) {
-  font-size: 52px;
+    font-size: 52px;
   }
 `;
 
@@ -349,71 +349,82 @@ const DownloadIcon = styled(AiOutlineDownload)`
 `;
 
 const SocialIconContainer = styled.a`
-display: flex;
-width: 32px;
-border-radius: 100%;
-margin: 0 10px;
-height: 32px;
+  display: flex;
+  width: 32px;
+  border-radius: 100%;
+  margin: 0 10px;
+  height: 32px;
   &:hover {
-    box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
-    -webkit-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
-    -moz-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
+    -webkit-box-shadow: 1px 0px 10px 2px var(--color-primary);
+    -moz-box-shadow: 1px 0px 10px 2px var(--color-primary);
     transition: all 0.5s ease-in-out;
   }
 `;
 
 const PlayStoreIcon = styled(IoLogoGooglePlaystore)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const DreamCodeIcon = styled(PiBracketsAngleBold)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const MailIcon = styled(AiOutlineMail)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const PhoneIcon = styled(AiOutlinePhone)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
-  `;
+  border: 1px solid var(--color-primary);
+`;
 
 const GithubIcon = styled(FaGithub)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const LinkedInIcon = styled(FaLinkedinIn)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
+`;
+
+const SocialIcon = styled.div`
+  margin: 0 10px;
+  height: 32px;
+  &:hover {
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
+    -webkit-box-shadow: 1px 0px 10px 2px var(--color-primary);
+    -moz-box-shadow: 1px 0px 10px 2px var(--color-primary);
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 const getLinesOfCode = () => {
@@ -460,6 +471,7 @@ const Home = () => {
   return (
     <>
       <GlobalStyle />
+      <GlobalColors />
       <PageContainer>
         {/* <FloatingWhatsApp
           accountName="Jurie"

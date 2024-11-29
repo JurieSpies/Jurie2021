@@ -24,24 +24,27 @@ const GlobalStyle = createGlobalStyle`
     position: fixed;
     width: 100%;
   }
+  :root {
+    --color-primary: ${COLOR_PRIMARY};
+  }
 `;
 
 const PlayStoreIcon = styled(IoLogoGooglePlaystore)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const PwaIcon = styled(FiChrome)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const Main = styled(Heading)`
@@ -179,7 +182,7 @@ const Paragraph = styled(SubHeading)`
 
 const Stack = styled(SubHeading)`
   font-size: 20px;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
 `;
 
 const LeftAndBottom = styled.div`
@@ -193,7 +196,7 @@ const LeftAndBottom = styled.div`
 
   /* For Firefox */
   scrollbar-width: thin;
-  scrollbar-color: ${COLOR_PRIMARY} transparent;
+  scrollbar-color: var(--color-primary) transparent;
 
   /* For Chrome, Safari, and Opera */
   &::-webkit-scrollbar {
@@ -205,7 +208,7 @@ const LeftAndBottom = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${COLOR_PRIMARY};
+    background-color: var(--color-primary);
     border-radius: 3px;
   }
 
@@ -259,20 +262,20 @@ const SocialIconContainer = styled.a`
   margin: 50px 30px 0px 0px;
   height: 32px;
   &:hover {
-    box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
-    -webkit-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
-    -moz-box-shadow: 1px 0px 10px 2px ${COLOR_PRIMARY};
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
+    -webkit-box-shadow: 1px 0px 10px 2px var(--color-primary);
+    -moz-box-shadow: 1px 0px 10px 2px var(--color-primary);
     transition: all 0.5s ease-in-out;
   }
 `;
 
 const GithubIcon = styled(FaGithub)`
   display: flex;
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   font-size: 32px;
   padding: 5px;
   border-radius: 100%;
-  border: 1px solid ${COLOR_PRIMARY};
+  border: 1px solid var(--color-primary);
 `;
 
 const Icons = styled.div`

@@ -3,6 +3,8 @@
 import propTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import { COLOR_DARK } from '@/utils/globalColors';
 
 const styles = {
   projectsSection: {
@@ -18,6 +20,7 @@ const styles = {
     marginBottom: '30px',
     padding: '15px',
     boxShadow: '1px 1px 10px #ccc',
+    border: '1px solid var(--color-primary)',
   },
 
   githubProfilePic: {
@@ -34,12 +37,12 @@ const styles = {
   repoLink: {
     fontWeight: 'bold',
     fontSize: 'min(max(14px,2vw),18px)',
-    color: '#000',
+    color: 'var(--color-primary)',
     marginTop: 5,
     textTransform: 'uppercase',
   },
   cardTitle: {
-    color: 'white',
+    color: 'var(--color-primary)',
     fontWeight: 'bold',
     wordBreak: 'break-all',
     textDecorationLine: 'underline',
@@ -63,6 +66,46 @@ const styles = {
     cursor: 'pointer',
   },
 };
+
+const Card = styled.div`
+  background-color: ${COLOR_DARK};
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+  border: 1px solid var(--color-primary);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--color-primary);
+  }
+`;
+
+const Title = styled.h3`
+  color: var(--color-primary);
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+`;
+
+const Description = styled.p`
+  color: #ffffff;
+  font-size: 0.9em;
+  margin: 0;
+  flex-grow: 1;
+`;
+
+const Stats = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  color: var(--color-primary);
+  font-size: 0.8em;
+`;
 
 const RepoCard = (props) => {
   const { githubName, token } = props;
@@ -93,9 +136,9 @@ const RepoCard = (props) => {
 
   return (
     <div style={styles.projectsSection}>
-      {repoInfo > '0'
+      {repoInfo && repoInfo.length > 0
         && repoInfo.slice(0, showMore ? repoInfo.length : 3).map((git) => (
-          <div style={styles.card}>
+          <Card>
             {/* <img
               style={styles.githubProfilePic}
               src={git.owner.avatar_url}
@@ -108,24 +151,20 @@ const RepoCard = (props) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span style={styles.cardTitle}>
+                <Title>
                   {git.name}
-                </span>
+                </Title>
               </a>
-              <span style={styles.cardSubTitle}>
+              <Description>
                 {git.description}
-              </span>
-              <span style={styles.cardSubTitle}>
-                language :
-                {git.language ? git.language : 'N/A'}
-              </span>
-              <span style={styles.cardSubTitle}>
-                watchers :
-                {git.watchers}
-              </span>
+              </Description>
+              <Stats>
+                <span>language : {git.language ? git.language : 'N/A'}</span>
+                <span>watchers : {git.watchers}</span>
+              </Stats>
             </div>
 
-          </div>
+          </Card>
         ))}
       <span style={styles.moreOrLessButton} onClick={() => setShowMore(!showMore)}>{showMore ? '...less' : 'more...'}</span>
     </div>

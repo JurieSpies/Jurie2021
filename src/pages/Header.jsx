@@ -1,11 +1,13 @@
 import Button from '@/components/Button/Button';
-import { COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
+import { COLOR_WHITE } from '@/utils/globalColors';
 import { Heading } from '@/utils/globalFonts';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { PiWhatsappLogoBold } from 'react-icons/pi';
 import styled from 'styled-components';
 import { openWhatsapp } from '../utils/helpers';
+import ColorPicker from '@/components/ColorPicker/ColorPicker';
+import MobileMenu from '@/components/MobileMenu/MobileMenu';
 
 const WhatsappIcon = styled(PiWhatsappLogoBold)`
   font-weight: bold;
@@ -24,21 +26,21 @@ const MainContent = styled.div`
 `;
 
 const Green = styled.span`
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   margin-left: 5px;
 `;
 
 const HeaderTab = styled.div`
   display: flex;
   text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
-  text-decoration-color: ${COLOR_PRIMARY};
+  text-decoration-color: var(--color-primary);
   text-decoration-thickness: 2px;
   margin: 0 20px;
   cursor: pointer;
   transform: scale(1);
   transition: transform 0.3s;
   &:hover {
-  color: ${COLOR_PRIMARY};
+  color: var(--color-primary);
   transform: scale(1.2);
   }
 `;
@@ -48,6 +50,13 @@ const Right = styled.div`
   color: ${COLOR_WHITE};
   display: flex;
   align-items: center;
+`;
+
+const DesktopColorPicker = styled.div`
+  margin-left: 20px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Header = ({ active = 'Home' }) => {
@@ -83,6 +92,14 @@ const Header = ({ active = 'Home' }) => {
           <WhatsappIcon size={18} />
           Whatsapp
         </Button>
+        <DesktopColorPicker>
+          <ColorPicker />
+        </DesktopColorPicker>
+        <MobileMenu 
+          menus={menus}
+          activeTab={activeTab}
+          onMenuClick={activeTabFunction}
+        />
       </Right>
     </MainContent>
   );

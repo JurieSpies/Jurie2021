@@ -5,6 +5,7 @@ import Header from './pages/Header';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
 import Work from './pages/Work';
+import ColorPicker from './components/ColorPicker/ColorPicker';
 
 // https://www.youtube.com/watch?v=dImgZ_AH7uA
 
@@ -75,6 +76,7 @@ const App = () => {
 
   return (
     <Main>
+      <ColorPicker />
       <Spacer />
       <PageContainer>
         <RenderDesktop>
