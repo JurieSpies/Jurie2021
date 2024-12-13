@@ -89,26 +89,27 @@ const ResetButton = styled.button`
 
 export const useColorPicker = () => {
   const DEFAULT_COLOR = '#03FDA7';
-  const [color, setColor] = useState(DEFAULT_COLOR);
+  const [color, setColor] = useState(() => {
+    // Try to get the color from localStorage first
+    const savedColor = localStorage.getItem('themeColor');
+    return savedColor || DEFAULT_COLOR;
+  });
 
   useEffect(() => {
-    const currentColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-primary')
-      .trim();
-    
-    if (currentColor) {
-      setColor(currentColor);
-    }
+    // Set the initial color on mount
+    document.documentElement.style.setProperty('--color-primary', color);
   }, []);
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
     document.documentElement.style.setProperty('--color-primary', newColor);
+    localStorage.setItem('themeColor', newColor);
     setColor(newColor);
   };
 
   const handleReset = () => {
     document.documentElement.style.setProperty('--color-primary', DEFAULT_COLOR);
+    localStorage.setItem('themeColor', DEFAULT_COLOR);
     setColor(DEFAULT_COLOR);
   };
 
