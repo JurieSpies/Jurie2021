@@ -22,11 +22,9 @@ export const openWhatsapp = () => {
 };
 
 export const generateResumePDF = async () => {
-  console.log('generateResumePDF function called');
   try {
     if (typeof window.jsPDF === 'undefined') {
       if (window.jspdf && window.jspdf.jsPDF) {
-        console.log('Found jspdf.jsPDF in generateResumePDF, using it...');
         window.jsPDF = window.jspdf.jsPDF;
       } else {
         throw new Error('jsPDF not loaded');
@@ -34,14 +32,12 @@ export const generateResumePDF = async () => {
     }
 
     // Create a new PDF document
-    console.log('Creating new PDF document...');
     const doc = new window.jsPDF({
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
       compress: true
     });
-    console.log('PDF document created successfully');
     
     // Set document properties
     doc.setProperties({
@@ -106,11 +102,13 @@ export const generateResumePDF = async () => {
     // Draw envelope icon
     doc.circle(emailIconX, emailIconY, 1.5, 'F');
     
-    // Email text
+    // Email text with link
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...lightGrey);
-    doc.text(`${RESUME_DATA.email}`, margin + 8, 44 + buttonHeight/2 + 1);
+    doc.textWithLink('Email', margin + 8, 44 + buttonHeight/2 + 1, {
+      url: `mailto:${RESUME_DATA.email}`
+    });
     
     // GitHub button - right side
     doc.setFillColor(30, 30, 30);
@@ -123,11 +121,13 @@ export const generateResumePDF = async () => {
     const githubIconY = 44 + buttonHeight/2;
     doc.circle(githubIconX, githubIconY, 1.5, 'F');
     
-    // GitHub text
+    // GitHub text with link
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...lightGrey);
-    doc.text(`${RESUME_DATA.github}`, margin + contentWidth/2 + 8, 44 + buttonHeight/2 + 1);
+    doc.textWithLink('GitHub', margin + contentWidth/2 + 8, 44 + buttonHeight/2 + 1, {
+      url: RESUME_DATA.github
+    });
     
     // Phone button - full width with icon
     doc.setFillColor(30, 30, 30);
@@ -140,11 +140,13 @@ export const generateResumePDF = async () => {
     const phoneIconY = 44 + buttonHeight + buttonSpacing + buttonHeight/2;
     doc.circle(phoneIconX, phoneIconY, 1.5, 'F');
     
-    // Phone text
+    // Phone text with link
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...lightGrey);
-    doc.text(`${RESUME_DATA.phoneNumber}`, margin + 8, 44 + buttonHeight + buttonSpacing + buttonHeight/2 + 1);
+    doc.textWithLink('Call Me', margin + 8, 44 + buttonHeight + buttonSpacing + buttonHeight/2 + 1, {
+      url: `tel:${RESUME_DATA.phoneNumber}`
+    });
     
     // LinkedIn button - right side
     doc.setFillColor(30, 30, 30);
@@ -157,11 +159,15 @@ export const generateResumePDF = async () => {
     const linkedinIconY = 44 + buttonHeight + buttonSpacing + buttonHeight/2;
     doc.circle(linkedinIconX, linkedinIconY, 1.5, 'F');
     
-    // LinkedIn text
+    // LinkedIn text - display "LinkedIn" but link to the full URL
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...lightGrey);
-    doc.text(`${RESUME_DATA.linkedIn}`, margin + contentWidth/2 + 8, 44 + buttonHeight + buttonSpacing + buttonHeight/2 + 1);
+    
+    // Add text with link to LinkedIn profile
+    doc.textWithLink('LinkedIn', margin + contentWidth/2 + 8, 44 + buttonHeight + buttonSpacing + buttonHeight/2 + 1, {
+      url: RESUME_DATA.linkedIn
+    });
     
     // Experience badge - make it more prominent and match website
     doc.setFillColor(...primaryColor);
@@ -171,28 +177,118 @@ export const generateResumePDF = async () => {
     doc.setTextColor(0, 0, 0); // Black text on green background
     doc.text(`${getYearsOfExperience()} YEARS EXPERIENCE`, margin + 5, 44 + (buttonHeight + buttonSpacing)*2 + buttonHeight/2 + 1);
     
-    // About Me section
+    // Add age badge next to experience badge
+    doc.setFillColor(...primaryColor);
+    doc.roundedRect(margin + 85, 44 + (buttonHeight + buttonSpacing)*2, 40, buttonHeight, buttonRadius, buttonRadius, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(0, 0, 0); // Black text on green background
+    doc.text(`AGE: ${getAge()}`, margin + 90, 44 + (buttonHeight + buttonSpacing)*2 + buttonHeight/2 + 1);
+    
+    // Add decorative element in top right corner
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(1.5);
+    doc.line(pageWidth - margin - 40, 15, pageWidth - margin, 15);
+    doc.line(pageWidth - margin, 15, pageWidth - margin, 35);
+    
+    // Add small decorative dots
+    doc.setFillColor(...primaryColor);
+    doc.circle(pageWidth - margin - 40, 15, 2, 'F');
+    doc.circle(pageWidth - margin, 35, 2, 'F');
+    
+    // About Me section with improved styling
     let yPosition = 80; // Increased to avoid overlap with contact section
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.setTextColor(...primaryColor);
     doc.text('ABOUT ME', margin, yPosition);
     
+    // Add decorative underline with gradient effect
+    const lineWidth = 40;
     doc.setDrawColor(...primaryColor);
-    doc.setLineWidth(0.5);
-    doc.line(margin, yPosition + 1, pageWidth - margin, yPosition + 1);
+    doc.setLineWidth(1.5);
+    doc.line(margin, yPosition + 3, margin + lineWidth, yPosition + 3);
+    
+    // Add small decorative dot at the end of the line
+    doc.setFillColor(...primaryColor);
+    doc.circle(margin + lineWidth, yPosition + 3, 1.5, 'F');
     
     yPosition += 10;
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(...lightGrey); // Lighter text for better contrast
     
+    // Add subtle background for about me section
+    doc.setFillColor(15, 15, 15); // Slightly darker than background
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 40, 3, 3, 'F');
+    
     // Make sure about me text doesn't get cut off
-    const aboutMeLines = doc.splitTextToSize(RESUME_DATA.aboutMe, contentWidth);
+    const aboutMeLines = doc.splitTextToSize(RESUME_DATA.aboutMe, contentWidth - 10);
     doc.text(aboutMeLines, margin, yPosition);
     
-    // Work Experience section
-    yPosition += aboutMeLines.length * 5 + 20; // Increased spacing after about me
+    // Add education section before work experience
+    yPosition += aboutMeLines.length * 5 + 25;
+    
+    // Check if we need to add a new page
+    if (yPosition > pageHeight - 100) {
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      yPosition = margin;
+    }
+    
+    // Education section with improved styling
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('EDUCATION', margin, yPosition);
+    
+    // Add decorative underline with gradient effect
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(1.5);
+    doc.line(margin, yPosition + 3, margin + lineWidth, yPosition + 3);
+    
+    // Add small decorative dot at the end of the line
+    doc.setFillColor(...primaryColor);
+    doc.circle(margin + lineWidth, yPosition + 3, 1.5, 'F');
+    
+    yPosition += 15;
+    
+    // Add education details with improved card design
+    doc.setFillColor(20, 20, 20); // Slightly darker than background
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 45, 5, 5, 'F');
+    
+    // Add accent border on left side
+    doc.setFillColor(...primaryColor);
+    doc.rect(margin - 5, yPosition - 5, 3, 45, 'F');
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(255, 255, 255);
+    doc.text('University of South Africa', margin + 5, yPosition);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...primaryColor);
+    doc.text('2018 - 2022', pageWidth - margin - 30, yPosition);
+    
+    yPosition += 8;
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(11);
+    doc.setTextColor(...primaryColor);
+    doc.text('• Bachelor of Science in Computing', margin + 10, yPosition);
+    
+    yPosition += 10;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey);
+    const educationDesc = 'Focused on software development, algorithms, data structures, and computer systems. Completed coursework in Java, C++, and web technologies.';
+    const educationLines = doc.splitTextToSize(educationDesc, contentWidth - 20);
+    doc.text(educationLines, margin + 10, yPosition);
+    
+    // Work Experience section with improved styling
+    yPosition += educationLines.length * 5 + 25;
     
     // Check if we need to add a new page
     if (yPosition > pageHeight - 100) { // Ensure enough space for at least one job
@@ -449,7 +545,6 @@ export const generateResumePDF = async () => {
     }
     
     // Save the PDF
-    console.log('Generating PDF blob...');
     return doc.output('blob');
   } catch (error) {
     console.error('Error in generateResumePDF:', error);
