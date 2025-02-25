@@ -1,8 +1,10 @@
+import RESUME_DATA from './RESUME_DATA.json';
+
 export const getYearsOfExperience = () => {
   const startDate = new Date('2019-03-01');
-  const endDate = new Date();
-  const yearsExperience = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24 * 365));
-  return yearsExperience;
+  const currentDate = new Date();
+  const diffInYears = (currentDate - startDate) / (1000 * 60 * 60 * 24 * 365.25);
+  return Math.floor(diffInYears);
 };
 
 export const getAge = () => {
@@ -19,8 +21,461 @@ export const openWhatsapp = () => {
   window.open(url, '_blank');
 };
 
+export const generateResumePDF = async () => {
+  console.log('generateResumePDF function called');
+  try {
+    if (typeof window.jsPDF === 'undefined') {
+      if (window.jspdf && window.jspdf.jsPDF) {
+        console.log('Found jspdf.jsPDF in generateResumePDF, using it...');
+        window.jsPDF = window.jspdf.jsPDF;
+      } else {
+        throw new Error('jsPDF not loaded');
+      }
+    }
+
+    // Create a new PDF document
+    console.log('Creating new PDF document...');
+    const doc = new window.jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
+      compress: true
+    });
+    console.log('PDF document created successfully');
+    
+    // Set document properties
+    doc.setProperties({
+      title: 'Jurie Spies - Resume',
+      subject: 'Resume',
+      author: 'Jurie Spies',
+      keywords: 'resume, cv, software engineer, react, react native',
+      creator: 'Jurie Spies Portfolio Website',
+    });
+    
+    // Define colors
+    const primaryColor = [0, 255, 136]; // RGB for bright green color (#00FF88) to match website
+    const darkGrey = [50, 50, 50];
+    const mediumGrey = [180, 180, 180]; // Lighter grey for better contrast on dark background
+    const lightGrey = [220, 220, 220]; // Even lighter grey for better contrast
+    
+    // Define page dimensions and margins
+    const pageWidth = 210;
+    const pageHeight = 297;
+    const margin = 15;
+    const contentWidth = pageWidth - (margin * 2);
+    
+    // Add black background to entire page
+    doc.setFillColor(0, 0, 0); // Pure black background for the entire page
+    doc.rect(0, 0, pageWidth, pageHeight, 'F');
+    
+    // Add header with colored background (darker than the page background)
+    doc.setFillColor(15, 15, 15); // Slightly darker background for header
+    doc.rect(0, 0, pageWidth, 40, 'F');
+    
+    // Header text
+    doc.setTextColor(0, 255, 136); // Bright green text for name
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(28);
+    doc.text('Jurie Spies', margin, 20);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(16);
+    doc.setTextColor(255, 255, 255); // White text for title
+    doc.text('SOFTWARE ENGINEER', margin, 30);
+    
+    // Contact information section
+    doc.setFillColor(20, 20, 20); // Slightly lighter than background for contact section
+    doc.rect(0, 40, pageWidth, 30, 'F');
+    
+    // Create button-like elements for contact information that match the website design
+    const buttonHeight = 8;
+    const buttonSpacing = 3;
+    const buttonRadius = 3;
+    
+    // Email button - full width with icon
+    doc.setFillColor(30, 30, 30); // Button background
+    doc.setDrawColor(0, 255, 136); // Green border
+    doc.roundedRect(margin, 44, contentWidth/2 - 5, buttonHeight, buttonRadius, buttonRadius, 'FD');
+    
+    // Email icon
+    doc.setFillColor(...primaryColor);
+    doc.setDrawColor(...primaryColor);
+    const emailIconX = margin + 4;
+    const emailIconY = 44 + buttonHeight/2;
+    
+    // Draw envelope icon
+    doc.circle(emailIconX, emailIconY, 1.5, 'F');
+    
+    // Email text
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...lightGrey);
+    doc.text(`${RESUME_DATA.email}`, margin + 8, 44 + buttonHeight/2 + 1);
+    
+    // GitHub button - right side
+    doc.setFillColor(30, 30, 30);
+    doc.setDrawColor(0, 255, 136);
+    doc.roundedRect(margin + contentWidth/2, 44, contentWidth/2, buttonHeight, buttonRadius, buttonRadius, 'FD');
+    
+    // GitHub icon
+    doc.setFillColor(...primaryColor);
+    const githubIconX = margin + contentWidth/2 + 4;
+    const githubIconY = 44 + buttonHeight/2;
+    doc.circle(githubIconX, githubIconY, 1.5, 'F');
+    
+    // GitHub text
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...lightGrey);
+    doc.text(`${RESUME_DATA.github}`, margin + contentWidth/2 + 8, 44 + buttonHeight/2 + 1);
+    
+    // Phone button - full width with icon
+    doc.setFillColor(30, 30, 30);
+    doc.setDrawColor(0, 255, 136);
+    doc.roundedRect(margin, 44 + buttonHeight + buttonSpacing, contentWidth/2 - 5, buttonHeight, buttonRadius, buttonRadius, 'FD');
+    
+    // Phone icon
+    doc.setFillColor(...primaryColor);
+    const phoneIconX = margin + 4;
+    const phoneIconY = 44 + buttonHeight + buttonSpacing + buttonHeight/2;
+    doc.circle(phoneIconX, phoneIconY, 1.5, 'F');
+    
+    // Phone text
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...lightGrey);
+    doc.text(`${RESUME_DATA.phoneNumber}`, margin + 8, 44 + buttonHeight + buttonSpacing + buttonHeight/2 + 1);
+    
+    // LinkedIn button - right side
+    doc.setFillColor(30, 30, 30);
+    doc.setDrawColor(0, 255, 136);
+    doc.roundedRect(margin + contentWidth/2, 44 + buttonHeight + buttonSpacing, contentWidth/2, buttonHeight, buttonRadius, buttonRadius, 'FD');
+    
+    // LinkedIn icon
+    doc.setFillColor(...primaryColor);
+    const linkedinIconX = margin + contentWidth/2 + 4;
+    const linkedinIconY = 44 + buttonHeight + buttonSpacing + buttonHeight/2;
+    doc.circle(linkedinIconX, linkedinIconY, 1.5, 'F');
+    
+    // LinkedIn text
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...lightGrey);
+    doc.text(`${RESUME_DATA.linkedIn}`, margin + contentWidth/2 + 8, 44 + buttonHeight + buttonSpacing + buttonHeight/2 + 1);
+    
+    // Experience badge - make it more prominent and match website
+    doc.setFillColor(...primaryColor);
+    doc.roundedRect(margin, 44 + (buttonHeight + buttonSpacing)*2, 80, buttonHeight, buttonRadius, buttonRadius, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(0, 0, 0); // Black text on green background
+    doc.text(`${getYearsOfExperience()} YEARS EXPERIENCE`, margin + 5, 44 + (buttonHeight + buttonSpacing)*2 + buttonHeight/2 + 1);
+    
+    // About Me section
+    let yPosition = 80; // Increased to avoid overlap with contact section
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('ABOUT ME', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.5);
+    doc.line(margin, yPosition + 1, pageWidth - margin, yPosition + 1);
+    
+    yPosition += 10;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey); // Lighter text for better contrast
+    
+    // Make sure about me text doesn't get cut off
+    const aboutMeLines = doc.splitTextToSize(RESUME_DATA.aboutMe, contentWidth);
+    doc.text(aboutMeLines, margin, yPosition);
+    
+    // Work Experience section
+    yPosition += aboutMeLines.length * 5 + 20; // Increased spacing after about me
+    
+    // Check if we need to add a new page
+    if (yPosition > pageHeight - 100) { // Ensure enough space for at least one job
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      yPosition = margin;
+    }
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('WORK EXPERIENCE', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.line(margin, yPosition + 1, pageWidth - margin, yPosition + 1);
+    
+    yPosition += 15; // Increased spacing before first job
+    
+    // Function to check if we need a new page
+    const checkPageBreak = (requiredSpace) => {
+      if (yPosition + requiredSpace > pageHeight - margin) {
+        doc.addPage();
+        // Add black background to new page
+        doc.setFillColor(0, 0, 0);
+        doc.rect(0, 0, pageWidth, pageHeight, 'F');
+        
+        yPosition = margin + 10; // Start with some padding on new page
+        
+        // Add a small header on the new page
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(10);
+        doc.setTextColor(...lightGrey);
+        doc.text('Jurie Spies - Resume (Continued)', margin, margin);
+        doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
+        
+        return true;
+      }
+      return false;
+    };
+    
+    RESUME_DATA.work.forEach((job, index) => {
+      // Add more space between jobs except for the first one
+      if (index > 0) {
+        yPosition += 15; // Increased spacing between jobs
+      }
+      
+      // Calculate the height needed for this job entry
+      const descriptionLines = doc.splitTextToSize(job.description, contentWidth - 20); // Reduced width for padding
+      const jobHeight = 12 + descriptionLines.length * 5 + 25; // Height of job card
+      
+      // Check if we need a new page for this job
+      checkPageBreak(jobHeight + 10);
+      
+      // Job card with border and background
+      doc.setFillColor(35, 35, 35); // Slightly lighter background for job cards
+      doc.setDrawColor(...primaryColor); // Green border to match website
+      doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, jobHeight, 3, 3, 'FD'); // Larger rounded rectangle with better corners
+      
+      // Job title
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.setTextColor(255, 255, 255); // White text for job title
+      doc.text(job.title, margin, yPosition);
+      
+      // Timeline on the right
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...primaryColor);
+      const timelineWidth = doc.getTextWidth(job.timeline);
+      doc.text(job.timeline, pageWidth - margin - timelineWidth, yPosition);
+      
+      yPosition += 8;
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(11);
+      doc.setTextColor(...primaryColor); // Green text for occupation to match website
+      doc.text(`• ${job.occupation}`, margin + 5, yPosition);
+      
+      yPosition += 10; // Increased spacing before description
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey); // Lighter text for better contrast
+      doc.text(descriptionLines, margin + 5, yPosition);
+      
+      yPosition += descriptionLines.length * 5 + 10; // Adjusted spacing after job description
+    });
+    
+    // Skills section
+    // Check if we need a new page for skills
+    if (yPosition > pageHeight - 100) { // Ensure enough space for skills section
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      
+      yPosition = margin + 10;
+      
+      // Add a small header on the new page
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey);
+      doc.text('Jurie Spies - Resume (Continued)', margin, margin);
+      doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
+    } else {
+      yPosition += 15; // Add extra space before skills section
+    }
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('SKILLS', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.line(margin, yPosition + 1, pageWidth - margin, yPosition + 1);
+    
+    yPosition += 15; // Increased spacing before skills
+    
+    // Two-column layout for skills
+    const leftColumnX = margin + 5;
+    const rightColumnX = pageWidth / 2 + 5;
+    let leftYPosition = yPosition;
+    let rightYPosition = yPosition;
+    
+    // Skills background
+    const skillsHeight = Math.max(
+      RESUME_DATA.skills.length * 10 + 20,
+      RESUME_DATA.frameworkSkills.length * 10 + 20
+    );
+    
+    // Check if skills will fit on current page
+    if (yPosition + skillsHeight > pageHeight - margin) {
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      
+      yPosition = margin + 10;
+      leftYPosition = yPosition;
+      rightYPosition = yPosition;
+      
+      // Add a small header on the new page
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey);
+      doc.text('Jurie Spies - Resume (Continued)', margin, margin);
+      doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
+      
+      // Redraw skills header
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.setTextColor(...primaryColor);
+      doc.text('SKILLS', margin, yPosition);
+      
+      doc.setDrawColor(...primaryColor);
+      doc.line(margin, yPosition + 1, pageWidth - margin, yPosition + 1);
+      
+      yPosition += 15;
+      leftYPosition = yPosition;
+      rightYPosition = yPosition;
+    }
+    
+    // Add a background for the skills section
+    doc.setFillColor(35, 35, 35); // Slightly lighter background for skills section
+    doc.setDrawColor(...primaryColor);
+    doc.roundedRect(margin - 5, yPosition - 10, contentWidth + 10, skillsHeight, 3, 3, 'FD');
+    
+    // Programming Languages
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(...primaryColor); // Green text for section titles to match website
+    doc.text('Programming Languages:', leftColumnX, leftYPosition);
+    leftYPosition += 10;
+    
+    RESUME_DATA.skills.forEach((skill) => {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey); // Lighter text for better contrast
+      
+      // Create a visual skill bar
+      const barWidth = skill.rating * 0.4; // Scale to fit in column
+      doc.text(`${skill.language}`, leftColumnX, leftYPosition);
+      
+      // Draw skill bar background
+      doc.setDrawColor(50, 50, 50);
+      doc.setFillColor(50, 50, 50);
+      doc.roundedRect(leftColumnX + 40, leftYPosition - 3, 40, 4, 2, 2, 'F'); // More rounded corners, adjusted width
+      
+      // Draw skill level
+      doc.setDrawColor(...primaryColor);
+      doc.setFillColor(...primaryColor);
+      doc.roundedRect(leftColumnX + 40, leftYPosition - 3, barWidth, 4, 2, 2, 'F'); // More rounded corners
+      
+      leftYPosition += 10; // Increased spacing between skills
+    });
+    
+    // Frameworks
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(...primaryColor); // Green text for section titles to match website
+    doc.text('Frameworks & Technologies:', rightColumnX, rightYPosition);
+    rightYPosition += 10;
+    
+    RESUME_DATA.frameworkSkills.forEach((skill) => {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey); // Lighter text for better contrast
+      
+      // Create a visual skill bar
+      const barWidth = skill.rating * 0.4; // Scale to fit in column
+      doc.text(`${skill.frameworkTitle}`, rightColumnX, rightYPosition);
+      
+      // Draw skill bar background
+      doc.setDrawColor(50, 50, 50);
+      doc.setFillColor(50, 50, 50);
+      doc.roundedRect(rightColumnX + 40, rightYPosition - 3, 40, 4, 2, 2, 'F'); // More rounded corners, adjusted width
+      
+      // Draw skill level
+      doc.setDrawColor(...primaryColor);
+      doc.setFillColor(...primaryColor);
+      doc.roundedRect(rightColumnX + 40, rightYPosition - 3, barWidth, 4, 2, 2, 'F'); // More rounded corners
+      
+      rightYPosition += 10; // Increased spacing between skills
+    });
+    
+    // Add current date to the footer
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    
+    // Add footer to all pages
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(...lightGrey);
+      // Add a clickable link to the website in the footer
+      doc.setTextColor(...lightGrey);
+      doc.text(`Generated on ${dateStr} from `, margin, pageHeight - 10);
+      
+      // Calculate the width of the first part of the text to position the link correctly
+      const textWidth = doc.getTextWidth(`Generated on ${dateStr} from `);
+      
+      // Add the URL text in the same color but with link
+      const urlText = "juriespies.co.za";
+      doc.textWithLink(urlText, margin + textWidth, pageHeight - 10, {
+        url: 'https://juriespies.co.za/'
+      });
+      doc.text(`Page ${i} of ${pageCount}`, pageWidth - margin - 20, pageHeight - 10);
+    }
+    
+    // Save the PDF
+    console.log('Generating PDF blob...');
+    return doc.output('blob');
+  } catch (error) {
+    console.error('Error in generateResumePDF:', error);
+    throw error;
+  }
+};
+
+// Make helper functions available globally for testing in the console
+if (typeof window !== 'undefined') {
+  window.generateResumePDF = generateResumePDF;
+  window.getYearsOfExperience = getYearsOfExperience;
+  window.getAge = getAge;
+  window.openWhatsapp = openWhatsapp;
+  
+  // Create a helpers object for organization
+  window.helpers = {
+    generateResumePDF,
+    getYearsOfExperience,
+    getAge,
+    openWhatsapp
+  };
+}
+
 export default {
   getYearsOfExperience,
   getAge,
   openWhatsapp,
+  generateResumePDF,
 };

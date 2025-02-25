@@ -1,6 +1,8 @@
+import profilePic from '@/assets/images/JuriePPbw3.png';
+import resume from '@/assets/JurieSpiesResume.pdf';
 import Button from '@/components/Button/Button';
-import { COLOR_GREY, COLOR_WHITE } from '@/utils/globalColors';
-import { GlobalColors } from '@/utils/globalColors';
+import { GITHUB_CONFIG } from '@/config/github';
+import { COLOR_GREY, COLOR_WHITE, GlobalColors } from '@/utils/globalColors';
 import { Heading, SubHeading } from '@/utils/globalFonts';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -10,12 +12,9 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import { PiBracketsAngleBold } from 'react-icons/pi';
 import ReactTyped from 'react-typed';
-import styled, { keyframes, createGlobalStyle } from 'styled-components';
-import profilePic from '@/assets/images/JuriePPbw3.png';
-import resume from '@/assets/JurieSpiesResume.pdf';
-import { GITHUB_CONFIG } from '@/config/github';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import { generateResumePDF, getYearsOfExperience } from '../utils/helpers';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
-import { getYearsOfExperience } from '../utils/helpers';
 
 const rotate = keyframes`
   0% {
@@ -468,6 +467,44 @@ const Home = () => {
     staleTime: 1000 * 60 * 60, // Cache for 1 hour
   });
 
+  const handleDownloadCV = async () => {
+    try {
+      console.log('Starting PDF generation...');
+      
+      // Wait for jsPDF to be available
+      if (typeof window.jsPDF === 'undefined') {
+        if (window.jspdf && window.jspdf.jsPDF) {
+          console.log('Found jspdf.jsPDF, using it...');
+          window.jsPDF = window.jspdf.jsPDF;
+        } else {
+          console.error('jsPDF not loaded properly');
+          throw new Error('PDF generation library not loaded');
+        }
+      }
+      
+      // Generate the full resume PDF
+      const pdfBlob = await generateResumePDF();
+      
+      // Create a URL for the blob
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      
+      // Create a link element and trigger download
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = 'JurieSpiesResume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(pdfUrl), 100);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      // Fallback to static PDF if generation fails
+      window.open(resume, '_blank');
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -497,7 +534,7 @@ const Home = () => {
                 Jurie Spies
               </Jurie>
               <Description>
-                I’m a Software Engineer who loves building web and mobile apps. I work with React, React Native, and Vue.js to create fast and user-friendly applications.
+                I'm a Software Engineer who loves building web and mobile apps. I work with React, React Native, and Vue.js to create fast and user-friendly applications.
                 {' '}
               </Description>
               <br />
@@ -519,7 +556,7 @@ const Home = () => {
             </ProfilePicContainer>
           </Main>
           <SocialsContainer>
-            <Button invert onClick={() => window.open(resume, '_blank')} rel="noreferrer">
+            <Button invert onClick={handleDownloadCV} rel="noreferrer">
               <>
                 Download CV
                 <DownloadIcon />

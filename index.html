@@ -10,6 +10,36 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="description" content="Software Developer" />
     <title>Jurie Spies</title>
+    <!-- Add jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+      // Initialize jsPDF as soon as it's loaded
+      (function initJsPDF() {
+        function checkAndSetJsPDF() {
+          if (window.jspdf && typeof window.jspdf.jsPDF === 'function') {
+            window.jsPDF = window.jspdf.jsPDF;
+            return true;
+          } else if (typeof window.jsPDF === 'function') {
+            return true;
+          }
+          return false;
+        }
+        
+        // Try immediately
+        if (checkAndSetJsPDF()) return;
+        
+        // If not available yet, try again when DOM is loaded
+        window.addEventListener('DOMContentLoaded', function() {
+          if (checkAndSetJsPDF()) return;
+          
+          // If still not available, try one more time after a delay
+          setTimeout(function() {
+            if (checkAndSetJsPDF()) return;
+            console.warn('jsPDF not available after multiple attempts');
+          }, 1000);
+        });
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
