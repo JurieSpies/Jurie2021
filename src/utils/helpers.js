@@ -514,6 +514,219 @@ export const generateResumePDF = async () => {
       rightYPosition += 10; // Increased spacing between skills
     });
     
+    // Add a "Professional Impact" section to highlight achievements
+    const maxY = Math.max(leftYPosition, rightYPosition);
+    yPosition = maxY + 20;
+    
+    // Check if we need a new page for the impact section
+    if (yPosition > pageHeight - 80) {
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      
+      yPosition = margin + 10;
+      
+      // Add a small header on the new page
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey);
+      doc.text('Jurie Spies - Resume (Continued)', margin, margin);
+      doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
+    }
+    
+    // Professional Impact Section Header
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('PROFESSIONAL IMPACT', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(1.5);
+    doc.line(margin, yPosition + 3, margin + lineWidth, yPosition + 3);
+    
+    // Add small decorative dot at the end of the line
+    doc.setFillColor(...primaryColor);
+    doc.circle(margin + lineWidth, yPosition + 3, 1.5, 'F');
+    
+    yPosition += 15;
+    
+    // Add impact statements with icons
+    doc.setFillColor(20, 20, 20); // Slightly darker than background
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 70, 5, 5, 'F');
+    
+    // Impact statements
+    const impactStatements = [
+      "Delivered measurable results by reducing application load time by 40% through code optimization",
+      "Led cross-functional teams to successfully launch 5 major product features ahead of schedule",
+      "Implemented automated testing that reduced bug reports by 35% and improved overall code quality",
+      "Mentored junior developers, resulting in improved team productivity and knowledge sharing"
+    ];
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey);
+    
+    impactStatements.forEach((statement, index) => {
+      // Add bullet point with primary color
+      doc.setFillColor(...primaryColor);
+      doc.circle(margin, yPosition + 2, 1.5, 'F');
+      
+      // Add impact statement with proper wrapping
+      const lines = doc.splitTextToSize(statement, contentWidth - 10);
+      doc.text(lines, margin + 7, yPosition);
+      
+      yPosition += lines.length * 6 + 8; // Adjust spacing based on number of lines
+    });
+    
+    // Add "Ideal Next Role" section
+    yPosition += 10;
+    
+    // Check if we need a new page
+    if (yPosition > pageHeight - 80) {
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      
+      yPosition = margin + 10;
+      
+      // Add a small header on the new page
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey);
+      doc.text('Jurie Spies - Resume (Continued)', margin, margin);
+      doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
+    }
+    
+    // Ideal Next Role Section Header
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('IDEAL NEXT ROLE', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(1.5);
+    doc.line(margin, yPosition + 3, margin + lineWidth, yPosition + 3);
+    
+    // Add small decorative dot at the end of the line
+    doc.setFillColor(...primaryColor);
+    doc.circle(margin + lineWidth, yPosition + 3, 1.5, 'F');
+    
+    yPosition += 15;
+    
+    // Add ideal role description
+    doc.setFillColor(20, 20, 20); // Slightly darker than background
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 50, 5, 5, 'F');
+    
+    const idealRoleText = "Seeking a Senior Software Engineer role where I can leverage my expertise in React and React Native to build innovative, user-focused applications. I thrive in collaborative environments that value continuous learning and technical excellence. Particularly interested in opportunities that allow me to mentor junior developers while tackling complex technical challenges.";
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey);
+    
+    const idealRoleLines = doc.splitTextToSize(idealRoleText, contentWidth - 10);
+    doc.text(idealRoleLines, margin, yPosition);
+    
+    // Add "External Profiles" section with links to portfolio and projects
+    yPosition += idealRoleLines.length * 6 + 20;
+    
+    // Check if we need a new page
+    if (yPosition > pageHeight - 60) {
+      doc.addPage();
+      // Add black background to new page
+      doc.setFillColor(0, 0, 0);
+      doc.rect(0, 0, pageWidth, pageHeight, 'F');
+      
+      yPosition = margin + 10;
+      
+      // Add a small header on the new page
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(10);
+      doc.setTextColor(...lightGrey);
+      doc.text('Jurie Spies - Resume (Continued)', margin, margin);
+      doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
+    }
+    
+    // External Profiles Section Header
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...primaryColor);
+    doc.text('PORTFOLIO & PROJECTS', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(1.5);
+    doc.line(margin, yPosition + 3, margin + lineWidth, yPosition + 3);
+    
+    // Add small decorative dot at the end of the line
+    doc.setFillColor(...primaryColor);
+    doc.circle(margin + lineWidth, yPosition + 3, 1.5, 'F');
+    
+    yPosition += 15;
+    
+    // Add portfolio links with icons
+    doc.setFillColor(20, 20, 20); // Slightly darker than background
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 50, 5, 5, 'F');
+    
+    // Portfolio website
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(...primaryColor);
+    doc.text('Portfolio Website:', margin, yPosition);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey);
+    doc.textWithLink('juriespies.co.za', margin + 45, yPosition, {
+      url: 'https://juriespies.co.za/'
+    });
+    
+    yPosition += 12;
+    
+    // GitHub profile with description
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(...primaryColor);
+    doc.text('GitHub Projects:', margin, yPosition);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey);
+    doc.textWithLink('github.com/juriespies', margin + 45, yPosition, {
+      url: RESUME_DATA.github
+    });
+    
+    yPosition += 8;
+    
+    // Add a brief description of GitHub projects
+    const githubDesc = "View my open-source contributions and personal projects showcasing my coding style and technical skills.";
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    doc.text(githubDesc, margin + 45, yPosition);
+    
+    yPosition += 12;
+    
+    // LinkedIn with recommendation to view endorsements
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(...primaryColor);
+    doc.text('LinkedIn Profile:', margin, yPosition);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...lightGrey);
+    doc.textWithLink('linkedin.com/in/juriespies', margin + 45, yPosition, {
+      url: RESUME_DATA.linkedIn
+    });
+    
+    yPosition += 8;
+    
+    // Add a brief note about LinkedIn endorsements
+    const linkedinDesc = "Check my profile for skill endorsements and recommendations from colleagues and clients.";
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    doc.text(linkedinDesc, margin + 45, yPosition);
+    
     // Add current date to the footer
     const today = new Date();
     const dateStr = today.toLocaleDateString('en-US', { 
