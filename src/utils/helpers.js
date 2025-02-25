@@ -628,7 +628,7 @@ export const generateResumePDF = async () => {
     const idealRoleLines = doc.splitTextToSize(idealRoleText, contentWidth - 10);
     doc.text(idealRoleLines, margin, yPosition);
     
-    // Add "External Profiles" section with links to portfolio and projects
+    // Add "Professional Achievements" section
     yPosition += idealRoleLines.length * 6 + 20;
     
     // Check if we need a new page
@@ -648,11 +648,11 @@ export const generateResumePDF = async () => {
       doc.line(margin, margin + 2, pageWidth - margin, margin + 2);
     }
     
-    // External Profiles Section Header
+    // Professional Achievements Section Header
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.setTextColor(...primaryColor);
-    doc.text('PORTFOLIO & PROJECTS', margin, yPosition);
+    doc.text('PROFESSIONAL ACHIEVEMENTS', margin, yPosition);
     
     doc.setDrawColor(...primaryColor);
     doc.setLineWidth(1.5);
@@ -664,68 +664,125 @@ export const generateResumePDF = async () => {
     
     yPosition += 15;
     
-    // Add portfolio links with icons
+    // Add achievements with background
     doc.setFillColor(20, 20, 20); // Slightly darker than background
-    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 50, 5, 5, 'F');
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 90, 5, 5, 'F');
     
-    // Portfolio website
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(...primaryColor);
-    doc.text('Portfolio Website:', margin, yPosition);
+    // Key achievements based on actual projects
+    const achievements = [
+      {
+        title: "WODbud Fitness App",
+        description: "Developed a functional fitness mobile app that allows users to generate custom workouts using AI based on available equipment, access various timers, view Hero WODs, and use conversion tools including the only CrossFit cal/meter converter available.",
+        link: "https://play.google.com/store/apps/details?id=com.wodbud",
+        linkText: "Available on Google Play Store"
+      },
+      {
+        title: "PiggyVault Budget App",
+        description: "Created a personal finance application to help users track expenses and manage budgets, implementing intuitive UI/UX design principles to simplify complex financial tracking."
+      },
+      {
+        title: "Domain Expertise Development",
+        description: "Successfully managed projects across diverse domains including PropTech, CCTV solutions, video monitoring, product solutions, loyalty systems, budgeting, fitness, and payment solutions."
+      },
+      {
+        title: "Technical Leadership",
+        description: "Instrumental in building cutting-edge Web and Mobile Applications using React Native and React. Managed services for clients, ensuring seamless integration and providing valuable technical expertise."
+      }
+    ];
     
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(...lightGrey);
-    doc.textWithLink('juriespies.co.za', margin + 45, yPosition, {
-      url: 'https://juriespies.co.za/'
+    // Display achievements
+    achievements.forEach((achievement, index) => {
+      // Achievement title
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...primaryColor);
+      doc.text(achievement.title, margin, yPosition);
+      
+      yPosition += 6;
+      
+      // Achievement description
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(...lightGrey);
+      
+      const descLines = doc.splitTextToSize(achievement.description, contentWidth - 10);
+      doc.text(descLines, margin + 5, yPosition);
+      
+      yPosition += (descLines.length * 5) + 3;
+      
+      // Add link if available
+      if (achievement.link && achievement.linkText) {
+        yPosition += 5;
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(8);
+        doc.setTextColor(...primaryColor);
+        doc.textWithLink(achievement.linkText, margin + 5, yPosition, {
+          url: achievement.link
+        });
+        yPosition += 5;
+      }
+      
+      yPosition += 8;
     });
+    
+    // Add a section for technical specialties
+    yPosition += 5;
+    
+    // Technical Specialties Section Header
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(...primaryColor);
+    doc.text('TECHNICAL SPECIALTIES', margin, yPosition);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(1);
+    doc.line(margin, yPosition + 3, margin + lineWidth - 20, yPosition + 3);
     
     yPosition += 12;
     
-    // GitHub profile with description
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(...primaryColor);
-    doc.text('GitHub Projects:', margin, yPosition);
+    // Add specialties with background
+    doc.setFillColor(20, 20, 20); // Slightly darker than background
+    doc.roundedRect(margin - 5, yPosition - 5, contentWidth + 10, 45, 5, 5, 'F');
     
+    // Create two columns for specialties
+    const specialties = [
+      "React & React Native Architecture",
+      "State Management (Redux, Context API)",
+      "API Integration & Development",
+      "Performance Optimization",
+      "UI/UX Implementation",
+      "Responsive Design",
+      "Cross-Platform Development",
+      "CI/CD Implementation"
+    ];
+    
+    const colWidth = contentWidth / 2;
+    const leftCol = specialties.slice(0, Math.ceil(specialties.length / 2));
+    const rightCol = specialties.slice(Math.ceil(specialties.length / 2));
+    
+    // Left column
+    let specialtyY = yPosition;
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(...lightGrey);
-    doc.textWithLink('github.com/juriespies', margin + 45, yPosition, {
-      url: RESUME_DATA.github
+    
+    leftCol.forEach(specialty => {
+      doc.setTextColor(...primaryColor);
+      doc.text('•', margin, specialtyY);
+      doc.setTextColor(...lightGrey);
+      doc.text(specialty, margin + 5, specialtyY);
+      specialtyY += 8;
     });
     
-    yPosition += 8;
-    
-    // Add a brief description of GitHub projects
-    const githubDesc = "View my open-source contributions and personal projects showcasing my coding style and technical skills.";
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(9);
-    doc.text(githubDesc, margin + 45, yPosition);
-    
-    yPosition += 12;
-    
-    // LinkedIn with recommendation to view endorsements
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(...primaryColor);
-    doc.text('LinkedIn Profile:', margin, yPosition);
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(...lightGrey);
-    doc.textWithLink('linkedin.com/in/juriespies', margin + 45, yPosition, {
-      url: RESUME_DATA.linkedIn
+    // Right column
+    specialtyY = yPosition;
+    rightCol.forEach(specialty => {
+      doc.setTextColor(...primaryColor);
+      doc.text('•', margin + colWidth, specialtyY);
+      doc.setTextColor(...lightGrey);
+      doc.text(specialty, margin + colWidth + 5, specialtyY);
+      specialtyY += 8;
     });
-    
-    yPosition += 8;
-    
-    // Add a brief note about LinkedIn endorsements
-    const linkedinDesc = "Check my profile for skill endorsements and recommendations from colleagues and clients.";
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(9);
-    doc.text(linkedinDesc, margin + 45, yPosition);
     
     // Add current date to the footer
     const today = new Date();
