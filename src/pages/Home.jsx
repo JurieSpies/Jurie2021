@@ -497,8 +497,9 @@ const Home = () => {
                 Jurie Spies
               </Jurie>
               <Description>
-                I’m a Software Engineer who loves building web and mobile apps. I work with React, React Native, and Vue.js to create fast and user-friendly applications.
-                {' '}
+                I'm a passionate Software Engineer with {getYearsOfExperience()}+ years of experience crafting web and mobile applications. 
+                I specialize in React and React Native, and I'm particularly drawn to projects that challenge me to solve complex UX problems.
+                What sets me apart is my ability to bridge technical implementation with user-centered design thinking.
               </Description>
               <br />
               <TypedContainer>

@@ -1,4 +1,4 @@
-import { COLOR_BACKGROUND, COLOR_PRIMARY } from '@/utils/globalColors';
+import { COLOR_BACKGROUND, COLOR_PRIMARY, COLOR_WHITE } from '@/utils/globalColors';
 import styled from 'styled-components';
 import css from '../../assets/skillIcons/css.svg';
 import html from '../../assets/skillIcons/html.svg';
@@ -69,6 +69,38 @@ const IconTitle = styled.div`
   color: var(--color-primary);
 `;
 
+const TopSkills = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--color-primary);
+  background-color: rgba(0, 0, 0, 0.2);
+`;
+
+const SkillTitle = styled.h3`
+  color: var(--color-primary);
+  margin-bottom: 10px;
+`;
+
+const SkillList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+`;
+
+const SkillTag = styled.li`
+  background-color: rgba(var(--color-primary-rgb), 0.2);
+  color: ${COLOR_WHITE};
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+`;
+
 const Skills = () => {
   const skillSvgs = [
     { svg: css, title: 'css' },
@@ -108,14 +140,32 @@ const Skills = () => {
   const randomizedSkills = [...skillSvgs].sort(() => Math.random() - 0.5);
 
   return (
-    <CardsContainer>
-      {randomizedSkills.map((skill, index) => (
-        <ImageWrapper key={index}>
-          <img src={skill.svg} alt={`${skill.title} Logo`} />
-          <IconTitle>{skill.title}</IconTitle>
-        </ImageWrapper>
-      ))}
-    </CardsContainer>
+    <>
+      <TopSkills>
+        <SkillTitle>Desired Roles</SkillTitle>
+        <SkillList>
+          {['Senior Frontend Developer', 'React Native Developer', 'Agentic AI'].map(role => (
+            <SkillTag key={role}>{role}</SkillTag>
+          ))}
+        </SkillList>
+        
+        <SkillTitle style={{ marginTop: '20px' }}>Top Skills</SkillTitle>
+        <SkillList>
+          {['React', 'React Native', 'JavaScript', 'Vue', 'TypeScript', 'Node.js', 'UI/UX Design'].map(skill => (
+            <SkillTag key={skill}>{skill}</SkillTag>
+          ))}
+        </SkillList>
+      </TopSkills>
+      
+      <CardsContainer>
+        {randomizedSkills.map((skill, index) => (
+          <ImageWrapper key={index}>
+            <img src={skill.svg} alt={`${skill.title} Logo`} />
+            <IconTitle>{skill.title}</IconTitle>
+          </ImageWrapper>
+        ))}
+      </CardsContainer>
+    </>
   );
 };
 export default Skills;

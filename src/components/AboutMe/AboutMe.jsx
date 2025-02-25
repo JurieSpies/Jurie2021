@@ -92,6 +92,18 @@ const AboutMe = () => (
           CrossFit, Gaming, Learning, Reading and Outdoors
         </StyledHeading>
       </Info>
+      <Info>
+        <StyledSubHeading>Ideal Role</StyledSubHeading>
+        <StyledHeading>
+          Senior Frontend Developer focusing on React ecosystem with opportunities to mentor junior developers. Would also love to work more with AI.
+        </StyledHeading>
+      </Info>
+      <Info>
+        <StyledSubHeading>Work Style</StyledSubHeading>
+        <StyledHeading>
+          Collaborative team player who thrives in agile environments with a focus on user experience.
+        </StyledHeading>
+      </Info>
     </Column>
     <Spacer />
     <Column>
