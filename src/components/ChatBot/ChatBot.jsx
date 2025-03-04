@@ -400,7 +400,7 @@ const ChatBot = () => {
 • Node.js
 • Express.js
 • GraphQL
-• Res
+• Restful APIs
 
 I'm always learning and exploring new technologies!`,
       experience: `💼 Professional Journey:
