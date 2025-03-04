@@ -1,9 +1,10 @@
-import RESUME_DATA from '@/utils/RESUME_DATA.json';
-import { COLOR_BACKGROUND, COLOR_DARK, COLOR_GREY, COLOR_WHITE } from '@/utils/globalColors';
-import { getYearsOfExperience } from '@/utils/helpers';
-import { useState } from 'react';
-import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { COLOR_GREY, COLOR_WHITE, COLOR_DARK, COLOR_BACKGROUND } from '@/utils/globalColors';
+import { IoChatbubbleEllipsesOutline, IoSend } from 'react-icons/io5';
+import RESUME_DATA from '@/utils/RESUME_DATA.json';
+import { getYearsOfExperience } from '@/utils/helpers';
+import { generateGeminiResponse } from '@/services/gemini';
 
 const ChatBotIcon = styled.div`
   position: fixed;
@@ -56,8 +57,31 @@ const ChatMessages = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color:${COLOR_BACKGROUND};
-  `;
+  background-color: ${COLOR_BACKGROUND};
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+
+  /* Chrome, Safari, and Opera scrollbar */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    
+    &:hover {
+      background-color: var(--color-primary-dark);
+    }
+  }
+`;
 
 const OptionsContainer = styled.div`
   display: flex;
@@ -132,9 +156,69 @@ const BotMessageContent = styled.div`
   }
 `;
 
+const InputContainer = styled.div`
+  display: ${props => props.$show ? 'flex' : 'none'};
+  padding: 10px;
+  background-color:${COLOR_BACKGROUND};
+  border-top: 1px solid #eee;
+  gap: 8px;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  background-color:${COLOR_BACKGROUND};
+  color:${COLOR_WHITE};
+  
+  &:focus {
+    border-color: var(--color-primary);
+  }
+`;
+
+const SendButton = styled.button`
+  background: var(--color-primary);
+  color: ${COLOR_WHITE};
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
+  const messagesEndRef = useRef(null); // Add this ref
+
+  // Add this scroll helper function
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Add this useEffect to scroll on messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const options = [
     { label: '👋 Introduction', value: 'intro' },
@@ -142,7 +226,7 @@ const ChatBot = () => {
     { label: '💻 Tech Stack', value: 'tech' },
     { label: '📚 Experience', value: 'experience' },
     { label: '🎯 Current Focus', value: 'focus' },
-    { label: '🤝 Let\'s Connect', value: 'connect' }
+    { label: '🤝 Let\'s Connect', value: 'connect' },
   ];
 
   const formatMessage = (text) => {
@@ -196,12 +280,49 @@ Always excited to discuss new technologies and opportunities!`,
 • <a href="mailto:${RESUME_DATA.email}">Send me an email</a>
 • <a href="${RESUME_DATA.linkedIn}" target="_blank">Connect on LinkedIn</a>
 • <a href="${RESUME_DATA.github}" target="_blank">Check out my GitHub</a>
-• <a href="${window.location.origin}" target="_blank">Visit my portfolio</a>
 
 Looking forward to connecting with you!`
     };
 
     return responses[option] || RESUME_DATA.aboutMe;
+  };
+
+  const handleCustomQuestion = async () => {
+    if (!inputValue.trim() || isLoading) return;
+
+    const userMessage = { text: inputValue, isBot: false };
+    setMessages(prev => [...prev, userMessage]);
+    setInputValue('');
+    setIsLoading(true);
+
+    try {
+      const prompt = `As Jurie Spies' AI assistant, please answer the following question about him: ${inputValue}. Use the following context about Jurie: He is a Software Engineer with ${getYearsOfExperience()}+ years of experience, specializing in React and React Native development. ${RESUME_DATA.aboutMe}`;
+      
+      const response = await generateGeminiResponse(prompt);
+      
+      const botMessage = {
+        text: response,
+        isBot: true,
+        html: true
+      };
+      
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      const errorMessage = {
+        text: "I'm having trouble connecting to the AI service. Please ensure you have a valid API key configured in your environment variables (VITE_GEMINI_API_KEY).",
+        isBot: true
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleCustomQuestion();
+    }
   };
 
   const toggleChat = () => {
@@ -215,6 +336,7 @@ Looking forward to connecting with you!`
   };
 
   const handleOptionClick = (option) => {
+
     const userMessage = { text: options.find(opt => opt.value === option).label, isBot: false };
     const botMessage = { 
       text: generateResponse(option), 
@@ -242,6 +364,7 @@ Looking forward to connecting with you!`
               )}
             </Message>
           ))}
+          <div ref={messagesEndRef} /> {/* Add this div at the end */}
         </ChatMessages>
         <OptionsContainer>
           {options.map((option) => (
@@ -249,12 +372,26 @@ Looking forward to connecting with you!`
               key={option.value}
               onClick={() => handleOptionClick(option.value)}
             >
-              <Label>
               {option.label}
-              </Label>
             </OptionButton>
           ))}
         </OptionsContainer>
+        <InputContainer $show>
+          <Input
+            ref={inputRef}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your question..."
+            disabled={isLoading}
+          />
+          <SendButton 
+            onClick={handleCustomQuestion}
+            disabled={isLoading || !inputValue.trim()}
+          >
+            <IoSend size={16} />
+          </SendButton>
+        </InputContainer>
       </ChatBotContainer>
     </>
   );
