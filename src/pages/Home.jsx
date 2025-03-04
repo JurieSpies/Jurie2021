@@ -16,6 +16,7 @@ import resume from '@/assets/JurieSpiesResume.pdf';
 import { GITHUB_CONFIG } from '@/config/github';
 import RESUME_DATA from '../utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '../utils/helpers';
+import ChatBot from '@/components/ChatBot/ChatBot';
 
 const rotate = keyframes`
   0% {
@@ -594,6 +595,7 @@ const Home = () => {
             </Statistics>
           </StatisticsMainContainer>
         </Center>
+        <ChatBot />
       </PageContainer>
     </>
   );
