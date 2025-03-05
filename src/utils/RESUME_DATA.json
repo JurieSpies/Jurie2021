@@ -68,7 +68,7 @@
     "troubleshooting",
     "problemSolving"
   ],
-  "aboutMe": "I am a hardworking, honest individual with a strong sense of responsibility. I am outgoing and tactful, and able to listen effectively when solving problems. I’m eager to Learn new skills and produce high standards of work.",
+  "aboutMe": "I consider myself a problem-solver at heart with a genuine passion for creating software that makes a difference. In my development journey, I've found that my strongest asset is my ability to bridge the gap between technical solutions and user needs. I thrive in collaborative environments but can also put my head down and work independently when needed. Outside of coding, I enjoy staying up-to-date with tech trends and occasionally contribute to open-source projects. What drives me most is seeing users interact with and benefit from something I've built - that moment when technology truly enhances someone's day.",
   "quote": "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
   "phoneNumber": "+27768862529",
   "dreamCode": "https://dreamcodedev.netlify.app/",
@@ -80,19 +80,19 @@
   "work": [
     {
       "title": "Capitec",
-      "description": "I work as a software engineer for Capitec Bank, where I'm responsible for developing and maintaining a wide range of applications and tools. This includes web applications built with HTML, CSS, and JavaScript, as well as mobile applications built with Kendo UI and Vue.js. I also work with React, Nuxt, and Capacitor to deliver high-quality applications. In addition, I'm involved in the development of internal software development tools and contribute to the improvement of our development processes.",
+      "description": "As a Front-End Software Engineer at Capitec Bank, I'm involved in the full development lifecycle from concept to deployment. I translate business requirements and design mockups into responsive, user-friendly interfaces for both web and mobile banking applications. My work focuses on creating intuitive user experiences while ensuring our solutions balance client value with security and performance. I collaborate with UX designers and other engineers to develop reusable components and optimize application flow. A significant part of my role involves implementing automated testing and CI/CD practices to ensure code reliability. I regularly troubleshoot and debug issues across different environments, and participate in system monitoring to maintain stability. The banking sector presents unique challenges that have sharpened my problem-solving skills, particularly in balancing aesthetic design with strict security requirements. I'm constantly learning new frameworks and technologies to improve our delivery team's capabilities and contribute to Capitec's digital banking innovation.",
       "timeline": "August 2024 - Currently",
       "occupation": "Software Engineer (Front-End)"
     },
     {
       "title": "Open Vantage",
-      "description": "At Open Vantage, I am instrumental in building cutting-edge Web and Mobile Applications using React Native and React. My role extends beyond development to encompass integrating JavaScript solutions. Additionally, I actively manage services for clients, ensuring seamless integration and providing valuable technical expertise. I also handle deployments of React Native apps to the Play Store and App Store.",
+      "description": "During my nearly 5 years at Open Vantage, I specialized in React and React Native development for various client projects. I built and maintained several web applications and mobile apps from scratch, working through the entire development process. One of my main responsibilities was integrating third-party APIs and payment gateways, which taught me a lot about secure data handling. I often found myself taking the lead on front-end architecture decisions, especially for new projects where we needed to establish solid foundations. The deployment process became second nature to me - I handled app submissions to both the Play Store and App Store, navigating their different requirements and review processes. Client communication was a regular part of my role, which helped me develop skills in translating technical concepts for non-technical stakeholders. The variety of projects kept the work interesting and pushed me to continuously expand my skill set.",
       "timeline": "September 2019 - July 2024",
       "occupation": "Software Engineer (Front-End)"
     },
     {
       "title": "Verge Technologies",
-      "description": "Developed mobile applications with React Native, contributing to the entire development lifecycle. Collaborated with cross-functional teams, optimized performance, and ensured seamless platform integration. Gained valuable insights into mobile app architecture and solidified skills in React Native.",
+      "description": "My time at Verge Technologies marked my entry into professional software development. I joined as a Junior Developer focused on React Native mobile applications. The team took a chance on me despite my limited experience, and I worked hard to prove their decision right. I started with small bug fixes and UI tweaks, gradually taking on more complex features as I gained confidence. Working alongside senior developers gave me invaluable insights into code organization and best practices. By the end of my time there, I had contributed significantly to two complete mobile applications that were successfully launched to users. This experience solidified my interest in front-end development and gave me a practical understanding of the development lifecycle that theoretical knowledge alone couldn't provide.",
       "timeline": "March 2019 - August 2019",
       "occupation": "Jnr Software developer (Front-End)"
     }

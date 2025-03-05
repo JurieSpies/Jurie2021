@@ -87,7 +87,7 @@ const Responsibilities = () => (
       <Info>
         <StyledSubHeading>Front-End Development</StyledSubHeading>
         <Description>
-          I build user-friendly websites and mobile apps using React and React Native. I work with tools like Redux to manage data and connect to various APIs to make everything work smoothly.
+          I build user-friendly websites and mobile apps using React,React Native and Vuejs. I work with tools like Axios,Tanstack,Redux,Jotai and Context API to manage data and connect to various APIs to make everything work smoothly.
         </Description>
       </Info>
       <Info>
@@ -99,7 +99,7 @@ const Responsibilities = () => (
       <Info>
         <StyledSubHeading>Technical Leadership</StyledSubHeading>
         <Description>
-          I help guide the technical direction of projects and review code to maintain high quality. I work closely with team members to plan features and make sure we're meeting business goals.
+          Beyond writing code, I've grown into guiding technical decisions and mentoring team members. I enjoy the collaborative aspects of code reviews – both giving constructive feedback and receiving it. I've learned that aligning technical choices with business goals is just as important as writing elegant code.
         </Description>
       </Info>
       <Info>
@@ -111,13 +111,13 @@ const Responsibilities = () => (
       <Info>
         <StyledSubHeading>Collaboration and Communication</StyledSubHeading>
         <Description>
-          I work well with designers, testers, and product managers to build great software. I make sure to keep everyone updated on progress and discuss any concerns openly.
+          Some of my best work has come from close collaboration with designers and product managers. I've learned to translate technical concepts for non-technical stakeholders and, equally important, to understand business needs and translate them into technical requirements. Clear communication has saved countless hours of rework.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Documentation and Knowledge Sharing</StyledSubHeading>
         <Description>
-          I write clear documentation for code and processes to help the team understand how things work. I also enjoy teaching others and sharing what I know through wikis and mentoring.
+          I believe good documentation is a gift to your future self and your team. I've created everything from API docs to onboarding guides. Teaching concepts to others has deepened my own understanding, whether through pair programming sessions, tech talks, or simply answering questions in Slack threads.
         </Description>
       </Info>
       <Info>
@@ -135,14 +135,13 @@ const Responsibilities = () => (
       <Info>
         <StyledSubHeading>Tool Proficiency</StyledSubHeading>
         <Description>
-          I'm experienced with common development tools like Git for code management, VS Code for writing code, and team collaboration tools like Clickup and Discord.
+          I'm experienced with common development tools like Git for code management, VS Code for writing code, and team collaboration tools like Clickup , Discord , Jira , Microsoft Teams , Slack , Figma and more.
         </Description>
       </Info>
       <Info>
         <StyledSubHeading>Project Domain Expertise</StyledSubHeading>
         <Description>
-          Managing projects within diverse domains including PropTech, CCTV solutions, video monitoring, product solutions, loyalty systems, budgeting, fitness, payment solutions, and more.
-          Leveraging domain knowledge to develop tailored solutions that meet specific business requirements and industry standards.
+          I've had the privilege of working across diverse industries – from PropTech and security systems to fitness apps and payment solutions. Each domain has taught me something valuable. I enjoy the challenge of diving into a new industry, learning its unique requirements, and applying my technical skills to solve domain-specific problems.
         </Description>
       </Info>
 

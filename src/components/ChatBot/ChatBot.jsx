@@ -6,7 +6,6 @@ import RESUME_DATA from '@/utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '@/utils/helpers';
 import { generateGeminiResponse } from '@/services/gemini';
 
-// Animation keyframes
 const pulse = keyframes`
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
@@ -40,30 +39,6 @@ const ChatBotWrapper = styled.div`
     height: 70px;
     top: 55px;
     right: 5px;
-  }
-`;
-
-const ChatBotLabel = styled.div`
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #00f5a0, #00d9f5);
-  color: ${COLOR_WHITE};
-  padding: 3px 8px;
-  border-radius: 10px;
-  font-size: 9px;
-  font-weight: 600;
-  text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-  z-index: 1;
-  
-  @media (max-width: 768px) {
-    font-size: 8px;
-    padding: 2px 6px;
-    top: -12px;
   }
 `;
 
@@ -169,12 +144,9 @@ const ChatMessages = styled.div`
   flex-direction: column;
   gap: 15px;
   background-color: ${COLOR_BACKGROUND};
-
-  /* Firefox scrollbar */
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary) transparent;
 
-  /* Chrome, Safari, and Opera scrollbar */
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -235,11 +207,6 @@ const OptionButton = styled.button`
     padding: 8px 16px;
     font-size: 14px;
   }
-`;
-
-const Label = styled.span`
-  font-size: 14px;
-  color: ${COLOR_DARK};
 `;
 
 const Message = styled.div`
@@ -354,14 +321,12 @@ const ChatBot = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
-  const messagesEndRef = useRef(null); // Add this ref
+  const messagesEndRef = useRef(null);
 
-  // Add this scroll helper function
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Add this useEffect to scroll on messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -516,7 +481,7 @@ Looking forward to connecting with you!`
               )}
             </Message>
           ))}
-          <div ref={messagesEndRef} /> {/* Add this div at the end */}
+          <div ref={messagesEndRef} />
         </ChatMessages>
         <OptionsContainer>
           {options.map((option) => (

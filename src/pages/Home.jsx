@@ -498,9 +498,7 @@ const Home = () => {
                 Jurie Spies
               </Jurie>
               <Description>
-                I'm a passionate Software Engineer with {getYearsOfExperience()}+ years of experience crafting web and mobile applications. 
-                I specialize in React and React Native, and I'm particularly drawn to projects that challenge me to solve complex UX problems.
-                What sets me apart is my ability to bridge technical implementation with user-centered design thinking.
+                Building digital experiences has been my passion for over {getYearsOfExperience()} years now. I develop responsive web apps and intuitive mobile solutions, with React and React Native as my tools of choice. What I enjoy most is tackling those tricky UX challenges – finding that sweet spot where code meets human behavior. When I'm not debugging or optimizing performance, you'll find me exploring new frameworks or brainstorming better ways to translate design concepts into functional interfaces.
               </Description>
               <br />
               <TypedContainer>
