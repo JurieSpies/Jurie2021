@@ -6,6 +6,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import AboutMe from '../components/AboutMe/AboutMe';
 import Responsibilities from '../components/AboutMe/Respnsibilities';
+import Recommendations from '../components/AboutMe/Recommendations';
 import Education from '../components/Skills/Education';
 import { COLOR_GREY } from '../utils/globalColors';
 
@@ -117,6 +118,7 @@ const Resume = () => {
     'Skills',
     'Education',
     'About me',
+    'Recommendations',
   ];
 
   const selectionHandler = (e) => {
@@ -130,6 +132,7 @@ const Resume = () => {
       Responsibilities: 'Work Responsibilities',
       Education: 'Education',
       'About me': 'About Me',
+      'Recommendations': 'LinkedIn Recommendations',
     };
 
     const subTitle = {
@@ -167,6 +170,7 @@ const Resume = () => {
           {activeSelection === 'Responsibilities' && <Responsibilities />}
           {activeSelection === 'Education' && <Education />}
           {activeSelection === 'About me' && <AboutMe /> }
+          {activeSelection === 'Recommendations' && <Recommendations />}
         </Selections>
       </Right>
     </Main>
