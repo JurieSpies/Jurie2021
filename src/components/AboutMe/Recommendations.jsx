@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { COLOR_GREY, COLOR_WHITE } from '../../utils/globalColors';
+import { COLOR_GREY, COLOR_WHITE, COLOR_PRIMARY } from '../../utils/globalColors';
 import { Heading, SubHeading } from '../../utils/globalFonts';
+import { FaLinkedinIn } from 'react-icons/fa';
 
 // https://www.linkedin.com/in/juriespies/details/recommendations/
 
@@ -107,6 +108,38 @@ const CardsContainer = styled.div`
   }
 `;
 
+const LinkedInButton = styled.a`
+  display: flex;
+  align-items: center;
+  background: rgba(10, 102, 194, 0.8);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  width: fit-content;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    background: rgba(10, 102, 194, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const LinkedInIcon = styled(FaLinkedinIn)`
+  margin-right: 10px;
+  font-size: 18px;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
 const Recommendations = () => {
   // Data structure to hold recommendation information
   const recommendations = [
@@ -162,7 +195,17 @@ const Recommendations = () => {
 
   return (
     <CardsContainer>
-      <StyledHeading>Recommendations</StyledHeading>
+      <HeaderContainer>
+        <StyledHeading>Recommendations</StyledHeading>
+        <LinkedInButton 
+          href="https://www.linkedin.com/in/juriespies/details/recommendations/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <LinkedInIcon />
+          View on LinkedIn
+        </LinkedInButton>
+      </HeaderContainer>
       {recommendations.map((recommendation) => (
         <RecommendationCard key={recommendation.id}>
           <Avatar>
