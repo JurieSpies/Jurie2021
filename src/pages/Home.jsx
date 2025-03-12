@@ -1,22 +1,26 @@
-import Button from '@/components/Button/Button';
-import { COLOR_GREY, COLOR_WHITE } from '@/utils/globalColors';
-import { GlobalColors } from '@/utils/globalColors';
-import { Heading, SubHeading } from '@/utils/globalFonts';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import CountUp from 'react-countup';
-import { AiOutlineDownload, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { IoLogoGooglePlaystore } from 'react-icons/io5';
-import { PiBracketsAngleBold } from 'react-icons/pi';
-import ReactTyped from 'react-typed';
-import styled, { keyframes, createGlobalStyle } from 'styled-components';
-import profilePic from '@/assets/images/JuriePPbw3.png';
-import resume from '@/assets/JurieSpiesResume.pdf';
-import { GITHUB_CONFIG } from '@/config/github';
-import RESUME_DATA from '../utils/RESUME_DATA.json';
-import { getYearsOfExperience } from '../utils/helpers';
-import ChatBot from '@/components/ChatBot/ChatBot';
+import Button from "@/components/Button/Button";
+import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE } from "@/utils/globalColors";
+import { GlobalColors } from "@/utils/globalColors";
+import { Heading, SubHeading } from "@/utils/globalFonts";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import CountUp from "react-countup";
+import {
+  AiOutlineDownload,
+  AiOutlineMail,
+  AiOutlinePhone,
+} from "react-icons/ai";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { PiBracketsAngleBold } from "react-icons/pi";
+import ReactTyped from "react-typed";
+import styled, { keyframes, createGlobalStyle } from "styled-components";
+import profilePic from "@/assets/images/JuriePPbw3.png";
+import resume from "@/assets/JurieSpiesResume.pdf";
+import { GITHUB_CONFIG } from "@/config/github";
+import RESUME_DATA from "../utils/RESUME_DATA.json";
+import { getYearsOfExperience } from "../utils/helpers";
+import ChatBot from "@/components/ChatBot/ChatBot";
 
 const rotate = keyframes`
   0% {
@@ -133,7 +137,9 @@ const StatisticsMainContainer = styled.div`
     gap: 20px;
     justify-content: center;
     margin-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px);
-    margin-bottom: calc(constant(safe-area-inset-bottom, 20px) + 20px); /* For older iOS */
+    margin-bottom: calc(
+      constant(safe-area-inset-bottom, 20px) + 20px
+    ); /* For older iOS */
   }
 `;
 
@@ -203,7 +209,9 @@ const PageContainer = styled.div`
   @media (max-width: 768px) {
     padding: 20px;
     padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 60px);
-    padding-bottom: calc(constant(safe-area-inset-bottom, 20px) + 60px); /* For older iOS */
+    padding-bottom: calc(
+      constant(safe-area-inset-bottom, 20px) + 60px
+    ); /* For older iOS */
     justify-content: flex-start;
     padding-top: max(40px, env(safe-area-inset-top, 40px));
     overscroll-behavior-y: none;
@@ -336,7 +344,7 @@ const InfoContainer = styled.div`
 
 const Jurie = styled(Heading)`
   color: var(--color-primary);
-  font-size:72px;
+  font-size: 72px;
 
   /* mobile */
   @media (max-width: 768px) {
@@ -429,7 +437,7 @@ const SocialIcon = styled.div`
 `;
 
 const getLinesOfCode = () => {
-  const refDate = '2019-03-01';
+  const refDate = "2019-03-01";
   const today = new Date();
   const linesOfCodePerDay = 20;
   const diff = today - new Date(refDate);
@@ -438,7 +446,7 @@ const getLinesOfCode = () => {
 };
 
 const getCupsOfCoffee = () => {
-  const refDate = '2019-03-01';
+  const refDate = "2019-03-01";
   const today = new Date();
   const cupsPerDay = 1;
   const diff = today - new Date(refDate);
@@ -448,20 +456,20 @@ const getCupsOfCoffee = () => {
 
 const Home = () => {
   const { data: totalRepositories } = useQuery({
-    queryKey: ['githubRepos'],
+    queryKey: ["githubRepos"],
     queryFn: async () => {
       try {
         const response = await axios({
-          method: 'get',
+          method: "get",
           url: `https://api.github.com/users/${GITHUB_CONFIG.USERNAME}/repos`,
           headers: {
-            Accept: 'application/vnd.github+json',
-            'X-GitHub-Api-Version': GITHUB_CONFIG.API_VERSION,
+            Accept: "application/vnd.github+json",
+            "X-GitHub-Api-Version": GITHUB_CONFIG.API_VERSION,
           },
         });
         return { total_count: response.data.length + 25 }; // Adding 25 to account for private repos
       } catch (error) {
-        console.log('Error fetching GitHub repos:', error);
+        console.log("Error fetching GitHub repos:", error);
         return { total_count: 66 }; // Fallback value on error
       }
     },
@@ -488,21 +496,31 @@ const Home = () => {
         <Center>
           <Main>
             <InfoContainer>
-              <Occupation>
-                Software Engineer
-              </Occupation>
-              <StyledHeading>
-                Hello, I&apos;m
-              </StyledHeading>
-              <Jurie>
-                Jurie Spies
-              </Jurie>
+              <Occupation>Software Engineer</Occupation>
+              <StyledHeading>Hello, I&apos;m</StyledHeading>
+              <Jurie>Jurie Spies</Jurie>
               <Description>
-                Building digital experiences has been my passion for over {getYearsOfExperience()} years now. I develop responsive web apps and intuitive mobile solutions, with React and React Native as my tools of choice. What I enjoy most is tackling those tricky UX challenges – finding that sweet spot where code meets human behavior. When I'm not debugging or optimizing performance, you'll find me exploring new frameworks or brainstorming better ways to translate design concepts into functional interfaces.
+                Building digital experiences has been my passion for over{" "}
+                {getYearsOfExperience()} years now. I develop responsive web
+                apps and intuitive mobile solutions, with React and React Native
+                as my tools of choice. What I enjoy most is tackling those
+                tricky UX challenges – finding that sweet spot where code meets
+                human behavior. When I'm not debugging or optimizing
+                performance, you'll find me exploring new frameworks or
+                brainstorming better ways to translate design concepts into
+                functional interfaces.
               </Description>
+              <AINote>
+                With AI, anyone can build a portfolio website like this. But if
+                it were that easy, why aren’t more people doing it? The truth
+                is, technology can assist—but it can’t replace dedication,
+                curiosity, and the drive to build something meaningful. I may
+                not have the highest formal education, but I am not lazy. I
+                learn, I build, and I improve. That’s what sets me apart.
+              </AINote>
               <br />
               <TypedContainer>
-                {'{'}
+                {"{"}
                 <ReactTyped
                   strings={RESUME_DATA.coolSoftwareTitles}
                   typeSpeed={60}
@@ -510,7 +528,7 @@ const Home = () => {
                   shuffle
                   loop
                 />
-                {'}'}
+                {"}"}
               </TypedContainer>
             </InfoContainer>
             <ProfilePicContainer>
@@ -519,17 +537,29 @@ const Home = () => {
             </ProfilePicContainer>
           </Main>
           <SocialsContainer>
-            <Button invert onClick={() => window.open(resume, '_blank')} rel="noreferrer">
+            <Button
+              invert
+              onClick={() => window.open(resume, "_blank")}
+              rel="noreferrer"
+            >
               <>
                 Download CV
                 <DownloadIcon />
               </>
             </Button>
             <AllIcons>
-              <SocialIconContainer href={RESUME_DATA.github} target="_blank" rel="noreferrer">
+              <SocialIconContainer
+                href={RESUME_DATA.github}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <GithubIcon />
               </SocialIconContainer>
-              <SocialIconContainer href={RESUME_DATA.linkedIn} target="_blank" rel="noreferrer">
+              <SocialIconContainer
+                href={RESUME_DATA.linkedIn}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <LinkedInIcon />
               </SocialIconContainer>
               <SocialIconContainer href={`tel:${RESUME_DATA.phoneNumber}`}>
@@ -538,30 +568,32 @@ const Home = () => {
               <SocialIconContainer href={`mailto:${RESUME_DATA.email}`}>
                 <MailIcon />
               </SocialIconContainer>
-              <SocialIconContainer href={RESUME_DATA.dreamCode} target="_blank" rel="noreferrer">
+              <SocialIconContainer
+                href={RESUME_DATA.dreamCode}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <DreamCodeIcon />
               </SocialIconContainer>
-              <SocialIconContainer href={RESUME_DATA.dreamCodePlayStore} target="_blank" rel="noreferrer">
+              <SocialIconContainer
+                href={RESUME_DATA.dreamCodePlayStore}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <PlayStoreIcon />
               </SocialIconContainer>
             </AllIcons>
           </SocialsContainer>
           <StatisticsMainContainer>
             <Statistics>
-              <StatisticsNumber>
-                {getYearsOfExperience()}
-              </StatisticsNumber>
-              <StyledSubHeading>
-                Years of Experience
-              </StyledSubHeading>
+              <StatisticsNumber>{getYearsOfExperience()}</StatisticsNumber>
+              <StyledSubHeading>Years of Experience</StyledSubHeading>
             </Statistics>
             <Statistics>
               <StatisticsNumber>
-                {totalRepositories?.total_count ?? '66'}
+                {totalRepositories?.total_count ?? "66"}
               </StatisticsNumber>
-              <StyledSubHeading>
-                Projects
-              </StyledSubHeading>
+              <StyledSubHeading>Projects</StyledSubHeading>
             </Statistics>
             <Statistics>
               <StatisticsNumber>
@@ -573,9 +605,7 @@ const Home = () => {
                   useEasing={false}
                 />
               </StatisticsNumber>
-              <StyledSubHeading>
-                Lines of Code
-              </StyledSubHeading>
+              <StyledSubHeading>Lines of Code</StyledSubHeading>
             </Statistics>
             <Statistics>
               <StatisticsNumber>
@@ -587,9 +617,7 @@ const Home = () => {
                   useEasing={false}
                 />
               </StatisticsNumber>
-              <StyledSubHeading>
-                Cups of Coffee
-              </StyledSubHeading>
+              <StyledSubHeading>Cups of Coffee</StyledSubHeading>
             </Statistics>
           </StatisticsMainContainer>
         </Center>
@@ -599,3 +627,13 @@ const Home = () => {
   );
 };
 export default Home;
+
+const AINote = styled.div`
+  color: ${COLOR_GREY};
+  font-size: 14px;
+  margin-top: 20px;
+  font-style: italic;
+  padding: 15px;
+  border-left: 2px solid ${COLOR_PRIMARY};
+  background: rgba(255, 255, 255, 0.05);
+`;

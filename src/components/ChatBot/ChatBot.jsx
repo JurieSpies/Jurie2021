@@ -81,7 +81,7 @@ const ChatBotContainer = styled.div`
   background: ${COLOR_BACKGROUND};
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  display: ${(props) => (props.isOpen ? "flex" : "none")};
+  display: ${(props) => (props.$isOpen ? "flex" : "none")};
   flex-direction: column;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -214,9 +214,9 @@ const Message = styled.div`
   padding: 15px 20px;
   border-radius: 15px;
   max-width: 85%;
-  background: ${(props) => (props.isBot ? COLOR_GREY : "linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))")};
-  color: ${(props) => (props.isBot ? "#1a1a1a" : COLOR_WHITE)};
-  align-self: ${(props) => (props.isBot ? "flex-start" : "flex-end")};
+  background: ${(props) => (props.$isBot ? COLOR_GREY : "linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))")};
+  color: ${(props) => (props.$isBot ? "#1a1a1a" : COLOR_WHITE)};
+  align-self: ${(props) => (props.$isBot ? "flex-start" : "flex-end")};
   font-size: 15px;
   line-height: 1.5;
   white-space: pre-wrap;
@@ -464,7 +464,7 @@ Looking forward to connecting with you!`
           <IoChatbubbleEllipsesOutline size={24} color="white" />
         </ChatBotIcon>
       </ChatBotWrapper>
-      <ChatBotContainer isOpen={isOpen}>
+      <ChatBotContainer $isOpen={isOpen}>
         <ChatHeader>
           <h2>Chat with Jurie's Assistant</h2>
           <CloseButton onClick={toggleChat}>
@@ -473,7 +473,7 @@ Looking forward to connecting with you!`
         </ChatHeader>
         <ChatMessages>
           {messages.map((message, index) => (
-            <Message key={index} isBot={message.isBot}>
+            <Message key={index} $isBot={message.isBot}>
               {message.html ? (
                 <BotMessageContent dangerouslySetInnerHTML={{ __html: message.text }} />
               ) : (
