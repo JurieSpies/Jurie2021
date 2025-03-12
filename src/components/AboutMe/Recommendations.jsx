@@ -1,18 +1,9 @@
-import styled from 'styled-components';
-import { COLOR_GREY, COLOR_WHITE, COLOR_PRIMARY } from '../../utils/globalColors';
-import { Heading, SubHeading } from '../../utils/globalFonts';
 import { FaLinkedinIn } from 'react-icons/fa';
+import styled from 'styled-components';
+import { COLOR_GREY, COLOR_WHITE } from '../../utils/globalColors';
+import { SubHeading } from '../../utils/globalFonts';
 
 // https://www.linkedin.com/in/juriespies/details/recommendations/
-
-const StyledHeading = styled(Heading)`
-  font-size: 24px;
-  margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    font-size: 20px;
-  }
-`;
 
 const StyledSubHeading = styled(SubHeading)`
   font-size: 18px;
@@ -196,7 +187,6 @@ const Recommendations = () => {
   return (
     <CardsContainer>
       <HeaderContainer>
-        <StyledHeading>Recommendations</StyledHeading>
         <LinkedInButton 
           href="https://www.linkedin.com/in/juriespies/details/recommendations/" 
           target="_blank" 
