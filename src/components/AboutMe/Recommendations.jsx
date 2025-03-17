@@ -136,6 +136,14 @@ const Recommendations = () => {
   const recommendations = [
     {
       id: 1,
+      name: "Richan Fourie",
+      title: "Business Analyst, Project & Operations Management",
+      relationship: "March 13, 2025, Richan worked with Jurie on the same team",
+      imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQF_ra3j4IklRw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1705472705646?e=1747872000&v=beta&t=mSFU13aVg2Umxj6TSxysgJfjHje06JwulM-CzF8V9yM",
+      text: "Jurie's capacity for problem solving is unrivalled. His ability to learn and adapt is far beyond any dev i've had the privilege to work with."
+    },
+    {
+      id: 2,
       name: "Marucelle McCallum",
       title: "Project Manager",
       relationship: "June 17, 2024, Marucelle managed Jurie directly",
@@ -143,7 +151,7 @@ const Recommendations = () => {
       text: "I've had the pleasure of working with Jurie on multiple project over the last four years at Open Vantage, where he has consistently shown exceptional dedication and commitment.\n\nHe is extremely reliable and an outstanding team player. His positive attitude and eagerness to help colleagues create a fun and collaborative work environment.\n\nI would highly recommend Jurie, as he would be a valuable asset to any team, bringing exceptional skills and a fantastic can-do attitude."
     },
     {
-      id: 2,
+      id: 3,
       name: "Ruan Carstens",
       title: "QA Engineer",
       relationship: "June 14, 2024, Ruan worked with Jurie on the same team",
@@ -151,7 +159,7 @@ const Recommendations = () => {
       text: "When I began my journey at OpenVantage, I had the privilege of working alongside Jurie. His qualities as a developer, such as tenacity and diligence, stood out to me. Jurie possesses the ability to take initiative and trust his instincts, which is a valuable trait not always found in developers. As a QA, I appreciated that giving him feedback was a collaborative process, and he didn't become discouraged by it. During that time, our design and UX processes were still evolving, allowing for creativity and ingenuity, which Jurie fully embraced.\n\nUnlike some developers who strictly adhere to documentation and acceptance criteria, Jurie isn't afraid to question things he disagrees with. This proactive approach is a vital asset for QA professionals. Although Jurie has since moved on to another project focused on mobile app development, we still keep in touch outside of work hours.\n\nI continue to be impressed by Jurie's passion and drive. He dedicates time to exercise and then seamlessly transitions back to coding, reading, and studying the latest coding approaches. In addition, he has even developed his own application, which is available on the Google Play store, to support his exercise routine.\n\nIn summary, Jurie's qualities and attitude are unmatched. He thrives on challenges and consistently seeks opportunities for growth."
     },
     {
-      id: 3,
+      id: 4,
       name: "Kinesh Pillay",
       title: "Senior Business Analyst at Entelect",
       relationship: "June 14, 2024, Kinesh worked with Jurie on the same team",
@@ -159,7 +167,7 @@ const Recommendations = () => {
       text: "I have had the honour of working with Jurie on multiple projects. Jurie is a really hard worker that puts his all in the work he does. He ensures his tasks gets done on time and when it cant, he communicates to let the team know. Jurie takes great pride in what he does ensuring he completes his tasks with the utmost quality. I would definitely recommend Jurie to any company that wants to pursue employment with him."
     },
     {
-      id: 4,
+      id: 5,
       name: "Wian Van Schalkwyk",
       title: "Front-End developer| React, React Native",
       relationship: "June 14, 2024, Wian worked with Jurie but on different teams",
@@ -167,7 +175,7 @@ const Recommendations = () => {
       text: "Jurie's dedication and determination are unparalleled. I've had the honor of being mentored by Jurie and collaborating with him on multiple projects.\n\nHis commitment to excellence leaves no room for uncertainty. Jurie consistently ensures that projects adhere to best practices, ensuring smooth execution.\n\nJurie's wealth of knowledge and knack for problem-solving are invaluable assets. He fosters teamwork, ensuring everyone is included and supported.\n\nHaving someone of Jurie's caliber on a team is genuinely enriching and inspiring."
     },
     {
-      id: 5,
+      id: 6,
       name: "Nicola Spies",
       title: "Software Analyst / UI/UX Design",
       relationship: "June 14, 2024, Nicola managed Jurie directly",
@@ -175,7 +183,7 @@ const Recommendations = () => {
       text: "Jurie is hands down the best front-end engineer I have ever worked with. He is an absolute pleasure to collaborate with, putting in the grind and working tirelessly until the job is done. His dedication and hard work are unmatched, and his expertise in CSS is truly remarkable. Jurie's attention to the smallest pixels sets him apart, and as someone who is very critical of UI/UX, this is one of the things that stood out to me the most. He is one of the few developers who rigorously tests his work, ensuring it is perfect upon delivery. Working with Jurie is a joy, and I highly recommend him."
     },
     {
-      id: 6,
+      id: 7,
       name: "Gus Visagie",
       title: "Systems & Automation Engineer",
       relationship: "July 3, 2019, Gus managed Jurie directly",
