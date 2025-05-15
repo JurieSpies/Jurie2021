@@ -10,6 +10,20 @@ const StyledSubHeading = styled(SubHeading)`
   }
 `;
 
+const CompanyLogo = styled.img`
+  display: flex;
+  flex: 1;
+  align-self: center;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--color-primary);
+  padding: 5px;
+  background-color: white;
+  width: 140px;
+  height: 29px;
+  object-fit: contain;
+`;
+
 const CardsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
@@ -62,8 +76,9 @@ const Experience = () => {
     <CardsContainer>
       {work.map((workItem) => (
         <ExperienceCard key={workItem.title}>
+          {workItem.logo && <CompanyLogo src={workItem.logo} alt={workItem.title} ></CompanyLogo>}
           <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
-          <StyledSubHeading>{workItem.title}</StyledSubHeading>
+          {workItem.title && <StyledSubHeading>{workItem.title}</StyledSubHeading>}
           <br />
           <StyledSubHeading fontWeight="thin" style={{ color: 'var(--color-primary)' }}>
             <li>

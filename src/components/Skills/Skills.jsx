@@ -6,6 +6,7 @@ import js from '../../assets/skillIcons/js.svg';
 import react from '../../assets/skillIcons/react.svg';
 import typescript from '../../assets/skillIcons/typescript.svg';
 import azure from '../../assets/skillIcons/azure.svg';
+import angular from '../../assets/skillIcons/angular.svg';
 import cypress from '../../assets/skillIcons/cypress.svg';
 import docker from '../../assets/skillIcons/docker.svg';
 import vue from '../../assets/skillIcons/vue.svg';
@@ -15,6 +16,7 @@ import discord from '../../assets/skillIcons/discord.svg';
 import figma from '../../assets/skillIcons/figma.svg';
 import git from '../../assets/skillIcons/git.svg';
 import github from '../../assets/skillIcons/github.svg';
+import kendoui from '../../assets/skillIcons/kendoui.svg';
 import githubactions from '../../assets/skillIcons/githubactions.svg';
 import gitlab from '../../assets/skillIcons/gitlab.svg';
 import firebase from '../../assets/skillIcons/firebase.svg';
@@ -109,6 +111,7 @@ const Skills = () => {
     { svg: react, title: 'react' },
     { svg: typescript, title: 'typescript' },
     { svg: azure, title: 'azure' },
+    { svg: angular, title: 'angular' },
     { svg: cypress, title: 'cypress' },
     { svg: docker, title: 'docker' },
     { svg: eslint, title: 'eslint' },
@@ -116,7 +119,8 @@ const Skills = () => {
     { svg: figma, title: 'figma' },
     { svg: git, title: 'git' },
     { svg: github, title: 'github' },
-    { svg: githubactions, title: 'githubactions' },
+    { svg: kendoui, title: 'kendoUi' },
+    { svg: githubactions, title: 'github actions' },
     { svg: gitlab, title: 'gitlab' },
     { svg: firebase, title: 'firebase' },
     { svg: graphql, title: 'graphql' },
@@ -160,7 +164,7 @@ const Skills = () => {
       <CardsContainer>
         {randomizedSkills.map((skill, index) => (
           <ImageWrapper key={index}>
-            <img src={skill.svg} alt={`${skill.title} Logo`} />
+            <img src={skill.svg} alt={`${skill.title} Logo`} height='58'/>
             <IconTitle>{skill.title}</IconTitle>
           </ImageWrapper>
         ))}

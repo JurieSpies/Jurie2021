@@ -79,9 +79,15 @@
   "resume": "https://drive.google.com/file/d/1EbNpgHpoXuZCyBq5UkU8BhJGE9Xu7Mf4/view?usp=sharing",
   "work": [
     {
-      "title": "Capitec",
-      "description": "As a Front-End Software Engineer at Capitec Bank, I'm involved in the full development lifecycle from concept to deployment. I translate business requirements and design mockups into responsive, user-friendly interfaces for both web and mobile banking applications. My work focuses on creating intuitive user experiences while ensuring our solutions balance client value with security and performance. I collaborate with UX designers and other engineers to develop reusable components and optimize application flow. A significant part of my role involves implementing automated testing and CI/CD practices to ensure code reliability. I regularly troubleshoot and debug issues across different environments, and participate in system monitoring to maintain stability. The banking sector presents unique challenges that have sharpened my problem-solving skills, particularly in balancing aesthetic design with strict security requirements. I'm constantly learning new frameworks and technologies to improve our delivery team's capabilities and contribute to Capitec's digital banking innovation.",
-      "timeline": "August 2024 - Currently",
+      "logo":"https://www.takealot.com/b245eaf03bdcf749830177d9d525bfaf08b264f9/static/media/src/images/logo.svg-f6ccb489b85bbddf97d6.svg",
+      "description": "I work for South Africa's largest online retailer and e-commerce platform ;)",
+      "timeline": "July 2025 - Currently",
+      "occupation": "Software Engineer"
+    },
+    {
+      "logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Capitec_Bank_logo.svg/330px-Capitec_Bank_logo.svg.png",
+      "description": "I worked for South Africa's largest bank as a Front-End Software Engineer, creating intuitive interfaces for our banking application. I helped with development of the new 'Devices' section, enabling customers to purchase phones and schedule returns directly through the Capitec app. This feature has been particularly rewarding as I was able to build it from concept to completion.",
+      "timeline": "August 2024 - June 2025",
       "occupation": "Software Engineer (Front-End)"
     },
     {
