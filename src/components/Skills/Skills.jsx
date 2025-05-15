@@ -145,7 +145,7 @@ const Skills = () => {
 
   return (
     <>
-      <TopSkills>
+      {/* <TopSkills>
         <SkillTitle>Desired Roles</SkillTitle>
         <SkillList>
           {['Senior Frontend Developer', 'React Native Developer', 'Agentic AI'].map(role => (
@@ -159,7 +159,7 @@ const Skills = () => {
             <SkillTag key={skill}>{skill}</SkillTag>
           ))}
         </SkillList>
-      </TopSkills>
+      </TopSkills> */}
       
       <CardsContainer>
         {randomizedSkills.map((skill, index) => (

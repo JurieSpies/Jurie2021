@@ -74,8 +74,8 @@ const Experience = () => {
 
   return (
     <CardsContainer>
-      {work.map((workItem) => (
-        <ExperienceCard key={workItem.title}>
+      {work.map((workItem, index) => (
+        <ExperienceCard key={`${workItem.title}-${index}`}>
           {workItem.logo && <CompanyLogo src={workItem.logo} alt={workItem.title} ></CompanyLogo>}
           <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
           {workItem.title && <StyledSubHeading>{workItem.title}</StyledSubHeading>}
