@@ -10,19 +10,11 @@ import ColorPicker from './components/ColorPicker/ColorPicker';
 // https://www.youtube.com/watch?v=dImgZ_AH7uA
 
 const Main = styled.div`
-  overflow: hidden;
   display: flex;
   width: 100%;
-  position: fixed;
-
-  @media (min-width: 768px) {
+  min-height: 100vh;
   position: relative;
-  }
-
-
-  @media (max-width: 768px) {
-  position: relative;
-  }
+  overflow-x: hidden;
 `;
 
 const RenderDesktop = styled.div`
@@ -40,11 +32,11 @@ const RenderMobile = styled.div`
 const PageContainer = styled.div`
   display: flex;
   width: 100%;
-  flex:1;
+  flex: 1;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-  }
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Spacer = styled.div`

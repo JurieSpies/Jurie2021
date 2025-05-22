@@ -4,7 +4,7 @@ body,
 #root {
   /* height: 100dvh; */
   /* width: 100dvw; */
-  height: 100vh; /* Fallback if browsers does not support dvh */
+  min-height: 100vh; /* Changed from height to min-height */
   width: 100vw; /* Fallback if browsers does not support dvw */
   overflow-x: hidden;
   padding: 0;
@@ -19,9 +19,9 @@ body,
 
   /* For mobile devices */
   @media (max-width: 768px) {
-    height: 100%;
-    position: fixed;
-    overflow-y: scroll;
+    min-height: 100vh; /* Changed from height: 100% */
+    position: relative; /* Changed from fixed */
+    overflow-y: auto; /* Changed from scroll */
     -webkit-overflow-scrolling: touch;
   }
 }

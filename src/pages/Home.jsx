@@ -21,7 +21,7 @@ import { GITHUB_CONFIG } from "@/config/github";
 import RESUME_DATA from "../utils/RESUME_DATA.json";
 import { getYearsOfExperience } from "../utils/helpers";
 import ChatBot from "@/components/ChatBot/ChatBot";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const rotate = keyframes`
   0% {
@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   body {
     margin: 0;
     padding: 0;
@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     position: relative;
     padding-bottom: env(safe-area-inset-bottom, 0px);
-    
+
     @media (min-height: 800px) {
       overflow-y: auto !important; /* Force auto instead of hidden */
     }
@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: auto !important;
     overflow-x: hidden;
     position: relative;
-    
+
     @media (min-height: 800px) {
       overflow-y: auto !important; /* Force auto instead of hidden */
     }
@@ -114,10 +114,11 @@ const StatisticsMainContainer = styled.div`
     margin-top: 20px;
     gap: 20px;
     justify-content: center;
-    margin-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px);
+    margin-bottom: calc(env(safe-area-inset-bottom, 40px) + 40px);
     margin-bottom: calc(
-      constant(safe-area-inset-bottom, 20px) + 20px
+      constant(safe-area-inset-bottom, 40px) + 40px
     ); /* For older iOS */
+    padding-bottom: 20px; /* Additional padding for safety */
   }
 `;
 
@@ -160,12 +161,13 @@ const PageContainer = styled.div`
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  overflow-y: ${props => props.$needsScroll ? 'auto' : 'hidden'};
+  overflow-y: auto; /* Always allow scrolling */
   overflow-x: hidden;
   position: relative;
-  
-  @media (min-height: 800px) {
-    overflow-y: auto; /* Change from 'hidden' to 'auto' */
+  padding-bottom: 40px; /* Add bottom padding to prevent cutoff */
+
+  @media (max-width: 768px) {
+    padding-bottom: 60px; /* More padding on mobile */
   }
 `;
 
@@ -405,23 +407,7 @@ const getCupsOfCoffee = () => {
 };
 
 const Home = () => {
-  const [needsScroll, setNeedsScroll] = useState(false);
   const contentRef = useRef(null);
-  
-  useEffect(() => {
-    const checkIfScrollNeeded = () => {
-      if (contentRef.current) {
-        const contentHeight = contentRef.current.scrollHeight;
-        const windowHeight = window.innerHeight;
-        setNeedsScroll(contentHeight > windowHeight);
-      }
-    };
-    
-    checkIfScrollNeeded();
-    window.addEventListener('resize', checkIfScrollNeeded);
-    
-    return () => window.removeEventListener('resize', checkIfScrollNeeded);
-  }, []);
 
   const { data: totalRepositories } = useQuery({
     queryKey: ["githubRepos"],
@@ -449,7 +435,7 @@ const Home = () => {
     <>
       <GlobalStyle />
       <GlobalColors />
-      <PageContainer $needsScroll={needsScroll}>
+      <PageContainer>
         {/* <FloatingWhatsApp
           accountName="Jurie"
           phoneNumber="27768862529"
