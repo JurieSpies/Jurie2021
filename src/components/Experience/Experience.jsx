@@ -2,6 +2,9 @@ import resumeData from '@/utils/RESUME_DATA.json';
 import { COLOR_BACKGROUND, COLOR_GREY } from '@/utils/globalColors';
 import { SubHeading } from '@/utils/globalFonts';
 import styled from 'styled-components';
+// Import company logos
+import CapitecLogo from '../../assets/images/Capitec.png';
+import TakealotLogo from '../../assets/svg/Takealot.svg';
 
 const StyledSubHeading = styled(SubHeading)`
 
@@ -69,28 +72,54 @@ const ExperienceCard = styled.div`
   }
 `;
 
+// Create a mapping of company logos
+const companyLogos = {
+  'Capitec': CapitecLogo,
+  'Takealot': TakealotLogo,
+};
+
+// Helper function to get logo based on company name or description
+const getCompanyLogo = (workItem) => {
+  // Check if description contains company name
+  if (workItem.description?.toLowerCase().includes('capitec')) {
+    return companyLogos.Capitec;
+  }
+  if (workItem.description?.toLowerCase().includes('e-commerce')) {
+    return companyLogos.Takealot;
+  }
+  // Fallback to logo path if it exists and doesn't start with /src/
+  if (workItem.logo && !workItem.logo.startsWith('/src/')) {
+    return workItem.logo;
+  }
+  return null;
+};
+
 const Experience = () => {
   const { work } = resumeData;
 
   return (
     <CardsContainer>
-      {work.map((workItem, index) => (
-        <ExperienceCard key={`${workItem.title}-${index}`}>
-          {workItem.logo && <CompanyLogo src={workItem.logo} alt={workItem.title} ></CompanyLogo>}
-          {workItem.title && <StyledSubHeading>{workItem.title}</StyledSubHeading>}
-          <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
-          <br />
-          <StyledSubHeading fontWeight="thin" style={{ color: 'var(--color-primary)' }}>
-            <li>
-              {workItem.occupation}
-            </li>
-          </StyledSubHeading>
-          <br />
-          <StyledSubHeading fontWeight="thin" color={COLOR_GREY}>
-            {workItem.description}
-          </StyledSubHeading>
-        </ExperienceCard>
-      ))}
+      {work.map((workItem, index) => {
+        const logoSrc = getCompanyLogo(workItem);
+
+        return (
+          <ExperienceCard key={`${workItem.title}-${index}`}>
+            {logoSrc && <CompanyLogo src={logoSrc} alt={workItem.title || 'Company logo'} />}
+            {workItem.title && <StyledSubHeading>{workItem.title}</StyledSubHeading>}
+            <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
+            <br />
+            <StyledSubHeading fontWeight="thin" style={{ color: 'var(--color-primary)' }}>
+              <li>
+                {workItem.occupation}
+              </li>
+            </StyledSubHeading>
+            <br />
+            <StyledSubHeading fontWeight="thin" color={COLOR_GREY}>
+              {workItem.description}
+            </StyledSubHeading>
+          </ExperienceCard>
+        );
+      })}
     </CardsContainer>
   );
 };
