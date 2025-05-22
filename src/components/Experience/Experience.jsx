@@ -77,8 +77,8 @@ const Experience = () => {
       {work.map((workItem, index) => (
         <ExperienceCard key={`${workItem.title}-${index}`}>
           {workItem.logo && <CompanyLogo src={workItem.logo} alt={workItem.title} ></CompanyLogo>}
-          <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
           {workItem.title && <StyledSubHeading>{workItem.title}</StyledSubHeading>}
+          <StyledSubHeading>{workItem.timeline}</StyledSubHeading>
           <br />
           <StyledSubHeading fontWeight="thin" style={{ color: 'var(--color-primary)' }}>
             <li>

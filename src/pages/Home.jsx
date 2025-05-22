@@ -21,6 +21,7 @@ import { GITHUB_CONFIG } from "@/config/github";
 import RESUME_DATA from "../utils/RESUME_DATA.json";
 import { getYearsOfExperience } from "../utils/helpers";
 import ChatBot from "@/components/ChatBot/ChatBot";
+import { useState, useEffect, useRef } from "react";
 
 const rotate = keyframes`
   0% {
@@ -43,49 +44,26 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: -moz-available;
-    min-height: fill-available;
-    min-height: stretch;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     position: relative;
     padding-bottom: env(safe-area-inset-bottom, 0px);
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    
-    @supports (-webkit-touch-callout: none) {
-      min-height: -webkit-fill-available;
-    }
     
     @media (min-height: 800px) {
-      overflow-y: hidden;
-    }
-    
-    @media (max-width: 768px) {
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: -ms-autohiding-scrollbar;
+      overflow-y: auto !important; /* Force auto instead of hidden */
     }
   }
 
   #root {
     min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: -moz-available;
-    min-height: fill-available;
-    min-height: stretch;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     position: relative;
     
-    @supports (-webkit-touch-callout: none) {
-      min-height: -webkit-fill-available;
-    }
-    
     @media (min-height: 800px) {
-      overflow-y: hidden;
+      overflow-y: auto !important; /* Force auto instead of hidden */
     }
   }
 `;
@@ -181,41 +159,13 @@ const PageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
-  min-height: -moz-available;
-  min-height: fill-available;
-  min-height: stretch;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: ${props => props.$needsScroll ? 'auto' : 'hidden'};
   overflow-x: hidden;
   position: relative;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-
-  @supports (-webkit-touch-callout: none) {
-    min-height: -webkit-fill-available;
-  }
-
+  
   @media (min-height: 800px) {
-    overflow-y: hidden;
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: -moz-available;
-    height: fill-available;
-    height: stretch;
-  }
-
-  /* mobile */
-  @media (max-width: 768px) {
-    padding: 20px;
-    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 60px);
-    padding-bottom: calc(
-      constant(safe-area-inset-bottom, 20px) + 60px
-    ); /* For older iOS */
-    justify-content: flex-start;
-    padding-top: max(40px, env(safe-area-inset-top, 40px));
-    overscroll-behavior-y: none;
-    -ms-scroll-chaining: none;
+    overflow-y: auto; /* Change from 'hidden' to 'auto' */
   }
 `;
 
@@ -455,6 +405,24 @@ const getCupsOfCoffee = () => {
 };
 
 const Home = () => {
+  const [needsScroll, setNeedsScroll] = useState(false);
+  const contentRef = useRef(null);
+  
+  useEffect(() => {
+    const checkIfScrollNeeded = () => {
+      if (contentRef.current) {
+        const contentHeight = contentRef.current.scrollHeight;
+        const windowHeight = window.innerHeight;
+        setNeedsScroll(contentHeight > windowHeight);
+      }
+    };
+    
+    checkIfScrollNeeded();
+    window.addEventListener('resize', checkIfScrollNeeded);
+    
+    return () => window.removeEventListener('resize', checkIfScrollNeeded);
+  }, []);
+
   const { data: totalRepositories } = useQuery({
     queryKey: ["githubRepos"],
     queryFn: async () => {
@@ -481,7 +449,7 @@ const Home = () => {
     <>
       <GlobalStyle />
       <GlobalColors />
-      <PageContainer>
+      <PageContainer $needsScroll={needsScroll}>
         {/* <FloatingWhatsApp
           accountName="Jurie"
           phoneNumber="27768862529"
@@ -493,7 +461,7 @@ const Home = () => {
           messageDelay={0}
           allowEsc
         /> */}
-        <Center>
+        <Center ref={contentRef}>
           <Main>
             <InfoContainer>
               <Occupation>Software Engineer</Occupation>
