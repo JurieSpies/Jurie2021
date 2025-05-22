@@ -10,6 +10,10 @@ import PiggyVault from '../assets/projects/piggyvault.png';
 import WodbudImage from '../assets/projects/wodbud.png';
 import GoWaterfall from '../assets/projects/GoWaterfall.png';
 import PasswordGenerator from '../assets/projects/PasswordGenerator.png';
+import BillScanner from '../assets/projects/BillScanner.png';
+import Beanandberrysa from '../assets/projects/Beanandberrysa.png';
+import AnyWorx from '../assets/projects/AnyWorx.png';
+import Pickle from '../assets/projects/Pickle.png';
 import Proof from '../assets/projects/Proof.png';
 import ETTX from '../assets/projects/ETTX.png';
 import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
@@ -55,7 +59,7 @@ const Main = styled(Heading)`
   height: 100%;
   overflow: hidden;
   width: 100%;
-  
+
   @media (max-width: 768px) {
     height: calc(100% - 56px); /* Subtract navigation bar height */
   }
@@ -120,7 +124,7 @@ const AnimatedSlide = styled.div`
   flex: 1;
   align-items: center;
   width: 100%;
-  
+
   @keyframes slideIn {
     from {
       opacity: 0;
@@ -138,7 +142,7 @@ const AnimatedSlide = styled.div`
     justify-content: flex-start;
     align-items: center;
     height: 100%;
-    
+
     @keyframes slideIn {
       from {
         opacity: 0;
@@ -154,7 +158,7 @@ const AnimatedSlide = styled.div`
 
 const StyledHeading = styled(Heading)`
   font-size: 52px;
-  
+
   @media (max-width: 768px) {
     font-size: 36px;
   }
@@ -162,7 +166,7 @@ const StyledHeading = styled(Heading)`
 
 const StyledSubHeading = styled(SubHeading)`
   font-size: 22px;
-  
+
   @media (max-width: 768px) {
     font-size: 18px;
   }
@@ -173,7 +177,7 @@ const Paragraph = styled(SubHeading)`
   font-weight: 100;
   margin: 20px 0px;
   color: ${COLOR_GREY};
-  
+
   @media (max-width: 768px) {
     font-size: 16px;
     margin: 15px 0px;
@@ -282,7 +286,7 @@ const Icons = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  
+
   @media (max-width: 768px) {
     justify-content: center;
     margin-top: 10px;
@@ -295,7 +299,6 @@ const Work = () => {
 
   const projects = [
     {
-      type: 'Frontend Project',
       number: '01',
       title: 'WODbud',
       description:
@@ -307,7 +310,6 @@ const Work = () => {
       liveUrl: 'https://wodbud.netlify.app/',
     },
     {
-      type: 'Frontend Project',
       number: '02',
       title: 'PiggyVault',
       description:
@@ -317,7 +319,6 @@ const Work = () => {
       githubUrl: 'https://github.com/AdamErwee/piggyvault-react-native',
     },
     {
-      type: 'Frontend Project',
       number: '03',
       title: 'ApexFit',
       description: 'I developed a gym management app that enables users to register for memberships, make payments, and book classes. This app streamlines the gym experience, making it easy for users to manage their memberships and schedules.',
@@ -327,7 +328,6 @@ const Work = () => {
       liveUrl: 'https://apexfit-crossfit.netlify.app/',
     },
     {
-      type: 'Frontend Project',
       number: '04',
       title: 'ETTX',
       description: 'ETT designs and manufactures a diverse line of open pit mine support equipment and specialised mobile industrial equipment aimed at improving productivity and safety.',
@@ -336,7 +336,6 @@ const Work = () => {
       liveUrl: 'https://www.ett.com/za/home',
     },
     {
-      type: 'Frontend Project',
       number: '05',
       title: 'Proof',
       description: 'Proof is a robust security platform designed for the security industry, law enforcement, insurance, and private businesses. It leverages Vumacam’s advanced video analytics and a centralized video management system hosted in a Tier-3 data center. The platform integrates with a public space smart camera network and private sites, sending alerts to the E2 Fusion Centre, which collaborates with the SAPS command center for necessary support.',
@@ -345,7 +344,6 @@ const Work = () => {
       liveUrl: 'https://vumacam.co.za/proof',
     },
     {
-      type: 'Frontend Project',
       number: '06',
       title: 'GoWaterfall / GoCity / Balwin ',
       description: 'GoWaterfall, GoCity, and Balwin are mobile platform, enhancing user engagement with their city. Designed for residents, employees, and visitors, the app simplifies navigation and offers a range of convenient services. By integrating digital and real-world experiences, these apps aim to elevate lifestyle and streamline daily activities in the urban environment.',
@@ -355,8 +353,39 @@ const Work = () => {
       playStore: 'https://play.google.com/store/apps/details?id=za.co.thinkdigital.balwin&hl=en_ZA',
     },
     {
-      type: 'Frontend Project',
       number: '07',
+      title: 'AnyWorx',
+      description: 'AnyWorx is a professional construction and home improvement service provider in the Western Cape. The website showcases their 32+ years of experience, comprehensive services including construction, steel works, aluminium framing, and renovations. Built with a modern, responsive design to highlight their portfolio and make it easy for customers to request quotes.',
+      stack: 'React, TypeScript, Styled Components',
+      image: AnyWorx, // Temporary placeholder - will be replaced with proper screenshot
+      liveUrl: 'https://anyworx.netlify.app/',
+    },
+    {
+      number: '08',
+      title: 'Bean & Berry',
+      description: 'Bean & Berry is an e-commerce platform specializing in premium nuts, seeds, coffee, and natural treats. The website features a clean, modern design with product categories, detailed descriptions, and an intuitive shopping experience. Built to showcase their commitment to natural goodness and quality products.',
+      stack: 'React, TypeScript, E-commerce Integration',
+      image: Beanandberrysa,
+      liveUrl: 'https://beanandberrysa.netlify.app/',
+    },
+    {
+      number: '09',
+      title: 'Bill Scanner',
+      description: 'Bill Scanner is a utility application that allows users to upload or photograph bills and receipts for digital processing. This tool simplifies expense tracking and document management by converting physical bills into digital format. Features include file upload, camera integration, and bill processing capabilities.',
+      stack: 'React, JavaScript, File Processing APIs',
+      image: BillScanner,
+      liveUrl: 'https://billscanner.netlify.app/',
+    },
+    {
+      number: '10',
+      title: 'Helderberg Pickleball',
+      description: 'Helderberg Pickleball is a community platform for pickleball enthusiasts in the Helderberg area. The application features user authentication, member management, and community features to connect local players. Built to foster the growing pickleball community with modern web technologies.',
+      stack: 'React, TypeScript, Authentication, Community Features',
+      image: Pickle,
+      liveUrl: 'https://helderbergpickleball.netlify.app/',
+    },
+    {
+      number: '11',
       title: 'Password Generator',
       description: 'Sometimes I work, sometimes I play. This password generator was created for the fun of it and helps users generate strong, unique passwords. Users can customize the length, complexity, and character types of their passwords.',
       stack: 'Javascript , React',
@@ -386,7 +415,7 @@ const Work = () => {
                 <AnimatedSlide>
                   <LeftAndBottom>
                     <StyledHeading>{project.number}</StyledHeading>
-                    <StyledSubHeading>{project.type}</StyledSubHeading>
+                    {/* <StyledSubHeading>{project.type}</StyledSubHeading> */}
                     <Paragraph>{project.description}</Paragraph>
                     <Stack>{project.stack}</Stack>
                     <Icons>
