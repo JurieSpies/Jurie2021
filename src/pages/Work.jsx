@@ -1,7 +1,5 @@
-/* eslint-disable import/no-named-default */
-import { default as BackButton, default as NextButton } from '@/components/Button/Button';
-import { useState } from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaGithub, FaBriefcase, FaUser } from 'react-icons/fa';
 import { FiChrome } from 'react-icons/fi';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import styled, { createGlobalStyle } from 'styled-components';
@@ -10,13 +8,13 @@ import PiggyVault from '../assets/projects/piggyvault.png';
 import WodbudImage from '../assets/projects/wodbud.png';
 import GoWaterfall from '../assets/projects/GoWaterfall.png';
 import PasswordGenerator from '../assets/projects/PasswordGenerator.png';
+import Pickleball from '../assets/projects/Pickle.png'
 import BillScanner from '../assets/projects/BillScanner.png';
-import Beanandberrysa from '../assets/projects/Beanandberrysa.png';
+import BeanAndBerry from '../assets/projects/Beanandberrysa.png';
 import AnyWorx from '../assets/projects/AnyWorx.png';
-import Pickle from '../assets/projects/Pickle.png';
 import Proof from '../assets/projects/Proof.png';
 import ETTX from '../assets/projects/ETTX.png';
-import { COLOR_GREY, COLOR_PRIMARY } from '../utils/globalColors';
+import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE, COLOR_BACKGROUND, COLOR_DARK, COLOR_HEADER } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
 
 const GlobalStyle = createGlobalStyle`
@@ -24,8 +22,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden;
-    position: fixed;
+    overflow-x: hidden;
     width: 100%;
   }
   :root {
@@ -33,439 +30,428 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const PlayStoreIcon = styled(IoLogoGooglePlaystore)`
-  display: flex;
-  color: var(--color-primary);
-  font-size: 32px;
-  padding: 5px;
-  border-radius: 100%;
-  border: 1px solid var(--color-primary);
-`;
-
-const PwaIcon = styled(FiChrome)`
-  display: flex;
-  color: var(--color-primary);
-  font-size: 32px;
-  padding: 5px;
-  border-radius: 100%;
-  border: 1px solid var(--color-primary);
-`;
-
-const Main = styled(Heading)`
+const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-  height: 100%;
-  overflow: hidden;
   width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  background: #17161D;
 
   @media (max-width: 768px) {
-    height: calc(100% - 56px); /* Subtract navigation bar height */
+    padding: 10px;
   }
 `;
 
-const ProjectContainer = styled.div`
-  display: flex;
-  flex: 2;
+const Header = styled.div`
+  text-align: center;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+`;
+
+const Title = styled(Heading)`
+  font-size: 48px;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+`;
+
+const Subtitle = styled(SubHeading)`
+  font-size: 18px;
+  color: ${COLOR_GREY};
+  margin-bottom: 30px;
+`;
+
+const CategorySection = styled.div`
   width: 100%;
-  min-height: 600px;
+  max-width: 1200px;
+  margin-bottom: 50px;
+`;
+
+const CategoryHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 15px;
+`;
+
+const CategoryIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: ${props => props.isCompany ?
+    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' :
+    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'};
+  color: white;
+  font-size: 24px;
+`;
+
+const CategoryTitle = styled(Heading)`
+  font-size: 32px;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+`;
+
+const ProjectsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+`;
+
+const ProjectCard = styled.div`
+  background: ${COLOR_HEADER};
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: ${props => props.isCompany ?
+    '2px solid rgba(102, 126, 234, 0.3)' :
+    '2px solid rgba(240, 147, 251, 0.3)'};
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: ${props => props.isCompany ?
+      '2px solid rgba(102, 126, 234, 0.6)' :
+      '2px solid rgba(240, 147, 251, 0.6)'};
+  }
+`;
+
+const ProjectImage = styled.div`
+  width: 100%;
+  height: 250px;
+  background-image: url(${props => props.src});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
-  overflow: hidden;
 
-  @media (max-width: 768px) {
-    min-height: unset;
-    flex: 1;
-    margin-top: 10px;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${props => props.isCompany ?
+      'linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8))' :
+      'linear-gradient(45deg, rgba(240, 147, 251, 0.8), rgba(245, 87, 108, 0.8))'};
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  ${ProjectCard}:hover &::after {
+    opacity: 1;
   }
 `;
 
-const Project = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  right: 0;
-
-  @media (max-width: 768px) {
-    height: 100%;
-  }
+const ProjectContent = styled.div`
+  padding: 25px;
 `;
 
-const ButtonContainer = styled.div`
+const ProjectHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 95%;
-  height: 80px;
+  align-items: flex-start;
+  margin-bottom: 15px;
+`;
+
+const ProjectTitle = styled(Heading)`
+  font-size: 24px;
+  margin: 0;
+  color: ${COLOR_WHITE};
 
   @media (max-width: 768px) {
-    padding: 0 20px;
-    margin-bottom: 20px;
+    font-size: 20px;
   }
 `;
 
-const AnimateBackButton = styled.div`
-  &:hover {
-    transform: scale(1.01) rotate(-5deg);
-  }
+const ProjectType = styled.div`
+  background: ${props => props.isCompany ?
+    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' :
+    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'};
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;
 
-const AnimateNextButton = styled.div`
-  &:hover {
-    transform: scale(1.01) rotate(5deg);
-  }
-`;
-
-const AnimatedSlide = styled.div`
-  animation: slideIn 0.5s ease-out;
-  display: flex;
-  flex: 1;
-  align-items: center;
-  width: 100%;
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-    flex-direction: column-reverse;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  }
-`;
-
-const StyledHeading = styled(Heading)`
-  font-size: 52px;
-
-  @media (max-width: 768px) {
-    font-size: 36px;
-  }
-`;
-
-const StyledSubHeading = styled(SubHeading)`
-  font-size: 22px;
-
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
-`;
-
-const Paragraph = styled(SubHeading)`
-  font-size: 18px;
-  font-weight: 100;
-  margin: 20px 0px;
+const ProjectDescription = styled(SubHeading)`
+  font-size: 14px;
   color: ${COLOR_GREY};
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-    margin: 15px 0px;
-  }
+  line-height: 1.6;
+  margin: 15px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
-const Stack = styled(SubHeading)`
-  font-size: 20px;
+const ProjectStack = styled.div`
+  font-size: 13px;
   color: var(--color-primary);
+  font-weight: 600;
+  margin: 15px 0;
 `;
 
-const LeftAndBottom = styled.div`
+const ProjectLinks = styled.div`
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow-y: auto;
-  max-height: 100%;
-  padding-right: 10px;
-  padding-bottom: 50px;
-
-  /* For Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) transparent;
-
-  /* For Chrome, Safari, and Opera */
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--color-primary);
-    border-radius: 3px;
-  }
-
-  @media (max-width: 768px) {
-    margin: 0px 20px;
-    max-height: 50vh;
-    padding-right: 5px;
-  }
+  gap: 10px;
+  margin-top: 20px;
 `;
 
-const Spacer = styled.div`
+const ProjectLink = styled.a`
   display: flex;
-  flex: 0.2;
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: ${props => props.isCompany ?
+    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' :
+    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'};
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
 
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const RightAndTop = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  flex: 1;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-bottom: 20px;
-    height: 300px;
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 768px) {
-    height: 300px;
-    object-fit: cover;
-  }
-`;
-
-const SocialIconContainer = styled.a`
-  display: flex;
-  width: 32px;
-  border-radius: 100%;
-  margin: 50px 30px 0px 0px;
-  height: 32px;
   &:hover {
-    box-shadow: 1px 0px 10px 2px var(--color-primary);
-    -webkit-box-shadow: 1px 0px 10px 2px var(--color-primary);
-    -moz-box-shadow: 1px 0px 10px 2px var(--color-primary);
-    transition: all 0.5s ease-in-out;
-  }
-`;
-
-const GithubIcon = styled(FaGithub)`
-  display: flex;
-  color: var(--color-primary);
-  font-size: 32px;
-  padding: 5px;
-  border-radius: 100%;
-  border: 1px solid var(--color-primary);
-`;
-
-const Icons = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-    margin-top: 10px;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const Work = () => {
-  const [activeProject, setActiveProject] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [randomizedProjects, setRandomizedProjects] = useState({});
 
-  const projects = [
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const companyProjects = [
     {
-      number: '01',
+      title: 'ETTX',
+      description: 'ETT designs and manufactures a diverse line of open pit mine support equipment and specialised mobile industrial equipment aimed at improving productivity and safety.',
+      stack: 'TypeScript, React, Firebase',
+      image: ETTX,
+      liveUrl: 'https://www.ett.com/za/home',
+      isCompany: true,
+    },
+    {
+      title: 'Proof',
+      description: 'Proof is a robust security platform designed for the security industry, law enforcement, insurance, and private businesses. It leverages advanced video analytics and a centralized video management system.',
+      stack: 'TypeScript, React, Firebase',
+      image: Proof,
+      liveUrl: 'https://vumacam.co.za/proof',
+      isCompany: true,
+    },
+    {
+      title: 'GoWaterfall / GoCity / Balwin',
+      description: 'Mobile platforms enhancing user engagement with their city. Designed for residents, employees, and visitors, the app simplifies navigation and offers convenient services.',
+      stack: 'TypeScript, React, Firebase',
+      image: GoWaterfall,
+      liveUrl: 'https://www.gowaterfall.co.za/',
+      playStore: 'https://play.google.com/store/apps/details?id=za.co.thinkdigital.balwin&hl=en_ZA',
+      isCompany: true,
+    },
+  ];
+
+  const personalProjects = [
+    {
       title: 'WODbud',
-      description:
-        'WODbud is a functional fitness mobile app that allows users to generate custom workouts, access various timers, view Hero WODs, and use conversion tools. It provides a comprehensive and user-friendly platform to enhance training experiences. PWA also a Work in Progress.',
-      stack: 'JavaScript , React Native, Jotai',
+      description: 'A functional fitness mobile app that allows users to generate custom workouts, access various timers, view Hero WODs, and use conversion tools.',
+      stack: 'JavaScript, React Native, Jotai',
       image: WodbudImage,
       githubUrl: 'https://github.com/JurieSpies/WODbud',
       playStore: 'https://play.google.com/store/apps/details?id=com.wodbud',
       liveUrl: 'https://wodbud.netlify.app/',
+      isCompany: false,
     },
     {
-      number: '02',
       title: 'PiggyVault',
-      description:
-        'Piggyvault is a budget app that allows users to track expenses and income, tag items, and monitor when they are going over budget. Additionally, it serves as a document vault for secure storage of financial documents.',
-      stack: 'Typescript, React, Firebase',
+      description: 'A budget app that allows users to track expenses and income, tag items, and monitor when they are going over budget. Also serves as a document vault.',
+      stack: 'TypeScript, React, Firebase',
       image: PiggyVault,
       githubUrl: 'https://github.com/AdamErwee/piggyvault-react-native',
+      isCompany: false,
     },
     {
-      number: '03',
       title: 'ApexFit',
-      description: 'I developed a gym management app that enables users to register for memberships, make payments, and book classes. This app streamlines the gym experience, making it easy for users to manage their memberships and schedules.',
-      stack: 'Typescript, React, Firebase',
+      description: 'A gym management app that enables users to register for memberships, make payments, and book classes. Streamlines the gym experience.',
+      stack: 'TypeScript, React, Firebase',
       image: ApexFit,
       githubUrl: 'https://github.com/JurieSpies/kleinmond_crossfit',
       liveUrl: 'https://apexfit-crossfit.netlify.app/',
+      isCompany: false,
     },
     {
-      number: '04',
-      title: 'ETTX',
-      description: 'ETT designs and manufactures a diverse line of open pit mine support equipment and specialised mobile industrial equipment aimed at improving productivity and safety.',
-      stack: 'Typescript, React, Firebase',
-      image: ETTX,
-      liveUrl: 'https://www.ett.com/za/home',
-    },
-    {
-      number: '05',
-      title: 'Proof',
-      description: 'Proof is a robust security platform designed for the security industry, law enforcement, insurance, and private businesses. It leverages Vumacam’s advanced video analytics and a centralized video management system hosted in a Tier-3 data center. The platform integrates with a public space smart camera network and private sites, sending alerts to the E2 Fusion Centre, which collaborates with the SAPS command center for necessary support.',
-      stack: 'Typescript, React, Firebase',
-      image: Proof,
-      liveUrl: 'https://vumacam.co.za/proof',
-    },
-    {
-      number: '06',
-      title: 'GoWaterfall / GoCity / Balwin ',
-      description: 'GoWaterfall, GoCity, and Balwin are mobile platform, enhancing user engagement with their city. Designed for residents, employees, and visitors, the app simplifies navigation and offers a range of convenient services. By integrating digital and real-world experiences, these apps aim to elevate lifestyle and streamline daily activities in the urban environment.',
-      stack: 'Typescript, React, Firebase',
-      image: GoWaterfall,
-      liveUrl: 'https://www.gowaterfall.co.za/',
-      playStore: 'https://play.google.com/store/apps/details?id=za.co.thinkdigital.balwin&hl=en_ZA',
-    },
-    {
-      number: '07',
       title: 'AnyWorx',
-      description: 'AnyWorx is a professional construction and home improvement service provider in the Western Cape. The website showcases their 32+ years of experience, comprehensive services including construction, steel works, aluminium framing, and renovations. Built with a modern, responsive design to highlight their portfolio and make it easy for customers to request quotes.',
+      description: 'A professional construction and home improvement service provider in the Western Cape. Showcases 32+ years of experience with modern, responsive design.',
       stack: 'React, TypeScript, Styled Components',
-      image: AnyWorx, // Temporary placeholder - will be replaced with proper screenshot
+      image: AnyWorx,
       liveUrl: 'https://anyworx.netlify.app/',
+      isCompany: false,
     },
     {
-      number: '08',
       title: 'Bean & Berry',
-      description: 'Bean & Berry is an e-commerce platform specializing in premium nuts, seeds, coffee, and natural treats. The website features a clean, modern design with product categories, detailed descriptions, and an intuitive shopping experience. Built to showcase their commitment to natural goodness and quality products.',
+      description: 'An e-commerce platform specializing in premium nuts, seeds, coffee, and natural treats. Features clean, modern design with intuitive shopping experience.',
       stack: 'React, TypeScript, E-commerce Integration',
-      image: Beanandberrysa,
+      image: BeanAndBerry,
       liveUrl: 'https://beanandberrysa.netlify.app/',
+      isCompany: false,
     },
     {
-      number: '09',
       title: 'Bill Scanner',
-      description: 'Bill Scanner is a utility application that allows users to upload or photograph bills and receipts for digital processing. This tool simplifies expense tracking and document management by converting physical bills into digital format. Features include file upload, camera integration, and bill processing capabilities.',
+      description: 'A utility application for uploading and processing bills/receipts digitally. Simplifies expense tracking and document management.',
       stack: 'React, JavaScript, File Processing APIs',
       image: BillScanner,
       liveUrl: 'https://billscanner.netlify.app/',
+      isCompany: false,
     },
     {
-      number: '10',
       title: 'Helderberg Pickleball',
-      description: 'Helderberg Pickleball is a community platform for pickleball enthusiasts in the Helderberg area. The application features user authentication, member management, and community features to connect local players. Built to foster the growing pickleball community with modern web technologies.',
+      description: 'A community platform for pickleball enthusiasts with user authentication, member management, and community features to connect local players.',
       stack: 'React, TypeScript, Authentication, Community Features',
-      image: Pickle,
+      image: Pickleball,
       liveUrl: 'https://helderbergpickleball.netlify.app/',
+      isCompany: false,
     },
     {
-      number: '11',
       title: 'Password Generator',
-      description: 'Sometimes I work, sometimes I play. This password generator was created for the fun of it and helps users generate strong, unique passwords. Users can customize the length, complexity, and character types of their passwords.',
-      stack: 'Javascript , React',
+      description: 'Sometimes I work, sometimes I play. This password generator helps users generate strong, unique passwords with customizable options.',
+      stack: 'JavaScript, React',
       image: PasswordGenerator,
       liveUrl: 'https://juriepasswordgen.netlify.app/',
+      isCompany: false,
     },
   ];
 
-  const handleTransition = (newIndex) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setActiveProject(newIndex);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const goBack = () => handleTransition((activeProject - 1 + projects.length) % projects.length);
-  const next = () => handleTransition((activeProject + 1) % projects.length);
+  useEffect(() => {
+    setRandomizedProjects({
+      company: shuffleArray(companyProjects),
+      personal: shuffleArray(personalProjects),
+    });
+  }, []);
 
   return (
     <>
       <GlobalStyle />
       <Main>
-        <ProjectContainer>
-          {projects.map((project, index) => (
-            activeProject === index && (
-              <Project key={project.number}>
-                <AnimatedSlide>
-                  <LeftAndBottom>
-                    <StyledHeading>{project.number}</StyledHeading>
-                    {/* <StyledSubHeading>{project.type}</StyledSubHeading> */}
-                    <Paragraph>{project.description}</Paragraph>
-                    <Stack>{project.stack}</Stack>
-                    <Icons>
+        <Header>
+          <Title>My Work</Title>
+          <Subtitle>A collection of projects I've built for companies and personal endeavors</Subtitle>
+        </Header>
+
+        {randomizedProjects.company && (
+          <CategorySection>
+            <CategoryHeader>
+              <CategoryIcon isCompany={true}>
+                <FaBriefcase />
+              </CategoryIcon>
+              <CategoryTitle>Company Projects</CategoryTitle>
+            </CategoryHeader>
+            <ProjectsGrid>
+              {randomizedProjects.company.map((project, index) => (
+                <ProjectCard key={index} isCompany={project.isCompany}>
+                  <ProjectImage src={project.image} isCompany={project.isCompany} />
+                  <ProjectContent>
+                    <ProjectHeader>
+                      <ProjectTitle>{project.title}</ProjectTitle>
+                      <ProjectType isCompany={project.isCompany}>Company</ProjectType>
+                    </ProjectHeader>
+                    <ProjectDescription>{project.description}</ProjectDescription>
+                    <ProjectStack>{project.stack}</ProjectStack>
+                    <ProjectLinks>
                       {project.githubUrl && (
-                        <SocialIconContainer href={project.githubUrl} target="_blank" rel="noreferrer">
-                          <GithubIcon />
-                        </SocialIconContainer>
+                        <ProjectLink href={project.githubUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
+                          <FaGithub />
+                        </ProjectLink>
                       )}
                       {project.playStore && (
-                        <SocialIconContainer href={project.playStore} target="_blank" rel="noreferrer">
-                          <PlayStoreIcon />
-                        </SocialIconContainer>
+                        <ProjectLink href={project.playStore} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
+                          <IoLogoGooglePlaystore />
+                        </ProjectLink>
                       )}
                       {project.liveUrl && (
-                        <SocialIconContainer href={project.liveUrl} target="_blank" rel="noreferrer">
-                          <PwaIcon />
-                        </SocialIconContainer>
+                        <ProjectLink href={project.liveUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
+                          <FiChrome />
+                        </ProjectLink>
                       )}
-                    </Icons>
-                  </LeftAndBottom>
-                  <Spacer />
-                  <RightAndTop>
-                    <Image loading="lazy" src={project.image} alt={project.title} />
-                  </RightAndTop>
-                </AnimatedSlide>
-              </Project>
-            )
-          ))}
-        </ProjectContainer>
-        <ButtonContainer>
-          <AnimateBackButton>
-            <BackButton
-              onClick={goBack}
-              disabled={isAnimating}
-              invert
-              style={{ borderRadius: '5px' }}
-            >
-              Back
-            </BackButton>
-          </AnimateBackButton>
-          <AnimateNextButton>
-            <NextButton
-              onClick={next}
-              disabled={isAnimating}
-              style={{ borderRadius: '5px' }}
-            >
-              Next
-            </NextButton>
-          </AnimateNextButton>
-        </ButtonContainer>
+                    </ProjectLinks>
+                  </ProjectContent>
+                </ProjectCard>
+              ))}
+            </ProjectsGrid>
+          </CategorySection>
+        )}
+
+        {randomizedProjects.personal && (
+          <CategorySection>
+            <CategoryHeader>
+              <CategoryIcon isCompany={false}>
+                <FaUser />
+              </CategoryIcon>
+              <CategoryTitle>Personal Projects</CategoryTitle>
+            </CategoryHeader>
+            <ProjectsGrid>
+              {randomizedProjects.personal.map((project, index) => (
+                <ProjectCard key={index} isCompany={project.isCompany}>
+                  <ProjectImage src={project.image} isCompany={project.isCompany} />
+                  <ProjectContent>
+                    <ProjectHeader>
+                      <ProjectTitle>{project.title}</ProjectTitle>
+                      <ProjectType isCompany={project.isCompany}>Personal</ProjectType>
+                    </ProjectHeader>
+                    <ProjectDescription>{project.description}</ProjectDescription>
+                    <ProjectStack>{project.stack}</ProjectStack>
+                    <ProjectLinks>
+                      {project.githubUrl && (
+                        <ProjectLink href={project.githubUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
+                          <FaGithub />
+                        </ProjectLink>
+                      )}
+                      {project.playStore && (
+                        <ProjectLink href={project.playStore} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
+                          <IoLogoGooglePlaystore />
+                        </ProjectLink>
+                      )}
+                      {project.liveUrl && (
+                        <ProjectLink href={project.liveUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
+                          <FiChrome />
+                        </ProjectLink>
+                      )}
+                    </ProjectLinks>
+                  </ProjectContent>
+                </ProjectCard>
+              ))}
+            </ProjectsGrid>
+          </CategorySection>
+        )}
       </Main>
     </>
   );
