@@ -45,6 +45,7 @@ const ExperienceCard = styled.div`
   margin: 20px;
   background-color: ${COLOR_BACKGROUND};
   padding: 20px;
+  padding-left: 30px;
   border-radius: 10px;
   border: 1px solid var(--color-primary);
   display: block;

@@ -9,6 +9,7 @@ import Responsibilities from '../components/AboutMe/Respnsibilities';
 import Recommendations from '../components/AboutMe/Recommendations';
 import Education from '../components/Skills/Education';
 import { COLOR_GREY } from '../utils/globalColors';
+import CyberTechCv from '@/components/CyberTechCv';
 
 const StyledSubHeading = styled(SubHeading)`
 color:${COLOR_GREY};
@@ -105,12 +106,14 @@ const buttonStyle = {
   width: '100%',
   borderRadius: 5,
   marginTop: 40,
+  marginBottom: 10,
   justifyContent: 'center',
   minWidth: 200,
 };
 
 const Resume = () => {
   const [activeSelection, setActiveSelection] = useState('Experience');
+  const [isCodeCvOpen, setIsCodeCvOpen] = useState(false);
 
   const buttonsTitles = [
     'Experience',
@@ -119,10 +122,16 @@ const Resume = () => {
     'Education',
     'About me',
     'Recommendations',
+    'Code CV',
   ];
 
   const selectionHandler = (e) => {
-    setActiveSelection(e.target.innerText);
+    const selection = e.target.innerText;
+    if (selection === 'Code CV') {
+      setIsCodeCvOpen(true);
+      return;
+    }
+    setActiveSelection(selection);
   };
 
   const renderHeading = (selection) => {
@@ -133,6 +142,7 @@ const Resume = () => {
       Education: 'Education',
       'About me': 'About Me',
       'Recommendations': 'LinkedIn Recommendations',
+      'Code CV': 'Code Editor CV',
     };
 
     const subTitle = {
@@ -155,7 +165,16 @@ const Resume = () => {
         </StyledSubHeading>
         <ButtonsContainer>
           {buttonsTitles.map((buttonTitle) => (
-            <Button style={buttonStyle} onClick={selectionHandler} invert={activeSelection !== buttonTitle} key={buttonTitle}>
+            <Button
+              style={buttonStyle}
+              onClick={selectionHandler}
+              invert={
+                buttonTitle === 'Code CV'
+                  ? !isCodeCvOpen
+                  : activeSelection !== buttonTitle
+              }
+              key={buttonTitle}
+            >
               {buttonTitle}
             </Button>
           ))}
@@ -173,6 +192,7 @@ const Resume = () => {
           {activeSelection === 'Recommendations' && <Recommendations />}
         </Selections>
       </Right>
+      <CyberTechCv open={isCodeCvOpen} onClose={() => setIsCodeCvOpen(false)} />
     </Main>
   );
 };

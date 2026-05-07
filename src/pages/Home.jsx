@@ -454,15 +454,13 @@ const Home = () => {
               <StyledHeading>Hello, I&apos;m</StyledHeading>
               <Jurie>Jurie Spies</Jurie>
               <Description>
-                Building digital experiences has been my passion for over{" "}
-                {getYearsOfExperience()} years now. I develop responsive web
-                apps and intuitive mobile solutions, with React and React Native
-                as my tools of choice. What I enjoy most is tackling those
-                tricky UX challenges – finding that sweet spot where code meets
-                human behavior. When I'm not debugging or optimizing
-                performance, you'll find me exploring new frameworks or
-                brainstorming better ways to translate design concepts into
-                functional interfaces.
+                I’ve been building websites and mobile apps for over{" "}
+                {getYearsOfExperience()} years. Most of my work is with React
+                and React Native. I enjoy the tricky part of taking a design and
+                turning it into something that feels good to use, especially
+                when the UX needs a bit of extra thought. When I’m not fixing
+                bugs or chasing performance, I’m usually trying out a new tool
+                or looking for a cleaner way to ship a feature.
               </Description>
               <AINote>
                 With AI, anyone can build a portfolio website like this. But if

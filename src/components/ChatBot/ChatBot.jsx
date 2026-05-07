@@ -4,7 +4,6 @@ import { COLOR_GREY, COLOR_WHITE, COLOR_DARK, COLOR_BACKGROUND } from '@/utils/g
 import { IoChatbubbleEllipsesOutline, IoSend, IoClose } from 'react-icons/io5';
 import RESUME_DATA from '@/utils/RESUME_DATA.json';
 import { getYearsOfExperience } from '@/utils/helpers';
-import { generateGeminiResponse } from '@/services/gemini';
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -380,7 +379,6 @@ Key Projects:
 Want to know more? Check out my <a href="${RESUME_DATA.github}" target="_blank">GitHub</a>!`,
       focus: `🎯 Currently focusing on:
 
-• AI Integration in Web Apps
 • React Performance Optimization
 • Mentoring Junior Developers
 • Full-stack Development
@@ -398,36 +396,73 @@ Looking forward to connecting with you!`
     return responses[option] || RESUME_DATA.aboutMe;
   };
 
-  const handleCustomQuestion = async () => {
+  const generateOfflineAnswer = (questionRaw) => {
+    const question = String(questionRaw || '').trim();
+    const q = question.toLowerCase();
+
+    const yearsExp = getYearsOfExperience();
+
+    if (!q) {
+      return { text: "Type a question or pick one of the options below.", isBot: true };
+    }
+
+    if (/(email|e-mail|mail)/.test(q)) {
+      return { text: `📧 Email: <a href="mailto:${RESUME_DATA.email}">${RESUME_DATA.email}</a>`, isBot: true, html: true };
+    }
+
+    if (/(phone|cell|call|contact number|mobile)/.test(q)) {
+      return { text: `📱 Phone: <a href="tel:${RESUME_DATA.phoneNumber}">${RESUME_DATA.phoneNumber}</a>`, isBot: true, html: true };
+    }
+
+    if (/linkedin/.test(q)) {
+      return { text: `🔗 LinkedIn: <a href="${RESUME_DATA.linkedIn}" target="_blank" rel="noopener noreferrer">View Profile</a>`, isBot: true, html: true };
+    }
+
+    if (/(github|git hub|repo|repositories)/.test(q)) {
+      return { text: `💻 GitHub: <a href="${RESUME_DATA.github}" target="_blank" rel="noopener noreferrer">View Repos</a>`, isBot: true, html: true };
+    }
+
+    if (/(portfolio|website|site)/.test(q)) {
+      return { text: `🌐 Website: <a href="https://www.juriespies.co.za" target="_blank" rel="noopener noreferrer">www.juriespies.co.za</a>`, isBot: true, html: true };
+    }
+
+    if (/(years|experience|exp\b|worked|work history)/.test(q)) {
+      return {
+        text: `I have ${yearsExp}+ years of experience in software development, with a focus on React and React Native.\n\nPick “📚 Experience” for a quick summary, or ask about a specific role/company.`,
+        isBot: true,
+      };
+    }
+
+    if (/(skills|tech stack|stack|tools|framework)/.test(q)) {
+      return { text: generateResponse('tech'), isBot: true, html: true };
+    }
+
+    if (/(who are you|introduc|about you|about jurie)/.test(q)) {
+      return { text: generateResponse('intro'), isBot: true, html: true };
+    }
+
+    if (/(connect|hire|availability|available|rate)/.test(q)) {
+      return { text: generateResponse('connect'), isBot: true, html: true };
+    }
+
+    return {
+      text: `I'm running in offline mode, so I can only answer using the info on this site.\n\nTry asking about: experience, tech stack, GitHub, LinkedIn, email, or phone.`,
+      isBot: true,
+    };
+  };
+
+  const handleCustomQuestion = () => {
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage = { text: inputValue, isBot: false };
     setMessages(prev => [...prev, userMessage]);
+    const question = inputValue;
     setInputValue('');
-    setIsLoading(true);
 
-    try {
-      const prompt = `As Jurie Spies' AI assistant, please answer the following question about him: ${inputValue}. Use the following context about Jurie: He is a Software Engineer with ${getYearsOfExperience()}+ years of experience, specializing in React and React Native development. ${RESUME_DATA.aboutMe}`;
-      
-      const response = await generateGeminiResponse(prompt);
-      
-      const botMessage = {
-        text: response,
-        isBot: true,
-        html: true
-      };
-      
-      setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
-      console.error('Chat error:', error);
-      const errorMessage = {
-        text: "I'm having trouble connecting to the AI service. Please ensure you have a valid API key configured in your environment variables (VITE_GEMINI_API_KEY).",
-        isBot: true
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    const botMessage = generateOfflineAnswer(question);
+    setMessages(prev => [...prev, botMessage]);
+    setIsLoading(false);
   };
 
   const handleKeyPress = (e) => {
@@ -440,7 +475,7 @@ Looking forward to connecting with you!`
     setIsOpen(!isOpen);
     if (!isOpen && messages.length === 0) {
       setMessages([{
-        text: "👋 Hi! I'm Jurie's virtual assistant. How can I help you today? Select an option below to learn more!",
+        text: "👋 Hi! I'm Jurie's chat assistant (offline). Select an option below or ask a question.",
         isBot: true
       }]);
     }
