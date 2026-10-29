@@ -15,7 +15,7 @@ export const SubHeading = styled.span`
   color: ${(props) => props.color || COLOR_WHITE};
 `;
 
-export const SubHeadingMobile = styled.span`
+const SubHeadingMobile = styled.span`
   display: flex;
 
 `;
