@@ -13,6 +13,8 @@ import CyberTechCv from '@/components/CyberTechCv';
 
 const StyledSubHeading = styled(SubHeading)`
 color:${COLOR_GREY};
+margin-top: 12px;
+line-height: 1.4;
 @media (max-width: 768px) {
   font-size: 16px;
 }
@@ -43,6 +45,7 @@ const Main = styled.div`
 `;
 
 const ButtonsContainer = styled.div`
+margin-top: 24px;
 
 @media (max-width: 768px) {
     width: 100%;
@@ -105,8 +108,10 @@ const buttonStyle = {
   display: 'flex',
   width: '100%',
   borderRadius: 5,
-  marginTop: 40,
-  marginBottom: 10,
+  marginTop: 14,
+  marginBottom: 0,
+  padding: '12px 20px',
+  fontSize: 15,
   justifyContent: 'center',
   minWidth: 200,
 };

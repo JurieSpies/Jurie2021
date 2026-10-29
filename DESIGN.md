@@ -6,6 +6,7 @@ colors:
   white: "#FFFFFF"
   black: "#000000"
   grey: "#808080"
+  text-muted: "#B4B4BE"
   disabled: "#D3D3D3"
   dark: "#1A1A1A"
   header: "#393B3C"
@@ -110,7 +111,8 @@ A near-black palette with white and grey text and a single user-tunable accent.
 - **Ink Black** (#1A1A1A): Text on accent-filled buttons and the reset control.
 - **Pure Black** (#000000): Text on accent-filled buttons.
 - **Signal White** (#FFFFFF): Primary text.
-- **Quiet Grey** (#808080): Subheadings and labels.
+- **Quiet Grey** (#808080): Subheadings and labels on the page background.
+- **Soft Lilac Grey** (#B4B4BE): Secondary body copy on cards and tinted panels (job descriptions, the hero quote). Quiet Grey is too dim there.
 - **Pale Grey** (#D3D3D3): Disabled state.
 
 ### Named Rules

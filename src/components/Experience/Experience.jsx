@@ -1,5 +1,5 @@
 import resumeData from '@/utils/RESUME_DATA.json';
-import { COLOR_BACKGROUND, COLOR_GREY } from '@/utils/globalColors';
+import { COLOR_BACKGROUND, COLOR_TEXT_MUTED } from '@/utils/globalColors';
 import { SubHeading } from '@/utils/globalFonts';
 import styled from 'styled-components';
 // Import company logos
@@ -115,7 +115,7 @@ const Experience = () => {
               </li>
             </StyledSubHeading>
             <br />
-            <StyledSubHeading fontWeight="thin" color={COLOR_GREY}>
+            <StyledSubHeading fontWeight="thin" color={COLOR_TEXT_MUTED}>
               {workItem.description}
             </StyledSubHeading>
           </ExperienceCard>

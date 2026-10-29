@@ -5,6 +5,8 @@ export const COLOR_PRIMARY = "#03FDA7";
 export const COLOR_WHITE = "#FFFFFF";
 export const COLOR_BLACK = "#000000";
 export const COLOR_GREY = "#808080";
+// Secondary text on dark surfaces; COLOR_GREY is too dim for body copy on cards.
+export const COLOR_TEXT_MUTED = "#B4B4BE";
 const COLOR_DISABLED = "#D3D3D3";
 export const COLOR_DARK = "#1A1A1A";
 export const COLOR_HEADER = "#393B3C";
