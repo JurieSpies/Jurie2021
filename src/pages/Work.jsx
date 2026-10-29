@@ -18,6 +18,8 @@ import ForgeDev from '../assets/projects/ForgeDev.webp';
 import CommunityOSWeb from '../assets/projects/CommunityOSWeb.webp';
 import CommunityOSApp from '../assets/projects/CommunityOSApp.webp';
 import Flare from '../assets/projects/Flare.webp';
+import MatheeDental from '../assets/projects/MatheeDental.webp';
+import BibleQuest from '../assets/projects/BibleQuest.webp';
 import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE, COLOR_BACKGROUND, COLOR_DARK, COLOR_HEADER } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
 
@@ -211,10 +213,6 @@ const ProjectDescription = styled(SubHeading)`
   color: ${COLOR_GREY};
   line-height: 1.6;
   margin: 15px 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 `;
 
 const ProjectStack = styled.div`
@@ -320,6 +318,22 @@ const Work = () => {
       description: 'Hold a button and the people you trust hear you. Sends an alert with your location to nearby neighbours and trusted contacts, who can respond and chat. Includes scheduled check-ins and home-screen widgets.',
       stack: 'TypeScript, React Native, Expo, Supabase',
       image: Flare,
+      isCompany: false,
+    },
+    {
+      title: 'Mathee Dental Studio',
+      description: 'A website for a family dental practice in Somerset West. Covers services, the team and patient resources, with online appointment booking and a clear way to get in touch.',
+      stack: 'Next.js, TypeScript, Tailwind CSS',
+      image: MatheeDental,
+      liveUrl: 'https://matheedentalstudio.co.za/',
+      isCompany: false,
+    },
+    {
+      title: 'Bible Quest',
+      description: 'A daily game that walks through all 66 books of the Bible in 600 short quests. Read the passage, take a quiz and reflect, with XP, streaks and a full Bible reader in five translations. Installable and works offline.',
+      stack: 'JavaScript, Canvas, PWA',
+      image: BibleQuest,
+      liveUrl: 'https://jurie-bible-quest.netlify.app/',
       isCompany: false,
     },
     {

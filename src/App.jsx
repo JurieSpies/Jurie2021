@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import styled from 'styled-components';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu';
 import Header from './pages/Header';
 import Home from './pages/Home';
-import Resume from './pages/Resume';
-import Work from './pages/Work';
 import ColorPicker from './components/ColorPicker/ColorPicker';
+
+const Resume = lazy(() => import('./pages/Resume'));
+const Work = lazy(() => import('./pages/Work'));
 
 // https://www.youtube.com/watch?v=dImgZ_AH7uA
 
@@ -88,13 +89,17 @@ const App = () => {
         {activeSelection === 'Resume'
         && (
         <Animation>
-          <Resume />
+          <Suspense fallback={null}>
+            <Resume />
+          </Suspense>
         </Animation>
         )}
         {activeSelection === 'Work'
         && (
         <Animation>
-          <Work />
+          <Suspense fallback={null}>
+            <Work />
+          </Suspense>
         </Animation>
         )}
       </PageContainer>

@@ -1,5 +1,5 @@
 import Button from "@/components/Button/Button";
-import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE } from "@/utils/globalColors";
+import { COLOR_GREY, COLOR_PRIMARY, COLOR_TEXT_MUTED, COLOR_WHITE } from "@/utils/globalColors";
 import { GlobalColors } from "@/utils/globalColors";
 import { Heading, SubHeading } from "@/utils/globalFonts";
 import { useQuery } from "@tanstack/react-query";
@@ -140,6 +140,11 @@ const StatisticsNumber = styled(Heading)`
   @media (max-width: 768px) {
     font-size: 32px;
   }
+`;
+
+const StatisticsLabel = styled(StyledSubHeading)`
+  justify-content: center;
+  text-align: center;
 `;
 
 const SocialsContainer = styled.div`
@@ -291,6 +296,10 @@ const InfoContainer = styled.div`
   /* mobile */
   @media (max-width: 768px) {
     align-items: center;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0 24px;
   }
 `;
 
@@ -300,7 +309,7 @@ const Jurie = styled(Heading)`
 
   /* mobile */
   @media (max-width: 768px) {
-    font-size: 52px;
+    font-size: 40px;
   }
 `;
 
@@ -412,18 +421,36 @@ const Home = () => {
   const { data: totalRepositories } = useQuery({
     queryKey: ["githubRepos"],
     queryFn: async () => {
+      const CACHE_KEY = "githubRepoCount";
+      const CACHE_TTL = 1000 * 60 * 60 * 24;
+      let cached = null;
+      try {
+        cached = JSON.parse(localStorage.getItem(CACHE_KEY));
+      } catch {
+        cached = null;
+      }
+      if (cached && Date.now() - cached.savedAt < CACHE_TTL) {
+        return { total_count: cached.total_count };
+      }
       try {
         const response = await axios({
           method: "get",
-          url: `https://api.github.com/users/${GITHUB_CONFIG.USERNAME}/repos`,
+          url: `https://api.github.com/users/${GITHUB_CONFIG.USERNAME}`,
           headers: {
             Accept: "application/vnd.github+json",
             "X-GitHub-Api-Version": GITHUB_CONFIG.API_VERSION,
           },
         });
-        return { total_count: response.data.length + 25 }; // Adding 25 to account for private repos
+        const total_count = response.data.public_repos + 25; // Adding 25 to account for private repos
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ total_count, savedAt: Date.now() }));
+        } catch {
+          // Storage unavailable (e.g. private mode); the count still displays
+        }
+        return { total_count };
       } catch (error) {
         console.log("Error fetching GitHub repos:", error);
+        if (cached) return { total_count: cached.total_count };
         return { total_count: 66 }; // Fallback value on error
       }
     },
@@ -539,13 +566,13 @@ const Home = () => {
           <StatisticsMainContainer>
             <Statistics>
               <StatisticsNumber>{getYearsOfExperience()}</StatisticsNumber>
-              <StyledSubHeading>Years of Experience</StyledSubHeading>
+              <StatisticsLabel>Years of Experience</StatisticsLabel>
             </Statistics>
             <Statistics>
               <StatisticsNumber>
                 {totalRepositories?.total_count ?? "66"}
               </StatisticsNumber>
-              <StyledSubHeading>Projects</StyledSubHeading>
+              <StatisticsLabel>Projects</StatisticsLabel>
             </Statistics>
             <Statistics>
               <StatisticsNumber>
@@ -557,7 +584,7 @@ const Home = () => {
                   useEasing={false}
                 />
               </StatisticsNumber>
-              <StyledSubHeading>Lines of Code</StyledSubHeading>
+              <StatisticsLabel>Lines of Code</StatisticsLabel>
             </Statistics>
             <Statistics>
               <StatisticsNumber>
@@ -569,7 +596,7 @@ const Home = () => {
                   useEasing={false}
                 />
               </StatisticsNumber>
-              <StyledSubHeading>Cups of Coffee</StyledSubHeading>
+              <StatisticsLabel>Cups of Coffee</StatisticsLabel>
             </Statistics>
           </StatisticsMainContainer>
         </Center>
@@ -581,7 +608,7 @@ const Home = () => {
 export default Home;
 
 const AINote = styled.div`
-  color: ${COLOR_GREY};
+  color: ${COLOR_TEXT_MUTED};
   font-size: 14px;
   margin-top: 20px;
   font-style: italic;
