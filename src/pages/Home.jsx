@@ -15,7 +15,7 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { PiBracketsAngleBold } from "react-icons/pi";
 import ReactTyped from "react-typed";
 import styled, { keyframes, createGlobalStyle } from "styled-components";
-import profilePic from "@/assets/images/JuriePPbw3.png";
+import profilePic from "@/assets/images/JuriePPbw3.webp";
 import resume from "@/assets/JurieSpiesResume.pdf";
 import { GITHUB_CONFIG } from "@/config/github";
 import RESUME_DATA from "../utils/RESUME_DATA.json";

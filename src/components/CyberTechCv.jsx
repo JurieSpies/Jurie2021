@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import RESUME_DATA from '@/utils/RESUME_DATA.json';
-import profileImage from '@/assets/images/JuriePPbw3.png';
+import profileImage from '@/assets/images/JuriePPbw3.webp';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
