@@ -1,8 +1,8 @@
 import { COLOR_BACKGROUND, COLOR_WHITE } from '@/utils/globalColors';
 import styled from 'styled-components';
-import udemy from '../../assets/skillIcons/Udemy.svg';
-import school from '../../assets/skillIcons/school.svg';
-import redseal from '../../assets/skillIcons/redseal.svg';
+import udemy from '../../assets/skillIcons/Udemy.webp';
+import school from '../../assets/skillIcons/school.webp';
+import redseal from '../../assets/skillIcons/redseal.webp';
 
 const CardsContainer = styled.div`
   display: flex;
@@ -43,9 +43,9 @@ const IconTitle = styled.div`
 
 const Education = () => {
   const skillSvgs = [
-    { svg: udemy, title: 'Self-taught through Udemy and Pluralsight, Ive honed skills in React, React Native, Node.js, and CI/CD tools like Git. These courses empower me to deliver high-quality software solutions aligned with industry best practices.' },
-    { svg: redseal, title: 'Majuba FET College - Newcastle Training Centre: Instumentation Red Seal - Jan 2008 - Dec 2011' },
-    { svg: school, title: 'HTS Witbank: Matriculated - 2013' },
+    { svg: udemy, width: 125, height: 63, title: 'Self-taught through Udemy and Pluralsight, Ive honed skills in React, React Native, Node.js, and CI/CD tools like Git. These courses empower me to deliver high-quality software solutions aligned with industry best practices.' },
+    { svg: redseal, width: 144, height: 86, title: 'Majuba FET College - Newcastle Training Centre: Instumentation Red Seal - Jan 2008 - Dec 2011' },
+    { svg: school, width: 82, height: 84, title: 'HTS Witbank: Matriculated - 2013' },
 
   ];
 
@@ -53,7 +53,7 @@ const Education = () => {
     <CardsContainer>
       {skillSvgs.map((skill, index) => (
         <ImageWrapper key={index}>
-          <img src={skill.svg} alt={`${skill.title} Logo`} />
+          <img src={skill.svg} width={skill.width} height={skill.height} alt={`${skill.title} Logo`} />
           <IconTitle>{skill.title}</IconTitle>
         </ImageWrapper>
       ))}

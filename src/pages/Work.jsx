@@ -3,17 +3,21 @@ import { FaGithub, FaBriefcase, FaUser } from 'react-icons/fa';
 import { FiChrome } from 'react-icons/fi';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import styled, { createGlobalStyle } from 'styled-components';
-import ApexFit from '../assets/projects/apexfit.png';
-import PiggyVault from '../assets/projects/piggyvault.png';
-import WodbudImage from '../assets/projects/wodbud.png';
-import GoWaterfall from '../assets/projects/GoWaterfall.png';
-import PasswordGenerator from '../assets/projects/PasswordGenerator.png';
-import Pickleball from '../assets/projects/Pickle.png'
-import BillScanner from '../assets/projects/BillScanner.png';
-import BeanAndBerry from '../assets/projects/Beanandberrysa.png';
-import AnyWorx from '../assets/projects/AnyWorx.png';
-import Proof from '../assets/projects/Proof.png';
-import ETTX from '../assets/projects/ETTX.png';
+import ApexFit from '../assets/projects/apexfit.webp';
+import PiggyVault from '../assets/projects/piggyvault.webp';
+import WodbudImage from '../assets/projects/wodbud.webp';
+import GoWaterfall from '../assets/projects/GoWaterfall.webp';
+import PasswordGenerator from '../assets/projects/PasswordGenerator.webp';
+import Pickleball from '../assets/projects/Pickle.webp'
+import BillScanner from '../assets/projects/BillScanner.webp';
+import BeanAndBerry from '../assets/projects/Beanandberrysa.webp';
+import AnyWorx from '../assets/projects/AnyWorx.webp';
+import Proof from '../assets/projects/Proof.webp';
+import ETTX from '../assets/projects/ETTX.webp';
+import ForgeDev from '../assets/projects/ForgeDev.webp';
+import CommunityOSWeb from '../assets/projects/CommunityOSWeb.webp';
+import CommunityOSApp from '../assets/projects/CommunityOSApp.webp';
+import Flare from '../assets/projects/Flare.webp';
 import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE, COLOR_BACKGROUND, COLOR_DARK, COLOR_HEADER } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
 
@@ -138,11 +142,8 @@ const ProjectCard = styled.div`
 const ProjectImage = styled.div`
   width: 100%;
   height: 250px;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
+  overflow: hidden;
 
   &::after {
     content: '';
@@ -161,6 +162,14 @@ const ProjectImage = styled.div`
   ${ProjectCard}:hover &::after {
     opacity: 1;
   }
+`;
+
+const ProjectPhoto = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 `;
 
 const ProjectContent = styled.div`
@@ -283,6 +292,37 @@ const Work = () => {
 
   const personalProjects = [
     {
+      title: 'ForgeDev',
+      description: 'My software studio in Somerset West and Strand. We build custom websites, installable web apps (PWAs) and life-changing mobile apps for local clients, from scoping through to shipping.',
+      stack: 'React, TypeScript, PWAs',
+      image: ForgeDev,
+      liveUrl: 'https://forge-dev.co.za/',
+      isCompany: false,
+    },
+    {
+      title: 'CommunityOS',
+      description: 'Everything your neighbourhood needs, in one platform. Brings local business info, deals, events and community news together for residents and visitors, with business listings and a resident login.',
+      stack: 'React, TypeScript, Supabase',
+      image: CommunityOSWeb,
+      liveUrl: 'https://communityos-web.co.za/',
+      isCompany: false,
+    },
+    {
+      title: 'CommunityOS Mobile',
+      description: 'The CommunityOS companion app: a business directory, local specials, what\'s on, and a community hub with local emergency numbers and notices, all in your pocket.',
+      stack: 'TypeScript, React Native, Expo, Supabase',
+      image: CommunityOSApp,
+      playStore: 'https://play.google.com/store/apps/details?id=za.co.forgedev.communityos',
+      isCompany: false,
+    },
+    {
+      title: 'Flare',
+      description: 'Hold a button and the people you trust hear you. Sends an alert with your location to nearby neighbours and trusted contacts, who can respond and chat. Includes scheduled check-ins and home-screen widgets.',
+      stack: 'TypeScript, React Native, Expo, Supabase',
+      image: Flare,
+      isCompany: false,
+    },
+    {
       title: 'WODbud',
       description: 'A functional fitness mobile app that allows users to generate custom workouts, access various timers, view Hero WODs, and use conversion tools.',
       stack: 'JavaScript, React Native, Jotai',
@@ -378,7 +418,9 @@ const Work = () => {
             <ProjectsGrid>
               {randomizedProjects.company.map((project, index) => (
                 <ProjectCard key={index} isCompany={project.isCompany}>
-                  <ProjectImage src={project.image} isCompany={project.isCompany} />
+                  <ProjectImage isCompany={project.isCompany}>
+                    <ProjectPhoto src={project.image} alt={`${project.title} screenshot`} loading="lazy" decoding="async" />
+                  </ProjectImage>
                   <ProjectContent>
                     <ProjectHeader>
                       <ProjectTitle>{project.title}</ProjectTitle>
@@ -421,7 +463,9 @@ const Work = () => {
             <ProjectsGrid>
               {randomizedProjects.personal.map((project, index) => (
                 <ProjectCard key={index} isCompany={project.isCompany}>
-                  <ProjectImage src={project.image} isCompany={project.isCompany} />
+                  <ProjectImage isCompany={project.isCompany}>
+                    <ProjectPhoto src={project.image} alt={`${project.title} screenshot`} loading="lazy" decoding="async" />
+                  </ProjectImage>
                   <ProjectContent>
                     <ProjectHeader>
                       <ProjectTitle>{project.title}</ProjectTitle>
