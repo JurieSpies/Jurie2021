@@ -53,7 +53,7 @@ const styles = {
     color: 'white',
   },
   moreOrLessButton: {
-    borderRadius: '5px',
+    borderRadius: '4px',
     marginTop: '15px',
     padding: '15px',
     color: 'white',
@@ -126,7 +126,7 @@ const RepoCard = (props) => {
         setRepoInfo(result);
       })
       .catch((res) => {
-        console.log('❌', res);
+        console.log('Error:', res);
       });
   };
 

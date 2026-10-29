@@ -14,7 +14,6 @@ body,
   padding: 0;
   margin: 0;
   background-color: #17161D;
-  user-select: none;
   flex-wrap: wrap;
   display: flex;
   -webkit-tap-highlight-color: transparent;
@@ -40,3 +39,18 @@ input:-webkit-autofill {
 }
 
 
+
+::selection {
+  background: var(--color-primary);
+  color: #000000;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+html {
+  scrollbar-color: var(--color-primary) #17161D;
+  scrollbar-width: thin;
+}

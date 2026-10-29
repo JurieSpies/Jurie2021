@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { FaGithub, FaBriefcase, FaUser } from 'react-icons/fa';
 import { FiChrome } from 'react-icons/fi';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
-import styled, { createGlobalStyle } from 'styled-components';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ApexFit from '../assets/projects/apexfit.webp';
 import PiggyVault from '../assets/projects/piggyvault.webp';
 import WodbudImage from '../assets/projects/wodbud.webp';
@@ -20,31 +21,15 @@ import CommunityOSApp from '../assets/projects/CommunityOSApp.webp';
 import Flare from '../assets/projects/Flare.webp';
 import MatheeDental from '../assets/projects/MatheeDental.webp';
 import BibleQuest from '../assets/projects/BibleQuest.webp';
-import { COLOR_GREY, COLOR_PRIMARY, COLOR_WHITE, COLOR_BACKGROUND, COLOR_DARK, COLOR_HEADER } from '../utils/globalColors';
+import { COLOR_GREY, COLOR_WHITE, COLOR_BACKGROUND, COLOR_TEXT_MUTED } from '../utils/globalColors';
 import { Heading, SubHeading } from '../utils/globalFonts';
-
-const GlobalStyle = createGlobalStyle`
-  html, body, #root {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  :root {
-    --color-primary: ${COLOR_PRIMARY};
-  }
-`;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
   padding: 20px;
-  overflow-y: auto;
-  background: #17161D;
 
   @media (max-width: 768px) {
     padding: 10px;
@@ -52,6 +37,9 @@ const Main = styled.div`
 `;
 
 const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-bottom: 40px;
 
@@ -61,8 +49,9 @@ const Header = styled.div`
 `;
 
 const Title = styled(Heading)`
-  font-size: 48px;
-  margin-bottom: 10px;
+  font-size: 52px;
+  margin: 0 0 10px;
+  justify-content: center;
 
   @media (max-width: 768px) {
     font-size: 32px;
@@ -73,9 +62,14 @@ const Subtitle = styled(SubHeading)`
   font-size: 18px;
   color: ${COLOR_GREY};
   margin-bottom: 30px;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
-const CategorySection = styled.div`
+const CategorySection = styled.section`
   width: 100%;
   max-width: 1200px;
   margin-bottom: 50px;
@@ -94,15 +88,13 @@ const CategoryIcon = styled.div`
   justify-content: center;
   width: 50px;
   height: 50px;
-  border-radius: 12px;
-  background: ${props => props.isCompany ?
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' :
-    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'};
-  color: white;
+  border-radius: 10px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
   font-size: 24px;
 `;
 
-const CategoryTitle = styled(Heading)`
+const CategoryTitle = styled(Heading).attrs({ as: 'h2' })`
   font-size: 32px;
   margin: 0;
 
@@ -122,48 +114,34 @@ const ProjectsGrid = styled.div`
   }
 `;
 
-const ProjectCard = styled.div`
-  background: ${COLOR_HEADER};
-  border-radius: 20px;
+const ProjectCard = styled.article`
+  display: flex;
+  flex-direction: column;
+  background: ${COLOR_BACKGROUND};
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  border: ${props => props.isCompany ?
-    '2px solid rgba(102, 126, 234, 0.3)' :
-    '2px solid rgba(240, 147, 251, 0.3)'};
+  border: 1px solid var(--color-primary);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border: ${props => props.isCompany ?
-      '2px solid rgba(102, 126, 234, 0.6)' :
-      '2px solid rgba(240, 147, 251, 0.6)'};
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 5px 15px var(--color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
 const ProjectImage = styled.div`
   width: 100%;
   height: 250px;
-  position: relative;
   overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: ${props => props.isCompany ?
-      'linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8))' :
-      'linear-gradient(45deg, rgba(240, 147, 251, 0.8), rgba(245, 87, 108, 0.8))'};
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  ${ProjectCard}:hover &::after {
-    opacity: 1;
-  }
+  border-bottom: 1px solid var(--color-primary);
 `;
 
 const ProjectPhoto = styled.img`
@@ -172,35 +150,53 @@ const ProjectPhoto = styled.img`
   object-fit: cover;
   object-position: center;
   display: block;
+  transition: transform 0.5s ease-out;
+
+  ${ProjectCard}:hover & {
+    transform: scale(1.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ${ProjectCard}:hover & {
+      transform: none;
+    }
+  }
 `;
 
 const ProjectContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 25px;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const ProjectHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 15px;
+  gap: 15px;
 `;
 
-const ProjectTitle = styled(Heading)`
+const ProjectTitle = styled(Heading).attrs({ as: 'h3' })`
   font-size: 24px;
   margin: 0;
   color: ${COLOR_WHITE};
+  text-wrap: balance;
 
   @media (max-width: 768px) {
     font-size: 20px;
   }
 `;
 
-const ProjectType = styled.div`
-  background: ${props => props.isCompany ?
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' :
-    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'};
-  color: white;
-  padding: 6px 12px;
+const ProjectType = styled.span`
+  flex-shrink: 0;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 4px 12px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
@@ -208,24 +204,30 @@ const ProjectType = styled.div`
   letter-spacing: 0.5px;
 `;
 
-const ProjectDescription = styled(SubHeading)`
-  font-size: 14px;
-  color: ${COLOR_GREY};
+const ProjectDescription = styled.p`
+  font-size: 15px;
+  font-weight: 400;
+  color: ${COLOR_TEXT_MUTED};
   line-height: 1.6;
-  margin: 15px 0;
+  margin: 15px 0 0;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const ProjectStack = styled.div`
-  font-size: 13px;
+  font-size: 14px;
   color: var(--color-primary);
   font-weight: 600;
-  margin: 15px 0;
+  margin: 15px 0 0;
 `;
 
 const ProjectLinks = styled.div`
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 20px;
 `;
 
 const ProjectLink = styled.a`
@@ -235,18 +237,63 @@ const ProjectLink = styled.a`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: ${props => props.isCompany ?
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' :
-    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'};
-  color: white;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 18px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.5s ease-in-out, color 0.3s ease-out;
 
   &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: ${COLOR_WHITE};
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
   }
 `;
+
+const ProjectCardItem = ({ project, label }) => (
+  <ProjectCard>
+    <ProjectImage>
+      <ProjectPhoto src={project.image} alt={`${project.title} screenshot`} loading="lazy" decoding="async" />
+    </ProjectImage>
+    <ProjectContent>
+      <ProjectHeader>
+        <ProjectTitle>{project.title}</ProjectTitle>
+        <ProjectType>{label}</ProjectType>
+      </ProjectHeader>
+      <ProjectDescription>{project.description}</ProjectDescription>
+      <ProjectStack>{project.stack}</ProjectStack>
+      <ProjectLinks>
+        {project.githubUrl && (
+          <ProjectLink href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.title} on GitHub`} title="GitHub">
+            <FaGithub aria-hidden="true" />
+          </ProjectLink>
+        )}
+        {project.playStore && (
+          <ProjectLink href={project.playStore} target="_blank" rel="noreferrer" aria-label={`${project.title} on Google Play`} title="Google Play">
+            <IoLogoGooglePlaystore aria-hidden="true" />
+          </ProjectLink>
+        )}
+        {project.liveUrl && (
+          <ProjectLink href={project.liveUrl} target="_blank" rel="noreferrer" aria-label={`Visit the ${project.title} website`} title="Live site">
+            <FiChrome aria-hidden="true" />
+          </ProjectLink>
+        )}
+      </ProjectLinks>
+    </ProjectContent>
+  </ProjectCard>
+);
+
+ProjectCardItem.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    stack: PropTypes.string,
+    image: PropTypes.string,
+    githubUrl: PropTypes.string,
+    playStore: PropTypes.string,
+    liveUrl: PropTypes.string,
+  }).isRequired,
+  label: PropTypes.string.isRequired,
+};
 
 const Work = () => {
   const [randomizedProjects, setRandomizedProjects] = useState({});
@@ -267,7 +314,6 @@ const Work = () => {
       stack: 'TypeScript, React, Firebase',
       image: ETTX,
       liveUrl: 'https://www.ett.com/za/home',
-      isCompany: true,
     },
     {
       title: 'Proof',
@@ -275,7 +321,6 @@ const Work = () => {
       stack: 'TypeScript, React, Firebase',
       image: Proof,
       liveUrl: 'https://vumacam.co.za/proof',
-      isCompany: true,
     },
     {
       title: 'GoWaterfall / GoCity / Balwin',
@@ -284,7 +329,6 @@ const Work = () => {
       image: GoWaterfall,
       liveUrl: 'https://www.gowaterfall.co.za/',
       playStore: 'https://play.google.com/store/apps/details?id=za.co.thinkdigital.balwin&hl=en_ZA',
-      isCompany: true,
     },
   ];
 
@@ -295,7 +339,6 @@ const Work = () => {
       stack: 'React, TypeScript, PWAs',
       image: ForgeDev,
       liveUrl: 'https://forge-dev.co.za/',
-      isCompany: false,
     },
     {
       title: 'CommunityOS',
@@ -303,7 +346,6 @@ const Work = () => {
       stack: 'React, TypeScript, Supabase',
       image: CommunityOSWeb,
       liveUrl: 'https://communityos-web.co.za/',
-      isCompany: false,
     },
     {
       title: 'CommunityOS Mobile',
@@ -311,14 +353,12 @@ const Work = () => {
       stack: 'TypeScript, React Native, Expo, Supabase',
       image: CommunityOSApp,
       playStore: 'https://play.google.com/store/apps/details?id=za.co.forgedev.communityos',
-      isCompany: false,
     },
     {
       title: 'Flare',
       description: 'Hold a button and the people you trust hear you. Sends an alert with your location to nearby neighbours and trusted contacts, who can respond and chat. Includes scheduled check-ins and home-screen widgets.',
       stack: 'TypeScript, React Native, Expo, Supabase',
       image: Flare,
-      isCompany: false,
     },
     {
       title: 'Mathee Dental Studio',
@@ -326,7 +366,6 @@ const Work = () => {
       stack: 'Next.js, TypeScript, Tailwind CSS',
       image: MatheeDental,
       liveUrl: 'https://matheedentalstudio.co.za/',
-      isCompany: false,
     },
     {
       title: 'Bible Quest',
@@ -334,7 +373,6 @@ const Work = () => {
       stack: 'JavaScript, Canvas, PWA',
       image: BibleQuest,
       liveUrl: 'https://jurie-bible-quest.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'WODbud',
@@ -344,7 +382,6 @@ const Work = () => {
       githubUrl: 'https://github.com/JurieSpies/WODbud',
       playStore: 'https://play.google.com/store/apps/details?id=com.wodbud',
       liveUrl: 'https://wodbud.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'PiggyVault',
@@ -352,7 +389,6 @@ const Work = () => {
       stack: 'TypeScript, React, Firebase',
       image: PiggyVault,
       githubUrl: 'https://github.com/AdamErwee/piggyvault-react-native',
-      isCompany: false,
     },
     {
       title: 'ApexFit',
@@ -361,7 +397,6 @@ const Work = () => {
       image: ApexFit,
       githubUrl: 'https://github.com/JurieSpies/kleinmond_crossfit',
       liveUrl: 'https://apexfit-crossfit.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'AnyWorx',
@@ -369,7 +404,6 @@ const Work = () => {
       stack: 'React, TypeScript, Styled Components',
       image: AnyWorx,
       liveUrl: 'https://anyworx.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'Bean & Berry',
@@ -377,7 +411,6 @@ const Work = () => {
       stack: 'React, TypeScript, E-commerce Integration',
       image: BeanAndBerry,
       liveUrl: 'https://beanandberrysa.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'Bill Scanner',
@@ -385,7 +418,6 @@ const Work = () => {
       stack: 'React, JavaScript, File Processing APIs',
       image: BillScanner,
       liveUrl: 'https://billscanner.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'Helderberg Pickleball',
@@ -393,7 +425,6 @@ const Work = () => {
       stack: 'React, TypeScript, Authentication, Community Features',
       image: Pickleball,
       liveUrl: 'https://helderbergpickleball.netlify.app/',
-      isCompany: false,
     },
     {
       title: 'Password Generator',
@@ -401,7 +432,6 @@ const Work = () => {
       stack: 'JavaScript, React',
       image: PasswordGenerator,
       liveUrl: 'https://juriepasswordgen.netlify.app/',
-      isCompany: false,
     },
   ];
 
@@ -413,105 +443,44 @@ const Work = () => {
   }, []);
 
   return (
-    <>
-      <GlobalStyle />
-      <Main>
-        <Header>
-          <Title>My Work</Title>
-          <Subtitle>A collection of projects I've built for companies and personal endeavors</Subtitle>
-        </Header>
+    <Main>
+      <Header>
+        <Title as="h1">My Work</Title>
+        <Subtitle>A collection of projects I've built for companies and personal endeavors</Subtitle>
+      </Header>
 
-        {randomizedProjects.company && (
-          <CategorySection>
-            <CategoryHeader>
-              <CategoryIcon isCompany={true}>
-                <FaBriefcase />
-              </CategoryIcon>
-              <CategoryTitle>Company Projects</CategoryTitle>
-            </CategoryHeader>
-            <ProjectsGrid>
-              {randomizedProjects.company.map((project, index) => (
-                <ProjectCard key={index} isCompany={project.isCompany}>
-                  <ProjectImage isCompany={project.isCompany}>
-                    <ProjectPhoto src={project.image} alt={`${project.title} screenshot`} loading="lazy" decoding="async" />
-                  </ProjectImage>
-                  <ProjectContent>
-                    <ProjectHeader>
-                      <ProjectTitle>{project.title}</ProjectTitle>
-                      <ProjectType isCompany={project.isCompany}>Company</ProjectType>
-                    </ProjectHeader>
-                    <ProjectDescription>{project.description}</ProjectDescription>
-                    <ProjectStack>{project.stack}</ProjectStack>
-                    <ProjectLinks>
-                      {project.githubUrl && (
-                        <ProjectLink href={project.githubUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
-                          <FaGithub />
-                        </ProjectLink>
-                      )}
-                      {project.playStore && (
-                        <ProjectLink href={project.playStore} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
-                          <IoLogoGooglePlaystore />
-                        </ProjectLink>
-                      )}
-                      {project.liveUrl && (
-                        <ProjectLink href={project.liveUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
-                          <FiChrome />
-                        </ProjectLink>
-                      )}
-                    </ProjectLinks>
-                  </ProjectContent>
-                </ProjectCard>
-              ))}
-            </ProjectsGrid>
-          </CategorySection>
-        )}
+      {randomizedProjects.company && (
+        <CategorySection>
+          <CategoryHeader>
+            <CategoryIcon aria-hidden="true">
+              <FaBriefcase />
+            </CategoryIcon>
+            <CategoryTitle>Company Projects</CategoryTitle>
+          </CategoryHeader>
+          <ProjectsGrid>
+            {randomizedProjects.company.map((project) => (
+              <ProjectCardItem key={project.title} project={project} label="Company" />
+            ))}
+          </ProjectsGrid>
+        </CategorySection>
+      )}
 
-        {randomizedProjects.personal && (
-          <CategorySection>
-            <CategoryHeader>
-              <CategoryIcon isCompany={false}>
-                <FaUser />
-              </CategoryIcon>
-              <CategoryTitle>Personal Projects</CategoryTitle>
-            </CategoryHeader>
-            <ProjectsGrid>
-              {randomizedProjects.personal.map((project, index) => (
-                <ProjectCard key={index} isCompany={project.isCompany}>
-                  <ProjectImage isCompany={project.isCompany}>
-                    <ProjectPhoto src={project.image} alt={`${project.title} screenshot`} loading="lazy" decoding="async" />
-                  </ProjectImage>
-                  <ProjectContent>
-                    <ProjectHeader>
-                      <ProjectTitle>{project.title}</ProjectTitle>
-                      <ProjectType isCompany={project.isCompany}>Personal</ProjectType>
-                    </ProjectHeader>
-                    <ProjectDescription>{project.description}</ProjectDescription>
-                    <ProjectStack>{project.stack}</ProjectStack>
-                    <ProjectLinks>
-                      {project.githubUrl && (
-                        <ProjectLink href={project.githubUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
-                          <FaGithub />
-                        </ProjectLink>
-                      )}
-                      {project.playStore && (
-                        <ProjectLink href={project.playStore} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
-                          <IoLogoGooglePlaystore />
-                        </ProjectLink>
-                      )}
-                      {project.liveUrl && (
-                        <ProjectLink href={project.liveUrl} target="_blank" rel="noreferrer" isCompany={project.isCompany}>
-                          <FiChrome />
-                        </ProjectLink>
-                      )}
-                    </ProjectLinks>
-                  </ProjectContent>
-                </ProjectCard>
-              ))}
-            </ProjectsGrid>
-          </CategorySection>
-        )}
-      </Main>
-    </>
+      {randomizedProjects.personal && (
+        <CategorySection>
+          <CategoryHeader>
+            <CategoryIcon aria-hidden="true">
+              <FaUser />
+            </CategoryIcon>
+            <CategoryTitle>Personal Projects</CategoryTitle>
+          </CategoryHeader>
+          <ProjectsGrid>
+            {randomizedProjects.personal.map((project) => (
+              <ProjectCardItem key={project.title} project={project} label="Personal" />
+            ))}
+          </ProjectsGrid>
+        </CategorySection>
+      )}
+    </Main>
   );
 };
 

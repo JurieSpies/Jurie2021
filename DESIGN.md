@@ -13,6 +13,22 @@ colors:
   card: "#27262F"
   page: "#17161D"
   editor: "#1E1E1E"
+  track: "#555555"
+  editor-chrome: "#323233"
+  editor-tab: "#2D2D2D"
+  editor-rule: "#333333"
+  editor-scrollbar: "#424242"
+  editor-text: "#CCCCCC"
+  editor-action: "#0E639C"
+  editor-string: "#CE9178"
+  editor-comment: "#6A9955"
+  editor-type: "#4EC9B0"
+  editor-number: "#B5CEA8"
+  editor-property: "#9CDCFE"
+  editor-function: "#DCDCAA"
+  editor-close: "#FF5F57"
+  editor-minimise: "#FEBC2E"
+  editor-maximise: "#28C840"
 typography:
   heading:
     fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
@@ -24,19 +40,64 @@ typography:
     fontSize: "32px"
     fontWeight: 700
     lineHeight: 1.2
+  display-name:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "72px"
+    fontWeight: 700
+    lineHeight: 1.1
+  display-name-mobile:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "40px"
+    fontWeight: 700
+    lineHeight: 1.1
+  statistic:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "42px"
+    fontWeight: 700
+    lineHeight: 1.2
+  title:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "24px"
+    fontWeight: 700
+    lineHeight: 1.3
+  title-mobile:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "20px"
+    fontWeight: 700
+    lineHeight: 1.3
   subheading:
     fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
     fontSize: "18px"
     fontWeight: 700
     lineHeight: 1.4
+  lead:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.5
   body:
     fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
     fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.5
+  small:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: 1.5
+  caption:
+    fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+    fontSize: "12px"
+    fontWeight: 600
+    lineHeight: 1.4
   code:
     fontFamily: "JetBrains Mono, Fira Code, Cascadia Code, Consolas, monospace"
     fontSize: "0.82rem"
+    fontWeight: 400
+    lineHeight: 1.5
+  code-chrome:
+    fontFamily: "JetBrains Mono, Fira Code, Cascadia Code, Consolas, monospace"
+    fontSize: "0.78rem"
     fontWeight: 400
     lineHeight: 1.5
 rounded:
@@ -45,6 +106,7 @@ rounded:
   lg: "8px"
   card: "10px"
   pill: "20px"
+  track: "25px"
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
@@ -115,6 +177,9 @@ A near-black palette with white and grey text and a single user-tunable accent.
 - **Soft Lilac Grey** (#B4B4BE): Secondary body copy on cards and tinted panels (job descriptions, the hero quote). Quiet Grey is too dim there.
 - **Pale Grey** (#D3D3D3): Disabled state.
 
+### Code-CV Editor Palette
+The `editor-*` colors reproduce a VS Code dark theme (chrome, tabs, syntax highlighting, and the window traffic lights) and exist **only inside the code-CV modal**. They are part of that modal's costume, not page colors; never use them elsewhere.
+
 ### Named Rules
 **The One Voice Rule.** The accent is the only saturated color. Its rarity is the point; do not introduce a second accent.
 
@@ -129,10 +194,15 @@ A near-black palette with white and grey text and a single user-tunable accent.
 **Character:** A plain system sans carries the whole site. Hierarchy comes from size and weight, not from a display face.
 
 ### Hierarchy
-- **Display** (700, 52px desktop / 32px mobile, line-height 1.2): Name and section titles; the largest text on the page.
+- **Display Name** (700, 72px desktop / 40px mobile): The hero name on the home page only.
+- **Display** (700, 52px desktop / 32px mobile, line-height 1.2): Section and page titles.
 - **Statistic** (700, 42px desktop / 32px mobile): Count-up numbers on the home page.
+- **Title** (700, 24px desktop / 20px mobile): Card titles, project names, category headings on mobile.
 - **Subheading** (700, 18px desktop / 16px mobile, grey): Labels above values, e.g. "Experience", "Nationality".
+- **Lead** (400 or 700, 16px): Hero description, nav labels, the first line of a card.
 - **Body** (400, 15px, line-height 1.5; 14px on mobile): Descriptions and card content.
+- **Small** (400, 14px): Tech-stack lines, recommender titles, secondary links.
+- **Caption** (600, 12px): Badges and metadata such as recommendation dates. Never for running text.
 - **Code** (400, 0.82rem, monospace): Code-CV modal only.
 
 ### Named Rules
@@ -176,17 +246,30 @@ Rounded but not soft. Buttons are full pills (20px radius). Cards and logo chips
 - **Mobile:** Replaced by the burger menu (full-height panel, backdrop `rgba(0,0,0,0.4)`).
 
 ### Cards / Containers
+- **Applies to:** Experience cards, recommendation cards, Work project cards, and the chat panel. All share one recipe.
 - **Corner Style:** 10px radius.
 - **Background:** Card Slate (`#27262F`).
 - **Shadow Strategy:** None at rest; see Elevation.
 - **Border:** 1px solid accent.
-- **Internal Padding:** `20px`, with `30px` on the left for experience cards.
+- **Internal Padding:** `20px`, with `30px` on the left for experience cards and `25px` on project cards.
+- **Hover:** Accent glow (`0 5px 15px var(--color-primary)`) with a small lift. Project screenshots scale to 1.04 inside the card.
+- **Secondary text:** Soft Lilac Grey (`#B4B4BE`), never Quiet Grey; Quiet Grey fails contrast on Card Slate.
+
+### Icon Links
+- **Style:** 32 to 40px circle, 1px accent border, accent icon, accent glow on hover. Used for Home socials and Work project links. Always carry an `aria-label`.
+
+### Badges
+- **Style:** Invert pill: 1px accent border, accent text, 12px uppercase caption, `4px 12px` padding.
 
 ### Company Logos
 - **Style:** 140×29px, `object-fit: contain`, white background, 1px accent border, 10px radius, 5px padding.
 
 ### Progress Meter
-- **Style:** Dark track (`#555`), 25px radius, green gradient fill (`rgb(43,194,83)` to `rgb(84,240,84)`) with a diagonal stripe overlay.
+- **Style:** Dark track (`#555`, token `track`), 25px radius (token `rounded.track`), green gradient fill (`rgb(43,194,83)` to `rgb(84,240,84)`) with a diagonal stripe overlay.
+
+### Chat Assistant
+- **Launcher:** Accent-filled circle with a black icon, gentle float (off under reduced motion).
+- **Panel:** Card recipe with the modal lift shadow. Visitor bubbles are accent-filled with black text; assistant bubbles are Header Graphite with white text and accent links. Quick-reply chips use the invert pill.
 
 ### Theme Picker
 - **Style:** Fixed bottom-left on desktop; hidden on mobile. An accent-colored palette icon opens a native color input. A Reset button appears when the color differs from the default.
@@ -206,4 +289,6 @@ Rounded but not soft. Buttons are full pills (20px radius). Cards and logo chips
 - **Don't** add drop shadows to cards at rest.
 - **Don't** hard-code the mint hex in components; use the variable.
 - **Don't** add light-theme surfaces; the system is dark-only.
-- **Don't** treat one-off decorative gradients (for example in the skill icon or chat components) as system tokens.
+- **Don't** use gradients as fills on buttons, badges, icons, or chat bubbles. The accent is a flat color.
+- **Don't** use `editor-*` colors outside the code-CV modal.
+- **Don't** put white text on an accent fill; text on the accent is black.

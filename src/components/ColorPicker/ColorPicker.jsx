@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { COLOR_WHITE, COLOR_DARK } from '@/utils/globalColors';
+import { COLOR_WHITE, COLOR_DARK, COLOR_PRIMARY } from '@/utils/globalColors';
 import { IoColorPaletteOutline } from 'react-icons/io5';
 
 const ColorPickerContainer = styled.div`
@@ -17,7 +17,7 @@ const ColorPickerContainer = styled.div`
     padding: 8px;
     width: fit-content;
 
-    &:hover {
+    &:hover, &:focus-within {
       .reset-button {
         opacity: 1;
         visibility: visible;
@@ -27,15 +27,15 @@ const ColorPickerContainer = styled.div`
   }
 `;
 
-const ColorIcon = styled(IoColorPaletteOutline)`
-  display: none;
+const ColorIconButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: none;
+  border: 0;
+  padding: 0;
   color: var(--color-primary);
   font-size: 24px;
   cursor: pointer;
-
-  @media (min-width: 768px) {
-    display: block;
-  }
 `;
 
 const ColorInput = styled.input`
@@ -78,6 +78,12 @@ const ResetButton = styled.button`
     opacity: 0.9;
   }
 
+  &:focus-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
   @media (min-width: 768px) {
     padding: 4px 8px;
     font-size: 11px;
@@ -88,7 +94,7 @@ const ResetButton = styled.button`
 `;
 
 export const useColorPicker = () => {
-  const DEFAULT_COLOR = '#03FDA7';
+  const DEFAULT_COLOR = COLOR_PRIMARY;
   const [color, setColor] = useState(() => {
     // Try to get the color from localStorage first
     const savedColor = localStorage.getItem('themeColor');
@@ -131,17 +137,24 @@ const ColorPicker = () => {
 
   return (
     <ColorPickerContainer>
-      <ColorIcon 
-        title="Customize Theme Color" 
+      <ColorIconButton
+        type="button"
+        title="Customize theme color"
+        aria-label="Customize theme color"
         onClick={handleIconClick}
-      />
+      >
+        <IoColorPaletteOutline aria-hidden="true" />
+      </ColorIconButton>
       <ColorInput
         ref={colorInputRef}
         type="color"
+        tabIndex={-1}
+        aria-hidden="true"
         value={color}
         onChange={handleColorChange}
       />
-      <ResetButton 
+      <ResetButton
+        type="button"
         className="reset-button" 
         onClick={handleReset}
         $showReset={color !== DEFAULT_COLOR}

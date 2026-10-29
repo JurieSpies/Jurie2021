@@ -1,9 +1,14 @@
-import { useState, useRef, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { COLOR_GREY, COLOR_WHITE, COLOR_DARK, COLOR_BACKGROUND } from '@/utils/globalColors';
-import { IoChatbubbleEllipsesOutline, IoSend, IoClose } from 'react-icons/io5';
-import RESUME_DATA from '@/utils/RESUME_DATA.json';
-import { getYearsOfExperience } from '@/utils/helpers';
+import { useState, useRef, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
+import {
+  COLOR_BLACK,
+  COLOR_WHITE,
+  COLOR_HEADER,
+  COLOR_BACKGROUND,
+} from "@/utils/globalColors";
+import { IoChatbubbleEllipsesOutline, IoSend, IoClose } from "react-icons/io5";
+import RESUME_DATA from "@/utils/RESUME_DATA.json";
+import { getYearsOfExperience } from "@/utils/helpers";
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -17,11 +22,6 @@ const float = keyframes`
   100% { transform: translateY(0px); }
 `;
 
-const rotate = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
-
 const ChatBotWrapper = styled.div`
   position: fixed;
   top: 0px;
@@ -32,7 +32,7 @@ const ChatBotWrapper = styled.div`
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  
+
   @media (max-width: 768px) {
     width: 70px;
     height: 70px;
@@ -41,21 +41,28 @@ const ChatBotWrapper = styled.div`
   }
 `;
 
-const ChatBotIcon = styled.div`
+const ChatBotIcon = styled.button`
+  border: 0;
+  padding: 0;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #00f5a0, #00d9f5);
+  background: var(--color-primary);
+  color: ${COLOR_BLACK};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 217, 245, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   transition: all 0.3s ease;
   z-index: 2;
   pointer-events: auto;
   animation: ${float} 3s ease-in-out infinite;
-  
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
   @media (max-width: 768px) {
     width: 38px;
     height: 38px;
@@ -63,7 +70,7 @@ const ChatBotIcon = styled.div`
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 217, 245, 0.6);
+    box-shadow: 0 5px 15px var(--color-primary);
   }
 
   &:active {
@@ -78,15 +85,14 @@ const ChatBotContainer = styled.div`
   width: 450px;
   height: 600px;
   background: ${COLOR_BACKGROUND};
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
   display: ${(props) => (props.$isOpen ? "flex" : "none")};
   flex-direction: column;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  
+  border: 1px solid var(--color-primary);
+  z-index: 1001;
+
   @media (max-width: 768px) {
     width: calc(100% - 40px);
     height: calc(100% - 160px);
@@ -96,22 +102,22 @@ const ChatBotContainer = styled.div`
 
 const ChatHeader = styled.div`
   padding: 20px;
-  background: linear-gradient(90deg, #1a1a1a, #2a2a2a);
+  background: ${COLOR_HEADER};
   color: ${COLOR_WHITE};
   font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  
+
   h2 {
     font-size: 18px;
     margin: 0;
   }
-  
+
   @media (max-width: 768px) {
     padding: 15px;
-    
+
     h2 {
       font-size: 16px;
     }
@@ -128,7 +134,7 @@ const CloseButton = styled.button`
   justify-content: center;
   padding: 0;
   transition: all 0.2s;
-  
+
   &:hover {
     opacity: 0.8;
     transform: rotate(90deg);
@@ -158,12 +164,8 @@ const ChatMessages = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: var(--color-primary);
     border-radius: 3px;
-
-    &:hover {
-      background-color: var(--color-primary-dark);
-    }
   }
-  
+
   @media (max-width: 768px) {
     padding: 15px;
     gap: 10px;
@@ -175,7 +177,7 @@ const OptionsContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   padding: 20px;
-  
+
   @media (max-width: 768px) {
     padding: 15px;
     gap: 8px;
@@ -184,24 +186,23 @@ const OptionsContainer = styled.div`
 
 const OptionButton = styled.button`
   padding: 10px 18px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
-  color: ${COLOR_WHITE};
-  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s;
   font-size: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: ${COLOR_WHITE};
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   @media (max-width: 768px) {
     padding: 8px 16px;
     font-size: 14px;
@@ -211,22 +212,23 @@ const OptionButton = styled.button`
 const Message = styled.div`
   margin: 5px 0;
   padding: 15px 20px;
-  border-radius: 15px;
+  border-radius: 10px;
   max-width: 85%;
-  background: ${(props) => (props.$isBot ? COLOR_GREY : "linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))")};
-  color: ${(props) => (props.$isBot ? "#1a1a1a" : COLOR_WHITE)};
+  background: ${(props) =>
+    props.$isBot ? COLOR_HEADER : "var(--color-primary)"};
+  color: ${(props) => (props.$isBot ? COLOR_WHITE : COLOR_BLACK)};
   align-self: ${(props) => (props.$isBot ? "flex-start" : "flex-end")};
   font-size: 15px;
   line-height: 1.5;
   white-space: pre-wrap;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
   animation: ${pulse} 0.3s ease-out;
-  
-  &:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  a {
+    color: ${(props) => (props.$isBot ? "var(--color-primary)" : "inherit")};
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
-  
+
   @media (max-width: 768px) {
     padding: 12px 16px;
     font-size: 14px;
@@ -251,7 +253,7 @@ const InputContainer = styled.div`
   background-color: ${COLOR_BACKGROUND};
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   gap: 15px;
-  
+
   @media (max-width: 768px) {
     padding: 15px;
     gap: 10px;
@@ -262,7 +264,7 @@ const Input = styled.input`
   flex: 1;
   padding: 15px 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 25px;
+  border-radius: 20px;
   font-size: 15px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.05);
@@ -271,9 +273,9 @@ const Input = styled.input`
 
   &:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(0, 217, 245, 0.2);
+    box-shadow: 0 0 0 1px var(--color-primary);
   }
-  
+
   @media (max-width: 768px) {
     padding: 12px 18px;
     font-size: 14px;
@@ -281,8 +283,8 @@ const Input = styled.input`
 `;
 
 const SendButton = styled.button`
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: ${COLOR_WHITE};
+  background: var(--color-primary);
+  color: ${COLOR_BLACK};
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -292,11 +294,10 @@ const SendButton = styled.button`
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-  &:hover {
+  &:hover:not(:disabled) {
     transform: rotate(15deg) scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
   }
 
   &:active {
@@ -307,7 +308,7 @@ const SendButton = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
-  
+
   @media (max-width: 768px) {
     width: 45px;
     height: 45px;
@@ -317,7 +318,7 @@ const SendButton = styled.button`
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
   const messagesEndRef = useRef(null);
@@ -331,33 +332,35 @@ const ChatBot = () => {
   }, [messages]);
 
   const options = [
-    { label: '👋 Introduction', value: 'intro' },
-    { label: '📞 Contact Details', value: 'contact' },
-    { label: '💻 Tech Stack', value: 'tech' },
-    { label: '📚 Experience', value: 'experience' },
-    { label: '🎯 Current Focus', value: 'focus' },
-    { label: '🤝 Let\'s Connect', value: 'connect' },
+    { label: "Introduction", value: "intro" },
+    { label: "Contact Details", value: "contact" },
+    { label: "Tech Stack", value: "tech" },
+    { label: "Experience", value: "experience" },
+    { label: "Current Focus", value: "focus" },
+    { label: "Let's Connect", value: "connect" },
   ];
 
   const formatMessage = (text) => {
-    return text.split('\n').map((line, i) => (
-      <div key={i}>
-        {line.includes('•') ? <li>{line.replace('•', '')}</li> : line}
-      </div>
-    ));
+    return text
+      .split("\n")
+      .map((line, i) => (
+        <div key={i}>
+          {line.includes("•") ? <li>{line.replace("•", "")}</li> : line}
+        </div>
+      ));
   };
 
   const generateResponse = (option) => {
     const yearsExp = getYearsOfExperience();
-    
+
     const responses = {
-      intro: `Hi! 👋 I'm Jurie Spies, a Software Engineer with ${yearsExp}+ years of experience. ${RESUME_DATA.aboutMe}`,
+      intro: `Hi! I'm Jurie Spies, a Software Engineer with ${yearsExp}+ years of experience. ${RESUME_DATA.aboutMe}`,
       contact: `Let's get in touch! Here's how you can reach me:
 
-📧 Email: <a href="mailto:${RESUME_DATA.email}">${RESUME_DATA.email}</a>
-📱 Phone: <a href="tel:${RESUME_DATA.phoneNumber}">${RESUME_DATA.phoneNumber}</a>
-🔗 LinkedIn: <a href="${RESUME_DATA.linkedIn}" target="_blank">View Profile</a>`,
-      tech: `🚀 My core tech stack includes:
+Email: <a href="mailto:${RESUME_DATA.email}">${RESUME_DATA.email}</a>
+Phone: <a href="tel:${RESUME_DATA.phoneNumber}">${RESUME_DATA.phoneNumber}</a>
+LinkedIn: <a href="${RESUME_DATA.linkedIn}" target="_blank">View Profile</a>`,
+      tech: `My core tech stack includes:
 
 • React & React Native
 • JavaScript/TypeScript
@@ -367,9 +370,9 @@ const ChatBot = () => {
 • Restful APIs
 
 I'm always learning and exploring new technologies!`,
-      experience: `💼 Professional Journey:
+      experience: `Professional Journey:
 
-I have ${yearsExp}+ years of experience in software development, specializing in React and React Native. 
+I have ${yearsExp}+ years of experience in software development, specializing in React and React Native.
 
 Key Projects:
 • PropTech Solutions
@@ -377,72 +380,95 @@ Key Projects:
 • Loyalty Programs
 
 Want to know more? Check out my <a href="${RESUME_DATA.github}" target="_blank">GitHub</a>!`,
-      focus: `🎯 Currently focusing on:
+      focus: `Currently focusing on:
 
 • React Performance Optimization
 • Mentoring Junior Developers
 • Full-stack Development
 
 Always excited to discuss new technologies and opportunities!`,
-      connect: `🤝 Let's connect! Here are all the ways to reach me:
+      connect: `Let's connect! Here are all the ways to reach me:
 
 • <a href="mailto:${RESUME_DATA.email}">Send me an email</a>
 • <a href="${RESUME_DATA.linkedIn}" target="_blank">Connect on LinkedIn</a>
 • <a href="${RESUME_DATA.github}" target="_blank">Check out my GitHub</a>
 
-Looking forward to connecting with you!`
+Looking forward to connecting with you!`,
     };
 
     return responses[option] || RESUME_DATA.aboutMe;
   };
 
   const generateOfflineAnswer = (questionRaw) => {
-    const question = String(questionRaw || '').trim();
+    const question = String(questionRaw || "").trim();
     const q = question.toLowerCase();
 
     const yearsExp = getYearsOfExperience();
 
     if (!q) {
-      return { text: "Type a question or pick one of the options below.", isBot: true };
+      return {
+        text: "Type a question or pick one of the options below.",
+        isBot: true,
+      };
     }
 
     if (/(email|e-mail|mail)/.test(q)) {
-      return { text: `📧 Email: <a href="mailto:${RESUME_DATA.email}">${RESUME_DATA.email}</a>`, isBot: true, html: true };
+      return {
+        text: `Email: <a href="mailto:${RESUME_DATA.email}">${RESUME_DATA.email}</a>`,
+        isBot: true,
+        html: true,
+      };
     }
 
     if (/(phone|cell|call|contact number|mobile)/.test(q)) {
-      return { text: `📱 Phone: <a href="tel:${RESUME_DATA.phoneNumber}">${RESUME_DATA.phoneNumber}</a>`, isBot: true, html: true };
+      return {
+        text: `Phone: <a href="tel:${RESUME_DATA.phoneNumber}">${RESUME_DATA.phoneNumber}</a>`,
+        isBot: true,
+        html: true,
+      };
     }
 
     if (/linkedin/.test(q)) {
-      return { text: `🔗 LinkedIn: <a href="${RESUME_DATA.linkedIn}" target="_blank" rel="noopener noreferrer">View Profile</a>`, isBot: true, html: true };
+      return {
+        text: `LinkedIn: <a href="${RESUME_DATA.linkedIn}" target="_blank" rel="noopener noreferrer">View Profile</a>`,
+        isBot: true,
+        html: true,
+      };
     }
 
     if (/(github|git hub|repo|repositories)/.test(q)) {
-      return { text: `💻 GitHub: <a href="${RESUME_DATA.github}" target="_blank" rel="noopener noreferrer">View Repos</a>`, isBot: true, html: true };
+      return {
+        text: `GitHub: <a href="${RESUME_DATA.github}" target="_blank" rel="noopener noreferrer">View Repos</a>`,
+        isBot: true,
+        html: true,
+      };
     }
 
     if (/(portfolio|website|site)/.test(q)) {
-      return { text: `🌐 Website: <a href="https://www.juriespies.co.za" target="_blank" rel="noopener noreferrer">www.juriespies.co.za</a>`, isBot: true, html: true };
+      return {
+        text: `Website: <a href="https://www.juriespies.co.za" target="_blank" rel="noopener noreferrer">www.juriespies.co.za</a>`,
+        isBot: true,
+        html: true,
+      };
     }
 
     if (/(years|experience|exp\b|worked|work history)/.test(q)) {
       return {
-        text: `I have ${yearsExp}+ years of experience in software development, with a focus on React and React Native.\n\nPick “📚 Experience” for a quick summary, or ask about a specific role/company.`,
+        text: `I have ${yearsExp}+ years of experience in software development, with a focus on React and React Native.\n\nPick “Experience” for a quick summary, or ask about a specific role/company.`,
         isBot: true,
       };
     }
 
     if (/(skills|tech stack|stack|tools|framework)/.test(q)) {
-      return { text: generateResponse('tech'), isBot: true, html: true };
+      return { text: generateResponse("tech"), isBot: true, html: true };
     }
 
     if (/(who are you|introduc|about you|about jurie)/.test(q)) {
-      return { text: generateResponse('intro'), isBot: true, html: true };
+      return { text: generateResponse("intro"), isBot: true, html: true };
     }
 
     if (/(connect|hire|availability|available|rate)/.test(q)) {
-      return { text: generateResponse('connect'), isBot: true, html: true };
+      return { text: generateResponse("connect"), isBot: true, html: true };
     }
 
     return {
@@ -455,18 +481,18 @@ Looking forward to connecting with you!`
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage = { text: inputValue, isBot: false };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     const question = inputValue;
-    setInputValue('');
+    setInputValue("");
 
     setIsLoading(true);
     const botMessage = generateOfflineAnswer(question);
-    setMessages(prev => [...prev, botMessage]);
+    setMessages((prev) => [...prev, botMessage]);
     setIsLoading(false);
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
       handleCustomQuestion();
     }
   };
@@ -474,35 +500,49 @@ Looking forward to connecting with you!`
   const toggleChat = () => {
     setIsOpen(!isOpen);
     if (!isOpen && messages.length === 0) {
-      setMessages([{
-        text: "👋 Hi! I'm Jurie's chat assistant (offline). Select an option below or ask a question.",
-        isBot: true
-      }]);
+      setMessages([
+        {
+          text: "Hi! I'm Jurie's chat assistant (offline). Select an option below or ask a question.",
+          isBot: true,
+        },
+      ]);
     }
   };
 
   const handleOptionClick = (option) => {
-    const userMessage = { text: options.find(opt => opt.value === option).label, isBot: false };
-    const botMessage = { 
-      text: generateResponse(option), 
-      isBot: true,
-      html: true 
+    const userMessage = {
+      text: options.find((opt) => opt.value === option).label,
+      isBot: false,
     };
-    
-    setMessages(prev => [...prev, userMessage, botMessage]);
+    const botMessage = {
+      text: generateResponse(option),
+      isBot: true,
+      html: true,
+    };
+
+    setMessages((prev) => [...prev, userMessage, botMessage]);
   };
 
   return (
     <>
       <ChatBotWrapper>
-        <ChatBotIcon onClick={toggleChat}>
-          <IoChatbubbleEllipsesOutline size={24} color="white" />
+        <ChatBotIcon
+          type="button"
+          aria-label={isOpen ? "Close chat" : "Open chat"}
+          aria-expanded={isOpen}
+          onClick={toggleChat}
+        >
+          <IoChatbubbleEllipsesOutline size={24} aria-hidden="true" />
         </ChatBotIcon>
       </ChatBotWrapper>
       <ChatBotContainer $isOpen={isOpen}>
         <ChatHeader>
           <h2>Chat with Jurie's Assistant</h2>
-          <CloseButton onClick={toggleChat}>
+          <CloseButton
+            type="button"
+            aria-label="Close chat"
+            onClick={toggleChat}
+          >
             <IoClose size={24} />
           </CloseButton>
         </ChatHeader>
@@ -510,9 +550,13 @@ Looking forward to connecting with you!`
           {messages.map((message, index) => (
             <Message key={index} $isBot={message.isBot}>
               {message.html ? (
-                <BotMessageContent dangerouslySetInnerHTML={{ __html: message.text }} />
+                <BotMessageContent
+                  dangerouslySetInnerHTML={{ __html: message.text }}
+                />
               ) : (
-                <BotMessageContent>{formatMessage(message.text)}</BotMessageContent>
+                <BotMessageContent>
+                  {formatMessage(message.text)}
+                </BotMessageContent>
               )}
             </Message>
           ))}
@@ -521,6 +565,7 @@ Looking forward to connecting with you!`
         <OptionsContainer>
           {options.map((option) => (
             <OptionButton
+              type="button"
               key={option.value}
               onClick={() => handleOptionClick(option.value)}
             >
@@ -533,11 +578,14 @@ Looking forward to connecting with you!`
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
+            aria-label="Ask a question about Jurie"
             placeholder="Type your question..."
             disabled={isLoading}
           />
-          <SendButton 
+          <SendButton
+            type="button"
+            aria-label="Send question"
             onClick={handleCustomQuestion}
             disabled={isLoading || !inputValue.trim()}
           >

@@ -412,7 +412,7 @@ const CyberTechCv = ({ open = false, onClose }) => {
 
           <div className="no-print" style={{ background: '#2d2d2d', borderBottom: '1px solid #1b1b1b', display: 'flex', padding: '0 0', fontSize: '0.78rem' }}>
             <div style={{ background: '#1e1e1e', borderTop: '1px solid #0e639c', padding: '6px 20px', color: '#d4d4d4', borderRight: '1px solid #1b1b1b' }}>
-              📄 JurieSpies.cv.tsx
+              JurieSpies.cv.tsx
             </div>
           </div>
 

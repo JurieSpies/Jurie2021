@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import { PiWhatsappLogoBold } from 'react-icons/pi';
 import styled from 'styled-components';
 import { openWhatsapp } from '../utils/helpers';
-import ColorPicker from '@/components/ColorPicker/ColorPicker';
-import MobileMenu from '@/components/MobileMenu/MobileMenu';
 
 const WhatsappIcon = styled(PiWhatsappLogoBold)`
   font-weight: bold;
@@ -30,8 +28,13 @@ const Green = styled.span`
   margin-left: 5px;
 `;
 
-const HeaderTab = styled.div`
+const HeaderTab = styled.button`
   display: flex;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
   text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
   text-decoration-color: var(--color-primary);
   text-decoration-thickness: 2px;
@@ -50,13 +53,6 @@ const Right = styled.div`
   color: ${COLOR_WHITE};
   display: flex;
   align-items: center;
-`;
-
-const DesktopColorPicker = styled.div`
-  margin-left: 20px;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const Header = ({ active = 'Home' }) => {
@@ -84,7 +80,7 @@ const Header = ({ active = 'Home' }) => {
       </Heading>
       <Right>
         {menus?.map((menu) => (
-          <HeaderTab key={menu} $active={activeTab === menu} onClick={() => activeTabFunction(menu)}>
+          <HeaderTab type="button" key={menu} aria-current={activeTab === menu ? 'page' : undefined} $active={activeTab === menu} onClick={() => activeTabFunction(menu)}>
             {menu}
           </HeaderTab>
         ))}
@@ -92,14 +88,6 @@ const Header = ({ active = 'Home' }) => {
           <WhatsappIcon size={18} />
           Whatsapp
         </Button>
-        <DesktopColorPicker>
-          <ColorPicker />
-        </DesktopColorPicker>
-        <MobileMenu 
-          menus={menus}
-          activeTab={activeTab}
-          onMenuClick={activeTabFunction}
-        />
       </Right>
     </MainContent>
   );

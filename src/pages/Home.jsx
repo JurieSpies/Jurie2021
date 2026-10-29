@@ -512,7 +512,7 @@ const Home = () => {
             </InfoContainer>
             <ProfilePicContainer>
               <Border />
-              <ProfilePic alt="jurie" src={profilePic} />
+              <ProfilePic alt="Jurie Spies" src={profilePic} />
             </ProfilePicContainer>
           </Main>
           <SocialsContainer>
@@ -529,6 +529,7 @@ const Home = () => {
             <AllIcons>
               <SocialIconContainer
                 href={RESUME_DATA.github}
+                aria-label="GitHub profile"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -536,19 +537,21 @@ const Home = () => {
               </SocialIconContainer>
               <SocialIconContainer
                 href={RESUME_DATA.linkedIn}
+                aria-label="LinkedIn profile"
                 target="_blank"
                 rel="noreferrer"
               >
                 <LinkedInIcon />
               </SocialIconContainer>
-              <SocialIconContainer href={`tel:${RESUME_DATA.phoneNumber}`}>
+              <SocialIconContainer href={`tel:${RESUME_DATA.phoneNumber}`} aria-label="Call Jurie">
                 <PhoneIcon />
               </SocialIconContainer>
-              <SocialIconContainer href={`mailto:${RESUME_DATA.email}`}>
+              <SocialIconContainer href={`mailto:${RESUME_DATA.email}`} aria-label="Email Jurie">
                 <MailIcon />
               </SocialIconContainer>
               <SocialIconContainer
                 href={RESUME_DATA.dreamCode}
+                aria-label="ForgeDev website"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -556,6 +559,7 @@ const Home = () => {
               </SocialIconContainer>
               <SocialIconContainer
                 href={RESUME_DATA.dreamCodePlayStore}
+                aria-label="ForgeDev apps on Google Play"
                 target="_blank"
                 rel="noreferrer"
               >

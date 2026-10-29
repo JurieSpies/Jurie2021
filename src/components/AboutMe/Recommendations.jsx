@@ -1,7 +1,6 @@
 import { FaLinkedinIn } from 'react-icons/fa';
 import styled from 'styled-components';
-import { COLOR_GREY, COLOR_WHITE } from '../../utils/globalColors';
-import { SubHeading } from '../../utils/globalFonts';
+import { COLOR_BACKGROUND, COLOR_TEXT_MUTED, COLOR_WHITE } from '../../utils/globalColors';
 import RichanImage from '../../assets/linkedInRecommendations/Richan.jpeg';
 import MarucelleImage from '../../assets/linkedInRecommendations/Marucelle.jpeg';
 import RuanImage from '../../assets/linkedInRecommendations/Ruan.jpeg';
@@ -13,29 +12,13 @@ import GusImage from '../../assets/linkedInRecommendations/Gus.jpeg';
 
 // https://www.linkedin.com/in/juriespies/details/recommendations/
 
-const StyledSubHeading = styled(SubHeading)`
-  font-size: 18px;
-  color: ${COLOR_WHITE};
-  font-weight: 600;
-  margin-bottom: 5px;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
-
 const RecommendationCard = styled.div`
   display: flex;
-  background: rgba(30, 30, 30, 0.6);
-  border-radius: 8px;
+  background: ${COLOR_BACKGROUND};
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  transition: transform 0.2s ease-in-out;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -77,13 +60,13 @@ const PersonName = styled.div`
 
 const PersonTitle = styled.div`
   font-size: 14px;
-  color: ${COLOR_GREY};
+  color: ${COLOR_TEXT_MUTED};
   margin-bottom: 5px;
 `;
 
 const Relationship = styled.div`
   font-size: 12px;
-  color: ${COLOR_GREY};
+  color: ${COLOR_TEXT_MUTED};
   margin-bottom: 15px;
   font-style: italic;
 `;
@@ -91,7 +74,8 @@ const Relationship = styled.div`
 const RecommendationText = styled.div`
   font-size: 15px;
   line-height: 1.6;
-  color: ${COLOR_GREY};
+  max-width: 70ch;
+  color: ${COLOR_TEXT_MUTED};
   white-space: pre-wrap;
 `;
 
@@ -110,21 +94,21 @@ const CardsContainer = styled.div`
 const LinkedInButton = styled.a`
   display: flex;
   align-items: center;
-  background: rgba(10, 102, 194, 0.8);
-  color: white;
-  padding: 10px 16px;
-  border-radius: 4px;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 10px 20px;
+  border-radius: 20px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 30px;
   width: fit-content;
-  transition: all 0.2s ease-in-out;
-  
+
   &:hover {
-    background: rgba(10, 102, 194, 1);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: ${COLOR_WHITE};
+    box-shadow: 1px 0px 10px 2px var(--color-primary);
+    transition: all 0.5s ease-in-out;
   }
 `;
 

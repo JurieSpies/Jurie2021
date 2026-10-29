@@ -51,7 +51,14 @@ const BurgerMenuContainer = styled.div`
   ${(props) => !props.open && 'visibility: hidden;'} // Hide when not open
 `;
 
-const BurgerMenuIcon = styled(AiOutlineMenu)`
+const BurgerMenuIcon = styled.button`
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  color: var(--color-primary);
   position: fixed;
   z-index: 10;
   top: 20px;
@@ -61,9 +68,15 @@ const BurgerMenuIcon = styled(AiOutlineMenu)`
   -webkit-tap-highlight-color: transparent;
 `;
 
-const BurgerMenuCloseIcon = styled(AiOutlineDoubleRight)`
-  width: 2rem;
-  height: 2rem;
+const BurgerMenuCloseIcon = styled.button`
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  font-size: 2rem;
+  color: ${COLOR_WHITE};
   position: fixed;
   z-index: 10;
   top: 20px;
@@ -83,7 +96,12 @@ const Header = styled.header`
   flex-wrap: wrap;
 `;
 
-const HeaderTab = styled.div`
+const HeaderTab = styled.button`
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
   display: flex;
   text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
   text-decoration-color: var(--color-primary);
@@ -91,7 +109,7 @@ const HeaderTab = styled.div`
   margin: 30px 30px;
   cursor: pointer;
   transform: scale(1);
-  font-size: 18x;
+  font-size: 18px;
   transition: transform 0.3s;
   width: fit-content;
   margin-left: auto;
@@ -117,7 +135,13 @@ const ColorPickerContainer = styled.div`
   }
 `;
 
-const ColorPickerIcon = styled(IoColorPaletteOutline)`
+const ColorPickerIcon = styled.button`
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  display: flex;
   color: var(--color-primary);
   font-size: 24px;
   cursor: pointer;
@@ -187,28 +211,44 @@ const BurgerMenu = ({ active = 'Home' }) => {
 
   return (
     <Header>
-      <BurgerMenuIcon size="2rem" onClick={() => toggleBurgerMenu()} color="var(--color-primary)" />
+      <BurgerMenuIcon
+        type="button"
+        aria-label="Open menu"
+        aria-expanded={openBurgerMenu}
+        onClick={() => toggleBurgerMenu()}
+      >
+        <AiOutlineMenu size="2rem" aria-hidden="true" />
+      </BurgerMenuIcon>
       {openBurgerMenu && (
         <BurgerBackdrop onClick={() => toggleBurgerMenu()}>
           <BurgerMenuContainer open={openBurgerMenu} onClick={(e) => e.stopPropagation()}>
-            <BurgerMenuCloseIcon onClick={() => toggleBurgerMenu()} />
+            <BurgerMenuCloseIcon type="button" aria-label="Close menu" onClick={() => toggleBurgerMenu()}>
+              <AiOutlineDoubleRight aria-hidden="true" />
+            </BurgerMenuCloseIcon>
             <Header>
               {menus?.map((menu) => (
                 <HeaderTab
+                  type="button"
                   key={menu}
+                  aria-current={activeTab === menu ? 'page' : undefined}
                   $active={activeTab === menu}
                   onClick={() => onSectionClick(menu)}
                 >
                   {menu}
                 </HeaderTab>
               ))}
-              <HeaderTab onClick={openWhatsapp}>Whatsapp</HeaderTab>
+              <HeaderTab type="button" onClick={openWhatsapp}>Whatsapp</HeaderTab>
               <ColorPickerContainer>
-                <ColorPickerIcon 
-                  title="Customize Theme Color"
+                <ColorPickerIcon
+                  type="button"
+                  title="Customize theme color"
+                  aria-label="Customize theme color"
                   onClick={handleIconClick}
-                />
-                <ResetButton 
+                >
+                  <IoColorPaletteOutline aria-hidden="true" />
+                </ColorPickerIcon>
+                <ResetButton
+                  type="button"
                   onClick={handleReset}
                   $showReset={color !== DEFAULT_COLOR}
                 >
@@ -216,6 +256,8 @@ const BurgerMenu = ({ active = 'Home' }) => {
                 </ResetButton>
               </ColorPickerContainer>
               <ColorInput
+                tabIndex={-1}
+                aria-hidden="true"
                 ref={colorInputRef}
                 type="color"
                 value={color}
